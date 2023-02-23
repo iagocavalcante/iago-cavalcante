@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html class="h-full antialiased" lang="en" style="scrollbar-gutter: stable;">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title suffix=" · Software Engineer">
+      <%= assigns[:page_title] || "Iago Cavalcante" %>
+    </.live_title>
+    <meta
+      name="description"
+      content={
+        gettext(
+          "I’m Iago Cavalcante, a software engineer and entrepreneur based in Belém. CTO and founder of Japu and Redação Travessia ."
+        )
+      }
+    />
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+  </head>
+  <body class="flex h-full flex-col bg-zinc-50 dark:bg-black">
+    <%= @inner_content %>
+  </body>
+</html>
