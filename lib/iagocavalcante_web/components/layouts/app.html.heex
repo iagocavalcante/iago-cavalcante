@@ -1,131 +1,24 @@
-<div className="fixed inset-0 flex justify-center sm:px-8">
-  <div className="flex w-full max-w-7xl lg:px-8">
-    <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
+<div class="fixed inset-0 flex justify-center sm:px-8">
+  <div class="flex w-full max-w-7xl lg:px-8">
+    <div class="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
   </div>
 </div>
-<div className="relative">
-  <header
-    class="pointer-events-none relative z-50 flex flex-col"
-    style="height:var(--header-height);margin-bottom:var(--header-mb)"
-  >
-    <div class="top-0 z-10 h-16 pt-6" style="position:var(--header-position)">
-      <div
-        class="sm:px-8 top-[var(--header-top,theme(spacing.6))] w-full"
-        style="position:var(--header-inner-position)"
-      >
-        <div class="mx-auto max-w-7xl lg:px-8">
-          <div class="relative px-4 sm:px-8 lg:px-12">
-            <div class="mx-auto max-w-2xl lg:max-w-5xl">
-              <div class="relative flex gap-4">
-                <div class="flex flex-1">
-                  <div class="h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10">
-                    <a aria-label="Home" class="pointer-events-auto" href="/">
-                      <img
-                        alt=""
-                        sizes="2.25rem"
-                        srcset="/images/myself.jpeg"
-                        src="/images/myself.jpeg"
-                        decoding="async"
-                        data-nimg="1"
-                        class="rounded-full bg-zinc-100 object-cover dark:bg-zinc-800 h-9 w-9"
-                        style="color: transparent;"
-                        width="512"
-                        height="512"
-                      />
-                    </a>
-                  </div>
-                </div>
-                <div class="flex flex-1 justify-end md:justify-center">
-                  <div class="pointer-events-auto md:hidden" data-headlessui-state="">
-                    <button
-                      class="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20"
-                      type="button"
-                      aria-expanded="false"
-                      data-headlessui-state=""
-                      id="headlessui-popover-button-:Rb9cm:"
-                    >
-                      Menu<svg
-                        viewBox="0 0 8 6"
-                        aria-hidden="true"
-                        class="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400"
-                      ><path
-                          d="M1.75 1.75 4 4.25l2.25-2.5"
-                          fill="none"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        ></path></svg>
-                    </button>
-                  </div>
-                  <nav class="pointer-events-auto hidden md:block">
-                    <ul class="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-                      <.nav_item link="/" text="Home" active_item={@active_tab} />
-                      <.nav_item link="/articles" text="Articles" active_item={@active_tab} />
-                      <.nav_item link="/projects" text="Projects" active_item={@active_tab} />
-                      <.nav_item link="/speaking" text="Speaking" active_item={@active_tab} />
-                      <.nav_item link="/uses" text="Uses" active_item={@active_tab} />
-                    </ul>
-                  </nav>
-                </div>
-                <div class="flex justify-end md:flex-1">
-                  <div class="pointer-events-auto">
-                    <.toggle_locale />
-                    <.toggle_theme />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+<div class="relative">
+  <.header>
+    <:nav_items>
+      <.nav_item link="/about" text="About" active_item={@active_tab} />
+      <.nav_item link="/articles" text="Articles" active_item={@active_tab} />
+      <.nav_item link="/projects" text="Projects" active_item={@active_tab} />
+      <.nav_item link="/speaking" text="Speaking" active_item={@active_tab} />
+      <.nav_item link="/uses" text="Uses" active_item={@active_tab} />
+    </:nav_items>
+    <:toggle_items>
+      <.live_component module={IagocavalcanteWeb.ToggleLocale} locale={@locale} id="locale" />
+      <.live_component module={IagocavalcanteWeb.ToggleTheme} theme={@theme} id="theme" />
+    </:toggle_items>
+  </.header>
   <main>
-    <div class="sm:px-8 mt-16 sm:mt-32">
-      <div class="mx-auto max-w-7xl lg:px-8">
-        <div class="relative px-4 sm:px-8 lg:px-12">
-          <div class="mx-auto max-w-2xl lg:max-w-5xl">
-            <%= @inner_content %>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= @inner_content %>
   </main>
-  <footer class="mt-32">
-    <div class="sm:px-8">
-      <div class="mx-auto max-w-7xl lg:px-8">
-        <div class="border-t border-zinc-100 pt-10 pb-16 dark:border-zinc-700/40">
-          <div class="relative px-4 sm:px-8 lg:px-12">
-            <div class="mx-auto max-w-2xl lg:max-w-5xl">
-              <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-                <div class="flex gap-6 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                  <a class="transition hover:text-teal-500 dark:hover:text-teal-400" href="/about">
-                    About
-                  </a>
-                  <a
-                    class="transition hover:text-teal-500 dark:hover:text-teal-400"
-                    href="/projects"
-                  >
-                    Projects
-                  </a>
-                  <a
-                    class="transition hover:text-teal-500 dark:hover:text-teal-400"
-                    href="/speaking"
-                  >
-                    Speaking
-                  </a>
-                  <a class="transition hover:text-teal-500 dark:hover:text-teal-400" href="/uses">
-                    Uses
-                  </a>
-                </div>
-                <p class="text-sm text-zinc-400 dark:text-zinc-500">
-                  © <!-- -->2023<!-- --> Spencer Sharp. All rights reserved.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <.footer />
 </div>

@@ -193,7 +193,7 @@ defmodule IagocavalcanteWeb.UserAuth do
       |> redirect(to: signed_in_path(conn))
       |> halt()
     else
-      conn |> assign(:theme, "light")
+      conn
     end
   end
 

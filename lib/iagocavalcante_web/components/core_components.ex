@@ -13,7 +13,6 @@ defmodule IagocavalcanteWeb.CoreComponents do
 
   alias Phoenix.LiveView.JS
   import IagocavalcanteWeb.Gettext
-  alias IagocavalcanteWeb.ToggleTheme
 
   @doc """
   Renders a modal.
@@ -411,7 +410,7 @@ defmodule IagocavalcanteWeb.CoreComponents do
   slot :subtitle
   slot :actions
 
-  def header(assigns) do
+  def header_core(assigns) do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
       <div>
@@ -633,7 +632,9 @@ defmodule IagocavalcanteWeb.CoreComponents do
   end
 
   defdelegate social_links(assigns), to: IagocavalcanteWeb.SocialLinks, as: :social_links
-  defdelegate toggle_theme(assigns), to: IagocavalcanteWeb.ToggleTheme, as: :toggle_theme
-  defdelegate toggle_locale(assigns), to: IagocavalcanteWeb.ToggleLocale, as: :toggle_locale
   defdelegate nav_item(assigns), to: IagocavalcanteWeb.NavItem, as: :nav_item
+  defdelegate photos(assigns), to: IagocavalcanteWeb.Photos, as: :photos
+  defdelegate footer(assigns), to: IagocavalcanteWeb.Footer, as: :footer
+  defdelegate header(assigns), to: IagocavalcanteWeb.Header, as: :header
+  defdelegate articles(assigns), to: IagocavalcanteWeb.Articles, as: :articles
 end

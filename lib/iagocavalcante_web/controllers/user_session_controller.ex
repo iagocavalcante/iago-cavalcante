@@ -39,4 +39,20 @@ defmodule IagocavalcanteWeb.UserSessionController do
     |> put_flash(:info, "Logged out successfully.")
     |> UserAuth.log_out_user()
   end
+
+  def set_locale(conn, %{"locale_form" => %{"locale" => locale}}) do
+    referer =
+      conn
+      |> get_req_header("referer")
+      |> List.first()
+
+    redirect_to =
+      referer
+      |> String.split("/", parts: 4)
+      |> Enum.at(3)
+
+    conn
+    |> put_resp_cookie(@locale_cookie, %{locale: locale}, @locale_options)
+    |> redirect(to: "/#{redirect_to}")
+  end
 end

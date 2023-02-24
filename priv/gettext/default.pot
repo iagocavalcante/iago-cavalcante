@@ -27,7 +27,23 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-#: lib/iagocavalcante_web/router.ex:57
+#: lib/iagocavalcante_web/router.ex:55
 #, elixir-autogen, elixir-format
 msgid "/login"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/social_links.ex:17
+#: lib/iagocavalcante_web/components/social_links.ex:22
+#, elixir-autogen, elixir-format
+msgid "Follow on"
+msgstr ""
+
+#: lib/iagocavalcante_web/live/home.ex:16
+#, elixir-autogen, elixir-format
+msgid "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education."
+msgstr ""
+
+#: lib/iagocavalcante_web/live/home.ex:13
+#, elixir-autogen, elixir-format
+msgid "Software alchemist, co-founder, and maker."
 msgstr ""

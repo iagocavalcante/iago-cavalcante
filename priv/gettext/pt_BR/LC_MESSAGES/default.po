@@ -16,9 +16,9 @@ msgstr ""
 msgid "Actions"
 msgstr "Ações"
 
-#: lib/iagocavalcante_web/components/layouts/root.html.heex:12
-#, elixir-autogen, elixir-format
-msgid "I’m Iago Cavalcante, a software engineer and entrepreneur based in Belém. CTO and co-founder of Japu and Redação Travessia."
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:13
+#, elixir-autogen, elixir-format, fuzzy
+msgid "I’m Iago Cavalcante, a software engineer and entrepreneur based in Belém. CTO and founder of Japu and Redação Travessia ."
 msgstr "Me chamo Iago Cavalcante, um engenheiro de software e empresário que mora em Belém. CTO e co-fundador da Japu e Redação Travessia"
 
 #: lib/iagocavalcante_web/components/core_components.ex:80
@@ -26,3 +26,24 @@ msgstr "Me chamo Iago Cavalcante, um engenheiro de software e empresário que mo
 #, elixir-autogen, elixir-format
 msgid "close"
 msgstr ""
+
+#: lib/iagocavalcante_web/router.ex:55
+#, elixir-autogen, elixir-format
+msgid "/login"
+msgstr "/entrar"
+
+#: lib/iagocavalcante_web/components/social_links.ex:17
+#: lib/iagocavalcante_web/components/social_links.ex:22
+#, elixir-autogen, elixir-format
+msgid "Follow on"
+msgstr "Siga-me em"
+
+#: lib/iagocavalcante_web/live/home.ex:16
+#, elixir-autogen, elixir-format
+msgid "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education."
+msgstr "Me chamo Iago Cavalcante, um alquimista de software (dev elixir) e empreendedor situado em Belém. Sou co-fundador e CTO da Japu e Travessia, onde desenvolvemos um marketplace e um SaaS para educação"
+
+#: lib/iagocavalcante_web/live/home.ex:13
+#, elixir-autogen, elixir-format
+msgid "Software alchemist, co-founder, and maker."
+msgstr "Alquimista de Software, co-fundador e maker"

@@ -12,6 +12,7 @@ defmodule IagocavalcanteWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    plug IagocavalcanteWeb.Plugs.Locale
   end
 
   pipeline :api do
@@ -53,6 +54,7 @@ defmodule IagocavalcanteWeb.Router do
       live "/users/register", UserRegistrationLive, :new
       live gettext("/login"), UserLoginLive, :new
       live "/", HomeLive, :home
+      live "/about", AboutLive, :home
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
     end
