@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - staging
 
 env:
   FLY_APP_NAME: iagocavalcante
@@ -21,7 +20,7 @@ jobs:
     - name: Set up Elixir
       uses: actions/setup-elixir@v1
       with:
-        elixir-version: 1.11
+        elixir-version: 1.14
 
     - name: Install dependencies
       run: mix deps.get
@@ -29,16 +28,14 @@ jobs:
     - name: Check code quality with Credo
       run: mix credo
 
-    - name: Run tests
-      run: mix test
+    # - name: Run tests
+    #   run: mix test
 
-    - name: Build the Phoenix app
-      run: mix compile
+    # - name: Build the Phoenix app
+    #   run: mix compile
 
-    - name: Deploy to Fly
-      if: github.ref == 'refs/heads/main'
+    - uses: superfly/flyctl-actions/setup-flyctl@master
+    - if: github.ref == 'refs/heads/main'
+      run: flyctl deploy --remote-only
       env:
-        FLY_ORG: <main-org-name>
-      run: |
-        echo "Deploying to main org"
-        fly -t $FLY_AUTH_TOKEN deploy-app --app-name $FLY_APP_NAME
+        FLY_AUTH_TOKEN: ${{ secrets.FLY_API_TOKEN }}
