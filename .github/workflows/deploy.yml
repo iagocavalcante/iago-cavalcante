@@ -1,0 +1,44 @@
+name: Deploy Site to Fly
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+env:
+  FLY_APP_NAME: iagocavalcante
+  FLY_AUTH_TOKEN: ${{ secrets.FLY_AUTH_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Elixir
+      uses: actions/setup-elixir@v1
+      with:
+        elixir-version: 1.11
+
+    - name: Install dependencies
+      run: mix deps.get
+
+    - name: Check code quality with Credo
+      run: mix credo
+
+    - name: Run tests
+      run: mix test
+
+    - name: Build the Phoenix app
+      run: mix compile
+
+    - name: Deploy to Fly
+      if: github.ref == 'refs/heads/main'
+      env:
+        FLY_ORG: <main-org-name>
+      run: |
+        echo "Deploying to main org"
+        fly -t $FLY_AUTH_TOKEN deploy-app --app-name $FLY_APP_NAME
