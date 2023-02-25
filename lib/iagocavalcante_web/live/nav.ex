@@ -2,7 +2,7 @@ defmodule IagocavalcanteWeb.Nav do
   import Phoenix.LiveView
   use Phoenix.Component
 
-  alias IagocavalcanteWeb.{AboutLive, HomeLive}
+  alias IagocavalcanteWeb.{AboutLive, Articles, HomeLive}
 
   def on_mount(:default, _params, _session, socket) do
     {:cont,
@@ -20,6 +20,12 @@ defmodule IagocavalcanteWeb.Nav do
 
         {AboutLive, _} ->
           :about
+
+        {ArticlesLive, _} ->
+          :articles
+
+        {ProjectsLive, _} ->
+          :projects
 
         {_, _} ->
           nil

@@ -1,4 +1,4 @@
-defmodule IagocavalcanteWeb.Articles do
+defmodule IagocavalcanteWeb.Posts do
   use Phoenix.Component
   import IagocavalcanteWeb.Gettext
 
@@ -33,7 +33,7 @@ defmodule IagocavalcanteWeb.Articles do
       }
     ]
 
-  def articles(assigns) do
+  def posts(assigns) do
     ~H"""
     <article :for={article <- @articles} class="group relative flex flex-col items-start">
       <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">

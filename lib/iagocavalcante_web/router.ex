@@ -54,7 +54,9 @@ defmodule IagocavalcanteWeb.Router do
       live "/users/register", UserRegistrationLive, :new
       live gettext("/login"), UserLoginLive, :new
       live "/", HomeLive, :home
-      live "/about", AboutLive, :home
+      live "/about", AboutLive, :about
+      live "/articles", ArticlesLive, :articles
+      live "/projects", ProjectsLive, :projects
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
     end

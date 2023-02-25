@@ -636,5 +636,6 @@ defmodule IagocavalcanteWeb.CoreComponents do
   defdelegate photos(assigns), to: IagocavalcanteWeb.Photos, as: :photos
   defdelegate footer(assigns), to: IagocavalcanteWeb.Footer, as: :footer
   defdelegate header(assigns), to: IagocavalcanteWeb.Header, as: :header
-  defdelegate articles(assigns), to: IagocavalcanteWeb.Articles, as: :articles
+  defdelegate posts(assigns), to: IagocavalcanteWeb.Posts, as: :posts
+  defdelegate work(assigns), to: IagocavalcanteWeb.Work, as: :work
 end
