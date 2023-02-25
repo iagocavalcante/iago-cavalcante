@@ -23,6 +23,7 @@ defmodule IagocavalcanteWeb.NavItem do
   defp active_class(assigns) do
     text_downcase = String.downcase(assigns.text)
     active_item = atom_to_string(assigns.active_item)
+    IO.inspect(assigns.active_item)
 
     if active_item =~ text_downcase,
       do: "text-teal-500 dark:text-teal-400",

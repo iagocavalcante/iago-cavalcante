@@ -53,7 +53,8 @@ defmodule IagocavalcanteWeb.ProjectsLive do
                           fill="currentColor"
                         >
                         </path>
-                      </svg><span class="ml-2">planetaria.tech</span>
+                      </svg>
+                      <span class="ml-2">planetaria.tech</span>
                     </p>
                   </li>
                   <li class="group relative flex flex-col items-start">
@@ -88,7 +89,8 @@ defmodule IagocavalcanteWeb.ProjectsLive do
                           fill="currentColor"
                         >
                         </path>
-                      </svg><span class="ml-2">github.com</span>
+                      </svg>
+                      <span class="ml-2">github.com</span>
                     </p>
                   </li>
                   <li class="group relative flex flex-col items-start">
@@ -123,7 +125,8 @@ defmodule IagocavalcanteWeb.ProjectsLive do
                           fill="currentColor"
                         >
                         </path>
-                      </svg><span class="ml-2">github.com</span>
+                      </svg>
+                      <span class="ml-2">github.com</span>
                     </p>
                   </li>
                   <li class="group relative flex flex-col items-start">
@@ -158,7 +161,8 @@ defmodule IagocavalcanteWeb.ProjectsLive do
                           fill="currentColor"
                         >
                         </path>
-                      </svg><span class="ml-2">github.com</span>
+                      </svg>
+                      <span class="ml-2">github.com</span>
                     </p>
                   </li>
                   <li class="group relative flex flex-col items-start">
@@ -193,7 +197,8 @@ defmodule IagocavalcanteWeb.ProjectsLive do
                           fill="currentColor"
                         >
                         </path>
-                      </svg><span class="ml-2">github.com</span>
+                      </svg>
+                      <span class="ml-2">github.com</span>
                     </p>
                   </li>
                 </ul>

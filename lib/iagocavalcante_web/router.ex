@@ -57,6 +57,8 @@ defmodule IagocavalcanteWeb.Router do
       live "/about", AboutLive, :about
       live "/articles", ArticlesLive, :articles
       live "/projects", ProjectsLive, :projects
+      live "/speaking", SpeakingLive, :speaking
+      live "/uses", UsesLive, :uses
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
     end

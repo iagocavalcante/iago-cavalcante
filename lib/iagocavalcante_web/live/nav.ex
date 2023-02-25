@@ -2,7 +2,12 @@ defmodule IagocavalcanteWeb.Nav do
   import Phoenix.LiveView
   use Phoenix.Component
 
-  alias IagocavalcanteWeb.{AboutLive, Articles, HomeLive}
+  alias IagocavalcanteWeb.AboutLive
+  alias IagocavalcanteWeb.ArticlesLive
+  alias IagocavalcanteWeb.HomeLive
+  alias IagocavalcanteWeb.ProjectsLive
+  alias IagocavalcanteWeb.SpeakingLive
+  alias IagocavalcanteWeb.UsesLive
 
   def on_mount(:default, _params, _session, socket) do
     {:cont,
@@ -13,6 +18,8 @@ defmodule IagocavalcanteWeb.Nav do
   end
 
   defp handle_active_tab_params(params, _url, socket) do
+    IO.inspect(socket.assigns.live_action)
+    IO.inspect(socket.view)
     active_tab =
       case {socket.view, socket.assigns.live_action} do
         {HomeLive, _} ->
@@ -26,6 +33,12 @@ defmodule IagocavalcanteWeb.Nav do
 
         {ProjectsLive, _} ->
           :projects
+
+        {SpeakingLive, _} ->
+          :speaking
+
+        {UsesLive, _} ->
+          :uses
 
         {_, _} ->
           nil
