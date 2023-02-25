@@ -18,8 +18,6 @@ defmodule IagocavalcanteWeb.Nav do
   end
 
   defp handle_active_tab_params(params, _url, socket) do
-    IO.inspect(socket.assigns.live_action)
-    IO.inspect(socket.view)
     active_tab =
       case {socket.view, socket.assigns.live_action} do
         {HomeLive, _} ->

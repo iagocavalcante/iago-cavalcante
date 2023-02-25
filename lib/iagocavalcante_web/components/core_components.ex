@@ -631,11 +631,13 @@ defmodule IagocavalcanteWeb.CoreComponents do
     Phoenix.HTML.html_escape(val1) == Phoenix.HTML.html_escape(val2)
   end
 
-  defdelegate social_links(assigns), to: IagocavalcanteWeb.SocialLinks, as: :social_links
-  defdelegate nav_item(assigns), to: IagocavalcanteWeb.NavItem, as: :nav_item
-  defdelegate photos(assigns), to: IagocavalcanteWeb.Photos, as: :photos
+  defdelegate articles_list(assigns), to: IagocavalcanteWeb.ArticlesList, as: :articles_list
+  defdelegate categories_projects(assigns), to: IagocavalcanteWeb.CategoriesProjects, as: :categories_projects
   defdelegate footer(assigns), to: IagocavalcanteWeb.Footer, as: :footer
   defdelegate header(assigns), to: IagocavalcanteWeb.Header, as: :header
+  defdelegate nav_item(assigns), to: IagocavalcanteWeb.NavItem, as: :nav_item
+  defdelegate photos(assigns), to: IagocavalcanteWeb.Photos, as: :photos
   defdelegate posts(assigns), to: IagocavalcanteWeb.Posts, as: :posts
+  defdelegate social_links(assigns), to: IagocavalcanteWeb.SocialLinks, as: :social_links
   defdelegate work(assigns), to: IagocavalcanteWeb.Work, as: :work
 end
