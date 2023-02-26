@@ -7,77 +7,70 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
   attr :categories, :list,
     default: [
       %{
-        name: "Cursos",
-        slug: "cursos",
-        description: "Cursos que eu já ministrei",
+        name: "Open-source",
+        slug: "open-source",
+        description: "Open-source projects I've contributed to",
         projects: [
           %{
-            name: "Planetaria",
-            description: "A simple and fast 2D game engine for Unity",
-            url: "http://planetaria.tech",
-            image: "/_next/static/media/planetaria.ecd81ade.svg"
+            name: "QTube",
+            description: "A desktop app built with Electron and Vue.js using Quasar Framework",
+            url: "https://qtube.iagocavalcante.company",
+            image: "/images/projects/qtube.svg"
           },
           %{
-            name: "Iago Cavalcante",
-            description: "My personal website",
-            url: "",
-            image: "/_next/static/media/iagocavalcante.1b0e1b1a.svg"
+            name: "Égua do artigo",
+            description: "Project to bypass paywalls on Medium articles",
+            url: "https://eguadoartigo.iagocavalcante.company",
+            image: "/images/projects/eguadoartigo.svg"
           },
           %{
-            name: "Elixir Brasil",
-            description: "A Brazilian community for Elixir",
-            url: "https://elixirbrasil.com",
-            image: "/_next/static/media/elixirbrasil.1b0e1b1a.svg"
+            name: "AbaetéFest",
+            description: "App to help people find the best events and more in Abaeté, Brazil",
+            url: "https://abaetefest.com.br/",
+            image: "/images/projects/abaetefest.png"
+          },
+          %{
+            name: "RN-Zendesk",
+            description: "Bridge between Zendesk and React Native",
+            url: "https://idopterlabs.github.io/rn-zendesk/",
+            image: "/images/projects/gstack.webp"
+          },
+          %{
+            name: "React-Native-Zoom-US-Bridge",
+            description: "Bridge between Zoom and React Native",
+            url: "https://www.npmjs.com/package/@iagocavalcante/react-native-zoom-us-bridge",
+            image: "/images/projects/gstack.webp"
           }
         ]
       },
       %{
-        name: "Palestras",
-        slug: "palestras",
-        description: "Palestras que eu já ministrei",
+        name: "Client's projects",
+        slug: "clients-projects",
+        description: "Freelance projects I've worked on",
         projects: [
           %{
-            name: "Planetaria",
-            description: "A simple and fast 2D game engine for Unity",
-            url: "http://planetaria.tech",
-            image: "/_next/static/media/planetaria.ecd81ade.svg"
+            name: "Gstack",
+            description: "A newsletter platform for journalists and writers. Built with Next.js, MongoDB, NestJS, Heroku, Redis, Sendgrid, Stripe, and more.",
+            url: "https://gstack.news",
+            image: "/images/projects/gstack.png"
           },
           %{
-            name: "Iago Cavalcante",
-            description: "My personal website",
-            url: "",
-            image: "/_next/static/media/iagocavalcante.1b0e1b1a.svg"
+            name: "Speech to text Analyzer",
+            description: "Project built inside the Intelliway for a specific client, where I built a speech to text analyzer with RabitMQ, Aws Speech, Google Speech, CPQD Speech, NestJS, MongoDB and React",
+            url: "https://www.intelliway.com.br/",
+            image: "/images/projects/intelliway.webp"
           },
           %{
-            name: "Elixir Brasil",
-            description: "A Brazilian community for Elixir",
-            url: "https://elixirbrasil.com",
-            image: "/_next/static/media/elixirbrasil.1b0e1b1a.svg"
-          }
-        ]
-      },
-      %{
-        name: "Workshops",
-        slug: "workshops",
-        description: "Workshops que eu já ministrei",
-        projects: [
-          %{
-            name: "Planetaria",
-            description: "A simple and fast 2D game engine for Unity",
-            url: "http://planetaria.tech",
-            image: "/_next/static/media/planetaria.ecd81ade.svg"
+            name: "Sua conta BASA",
+            description: "Built the frontend with Vue.js, we create a entire new webapp to open accounts",
+            url: "https://sua-conta-basa.bancoamazonia.com.br/login?type=pf",
+            image: "/images/projects/basa.png"
           },
           %{
-            name: "Iago Cavalcante",
-            description: "My personal website",
-            url: "",
-            image: "/_next/static/media/iagocavalcante.1b0e1b1a.svg"
-          },
-          %{
-            name: "Elixir Brasil",
-            description: "A Brazilian community for Elixir",
-            url: "https://elixirbrasil.com",
-            image: "/_next/static/media/elixirbrasil.1b0e1b1a.svg"
+            name: "HintClub/CartoLoL",
+            description: "Fantasay League of Legends game built with VueJs, Django, Postgres, Redis, Docker, and more.",
+            url: "https://cartolol.com.br/",
+            image: "/images/projects/cartolol.png"
           }
         ]
       }
@@ -111,8 +104,9 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             <h2 class="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
               <div class="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl">
               </div>
-              <a href={project.url}>
-                <span class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span><span class="relative z-10">Planetaria</span>
+              <a href={project.url} target="_blank">
+                <span class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
+                <span class="relative z-10"><%= project.name %></span>
               </a>
             </h2>
             <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
@@ -126,7 +120,7 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
                 >
                 </path>
               </svg>
-              <span class="ml-2"><%= project.url %></span>
+              <span class="ml-2 break-all"><%= project.url %></span>
             </p>
           </li>
         </ul>
