@@ -54,4 +54,56 @@ defmodule Iagocavalcante.BlogTest do
       assert %Ecto.Changeset{} = Blog.change_post(post)
     end
   end
+
+  describe "posts" do
+    alias Iagocavalcante.Blog.Posts
+
+    import Iagocavalcante.BlogFixtures
+
+    @invalid_attrs %{}
+
+    test "list_posts/0 returns all posts" do
+      posts = posts_fixture()
+      assert Blog.list_posts() == [posts]
+    end
+
+    test "get_posts!/1 returns the posts with given id" do
+      posts = posts_fixture()
+      assert Blog.get_posts!(posts.id) == posts
+    end
+
+    test "create_posts/1 with valid data creates a posts" do
+      valid_attrs = %{}
+
+      assert {:ok, %Posts{} = posts} = Blog.create_posts(valid_attrs)
+    end
+
+    test "create_posts/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Blog.create_posts(@invalid_attrs)
+    end
+
+    test "update_posts/2 with valid data updates the posts" do
+      posts = posts_fixture()
+      update_attrs = %{}
+
+      assert {:ok, %Posts{} = posts} = Blog.update_posts(posts, update_attrs)
+    end
+
+    test "update_posts/2 with invalid data returns error changeset" do
+      posts = posts_fixture()
+      assert {:error, %Ecto.Changeset{}} = Blog.update_posts(posts, @invalid_attrs)
+      assert posts == Blog.get_posts!(posts.id)
+    end
+
+    test "delete_posts/1 deletes the posts" do
+      posts = posts_fixture()
+      assert {:ok, %Posts{}} = Blog.delete_posts(posts)
+      assert_raise Ecto.NoResultsError, fn -> Blog.get_posts!(posts.id) end
+    end
+
+    test "change_posts/1 returns a posts changeset" do
+      posts = posts_fixture()
+      assert %Ecto.Changeset{} = Blog.change_posts(posts)
+    end
+  end
 end

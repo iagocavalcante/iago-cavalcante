@@ -458,7 +458,7 @@ defmodule IagocavalcanteWeb.CoreComponents do
         </thead>
         <tbody class="relative divide-y divide-zinc-100 border-t border-zinc-200 text-sm leading-6 text-zinc-700">
           <tr
-            :for={row <- @rows}
+            :for={{id, row} <- @rows}
             id={"#{@id}-#{Phoenix.Param.to_param(row)}"}
             class="relative group hover:bg-zinc-50"
           >
@@ -632,7 +632,11 @@ defmodule IagocavalcanteWeb.CoreComponents do
   end
 
   defdelegate articles_list(assigns), to: IagocavalcanteWeb.ArticlesList, as: :articles_list
-  defdelegate categories_projects(assigns), to: IagocavalcanteWeb.CategoriesProjects, as: :categories_projects
+
+  defdelegate categories_projects(assigns),
+    to: IagocavalcanteWeb.CategoriesProjects,
+    as: :categories_projects
+
   defdelegate footer(assigns), to: IagocavalcanteWeb.Footer, as: :footer
   defdelegate header(assigns), to: IagocavalcanteWeb.Header, as: :header
   defdelegate nav_item(assigns), to: IagocavalcanteWeb.NavItem, as: :nav_item

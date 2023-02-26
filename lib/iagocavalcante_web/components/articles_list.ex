@@ -34,7 +34,7 @@ defmodule IagocavalcanteWeb.ArticlesList do
         <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
           <div class="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl">
           </div>
-          <a href={article.slug}>
+          <a href={"/articles/#{article.slug}"}>
             <span class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span><span class="relative z-10"><%= article.title %></span>
           </a>
         </h2>
@@ -68,9 +68,13 @@ defmodule IagocavalcanteWeb.ArticlesList do
         class="mt-1 hidden md:block relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500"
         datetime="2022-09-05"
       >
-        <%= article.inserted_at %>
+        <%= format_date(article.inserted_at) %>
       </time>
     </article>
     """
+  end
+
+  defp format_date(date) do
+    date |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_date()
   end
 end

@@ -15,4 +15,16 @@ defmodule Iagocavalcante.BlogFixtures do
 
     post
   end
+
+  @doc """
+  Generate a posts.
+  """
+  def posts_fixture(attrs \\ %{}) do
+    {:ok, posts} =
+      attrs
+      |> Enum.into(%{})
+      |> Iagocavalcante.Blog.create_posts()
+
+    posts
+  end
 end

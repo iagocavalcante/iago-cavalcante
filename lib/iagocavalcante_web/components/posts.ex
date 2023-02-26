@@ -39,7 +39,7 @@ defmodule IagocavalcanteWeb.Posts do
       <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
         <div class="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl">
         </div>
-        <a href={article.url}>
+        <a href={"/articles/#{article.slug}"}>
           <span class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
           <span class="relative z-10"><%= article.title %></span>
         </a>
@@ -51,7 +51,7 @@ defmodule IagocavalcanteWeb.Posts do
         <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
           <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
         </span>
-        <%= article.inserted_at %>
+        <%= format_date(article.inserted_at) %>
       </time>
       <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
         <%= article.description %>
@@ -74,5 +74,9 @@ defmodule IagocavalcanteWeb.Posts do
       </div>
     </article>
     """
+  end
+
+  defp format_date(date) do
+    date |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_date()
   end
 end

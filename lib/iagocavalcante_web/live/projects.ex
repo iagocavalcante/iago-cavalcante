@@ -1,7 +1,7 @@
 defmodule IagocavalcanteWeb.ProjectsLive do
   use IagocavalcanteWeb, :live_view
 
-def render(assigns) do
+  def render(assigns) do
     ~H"""
     <main>
       <div class="sm:px-8 mt-16 sm:mt-32">

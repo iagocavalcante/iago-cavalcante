@@ -1,10 +1,11 @@
 defmodule IagocavalcanteWeb.HomeLive do
   use IagocavalcanteWeb, :live_view
 
-  def mount(_params, %{"locale" => locale}, socket) do
-    IO.inspect(locale, label: "locale")
-    Gettext.put_locale(IagocavalcanteWeb.Gettext, locale)
-    {:ok, socket}
+  alias Iagocavalcante.Blog
+
+  @impl true
+  def mount(_params, _session, socket) do
+    {:ok, assign(socket, :last_articles, Blog.list_last_posts())}
   end
 
   def render(assigns) do
@@ -60,7 +61,7 @@ defmodule IagocavalcanteWeb.HomeLive do
           <div class="mx-auto max-w-2xl lg:max-w-5xl">
             <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
               <div class="flex flex-col gap-16">
-                <.posts />
+                <.posts articles={@last_articles} />
               </div>
               <div class="space-y-10 lg:pl-16 xl:pl-24">
                 <.live_component module={IagocavalcanteWeb.Newsletter} id="newsletter" />

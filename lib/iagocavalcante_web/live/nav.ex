@@ -3,7 +3,8 @@ defmodule IagocavalcanteWeb.Nav do
   use Phoenix.Component
 
   alias IagocavalcanteWeb.AboutLive
-  alias IagocavalcanteWeb.ArticlesLive
+  alias IagocavalcanteWeb.ArticlesLive.Index
+  alias IagocavalcanteWeb.ArticlesLive.Show
   alias IagocavalcanteWeb.HomeLive
   alias IagocavalcanteWeb.ProjectsLive
   alias IagocavalcanteWeb.SpeakingLive

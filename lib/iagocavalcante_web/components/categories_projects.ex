@@ -87,7 +87,10 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
     ~H"""
     <div :for={category <- @categories} class="space-y-20">
       <div>
-        <h2 id="cursos" class="text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 mt-10">
+        <h2
+          id="cursos"
+          class="text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 mt-10"
+        >
           <a href={"##{category.slug}"}><%= category.name %></a>
         </h2>
         <ul role="list" class="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 mt-10">

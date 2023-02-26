@@ -41,6 +41,22 @@ defmodule IagocavalcanteWeb.Router do
     end
   end
 
+  scope "/", IagocavalcanteWeb do
+    pipe_through [:browser]
+
+    live_session :nav,
+      on_mount: [
+        IagocavalcanteWeb.Nav
+      ] do
+      live "/", HomeLive, :home
+      live "/about", AboutLive, :about
+      live "/articles", ArticlesLive.Index, :index
+      live "/articles/:slug", ArticlesLive.Show, :show
+      live "/projects", ProjectsLive, :projects
+      live "/speaking", SpeakingLive, :speaking
+    end
+  end
+
   ## Authentication routes
 
   scope "/", IagocavalcanteWeb do
@@ -53,17 +69,11 @@ defmodule IagocavalcanteWeb.Router do
       ] do
       live "/users/register", UserRegistrationLive, :new
       live gettext("/login"), UserLoginLive, :new
-      live "/", HomeLive, :home
-      live "/about", AboutLive, :about
-      live "/articles", ArticlesLive, :articles
-      live "/projects", ProjectsLive, :projects
-      live "/speaking", SpeakingLive, :speaking
-      live "/uses", UsesLive, :uses
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
     end
 
-    post "/users/log_in", UserSessionController, :create
+    post "/login", UserSessionController, :create
   end
 
   scope "/", IagocavalcanteWeb do
@@ -73,6 +83,12 @@ defmodule IagocavalcanteWeb.Router do
       on_mount: [{IagocavalcanteWeb.UserAuth, :ensure_authenticated}, IagocavalcanteWeb.Nav] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+      live "/admin/posts", PostsLive.Index, :index
+      live "/admin/posts/new", PostsLive.Index, :new
+      live "/admin/posts/:id/edit", PostsLive.Index, :edit
+
+      live "/admin/posts/:id", PostsLive.Show, :show
+      live "/admin/posts/:id/show/edit", PostsLive.Show, :edit
     end
   end
 

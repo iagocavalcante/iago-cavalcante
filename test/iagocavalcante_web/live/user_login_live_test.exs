@@ -6,7 +6,7 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
 
   describe "Log in page" do
     test "renders log in page", %{conn: conn} do
-      {:ok, _lv, html} = live(conn, ~p"/users/log_in")
+      {:ok, _lv, html} = live(conn, ~p"/login")
 
       assert html =~ "Log in"
       assert html =~ "Register"
@@ -17,7 +17,7 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
       result =
         conn
         |> log_in_user(user_fixture())
-        |> live(~p"/users/log_in")
+        |> live(~p"/login")
         |> follow_redirect(conn, "/")
 
       assert {:ok, _conn} = result
@@ -29,7 +29,7 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
       password = "123456789abcd"
       user = user_fixture(%{password: password})
 
-      {:ok, lv, _html} = live(conn, ~p"/users/log_in")
+      {:ok, lv, _html} = live(conn, ~p"/login")
 
       form =
         form(lv, "#login_form", user: %{email: user.email, password: password, remember_me: true})
@@ -42,7 +42,7 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
     test "redirects to login page with a flash error if there are no valid credentials", %{
       conn: conn
     } do
-      {:ok, lv, _html} = live(conn, ~p"/users/log_in")
+      {:ok, lv, _html} = live(conn, ~p"/login")
 
       form =
         form(lv, "#login_form",
@@ -53,13 +53,13 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
 
       assert Phoenix.Flash.get(conn.assigns.flash, :error) == "Invalid email or password"
 
-      assert redirected_to(conn) == "/users/log_in"
+      assert redirected_to(conn) == "/login"
     end
   end
 
   describe "login navigation" do
     test "redirects to registration page when the Register button is clicked", %{conn: conn} do
-      {:ok, lv, _html} = live(conn, ~p"/users/log_in")
+      {:ok, lv, _html} = live(conn, ~p"/login")
 
       {:ok, _login_live, login_html} =
         lv
@@ -73,7 +73,7 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
     test "redirects to forgot password page when the Forgot Password button is clicked", %{
       conn: conn
     } do
-      {:ok, lv, _html} = live(conn, ~p"/users/log_in")
+      {:ok, lv, _html} = live(conn, ~p"/login")
 
       {:ok, conn} =
         lv
