@@ -1,4 +1,4 @@
-defmodule Iagocavalcante.Repo.Migrations.CreatePosts do
+defmodule Iagocavalcante.Repo.Migrations.AlterPosts do
   use Ecto.Migration
 
   def change do
@@ -9,8 +9,6 @@ defmodule Iagocavalcante.Repo.Migrations.CreatePosts do
       add :published_at, :utc_datetime
       add :status, :string
       add :user_id, references(:users, on_delete: :delete_all)
-
-      timestamps()
     end
   end
 end
