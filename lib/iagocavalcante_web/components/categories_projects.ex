@@ -71,6 +71,12 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             description: "Fantasay League of Legends game built with VueJs, Django, Postgres, Redis, Docker, and more.",
             url: "https://cartolol.com.br/",
             image: "/images/projects/cartolol.png"
+          },
+          %{
+            name: "HoverTrail",
+            description: "A webapp to help people find the best trails to hike. Built with Remix, Tailwind and Postgres.",
+            url: "https://hovertrail.fly.dev/",
+            image: "/images/projects/hovertrail.png"
           }
         ]
       }
