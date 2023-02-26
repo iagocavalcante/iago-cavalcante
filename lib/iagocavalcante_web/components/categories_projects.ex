@@ -40,6 +40,12 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             description: "Bridge between Zoom and React Native",
             url: "https://www.npmjs.com/package/@iagocavalcante/react-native-zoom-us-bridge",
             image: "/images/projects/gstack.webp"
+          },
+          %{
+            name: "Me Pague O que Dev",
+            description: "Webapp to send anonymous messages to people who owe you money, built with Node and Vue.js using Lambda and Giphy API",
+            url: "https://mepagueoque.dev/",
+            image: "/images/projects/mepagueoquedev.svg"
           }
         ]
       },
