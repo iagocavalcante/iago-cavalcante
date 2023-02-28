@@ -10,7 +10,11 @@
     <meta property="og:title" content="Iago Cavalcante · Software Engineer" />
     <meta
       property="og:description"
-      content="I'm Iago Cavalcante, a web developer and designer passionate about creating engaging and functional websites. Learn more about my skills and experience."
+      content={
+        gettext(
+          "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém. CTO and founder of Japu and Redação Travessia ."
+        )
+      }
     />
 
     <meta
@@ -22,6 +26,7 @@
       }
     />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer data-domain="iagocavalcante.company" src="https://plausible.io/js/script.js"></script>
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
