@@ -54,6 +54,7 @@ defmodule IagocavalcanteWeb.Router do
       live "/articles/:slug", ArticlesLive.Show, :show
       live "/projects", ProjectsLive, :projects
       live "/speaking", SpeakingLive, :speaking
+      live "/uses", UsesLive, :uses
     end
   end
 
