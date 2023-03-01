@@ -645,4 +645,5 @@ defmodule IagocavalcanteWeb.CoreComponents do
   defdelegate social_links(assigns), to: IagocavalcanteWeb.SocialLinks, as: :social_links
   defdelegate work(assigns), to: IagocavalcanteWeb.Work, as: :work
   defdelegate events(assigns), to: IagocavalcanteWeb.Events, as: :events
+  defdelegate categories_uses(assigns), to: IagocavalcanteWeb.CategoriesUses, as: :categories_uses
 end

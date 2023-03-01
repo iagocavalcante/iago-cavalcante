@@ -9,10 +9,12 @@ defmodule IagocavalcanteWeb.SpeakingLive do
           <div class="mx-auto max-w-2xl lg:max-w-5xl">
             <header class="max-w-2xl">
               <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-                <%= gettext "I have already given some talks in my region and for internal events." %>
+                <%= gettext("I have already given some talks in my region and for internal events.") %>
               </h1>
               <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-                <%= gettext "Although I enjoy sharing content at events, I still get very nervous and appear very little. But I continue to help the community as the manager of the North devs community and by organizing monthly events." %>
+                <%= gettext(
+                  "Although I enjoy sharing content at events, I still get very nervous and appear very little. But I continue to help the community as the manager of the North devs community and by organizing monthly events."
+                ) %>
               </p>
             </header>
             <div class="mt-16 sm:mt-20">
@@ -23,7 +25,7 @@ defmodule IagocavalcanteWeb.SpeakingLive do
                 >
                   <div class="grid max-w-3xl grid-cols-1 items-baseline gap-y-8 md:grid-cols-4">
                     <h2 id=":r1:" class="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
-                      <%= gettext "Events" %>
+                      <%= gettext("Events") %>
                     </h2>
                     <div class="md:col-span-3">
                       <div class="space-y-16">

@@ -19,7 +19,7 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
                 <a
                   href="/articles"
                   type="button"
-                  aria-label={gettext "Go back to articles"}
+                  aria-label={gettext("Go back to articles")}
                   class="group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 transition dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20 lg:absolute lg:-left-5 lg:mb-0 lg:-mt-2 xl:-top-1.5 xl:left-0 xl:mt-0"
                 >
                   <svg
@@ -105,7 +105,8 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
                     </ol>
                     <p>
                       Ungues fistula annoso, ille addit linoque motatque uberior verso
-                      <a href="#">rubuerunt</a> confine desuetaque. <em>Sanguine</em>
+                      <a href="#">rubuerunt</a>
+                      confine desuetaque. <em>Sanguine</em>
                       anteit
                       emerguntque expugnacior est pennas iniqui ecce <strong>haeret</strong>
                       genus: peiora imagine

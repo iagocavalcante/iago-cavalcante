@@ -68,7 +68,7 @@ defmodule IagocavalcanteWeb.Router do
         {IagocavalcanteWeb.UserAuth, :redirect_if_user_is_authenticated},
         IagocavalcanteWeb.Nav
       ] do
-live gettext("/login"), UserLoginLive, :new
+      live gettext("/login"), UserLoginLive, :new
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
     end

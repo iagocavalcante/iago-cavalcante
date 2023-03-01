@@ -2,7 +2,6 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
   use IagocavalcanteWeb, :live_component
 
   import IagocavalcanteWeb.Gettext
-  alias IagocavalcanteWeb.ProjectsList
 
   attr :categories, :list,
     default: [
@@ -43,7 +42,8 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
           },
           %{
             name: "Me Pague O que Dev",
-            description: "Webapp to send anonymous messages to people who owe you money, built with Node and Vue.js using Lambda and Giphy API",
+            description:
+              "Webapp to send anonymous messages to people who owe you money, built with Node and Vue.js using Lambda and Giphy API",
             url: "https://mepagueoque.dev/",
             image: "/images/projects/mepagueoquedev.svg"
           }
@@ -56,33 +56,52 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
         projects: [
           %{
             name: "Gstack",
-            description: "A newsletter platform for journalists and writers. Built with Next.js, MongoDB, NestJS, Heroku, Redis, Sendgrid, Stripe, and more.",
+            description:
+              "A newsletter platform for journalists and writers. Built with Next.js, MongoDB, NestJS, Heroku, Redis, Sendgrid, Stripe, and more.",
             url: "https://gstack.news",
             image: "/images/projects/gstack.png"
           },
           %{
             name: "Speech to text Analyzer",
-            description: "Project built inside the Intelliway for a specific client, where I built a speech to text analyzer with RabitMQ, Aws Speech, Google Speech, CPQD Speech, NestJS, MongoDB and React",
+            description:
+              "Project built inside the Intelliway for a specific client, where I built a speech to text analyzer with RabitMQ, Aws Speech, Google Speech, CPQD Speech, NestJS, MongoDB and React",
             url: "https://www.intelliway.com.br/",
             image: "/images/projects/intelliway.webp"
           },
           %{
             name: "Sua conta BASA",
-            description: "Built the frontend with Vue.js, we create a entire new webapp to open accounts",
+            description:
+              "Built the frontend with Vue.js, we create a entire new webapp to open accounts",
             url: "https://sua-conta-basa.bancoamazonia.com.br/login?type=pf",
             image: "/images/projects/basa.png"
           },
           %{
             name: "HintClub/CartoLoL",
-            description: "Fantasay League of Legends game built with VueJs, Django, Postgres, Redis, Docker, and more.",
+            description:
+              "Fantasay League of Legends game built with VueJs, Django, Postgres, Redis, Docker, and more.",
             url: "https://cartolol.com.br/",
             image: "/images/projects/cartolol.png"
           },
           %{
             name: "HoverTrail",
-            description: "A webapp to help people find the best trails to hike. Built with Remix, Tailwind and Postgres.",
+            description:
+              "A webapp to help people find the best trails to hike. Built with Remix, Tailwind and Postgres.",
             url: "https://hovertrail.fly.dev/",
             image: "/images/projects/hovertrail.png"
+          },
+          %{
+            name: "Questões PRO",
+            description:
+              "Webapp is a platform where users can answer questions and get paid for it. Built with Vue, Postgres, Bootstrap, and AdonisJS.",
+            url: "https://questoespro.com/",
+            image: "https://placehold.it/200x200"
+          },
+          %{
+            name: "Trail Club de Goiás",
+            description:
+              "Built a admin dashboard to manage infos and generate report using Rails and deployed to digital ocean, and App was built using React Native consuming the API built with Rails",
+            url: "https://apps.apple.com/mu/app/trail-club-go-app/id1552081793?l=fr",
+            image: "/images/projects/trailclub.png"
           }
         ]
       }
