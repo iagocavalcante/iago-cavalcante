@@ -1,5 +1,5 @@
 defmodule IagocavalcanteWeb.CategoriesUses do
-  use IagocavalcanteWeb, :live_component
+  use Phoenix.Component
 
   import IagocavalcanteWeb.Gettext
 
@@ -105,7 +105,7 @@ defmodule IagocavalcanteWeb.CategoriesUses do
     >
       <%= if category.has_image do %>
         <img
-          src={"/images/uses/#{category.name}.jpeg"}
+          src={"/images/uses/#{String.downcase(category.name)}.jpeg"}
           class="w-full h-96 object-cover mb-8 rounded-lg"
         />
       <% end %>
