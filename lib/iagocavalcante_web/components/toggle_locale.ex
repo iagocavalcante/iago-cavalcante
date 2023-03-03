@@ -1,15 +1,13 @@
 defmodule IagocavalcanteWeb.ToggleLocale do
-  use IagocavalcanteWeb, :live_component
-  import Gettext
+  use Phoenix.Component
 
-  alias IagocavalcanteWeb.Endpoint
+  import IagocavalcanteWeb.Gettext
 
-  def render(assigns) do
+  def toggle_locale(assigns) do
     ~H"""
     <button
       phx-click="toggle_locale"
       phx-value-locale={@locale}
-      phx-target={@myself}
       type="button"
       aria-label="Toggle locale"
       class="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
@@ -22,40 +20,39 @@ defmodule IagocavalcanteWeb.ToggleLocale do
     """
   end
 
-  def handle_event("toggle_locale", %{"locale" => "en"}, socket) do
-    locale = "pt_BR"
-    IO.inspect(locale, label: "handle_event")
-    perform_assigns(socket, locale)
-  end
+  # def handle_event("toggle_locale", %{"locale" => "en"}, socket) do
+  #   locale = "pt_BR"
+  #   IO.inspect(locale, label: "handle_event")
+  #   perform_assigns(socket, locale)
+  # end
 
-  def handle_event("toggle_locale", %{"locale" => "pt_BR"}, socket) do
-    locale = "en"
-    IO.inspect(locale, label: "handle_event")
-    perform_assigns(socket, locale)
-  end
+  # def handle_event("toggle_locale", %{"locale" => "pt_BR"}, socket) do
+  #   locale = "en"
+  #   IO.inspect(locale, label: "handle_event")
+  #   perform_assigns(socket, locale)
+  # end
 
-  defp perform_assigns(socket, locale) do
-    new_socket = socket |> assign(locale: locale)
-    IO.inspect(locale, label: "perform_assigns")
+  # defp perform_assigns(socket, locale) do
+  #   new_socket = socket |> assign(locale: locale)
+  #   IO.inspect(locale, label: "perform_assigns")
 
-    current_path = choose_path(socket.view)
-    # remove / from the beginning of the path
-    current_path = String.replace(current_path, "/", "")
-    Gettext.put_locale(locale)
-    push_event(socket, "set_locale", %{"locale" => locale})
-    IO.inspect(current_path, label: "current_path")
+  #   current_path = choose_path(socket.view)
+  #   # remove / from the beginning of the path
+  #   current_path = String.replace(current_path, "/", "")
+  #   Gettext.put_locale(locale)
+  #   IO.inspect(current_path, label: "current_path")
 
-    {:noreply, new_socket}
-  end
+  #   {:noreply, new_socket}
+  # end
 
-  defp choose_path(view) do
-    case view do
-      IagocavalcanteWeb.HomeLive -> "/"
-      IagocavalcanteWeb.AboutLive -> gettext("/about")
-      IagocavalcanteWeb.ArticlesLive.Index -> gettext("/articles")
-      IagocavalcanteWeb.ProjectsLive -> gettext("/projects")
-      IagocavalcanteWeb.SpeakingLive -> gettext("/speaking")
-      IagocavalcanteWeb.UsesLive -> gettext("/uses")
-    end
-  end
+  # defp choose_path(view) do
+  #   case view do
+  #     IagocavalcanteWeb.HomeLive -> "/"
+  #     IagocavalcanteWeb.AboutLive -> gettext("/about")
+  #     IagocavalcanteWeb.ArticlesLive.Index -> gettext("/articles")
+  #     IagocavalcanteWeb.ProjectsLive -> gettext("/projects")
+  #     IagocavalcanteWeb.SpeakingLive -> gettext("/speaking")
+  #     IagocavalcanteWeb.UsesLive -> gettext("/uses")
+  #   end
+  # end
 end

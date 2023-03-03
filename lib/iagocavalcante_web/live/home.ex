@@ -15,13 +15,13 @@ defmodule IagocavalcanteWeb.HomeLive do
         <div class="relative px-4 sm:px-8 lg:px-12">
           <div class="mx-auto max-w-2xl lg:max-w-5xl">
             <div class="max-w-2xl">
-              <%= @locale %>
               <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
                 <%= gettext("Software alchemist, co-founder, and maker.", lang: @locale) %>
               </h1>
               <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
                 <%= gettext(
-                  "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education."
+                  "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education.",
+                  lang: @locale
                 ) %>
               </p>
               <div class="mt-6 flex gap-6">
@@ -65,7 +65,7 @@ defmodule IagocavalcanteWeb.HomeLive do
                 <.posts articles={@last_articles} />
               </div>
               <div class="space-y-10 lg:pl-16 xl:pl-24">
-                <.live_component module={IagocavalcanteWeb.Newsletter} id="newsletter" />
+                <.live_component module={IagocavalcanteWeb.Newsletter} id="newsletter" locale={@locale} />
                 <div class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
                   <h2 class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                     <svg
@@ -88,7 +88,7 @@ defmodule IagocavalcanteWeb.HomeLive do
                       >
                       </path>
                     </svg>
-                    <span class="ml-3"><%= gettext("Work") %></span>
+                    <span class="ml-3"><%= gettext("Work", lang: @locale) %></span>
                   </h2>
                   <ol class="mt-6 space-y-4">
                     <.work />
@@ -99,7 +99,7 @@ defmodule IagocavalcanteWeb.HomeLive do
                     download
                     target="_blank"
                   >
-                    <%= gettext("Download CV") %><svg
+                    <%= gettext("Download CV", lang: @locale) %><svg
                       viewBox="0 0 16 16"
                       fill="none"
                       aria-hidden="true"

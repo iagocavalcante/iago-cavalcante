@@ -646,4 +646,5 @@ defmodule IagocavalcanteWeb.CoreComponents do
   defdelegate work(assigns), to: IagocavalcanteWeb.Work, as: :work
   defdelegate events(assigns), to: IagocavalcanteWeb.Events, as: :events
   defdelegate categories_uses(assigns), to: IagocavalcanteWeb.CategoriesUses, as: :categories_uses
+  defdelegate toggle_locale(assigns), to: IagocavalcanteWeb.ToggleLocale, as: :toggle_locale
 end

@@ -60,7 +60,7 @@ defmodule IagocavalcanteWeb.Posts do
         aria-hidden="true"
         class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
       >
-        <%= gettext("Read article") %><svg
+        <%= gettext("Read article", lang: @locale) %><svg
           viewBox="0 0 16 16"
           fill="none"
           aria-hidden="true"

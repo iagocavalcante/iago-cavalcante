@@ -7,26 +7,26 @@
 <div class="relative">
   <.header>
     <:nav_items>
-      <.nav_item link={gettext("/about")} text={"#{gettext "About"}"} active_item={@active_tab} />
+      <.nav_item link={gettext("/about")} text={"#{gettext("About", lang: @locale)}"} active_item={@active_tab} />
       <.nav_item
         link={gettext("/articles")}
-        text={"#{gettext "Articles"}"}
+        text={"#{gettext("Articles", lang: @locale)}"}
         active_item={@active_tab}
       />
       <.nav_item
         link={gettext("/projects")}
-        text={"#{gettext "Projects"}"}
+        text={"#{gettext("Projects", lang: @locale)}"}
         active_item={@active_tab}
       />
       <.nav_item
         link={gettext("/speaking")}
-        text={"#{gettext "Speaking"}"}
+        text={"#{gettext("Speaking", lang: @locale)}"}
         active_item={@active_tab}
       />
-      <.nav_item link={gettext("/uses")} text={"#{gettext "Uses"}"} active_item={@active_tab} />
+      <.nav_item link={gettext("/uses")} text={"#{gettext("Uses", lang: @locale)}"} active_item={@active_tab} />
     </:nav_items>
     <:toggle_items>
-      <.live_component module={IagocavalcanteWeb.ToggleLocale} locale={@locale} id="locale" />
+      <.toggle_locale locale={@locale} />
       <.live_component module={IagocavalcanteWeb.ToggleTheme} theme={@theme} id="theme" />
     </:toggle_items>
   </.header>

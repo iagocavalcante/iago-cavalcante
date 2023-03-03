@@ -28,28 +28,33 @@ defmodule IagocavalcanteWeb.AboutLive do
               <div class="lg:order-first lg:row-span-2">
                 <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
                   <%= gettext(
-                    "I'm Iago Cavalcante. I live in Belém, Brazil. I'm a software alchemist and community lover."
+                    "I'm Iago Cavalcante. I live in Belém, Brazil. I'm a software alchemist and community lover.",
+                    lang: @locale
                   ) %>
                 </h1>
                 <div class="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
                   <p>
                     <%= gettext(
-                      "I have been a curious person since childhood, greatly inspired by what my grandfather built and fixed. I always knew that I wanted to be an electrical or computer engineer. During my teenage years, I loved computers and video games, and that's when I made the final decision to study Computer Engineering."
+                      "I have been a curious person since childhood, greatly inspired by what my grandfather built and fixed. I always knew that I wanted to be an electrical or computer engineer. During my teenage years, I loved computers and video games, and that's when I made the final decision to study Computer Engineering.",
+                      lang: @locale
                     ) %>
                   </p>
                   <p>
                     <%= gettext(
-                      "During college, I discovered my passion for programming and building hardware. After graduation, I continued to build things for fun using Arduinos, Raspberry Pis, and ESPs. I also discovered that I enjoyed helping people and even giving talks (even though I was always very shy about speaking to other people)."
+                      "During college, I discovered my passion for programming and building hardware. After graduation, I continued to build things for fun using Arduinos, Raspberry Pis, and ESPs. I also discovered that I enjoyed helping people and even giving talks (even though I was always very shy about speaking to other people).",
+                      lang: @locale
                     ) %>
                   </p>
                   <p>
                     <%= gettext(
-                      "In 2018, my friends Patrick and Amir came up with the idea of starting a movement in our city called VueJs Norte, which is now called DevsNorte. Today, with new organizers, we hold monthly events on a variety of technology topics and try to help people who are just starting out in the field."
+                      "In 2018, my friends Patrick and Amir came up with the idea of starting a movement in our city called VueJs Norte, which is now called DevsNorte. Today, with new organizers, we hold monthly events on a variety of technology topics and try to help people who are just starting out in the field.",
+                      lang: @locale
                     ) %>
                   </p>
                   <p>
                     <%= gettext(
-                      "In addition to trying to create content in my spare time and mentoring people who are entering the field, I am now a partner with Juliana Ranieri where we are developing a marketplace platform for hardware stores called Japu. I also work full-time as a software engineer for the consultancy firm Truelogic and for a client directly in the United States."
+                      "In addition to trying to create content in my spare time and mentoring people who are entering the field, I am now a partner with Juliana Ranieri where we are developing a marketplace platform for hardware stores called Japu. I also work full-time as a software engineer for the consultancy firm Truelogic and for a client directly in the United States.",
+                      lang: @locale
                     ) %>
                   </p>
                 </div>
@@ -57,16 +62,16 @@ defmodule IagocavalcanteWeb.AboutLive do
               <div class="lg:pl-20">
                 <ul role="list">
                   <li class="flex">
-                    <.social_links link="https://twitter.com/iagoangelimc" social="twitter" />
+                    <.social_links link="https://twitter.com/iagoangelimc" social="twitter" locale={@locale} />
                   </li>
                   <li class="mt-4 flex">
-                    <.social_links link="https://instagram.com/iago_cavalcante" social="instagram" />
+                    <.social_links link="https://instagram.com/iago_cavalcante" social="instagram" locale={@locale} />
                   </li>
                   <li class="mt-4 flex">
-                    <.social_links link="https://github.com/iagocavalcante" social="github" />
+                    <.social_links link="https://github.com/iagocavalcante" social="github" locale={@locale} />
                   </li>
                   <li class="mt-4 flex">
-                    <.social_links link="https://linkedin.com/in/iago-a-cavalcante" social="linkedin" />
+                    <.social_links link="https://linkedin.com/in/iago-a-cavalcante" social="linkedin" locale={@locale} />
                   </li>
                   <li class="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40 flex">
                     <a

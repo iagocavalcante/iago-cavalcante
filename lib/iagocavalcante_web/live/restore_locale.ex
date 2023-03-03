@@ -10,24 +10,24 @@ defmodule IagocavalcanteWeb.RestoreLocale do
     {:cont,
      socket
      |> assign(:locale, locale)
-     |> attach_hook(:set_locale, :handle_event, &handle_set_locale/3)}
+     |> attach_hook(:set_locale, :handle_event, &handle_event/3)}
   end
 
   def on_mount(:default, _params, _session, socket), do: {:cont, socket}
 
-  defp handle_set_locale("set_locale", %{"locale" => "en"}, socket) do
+  defp handle_event("toggle_locale", %{"locale" => "en"}, socket) do
     locale = "pt_BR"
     IO.inspect(locale, label: "handle_set_locale")
     perform_assigns(socket, locale)
   end
 
-  defp handle_set_locale("set_locale", %{"locale" => "pt_BR"}, socket) do
+  defp handle_event("toggle_locale", %{"locale" => "pt_BR"}, socket) do
     locale = "en"
     IO.inspect(locale, label: "handle_set_locale")
     perform_assigns(socket, locale)
   end
 
-  defp handle_set_locale(_, _, socket) do
+  defp handle_event(_, _, socket) do
     {:cont, socket}
   end
 
@@ -38,6 +38,6 @@ defmodule IagocavalcanteWeb.RestoreLocale do
     # remove / from the beginning of the path
     # current_path = String.replace(current_path, "/", "")
     Gettext.put_locale(IagocavalcanteWeb.Gettext, locale)
-    {:cont, socket |> assign(locale: locale)}
+    {:halt, socket |> assign(locale: locale)}
   end
 end

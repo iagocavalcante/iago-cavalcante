@@ -6,6 +6,7 @@ defmodule IagocavalcanteWeb.SocialLinks do
   attr :social, :string, required: true
   attr :rest, :global, doc: "Any other attributes to be passed to the link"
   attr :only_icon, :boolean, default: false
+  attr :locale, :string, default: "en"
 
   def social_links(assigns) do
     class_link =
@@ -21,12 +22,12 @@ defmodule IagocavalcanteWeb.SocialLinks do
       class={@class_link}
       href={@link}
       target="_blank"
-      aria-label={gettext("Follow on") <> " " <> String.capitalize(@social)}
+      aria-label={gettext("Follow on", lang: @locale) <> " " <> String.capitalize(@social)}
       {@rest}
     >
       <%= social_icon(assigns) %>
       <%= unless assigns.only_icon do %>
-        <span class="ml-4"><%= gettext("Follow on") %> <%= String.capitalize(@social) %></span>
+        <span class="ml-4"><%= gettext("Follow on", lang: @locale) %> <%= String.capitalize(@social) %></span>
       <% end %>
     </a>
     """
