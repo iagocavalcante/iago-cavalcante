@@ -16,34 +16,231 @@ msgstr ""
 msgid "Actions"
 msgstr "Ações"
 
-#: lib/iagocavalcante_web/components/layouts/root.html.heex:13
-#, elixir-autogen, elixir-format, fuzzy
-msgid "I’m Iago Cavalcante, a software engineer and entrepreneur based in Belém. CTO and founder of Japu and Redação Travessia ."
-msgstr "Me chamo Iago Cavalcante, um engenheiro de software e empresário que mora em Belém. CTO e co-fundador da Japu e Redação Travessia"
-
 #: lib/iagocavalcante_web/components/core_components.ex:80
 #: lib/iagocavalcante_web/components/core_components.ex:169
 #, elixir-autogen, elixir-format
 msgid "close"
 msgstr ""
 
-#: lib/iagocavalcante_web/router.ex:55
+#: lib/iagocavalcante_web/router.ex:73
 #, elixir-autogen, elixir-format
 msgid "/login"
 msgstr "/entrar"
 
-#: lib/iagocavalcante_web/components/social_links.ex:17
-#: lib/iagocavalcante_web/components/social_links.ex:22
+#: lib/iagocavalcante_web/components/social_links.ex:24
+#: lib/iagocavalcante_web/components/social_links.ex:29
 #, elixir-autogen, elixir-format
 msgid "Follow on"
 msgstr "Siga-me em"
 
-#: lib/iagocavalcante_web/live/home.ex:16
+#: lib/iagocavalcante_web/live/home.ex:22
 #, elixir-autogen, elixir-format
 msgid "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education."
 msgstr "Me chamo Iago Cavalcante, um alquimista de software (dev elixir) e empreendedor situado em Belém. Sou co-fundador e CTO da Japu e Travessia, onde desenvolvemos um marketplace e um SaaS para educação"
 
-#: lib/iagocavalcante_web/live/home.ex:13
+#: lib/iagocavalcante_web/live/home.ex:19
 #, elixir-autogen, elixir-format
 msgid "Software alchemist, co-founder, and maker."
 msgstr "Alquimista de Software, co-fundador e maker"
+
+#: lib/iagocavalcante_web/components/work.ex:63
+#, elixir-autogen, elixir-format
+msgid "%{date_start} until %{date_end}"
+msgstr "%{date_start} até %{date_end}"
+
+#: lib/iagocavalcante_web/live/speaking.ex:15
+#, elixir-autogen, elixir-format
+msgid "Although I enjoy sharing content at events, I still get very nervous and appear very little. But I continue to help the community as the manager of the North devs community and by organizing monthly events."
+msgstr "Embora eu goste de compartilhar conteúdo em eventos, ainda fico muito nervoso e apareço muito pouco. Mas continuo ajudando a comunidade como o gerente da comunidade de desenvolvedores do Norte e organizando eventos mensais."
+
+#: lib/iagocavalcante_web/components/work.ex:53
+#, elixir-autogen, elixir-format
+msgid "Company"
+msgstr "Empresa"
+
+#: lib/iagocavalcante_web/components/work.ex:59
+#, elixir-autogen, elixir-format
+msgid "Date"
+msgstr "Data"
+
+#: lib/iagocavalcante_web/live/home.ex:101
+#, elixir-autogen, elixir-format
+msgid "Download CV"
+msgstr "Baixar CV"
+
+#: lib/iagocavalcante_web/live/about.ex:41
+#, elixir-autogen, elixir-format
+msgid "During college, I discovered my passion for programming and building hardware. After graduation, I continued to build things for fun using Arduinos, Raspberry Pis, and ESPs. I also discovered that I enjoyed helping people and even giving talks (even though I was always very shy about speaking to other people)."
+msgstr "Durante a faculdade, descobri minha paixão por programação e construção de hardware. Após a formatura, continuei construindo coisas por diversão usando Arduinos, Raspberry Pis e ESPs. Também descobri que gostava de ajudar as pessoas e até mesmo dar palestras (embora sempre tenha sido muito tímido para falar com outras pessoas)."
+
+#: lib/iagocavalcante_web/components/newsletter.ex:37
+#, elixir-autogen, elixir-format
+msgid "Email address"
+msgstr "Endereço de email"
+
+#: lib/iagocavalcante_web/live/speaking.ex:28
+#, elixir-autogen, elixir-format
+msgid "Events"
+msgstr "Eventos"
+
+#: lib/iagocavalcante_web/components/newsletter.ex:32
+#, elixir-autogen, elixir-format
+msgid "Get notified when I publish something new, and unsubscribe at any time."
+msgstr "Seja notificado quando eu publicar algo novo e se desinscreva a qualquer momento."
+
+#: lib/iagocavalcante_web/live/articles_live/show.ex:22
+#, elixir-autogen, elixir-format
+msgid "Go back to articles"
+msgstr "Voltar para artigos"
+
+#: lib/iagocavalcante_web/live/articles_live/index.ex:24
+#, elixir-autogen, elixir-format
+msgid "Here will be centralized all the old and current posts and thoughts, with tips and some solutions that I have implemented throughout my career."
+msgstr "Aqui serão centralizados todos os posts antigos e atuais e pensamentos, com dicas e algumas soluções que implementei ao longo da minha carreira."
+
+#: lib/iagocavalcante_web/live/speaking.ex:12
+#, elixir-autogen, elixir-format
+msgid "I have already given some talks in my region and for internal events."
+msgstr "Já dei algumas palestras na minha região e para eventos internos."
+
+#: lib/iagocavalcante_web/live/about.ex:36
+#, elixir-autogen, elixir-format
+msgid "I have been a curious person since childhood, greatly inspired by what my grandfather built and fixed. I always knew that I wanted to be an electrical or computer engineer. During my teenage years, I loved computers and video games, and that's when I made the final decision to study Computer Engineering."
+msgstr "Desde a infância, sempre fui uma pessoa curiosa, muito inspirado pelo que meu avô construía e consertava. Sempre soube que queria ser engenheiro eletricista ou de computação. Durante minha adolescência, eu adorava computadores e jogos de vídeo game, e foi nessa época que tomei a decisão final de estudar Engenharia de Computação."
+
+#: lib/iagocavalcante_web/live/articles_live/index.ex:19
+#, elixir-autogen, elixir-format
+msgid "I write about software in general, and now I want to talk more about hardware and IoT."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:14
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:23
+#, elixir-autogen, elixir-format, fuzzy
+msgid "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém. CTO and founder of Japu and Redação Travessia ."
+msgstr "Me chamo Iago Cavalcante, um engenheiro de software e empresário que mora em Belém. CTO e co-fundador da Japu e Redação Travessia"
+
+#: lib/iagocavalcante_web/live/about.ex:30
+#, elixir-autogen, elixir-format
+msgid "I'm Iago Cavalcante. I live in Belém, Brazil. I'm a software alchemist and community lover."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/footer.ex:38
+#, elixir-autogen, elixir-format
+msgid "Iago Cavalcante. All rights reserved."
+msgstr "Iago Cavalcante. Todos os direitos reservados."
+
+#: lib/iagocavalcante_web/live/about.ex:46
+#, elixir-autogen, elixir-format
+msgid "In 2018, my friends Patrick and Amir came up with the idea of starting a movement in our city called VueJs Norte, which is now called DevsNorte. Today, with new organizers, we hold monthly events on a variety of technology topics and try to help people who are just starting out in the field."
+msgstr "Em 2018, meus amigos Patrick e Amir tiveram a ideia de começar um movimento em nossa cidade chamado VueJs Norte, que agora é chamado de DevsNorte. Hoje, com novos organizadores, realizamos eventos mensais sobre uma variedade de tópicos de tecnologia e tentamos ajudar pessoas que estão começando na área."
+
+#: lib/iagocavalcante_web/live/about.ex:51
+#, elixir-autogen, elixir-format
+msgid "In addition to trying to create content in my spare time and mentoring people who are entering the field, I am now a partner with Juliana Ranieri where we are developing a marketplace platform for hardware stores called Japu. I also work full-time as a software engineer for the consultancy firm Truelogic and for a client directly in the United States."
+msgstr "Além de tentar criar conteúdo em meu tempo livre e orientar pessoas que estão entrando na área, agora sou sócio da Juliana Ranieri, onde estamos desenvolvendo uma plataforma de mercado para lojas de hardware chamada Japu. Também trabalho em período integral como engenheiro de software para a empresa de consultoria Truelogic e para um cliente diretamente nos Estados Unidos."
+
+#: lib/iagocavalcante_web/live/uses.ex:15
+#, elixir-autogen, elixir-format
+msgid "I’ve been using a lot of different software and hardware over the years, but now I've finally stopped to focus on selecting and maintaining cool gadgets and equipment for work and productivity."
+msgstr "Ao longo dos anos, tenho usado muitos softwares e hardwares diferentes, mas agora finalmente parei para me concentrar na seleção e manutenção de gadgets e equipamentos legais para trabalho e produtividade."
+
+#: lib/iagocavalcante_web/components/newsletter.ex:47
+#, elixir-autogen, elixir-format
+msgid "Join"
+msgstr "Entrar"
+
+#: lib/iagocavalcante_web/components/events.ex:49
+#, elixir-autogen, elixir-format
+msgid "Link to presentation or video"
+msgstr "Link para apresentação ou vídeo"
+
+#: lib/iagocavalcante_web/components/articles_list.ex:54
+#: lib/iagocavalcante_web/components/posts.ex:63
+#, elixir-autogen, elixir-format
+msgid "Read article"
+msgstr "Ler artigo"
+
+#: lib/iagocavalcante_web/components/work.ex:57
+#, elixir-autogen, elixir-format
+msgid "Role"
+msgstr "Cargo"
+
+#: lib/iagocavalcante_web/live/uses.ex:12
+#, elixir-autogen, elixir-format
+msgid "Software I use, gadgets I love, and other things I recommend."
+msgstr "Softwares que eu uso, gadgets que eu amo e coisas que recomendo"
+
+#: lib/iagocavalcante_web/components/newsletter.ex:29
+#, elixir-autogen, elixir-format
+msgid "Stay up to date"
+msgstr "Quer ficar por dentro"
+
+#: lib/iagocavalcante_web/live/home.ex:90
+#, elixir-autogen, elixir-format
+msgid "Work"
+msgstr "Trabalho"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:9
+#: lib/iagocavalcante_web/components/toggle_locale.ex:54
+#: lib/iagocavalcante_web/router.ex:54
+#, elixir-autogen, elixir-format
+msgid "/about"
+msgstr "/sobre"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:10
+#: lib/iagocavalcante_web/components/toggle_locale.ex:55
+#: lib/iagocavalcante_web/router.ex:55
+#, elixir-autogen, elixir-format
+msgid "/articles"
+msgstr "/artigos"
+
+#: lib/iagocavalcante_web/router.ex:56
+#, elixir-autogen, elixir-format
+msgid "/articles/:slug"
+msgstr "/artigos/:slug"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:11
+#: lib/iagocavalcante_web/components/toggle_locale.ex:56
+#: lib/iagocavalcante_web/router.ex:57
+#, elixir-autogen, elixir-format
+msgid "/projects"
+msgstr "/projetos"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:12
+#: lib/iagocavalcante_web/components/toggle_locale.ex:57
+#: lib/iagocavalcante_web/router.ex:58
+#, elixir-autogen, elixir-format
+msgid "/speaking"
+msgstr "/palestras"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:13
+#: lib/iagocavalcante_web/components/toggle_locale.ex:58
+#: lib/iagocavalcante_web/router.ex:59
+#, elixir-autogen, elixir-format
+msgid "/uses"
+msgstr "/setup"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:9
+#, elixir-autogen, elixir-format, fuzzy
+msgid "About"
+msgstr "Sobre"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:10
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Articles"
+msgstr "Artigos"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:11
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Projects"
+msgstr "Projetos"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:12
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Speaking"
+msgstr "Palestras"
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:13
+#, elixir-autogen, elixir-format
+msgid "Uses"
+msgstr "setup"

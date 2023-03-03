@@ -54,8 +54,6 @@ defmodule IagocavalcanteWeb do
       use Phoenix.LiveView,
         layout: {IagocavalcanteWeb.Layouts, :app}
 
-      on_mount IagocavalcanteWeb.RestoreLocale
-
       unquote(html_helpers())
     end
   end

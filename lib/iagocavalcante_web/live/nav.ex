@@ -2,9 +2,10 @@ defmodule IagocavalcanteWeb.Nav do
   import Phoenix.LiveView
   use Phoenix.Component
 
+  import IagocavalcanteWeb.Gettext
+
   alias IagocavalcanteWeb.AboutLive
-  alias IagocavalcanteWeb.ArticlesLive.Index
-  alias IagocavalcanteWeb.ArticlesLive.Show
+  alias IagocavalcanteWeb.ArticlesLive
   alias IagocavalcanteWeb.HomeLive
   alias IagocavalcanteWeb.ProjectsLive
   alias IagocavalcanteWeb.SpeakingLive
@@ -13,12 +14,12 @@ defmodule IagocavalcanteWeb.Nav do
   def on_mount(:default, _params, _session, socket) do
     {:cont,
      socket
+     |> assign(locale: maybe_locale(socket))
      |> attach_hook(:active_tab, :handle_params, &handle_active_tab_params/3)
-     |> attach_hook(:locale, :handle_params, &handle_locale_params/3)
      |> attach_hook(:theme, :handle_params, &handle_theme_params/3)}
   end
 
-  defp handle_active_tab_params(params, _url, socket) do
+  defp handle_active_tab_params(_params, _url, socket) do
     active_tab =
       case {socket.view, socket.assigns.live_action} do
         {HomeLive, _} ->
@@ -27,7 +28,10 @@ defmodule IagocavalcanteWeb.Nav do
         {AboutLive, _} ->
           :about
 
-        {ArticlesLive, _} ->
+        {ArticlesLive.Index, _} ->
+          :articles
+
+        {ArticlesLive.Show, _} ->
           :articles
 
         {ProjectsLive, _} ->
@@ -46,21 +50,18 @@ defmodule IagocavalcanteWeb.Nav do
     {:cont, assign(socket, active_tab: active_tab)}
   end
 
-  defp handle_locale_params(params, _url, socket) do
-    locale =
-      case params["locale"] do
-        "pt_BR" -> "pt_BR"
-        _ -> "en"
-      end
-
-    {:cont, assign(socket, locale: locale)}
-  end
-
-  defp handle_theme_params(params, _url, socket) do
+  defp handle_theme_params(_params, _url, socket) do
     theme = "light"
 
     {:cont, assign(socket, theme: theme)}
   end
 
-  defp handle_event(_, _, socket), do: {:cont, socket}
+  defp maybe_locale(socket) do
+    IO.inspect(socket.assigns)
+
+    case socket.assigns[:locale] do
+      nil -> "en"
+      _ -> socket.assigns.locale
+    end
+  end
 end

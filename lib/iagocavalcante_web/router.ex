@@ -44,17 +44,18 @@ defmodule IagocavalcanteWeb.Router do
   scope "/", IagocavalcanteWeb do
     pipe_through [:browser]
 
-    live_session :nav,
+    live_session :public_session,
       on_mount: [
-        IagocavalcanteWeb.Nav
+        IagocavalcanteWeb.Nav,
+        IagocavalcanteWeb.RestoreLocale
       ] do
       live "/", HomeLive, :home
-      live "/about", AboutLive, :about
-      live "/articles", ArticlesLive.Index, :index
-      live "/articles/:slug", ArticlesLive.Show, :show
-      live "/projects", ProjectsLive, :projects
-      live "/speaking", SpeakingLive, :speaking
-      live "/uses", UsesLive, :uses
+      live gettext("/about"), AboutLive, :about
+      live gettext("/articles"), ArticlesLive.Index, :index
+      live gettext("/articles/:slug"), ArticlesLive.Show, :show
+      live gettext("/projects"), ProjectsLive, :projects
+      live gettext("/speaking"), SpeakingLive, :speaking
+      live gettext("/uses"), UsesLive, :uses
     end
   end
 
