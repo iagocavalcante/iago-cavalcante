@@ -46,6 +46,18 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
               "Webapp to send anonymous messages to people who owe you money, built with Node and Vue.js using Lambda and Giphy API",
             url: "https://mepagueoque.dev/",
             image: "/images/projects/mepagueoquedev.svg"
+          },
+          %{
+            name: "Squash Hardcore",
+            description: "Game built with Construct 2",
+            url: "https://squash-hardcore.iagocavalcante.company/",
+            image: "https://placehold.it/200x200"
+          },
+          %{
+            name: "Personal Board v1",
+            description: "A personal board to manage tasks and boards, built with Vue.js and Vuex",
+            url: "https://personal-board-v1.iagocavalcante.company/",
+            image: "/images/projects/personal-board-v1.png"
           }
         ]
       },
