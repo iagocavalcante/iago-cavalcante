@@ -6,7 +6,7 @@ defmodule Iagocavalcante.Blog do
   import Ecto.Query, warn: false
   alias Iagocavalcante.Repo
 
-  alias Iagocavalcante.Blog.Posts
+  alias Iagocavalcante.Blog.Post
 
   @doc """
   Returns the list of posts.
@@ -14,34 +14,34 @@ defmodule Iagocavalcante.Blog do
   ## Examples
 
       iex> list_posts()
-      [%Posts{}, ...]
+      [%Post{}, ...]
 
   """
   def list_posts do
-    Repo.all(Posts)
+    Repo.all(Post)
   end
 
   def list_last_posts do
-    Repo.all(from p in Posts, order_by: [desc: p.inserted_at], limit: 3)
+    Repo.all(from p in Post, order_by: [desc: p.inserted_at], limit: 3)
   end
 
   @doc """
   Gets a single posts.
 
-  Raises `Ecto.NoResultsError` if the Posts does not exist.
+  Raises `Ecto.NoResultsError` if the Post does not exist.
 
   ## Examples
 
       iex> get_posts!(123)
-      %Posts{}
+      %Post{}
 
       iex> get_posts!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_posts!(id), do: Repo.get!(Posts, id)
+  def get_posts!(id), do: Repo.get!(Post, id)
 
-  def get_article_by_slug!(slug), do: Repo.get_by!(Posts, slug: slug)
+  def get_article_by_slug!(slug), do: Repo.get_by!(Post, slug: slug)
 
   @doc """
   Creates a posts.
@@ -49,15 +49,15 @@ defmodule Iagocavalcante.Blog do
   ## Examples
 
       iex> create_posts(%{field: value})
-      {:ok, %Posts{}}
+      {:ok, %Post{}}
 
       iex> create_posts(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
   def create_posts(attrs \\ %{}) do
-    %Posts{}
-    |> Posts.changeset(attrs)
+    %Post{}
+    |> Post.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -67,15 +67,15 @@ defmodule Iagocavalcante.Blog do
   ## Examples
 
       iex> update_posts(posts, %{field: new_value})
-      {:ok, %Posts{}}
+      {:ok, %Post{}}
 
       iex> update_posts(posts, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_posts(%Posts{} = posts, attrs) do
+  def update_posts(%Post{} = posts, attrs) do
     posts
-    |> Posts.changeset(attrs)
+    |> Post.changeset(attrs)
     |> Repo.update()
   end
 
@@ -85,13 +85,13 @@ defmodule Iagocavalcante.Blog do
   ## Examples
 
       iex> delete_posts(posts)
-      {:ok, %Posts{}}
+      {:ok, %Post{}}
 
       iex> delete_posts(posts)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_posts(%Posts{} = posts) do
+  def delete_posts(%Post{} = posts) do
     Repo.delete(posts)
   end
 
@@ -101,10 +101,10 @@ defmodule Iagocavalcante.Blog do
   ## Examples
 
       iex> change_posts(posts)
-      %Ecto.Changeset{data: %Posts{}}
+      %Ecto.Changeset{data: %Post{}}
 
   """
-  def change_posts(%Posts{} = posts, attrs \\ %{}) do
-    Posts.changeset(posts, attrs)
+  def change_posts(%Post{} = posts, attrs \\ %{}) do
+    Post.changeset(posts, attrs)
   end
 end

@@ -1,0 +1,7 @@
+<.simple_form for={@form} id="ticket-form" phx-change="ignore" phx-submit="ignore" class="flex items-center justify-center w-full">
+  <.input field={{@form, :body}} type="hidden" phx-hook="TrixEditor" />
+  <div id={"ignore-#{@form[:body].id}"} phx-update="ignore">
+    <trix-editor input={@form[:body].id} class="trix-content"></trix-editor>
+  </div>
+  <.button phx-disable-with="Saving...">Save post</.button>
+</.simple_form>

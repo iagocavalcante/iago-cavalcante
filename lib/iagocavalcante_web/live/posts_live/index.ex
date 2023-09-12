@@ -2,7 +2,7 @@ defmodule IagocavalcanteWeb.PostsLive.Index do
   use IagocavalcanteWeb, :live_view
 
   alias Iagocavalcante.Blog
-  alias Iagocavalcante.Blog.Posts
+  alias Iagocavalcante.Blog.Post
 
   @impl true
   def mount(_params, _session, socket) do
@@ -23,7 +23,7 @@ defmodule IagocavalcanteWeb.PostsLive.Index do
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Posts")
-    |> assign(:posts, %Posts{})
+    |> assign(:post, %Post{})
   end
 
   defp apply_action(socket, :index, _params) do

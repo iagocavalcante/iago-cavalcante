@@ -61,7 +61,7 @@ defmodule IagocavalcanteWeb.Router do
 
   ## Authentication routes
 
-  scope "/", IagocavalcanteWeb do
+  scope "/admin", IagocavalcanteWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
     live_session :redirect_if_user_is_authenticated,
@@ -70,14 +70,15 @@ defmodule IagocavalcanteWeb.Router do
         IagocavalcanteWeb.Nav
       ] do
       live gettext("/login"), UserLoginLive, :new
-      live "/users/reset_password", UserForgotPasswordLive, :new
-      live "/users/reset_password/:token", UserResetPasswordLive, :edit
+      live "/register", UserRegistrationLive, :new
+      live "/reset_password", UserForgotPasswordLive, :new
+      live "/reset_password/:token", UserResetPasswordLive, :edit
     end
 
     post "/login", UserSessionController, :create
   end
 
-  scope "/", IagocavalcanteWeb do
+  scope "/admin", IagocavalcanteWeb do
     pipe_through [:browser, :require_authenticated_user]
 
     live_session :require_authenticated_user,
@@ -85,11 +86,11 @@ defmodule IagocavalcanteWeb.Router do
       live "/users/register", UserRegistrationLive, :new
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
-      live "/admin/posts", PostsLive.Index, :index
-      live "/admin/posts/new", PostsLive.Index, :new
-      live "/admin/posts/:id/edit", PostsLive.Index, :edit
-      live "/admin/posts/:id", PostsLive.Show, :show
-      live "/admin/posts/:id/show/edit", PostsLive.Show, :edit
+      live "/posts", PostsLive.Index, :index
+      live "/posts/new", PostsLive.Editor, :new
+      live "/posts/:id/edit", PostsLive.Index, :edit
+      live "/posts/:id", PostsLive.Show, :show
+      live "/posts/:id/show/edit", PostsLive.Show, :edit
     end
   end
 

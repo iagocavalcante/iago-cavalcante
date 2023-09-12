@@ -8,7 +8,7 @@ defmodule IagocavalcanteWeb.UserLoginLive do
         :let={f}
         id="login_form"
         for={:user}
-        action={~p"/login"}
+        action={~p"/admin/login"}
         as={:user}
         phx-update="ignore"
       >
