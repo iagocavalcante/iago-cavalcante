@@ -3,11 +3,6 @@ defmodule IagocavalcanteWeb.ArticlesLive.Index do
 
   alias Iagocavalcante.Blog
 
-  @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :articles, Blog.list_posts())}
-  end
-
   def render(assigns) do
     ~H"""
     <div class="sm:px-8 mt-16 sm:mt-32">
@@ -31,7 +26,7 @@ defmodule IagocavalcanteWeb.ArticlesLive.Index do
             <div class="mt-16 sm:mt-20">
               <div class="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
                 <div class="flex max-w-3xl flex-col space-y-16">
-                  <.articles_list articles={@articles} />
+                  <.articles_list articles={Blog.published_posts_by_locale(@locale)} locale={@locale} />
                 </div>
               </div>
             </div>

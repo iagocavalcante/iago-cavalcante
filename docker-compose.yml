@@ -1,0 +1,39 @@
+version: '3'
+services:
+  # Elixir application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev  # Use the development Dockerfile
+    ports:
+      - "4000:4000"  # Map host port 4000 to container port 4000
+    volumes:
+      - .:/app  # Mount the current directory on the host to /app in the container
+    depends_on:
+      - db  # Ensure the PostgreSQL service is started before the app
+
+  # PostgreSQL database
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"  # Map host port 5432 to container port 5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: iagocavalcante_dev
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  # Custom service for running mix deps.get
+  deps-get:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev  # Use the same Dockerfile as your app
+    volumes:
+      - .:/app  # Mount the application code
+    entrypoint: ["mix", "deps.get"]  # Run mix deps.get command
+    depends_on:
+      - app  # Ensure the app service is started before running deps.get
+
+volumes:
+  pg_data: # Named volume for persisting data

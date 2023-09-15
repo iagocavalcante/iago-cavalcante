@@ -1,110 +1,37 @@
 defmodule Iagocavalcante.Blog do
-  @moduledoc """
-  The Blog context.
-  """
+  alias Iagocavalcante.Post
 
-  import Ecto.Query, warn: false
-  alias Iagocavalcante.Repo
+  defmodule NotFoundError, do: defexception [:message, plug_status: 404]
 
-  alias Iagocavalcante.Blog.Post
+  use NimblePublisher,
+    build: Post,
+    from: Application.app_dir(:iagocavalcante, "priv/posts/**/*.md"),
+    as: :posts,
+    highlighters: [:makeup_elixir, :makeup_erlang]
 
-  @doc """
-  Returns the list of posts.
+  @posts Enum.sort_by(@posts, & &1.date, {:desc, Date})
+  @tags @posts |> Enum.flat_map(& &1.tags) |> Enum.uniq() |> Enum.sort()
 
-  ## Examples
+  def all_tags, do: @tags
+  def all_posts, do: @posts
 
-      iex> list_posts()
-      [%Post{}, ...]
+  def published_posts, do: Enum.filter(all_posts(), &(&1.published == true))
+  def published_posts_by_locale(locale) do
+    published_posts()
+    |> Enum.filter(& &1.locale == locale)
+  end
+  def recent_posts(num \\ 5), do: Enum.take(published_posts(), num)
+  def recent_posts_by_locale(num \\ 5, locale), do: Enum.take(published_posts_by_locale(locale), num)
 
-  """
-  def list_posts do
-    Repo.all(Post)
+  def get_post_by_id!(id) do
+    Enum.find(all_posts(), &(&1.id == id)) ||
+      raise NotFoundError, "post with id=#{id} not found"
   end
 
-  def list_last_posts do
-    Repo.all(from p in Post, order_by: [desc: p.inserted_at], limit: 3)
-  end
-
-  @doc """
-  Gets a single posts.
-
-  Raises `Ecto.NoResultsError` if the Post does not exist.
-
-  ## Examples
-
-      iex> get_posts!(123)
-      %Post{}
-
-      iex> get_posts!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_posts!(id), do: Repo.get!(Post, id)
-
-  def get_article_by_slug!(slug), do: Repo.get_by!(Post, slug: slug)
-
-  @doc """
-  Creates a posts.
-
-  ## Examples
-
-      iex> create_posts(%{field: value})
-      {:ok, %Post{}}
-
-      iex> create_posts(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_posts(attrs \\ %{}) do
-    %Post{}
-    |> Post.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Updates a posts.
-
-  ## Examples
-
-      iex> update_posts(posts, %{field: new_value})
-      {:ok, %Post{}}
-
-      iex> update_posts(posts, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_posts(%Post{} = posts, attrs) do
-    posts
-    |> Post.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a posts.
-
-  ## Examples
-
-      iex> delete_posts(posts)
-      {:ok, %Post{}}
-
-      iex> delete_posts(posts)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_posts(%Post{} = posts) do
-    Repo.delete(posts)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking posts changes.
-
-  ## Examples
-
-      iex> change_posts(posts)
-      %Ecto.Changeset{data: %Post{}}
-
-  """
-  def change_posts(%Post{} = posts, attrs \\ %{}) do
-    Post.changeset(posts, attrs)
+  def get_posts_by_tag!(tag) do
+    case Enum.filter(published_posts(), &(tag in &1.tags)) do
+      [] -> raise NotFoundError, "posts with tag=#{tag} not found"
+      posts -> posts
+    end
   end
 end

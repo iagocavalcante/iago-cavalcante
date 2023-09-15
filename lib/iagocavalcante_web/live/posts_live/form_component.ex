@@ -1,7 +1,7 @@
 defmodule IagocavalcanteWeb.PostsLive.FormComponent do
   use IagocavalcanteWeb, :live_component
 
-  alias Iagocavalcante.Blog
+  alias Iagocavalcante.Blogs
 
   @impl true
   def render(assigns) do
@@ -30,7 +30,7 @@ defmodule IagocavalcanteWeb.PostsLive.FormComponent do
 
   @impl true
   def update(%{posts: posts} = assigns, socket) do
-    changeset = Blog.change_posts(posts)
+    changeset = Blogs.change_posts(posts)
 
     {:ok,
      socket
@@ -42,7 +42,7 @@ defmodule IagocavalcanteWeb.PostsLive.FormComponent do
   def handle_event("validate", %{"posts" => posts_params}, socket) do
     changeset =
       socket.assigns.posts
-      |> Blog.change_posts(posts_params)
+      |> Blogs.change_posts(posts_params)
       # |> slug_from_title()
       |> Map.put(:action, :validate)
 
@@ -54,7 +54,7 @@ defmodule IagocavalcanteWeb.PostsLive.FormComponent do
   end
 
   defp save_posts(socket, :edit, posts_params) do
-    case Blog.update_posts(socket.assigns.posts, posts_params) do
+    case Blogs.update_posts(socket.assigns.posts, posts_params) do
       {:ok, posts} ->
         notify_parent({:saved, posts})
 
@@ -71,7 +71,7 @@ defmodule IagocavalcanteWeb.PostsLive.FormComponent do
   defp save_posts(socket, :new, posts_params) do
     post_with_slug = slug_from_title(posts_params)
 
-    case Blog.create_posts(post_with_slug) do
+    case Blogs.create_posts(post_with_slug) do
       {:ok, posts} ->
         notify_parent({:saved, posts})
 

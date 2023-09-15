@@ -2,36 +2,8 @@ defmodule IagocavalcanteWeb.Posts do
   use Phoenix.Component
   import IagocavalcanteWeb.Gettext
 
-  attr :articles, :list,
-    default: [
-      %{
-        title: "Rewriting the Cosmos Kernel in Rust",
-        description: "A step-by-step guide on how to rewrite the Cosmos Kernel in Rust",
-        inserted_at: "2021-09-01",
-        tags: ["rust", "cosmos", "kernel", "osdev"],
-        image: "/images/articles/rewriting-the-cosmos-kernel-in-rust/cover.png",
-        image_alt: "A screenshot of the Cosmos Kernel running on QEMU",
-        url: "/articles/rewriting-the-cosmos-kernel-in-rust"
-      },
-      %{
-        title: "Building a Rust Kernel",
-        description: "A step-by-step guide on how to build a Rust Kernel",
-        inserted_at: "2021-08-01",
-        tags: ["rust", "kernel", "osdev"],
-        image: "/images/articles/building-a-rust-kernel/cover.png",
-        image_alt: "A screenshot of the Cosmos Kernel running on QEMU",
-        url: "/articles/building-a-rust-kernel"
-      },
-      %{
-        title: "Building a Rust Kernel",
-        description: "A step-by-step guide on how to build a Rust Kernel",
-        inserted_at: "2021-08-01",
-        tags: ["rust", "kernel", "osdev"],
-        image: "/images/articles/building-a-rust-kernel/cover.png",
-        image_alt: "A screenshot of the Cosmos Kernel running on QEMU",
-        url: "/articles/building-a-rust-kernel"
-      }
-    ]
+  attr :locale, :string, default: "en"
+  attr :articles, :list
 
   def posts(assigns) do
     ~H"""
@@ -39,7 +11,7 @@ defmodule IagocavalcanteWeb.Posts do
       <h2 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
         <div class="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl">
         </div>
-        <a href={"/articles/#{article.slug}"}>
+        <a href={"/articles/#{article.id}"}>
           <span class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
           <span class="relative z-10"><%= article.title %></span>
         </a>
@@ -51,7 +23,7 @@ defmodule IagocavalcanteWeb.Posts do
         <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
           <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
         </span>
-        <%= format_date(article.inserted_at) %>
+        <%= article.date %>
       </time>
       <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
         <%= article.description %>

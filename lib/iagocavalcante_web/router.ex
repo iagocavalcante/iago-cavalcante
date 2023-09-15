@@ -52,7 +52,7 @@ defmodule IagocavalcanteWeb.Router do
       live "/", HomeLive, :home
       live gettext("/about"), AboutLive, :about
       live gettext("/articles"), ArticlesLive.Index, :index
-      live gettext("/articles/:slug"), ArticlesLive.Show, :show
+      live gettext("/articles/:id"), ArticlesLive.Show, :show
       live gettext("/projects"), ProjectsLive, :projects
       live gettext("/speaking"), SpeakingLive, :speaking
       live gettext("/uses"), UsesLive, :uses
