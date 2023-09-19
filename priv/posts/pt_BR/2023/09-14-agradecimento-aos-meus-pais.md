@@ -8,8 +8,6 @@
 }
 ---
 
-## Agradecimento aos meus pais
-
 Bom pessoal, venho aqui hoje compartilhar um texto mais pessoal. Senti uma enorme vontade de agradecer, após refletir sobre minha trajetória de vida, batalhas, desistências, sucessos, projeto de vida e outras coisas. 
 
 Tudo me levou a um enorme sentimento de satisfação, de está onde eu estou, trilhando meu caminho, construindo a minha família e batalhando todo dia pra ser um ser humano melhor.

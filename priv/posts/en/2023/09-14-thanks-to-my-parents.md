@@ -8,8 +8,6 @@
 }
 ---
 
-## Thanks to my parents
-
 Hello everyone, today I'm here to share a more personal text. I felt a strong urge to express my gratitude after reflecting on my life journey, the struggles, the moments of giving up, the successes, life goals, and everything in between.
 
 Everything has led me to a profound sense of contentment, being where I am, forging my path, building my family, and striving every day to become a better human being.
