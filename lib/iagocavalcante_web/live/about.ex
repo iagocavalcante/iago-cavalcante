@@ -89,7 +89,7 @@ defmodule IagocavalcanteWeb.AboutLive do
                         >
                         </path>
                       </svg>
-                      <span class="ml-4">contato@iagocavalcante.company</span>
+                      <span class="ml-4">iagocavalcante@hey.com</span>
                     </a>
                   </li>
                 </ul>
