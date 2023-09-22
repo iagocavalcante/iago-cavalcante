@@ -51,6 +51,7 @@ defmodule Iagocavalcante.MixProject do
       {:phoenix, "~> 1.7.1", override: true},
       {:plug_cowboy, "~> 2.5"},
       {:postgrex, ">= 0.0.0"},
+      {:resend, "~> 0.2.1"},
       {:swoosh, "~> 1.3"},
       {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},

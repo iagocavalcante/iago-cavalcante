@@ -7,7 +7,11 @@
 <div class="relative">
   <.header>
     <:nav_items>
-      <.nav_item link={gettext("/about")} text={"#{gettext("About", lang: @locale)}"} active_item={@active_tab} />
+      <.nav_item
+        link={gettext("/about")}
+        text={"#{gettext("About", lang: @locale)}"}
+        active_item={@active_tab}
+      />
       <.nav_item
         link={gettext("/articles")}
         text={"#{gettext("Articles", lang: @locale)}"}
@@ -23,7 +27,11 @@
         text={"#{gettext("Speaking", lang: @locale)}"}
         active_item={@active_tab}
       />
-      <.nav_item link={gettext("/uses")} text={"#{gettext("Uses", lang: @locale)}"} active_item={@active_tab} />
+      <.nav_item
+        link={gettext("/uses")}
+        text={"#{gettext("Uses", lang: @locale)}"}
+        active_item={@active_tab}
+      />
     </:nav_items>
     <:toggle_items>
       <.toggle_locale locale={@locale} />

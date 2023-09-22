@@ -27,7 +27,9 @@ defmodule IagocavalcanteWeb.SocialLinks do
     >
       <%= social_icon(assigns) %>
       <%= unless assigns.only_icon do %>
-        <span class="ml-4"><%= gettext("Follow on", lang: @locale) %> <%= String.capitalize(@social) %></span>
+        <span class="ml-4">
+          <%= gettext("Follow on", lang: @locale) %> <%= String.capitalize(@social) %>
+        </span>
       <% end %>
     </a>
     """

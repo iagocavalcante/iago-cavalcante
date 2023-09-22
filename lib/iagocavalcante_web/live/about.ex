@@ -62,16 +62,32 @@ defmodule IagocavalcanteWeb.AboutLive do
               <div class="lg:pl-20">
                 <ul role="list">
                   <li class="flex">
-                    <.social_links link="https://twitter.com/iagoangelimc" social="twitter" locale={@locale} />
+                    <.social_links
+                      link="https://twitter.com/iagoangelimc"
+                      social="twitter"
+                      locale={@locale}
+                    />
                   </li>
                   <li class="mt-4 flex">
-                    <.social_links link="https://instagram.com/iago_cavalcante" social="instagram" locale={@locale} />
+                    <.social_links
+                      link="https://instagram.com/iago_cavalcante"
+                      social="instagram"
+                      locale={@locale}
+                    />
                   </li>
                   <li class="mt-4 flex">
-                    <.social_links link="https://github.com/iagocavalcante" social="github" locale={@locale} />
+                    <.social_links
+                      link="https://github.com/iagocavalcante"
+                      social="github"
+                      locale={@locale}
+                    />
                   </li>
                   <li class="mt-4 flex">
-                    <.social_links link="https://linkedin.com/in/iago-a-cavalcante" social="linkedin" locale={@locale} />
+                    <.social_links
+                      link="https://linkedin.com/in/iago-a-cavalcante"
+                      social="linkedin"
+                      locale={@locale}
+                    />
                   </li>
                   <li class="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40 flex">
                     <a

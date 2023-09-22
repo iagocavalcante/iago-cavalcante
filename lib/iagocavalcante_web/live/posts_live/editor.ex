@@ -6,9 +6,11 @@ defmodule IagocavalcanteWeb.PostsLive.Editor do
 
   @impl true
   def mount(_params, _session, socket) do
-    socket = socket
+    socket =
+      socket
       |> assign(:page_title, "New Post")
       |> assign(:form, to_form(%{body: "asdasdas"}))
+
     {:ok, socket}
   end
 

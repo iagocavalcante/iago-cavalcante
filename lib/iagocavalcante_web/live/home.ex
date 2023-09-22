@@ -60,7 +60,11 @@ defmodule IagocavalcanteWeb.HomeLive do
                 <.posts articles={Blog.recent_posts_by_locale(@locale)} locale={@locale} />
               </div>
               <div class="space-y-10 lg:pl-16 xl:pl-24">
-                <.live_component module={IagocavalcanteWeb.Newsletter} id="newsletter" locale={@locale} />
+                <.live_component
+                  module={IagocavalcanteWeb.Newsletter}
+                  id="newsletter"
+                  locale={@locale}
+                />
                 <div class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
                   <h2 class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                     <svg

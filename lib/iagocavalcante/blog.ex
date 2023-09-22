@@ -1,7 +1,7 @@
 defmodule Iagocavalcante.Blog do
   alias Iagocavalcante.Post
 
-  defmodule NotFoundError, do: defexception [:message, plug_status: 404]
+  defmodule NotFoundError, do: defexception([:message, plug_status: 404])
 
   use NimblePublisher,
     build: Post,
@@ -16,12 +16,16 @@ defmodule Iagocavalcante.Blog do
   def all_posts, do: @posts
 
   def published_posts, do: Enum.filter(all_posts(), &(&1.published == true))
+
   def published_posts_by_locale(locale) do
     published_posts()
-    |> Enum.filter(& &1.locale == locale)
+    |> Enum.filter(&(&1.locale == locale))
   end
+
   def recent_posts(num \\ 5), do: Enum.take(published_posts(), num)
-  def recent_posts_by_locale(num \\ 5, locale), do: Enum.take(published_posts_by_locale(locale), num)
+
+  def recent_posts_by_locale(num \\ 5, locale),
+    do: Enum.take(published_posts_by_locale(locale), num)
 
   def get_post_by_id!(id) do
     Enum.find(all_posts(), &(&1.id == id)) ||

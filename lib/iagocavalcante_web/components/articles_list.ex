@@ -4,7 +4,6 @@ defmodule IagocavalcanteWeb.ArticlesList do
   import IagocavalcanteWeb.Gettext
   alias IagocavalcanteWeb.ArticleView
 
-
   attr :locale, :string, default: "en"
   attr :articles, :list
 

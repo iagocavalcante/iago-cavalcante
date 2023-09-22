@@ -55,7 +55,8 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
           },
           %{
             name: "Personal Board v1",
-            description: "A personal board to manage tasks and boards, built with Vue.js and Vuex",
+            description:
+              "A personal board to manage tasks and boards, built with Vue.js and Vuex",
             url: "https://personal-board-v1.iagocavalcante.company/",
             image: "/images/projects/personal-board-v1.png"
           }

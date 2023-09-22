@@ -22,6 +22,7 @@ defmodule IagocavalcanteWeb.Events do
           "I see a lot of people wanting to start with DevOps or understand it better, but it can be difficult to practice in your work environment. So, nothing better than starting with something that is yours and that will probably cost you almost nothing. That is the main goal of this talk, to get out of inertia and get your hands dirty."
       }
     ]
+
   attr :locale, :string, default: "en"
 
   def events(assigns) do

@@ -50,7 +50,7 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
                     </time>
                   </header>
                   <div class="mt-8 prose dark:prose-invert text-lg">
-                    <%= raw @article.body %>
+                    <%= raw(@article.body) %>
                   </div>
                 </article>
               </div>

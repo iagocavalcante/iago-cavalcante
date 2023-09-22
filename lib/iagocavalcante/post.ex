@@ -1,5 +1,16 @@
 defmodule Iagocavalcante.Post do
-  @enforce_keys [:id, :author, :title, :body, :description, :tags, :date, :path, :published, :locale]
+  @enforce_keys [
+    :id,
+    :author,
+    :title,
+    :body,
+    :description,
+    :tags,
+    :date,
+    :path,
+    :published,
+    :locale
+  ]
   defstruct [:id, :author, :title, :body, :description, :tags, :date, :path, :published, :locale]
 
   def build(filename, attrs, body) do
