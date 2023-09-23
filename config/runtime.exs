@@ -63,6 +63,10 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  config :iagocavalcante, Iagocavalcante.Mailer,
+    adapter: Resend.Swoosh.Adapter,
+    api_key: System.fetch_env!("RESEND_API_KEY")
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key
