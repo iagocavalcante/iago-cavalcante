@@ -50,8 +50,8 @@ defmodule Iagocavalcante.Subscribers do
   def get_by_email!(email),
     do: from(s in Subscriber, where: s.email == ^email and is_nil(s.verified_at)) |> Repo.one()
 
-  def get_by_token!(token),
-    do: from(s in Subscriber, where: s.token == ^token) |> Repo.one()
+  def get_by_token(token),
+    do: from(s in Subscriber, where: s.token == ^token and is_nil(s.verified_at)) |> Repo.one()
 
   @doc """
   Creates a subscriber.
@@ -118,12 +118,22 @@ defmodule Iagocavalcante.Subscribers do
     Subscriber.changeset(subscriber, attrs)
   end
 
-  def verify_subscriber(token) do
-    subscriber = get_by_token!(token)
+  def verify_subscriber(socket, token) do
+    subscriber = get_by_token(token)
 
-    subscriber
-    |> change_subscriber(%{verified_at: DateTime.utc_now()})
-    |> Repo.update()
+    if is_nil(subscriber) do
+      {:ok, :already_verified}
+    else
+      case Phoenix.Token.verify(socket, subscriber.email, token, max_age: 86400) do
+        {:ok, _subscriber} ->
+          subscriber
+          |> change_subscriber(%{verified_at: DateTime.utc_now()})
+          |> Repo.update()
+
+        {:error, _} ->
+          {:error, :invalid_token}
+      end
+    end
   end
 
   def deliver_confirmation_subscription(%Subscriber{} = subscriber, confirmation_url_fun)

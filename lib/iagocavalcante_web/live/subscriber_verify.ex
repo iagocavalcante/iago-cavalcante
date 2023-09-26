@@ -2,7 +2,7 @@ defmodule IagocavalcanteWeb.SubscriberVerifyLive do
   use IagocavalcanteWeb, :live_view
 
   def mount(%{"token" => token}, _assigns, socket) do
-    case Iagocavalcante.Subscribers.verify_subscriber(token) do
+    case Iagocavalcante.Subscribers.verify_subscriber(socket, token) do
       {:ok, _subscriber} ->
         {:ok, socket |> assign(:token, token)}
 
