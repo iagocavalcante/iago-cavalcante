@@ -53,6 +53,14 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
                     <%= raw(@article.body) %>
                   </div>
                 </article>
+
+                <script src="https://utteranc.es/client.js"
+                  repo="iagocavalcante/iago-cavalcante"
+                  issue-term="pathname"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+                </script>
               </div>
             </div>
           </div>
