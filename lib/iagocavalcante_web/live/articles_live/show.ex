@@ -56,7 +56,8 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
 
                 <script src="https://utteranc.es/client.js"
                   repo="iagocavalcante/iago-cavalcante"
-                  issue-term="pathname"
+                  issue-term="url"
+                  label="comments"
                   theme="github-light"
                   crossorigin="anonymous"
                   async>
