@@ -4,15 +4,13 @@
       <div class="mx-auto max-w-2xl lg:max-w-5xl">
         <.live_component
           module={IagocavalcanteWeb.PostsLive.FormComponent}
-          id={@posts.id}
+          id="new_post"
           title={@page_title}
           action={@live_action}
-          posts={@posts}
-          patch={~p"/posts/#{@posts}"}
+          posts={@post}
+          patch={~p"/posts"}
         />
       </div>
     </div>
   </div>
 </div>
-
-<.back navigate={~p"/posts"}>Back to posts</.back>

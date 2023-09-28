@@ -38,4 +38,61 @@ defmodule Iagocavalcante.Blog do
       posts -> posts
     end
   end
+
+  def create_new_post(attrs) do
+    %Post{
+      id: attrs["slug"],
+      title: attrs["title"],
+      description: attrs["description"],
+      body: attrs["body"],
+      tags: attrs["tags"] || "~w()",
+      published: attrs["published"] || false,
+      date: Date.utc_today(),
+      locale: attrs["locale"],
+      author: "Iago Cavalcante",
+      path: attrs["path"],
+      year: attrs["year"]
+    }
+    |> insert_header_in_body()
+    |> create_markdown_file()
+  end
+
+  def update_post(id, attrs) do
+  end
+
+  def delete_post(id) do
+    post = get_post_by_id!(id)
+    renamed_html_to_md = post.path |> String.replace(".html", ".md")
+    File.rm!(renamed_html_to_md)
+  end
+
+  defp create_markdown_file(post) do
+    full_path = Path.join(Application.app_dir(:iagocavalcante, "priv/posts/#{post.locale}/#{post.year}/"), post.path)
+    File.write(full_path, post.body)
+  end
+
+  defp insert_header_in_body(post) do
+    header = """
+    %{
+      title: "#{post.title}",
+      description: "#{post.description}",
+      tags: ~w(#{split_tags(post.tags)}),
+      published: #{post.published},
+      locale: "#{post.locale}",
+      author: "Iago Cavalcante"
+    }
+    ---
+
+    """
+
+    post |> Map.put(:body, header <> post.body)
+  end
+
+  defp split_tags(tags) do
+    tags
+    |> String.split(",")
+    |> Enum.map(&String.trim/1)
+    |> Enum.map(&String.downcase/1)
+    |> Enum.join(" ")
+  end
 end

@@ -2,11 +2,10 @@ defmodule IagocavalcanteWeb.PostsLive.Index do
   use IagocavalcanteWeb, :live_view
 
   alias Iagocavalcante.Blog
-  alias Iagocavalcante.Blog.Post
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :posts_collection, Blog.list_posts())}
+    {:ok, stream(socket, :posts_collection, Blog.all_posts())}
   end
 
   @impl true
@@ -17,13 +16,13 @@ defmodule IagocavalcanteWeb.PostsLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Edit Posts")
-    |> assign(:posts, Blog.get_posts!(id))
+    |> assign(:posts, Blog.get_post_by_id!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Posts")
-    |> assign(:post, %Post{})
+    |> assign(:post, %{})
   end
 
   defp apply_action(socket, :index, _params) do
@@ -39,9 +38,12 @@ defmodule IagocavalcanteWeb.PostsLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    posts = Blog.get_posts!(id)
-    {:ok, _} = Blog.delete_posts(posts)
-
-    {:noreply, stream_delete(socket, :posts_collection, posts)}
+    case Blog.delete_post(id) do
+      :ok ->
+        IO.inspect("ok")
+        {:noreply, socket |> put_flash(:info, "Posts deleted successfully")}
+      {:error, _} ->
+        {:noreply, socket}
+    end
   end
 end

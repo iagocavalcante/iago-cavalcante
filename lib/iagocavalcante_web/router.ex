@@ -84,11 +84,11 @@ defmodule IagocavalcanteWeb.Router do
 
     live_session :require_authenticated_user,
       on_mount: [{IagocavalcanteWeb.UserAuth, :ensure_authenticated}, IagocavalcanteWeb.Nav] do
-      live "/users/register", UserRegistrationLive, :new
+      # live "/users/register", UserRegistrationLive, :new
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       live "/posts", PostsLive.Index, :index
-      live "/posts/new", PostsLive.Editor, :new
+      live "/posts/new", PostsLive.New, :new
       live "/posts/:id/edit", PostsLive.Index, :edit
       live "/posts/:id", PostsLive.Show, :show
       live "/posts/:id/show/edit", PostsLive.Show, :edit

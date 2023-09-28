@@ -11,9 +11,24 @@ defmodule Iagocavalcante.Post do
     :published,
     :locale
   ]
-  defstruct [:id, :author, :title, :body, :description, :tags, :date, :path, :published, :locale]
+  defstruct [
+    :id,
+    :author,
+    :title,
+    :body,
+    :description,
+    :tags,
+    :date,
+    :path,
+    :published,
+    :locale,
+    :year
+  ]
 
   def build(filename, attrs, body) do
+    IO.inspect(filename)
+    IO.inspect(attrs)
+    IO.inspect(body)
     path = Path.rootname(filename <> "-#{attrs["locale"]}")
     [year, month_day_id] = path |> Path.split() |> Enum.take(-2)
     path = path <> ".html"
