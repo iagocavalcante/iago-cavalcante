@@ -24,7 +24,7 @@ msgstr ""
 
 #: lib/iagocavalcante_web/router.ex:72
 #, elixir-autogen, elixir-format
-msgid "/login"
+msgid "/admin/login"
 msgstr "/entrar"
 
 #: lib/iagocavalcante_web/components/social_links.ex:24

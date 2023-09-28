@@ -136,6 +136,17 @@ defmodule Iagocavalcante.Subscribers do
     end
   end
 
+  def notify_new_post(post_params) do
+    subscribers = Repo.all(from s in Subscriber, where: not is_nil(s.verified_at))
+
+    Enum.chunk_every(subscribers, 50)
+    |> Enum.each(fn subscribers ->
+      Enum.each(subscribers, fn subscriber ->
+        SubscriberNotifier.deliver_new_post(subscriber.email, post_params)
+      end)
+    end)
+  end
+
   def deliver_confirmation_subscription(%Subscriber{} = subscriber, confirmation_url_fun)
       when is_function(confirmation_url_fun, 1) do
     if subscriber.verified_at do

@@ -42,6 +42,7 @@ defmodule IagocavalcanteWeb.PostsLive.Index do
       :ok ->
         IO.inspect("ok")
         {:noreply, socket |> put_flash(:info, "Posts deleted successfully")}
+
       {:error, _} ->
         {:noreply, socket}
     end

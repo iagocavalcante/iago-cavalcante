@@ -26,9 +26,6 @@ defmodule Iagocavalcante.Post do
   ]
 
   def build(filename, attrs, body) do
-    IO.inspect(filename)
-    IO.inspect(attrs)
-    IO.inspect(body)
     path = Path.rootname(filename <> "-#{attrs["locale"]}")
     [year, month_day_id] = path |> Path.split() |> Enum.take(-2)
     path = path <> ".html"

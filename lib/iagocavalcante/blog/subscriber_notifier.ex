@@ -37,4 +37,19 @@ defmodule Iagocavalcante.Blog.SubscriberNotifier do
     ==============================
     """)
   end
+
+  def deliver_new_post(email, post) do
+    deliver(email, "New post published", """
+    ==============================
+    Hi,
+
+    A new post was published on my blog.
+
+    Title: #{post["title"]}
+    Description: #{post["description"]}
+    URL: https://iagocavalcante.company/articles/#{post["slug"]}
+
+    ==============================
+    """)
+  end
 end

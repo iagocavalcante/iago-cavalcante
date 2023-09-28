@@ -2,6 +2,7 @@ defmodule IagocavalcanteWeb.PostsLive.FormComponent do
   use IagocavalcanteWeb, :live_component
 
   alias Iagocavalcante.Blog
+  alias Iagocavalcante.Subscribers
 
   @impl true
   def render(assigns) do
@@ -59,30 +60,34 @@ defmodule IagocavalcanteWeb.PostsLive.FormComponent do
 
   defp save_posts(socket, :new, posts_params) do
     locale = posts_params["locale"]
-    day = Date.utc_today().day
-    month = Date.utc_today().month
+    day = if Date.utc_today().day < 10, do: "0#{Date.utc_today().day}", else: Date.utc_today().day
+
+    month =
+      if Date.utc_today().month < 10,
+        do: "0#{Date.utc_today().month}",
+        else: Date.utc_today().month
+
     year = Date.utc_today().year
 
     post_params =
       Map.put(
         posts_params,
         "path",
-        "#{month}-#{day}-#{slug_from_title(posts_params)}-#{locale}.md"
+        "#{month}-#{day}-#{slug_from_title(posts_params)}.md"
       )
       |> Map.put("slug", slug_from_title(posts_params))
       |> Map.put("year", year)
 
     case Blog.create_new_post(post_params) do
       :ok ->
-        IO.inspect("ok")
-        notify_parent(:saved)
+        Subscribers.notify_new_post(post_params)
 
         {:noreply,
          socket
          |> put_flash(:info, "Posts created successfully")
-         |> push_patch(to: Routes.post_path(socket, :index))}
+         |> push_patch(to: socket.assigns.patch)}
 
-      {:error, :enoent}->
+      _ ->
         {:noreply,
          socket
          |> put_flash(:error, "Error when create file to post")

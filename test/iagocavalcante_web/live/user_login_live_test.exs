@@ -6,7 +6,7 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
 
   describe "Log in page" do
     test "renders log in page", %{conn: conn} do
-      {:ok, _lv, html} = live(conn, ~p"/login")
+      {:ok, _lv, html} = live(conn, ~p"/admin/login")
 
       assert html =~ "Log in"
       assert html =~ "Register"
@@ -17,7 +17,7 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
       result =
         conn
         |> log_in_user(user_fixture())
-        |> live(~p"/login")
+        |> live(~p"/admin/login")
         |> follow_redirect(conn, "/")
 
       assert {:ok, _conn} = result
@@ -29,7 +29,7 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
       password = "123456789abcd"
       user = user_fixture(%{password: password})
 
-      {:ok, lv, _html} = live(conn, ~p"/login")
+      {:ok, lv, _html} = live(conn, ~p"/admin/login")
 
       form =
         form(lv, "#login_form", user: %{email: user.email, password: password, remember_me: true})
@@ -42,7 +42,7 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
     test "redirects to login page with a flash error if there are no valid credentials", %{
       conn: conn
     } do
-      {:ok, lv, _html} = live(conn, ~p"/login")
+      {:ok, lv, _html} = live(conn, ~p"/admin/login")
 
       form =
         form(lv, "#login_form",
@@ -53,19 +53,19 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
 
       assert Phoenix.Flash.get(conn.assigns.flash, :error) == "Invalid email or password"
 
-      assert redirected_to(conn) == "/login"
+      assert redirected_to(conn) == "/admin/login"
     end
   end
 
   describe "login navigation" do
     test "redirects to registration page when the Register button is clicked", %{conn: conn} do
-      {:ok, lv, _html} = live(conn, ~p"/login")
+      {:ok, lv, _html} = live(conn, ~p"/admin/login")
 
       {:ok, _login_live, login_html} =
         lv
         |> element(~s|a:fl-contains("Sign up")|)
         |> render_click()
-        |> follow_redirect(conn, ~p"/users/register")
+        |> follow_redirect(conn, ~p"/admin/users/register")
 
       assert login_html =~ "Register"
     end
@@ -73,13 +73,13 @@ defmodule IagocavalcanteWeb.UserLoginLiveTest do
     test "redirects to forgot password page when the Forgot Password button is clicked", %{
       conn: conn
     } do
-      {:ok, lv, _html} = live(conn, ~p"/login")
+      {:ok, lv, _html} = live(conn, ~p"/admin/login")
 
       {:ok, conn} =
         lv
         |> element(~s{a:fl-contains('Forgot your password?')})
         |> render_click()
-        |> follow_redirect(conn, ~p"/users/reset_password")
+        |> follow_redirect(conn, ~p"/admin/users/reset_password")
 
       assert conn.resp_body =~ "Forgot your password?"
     end

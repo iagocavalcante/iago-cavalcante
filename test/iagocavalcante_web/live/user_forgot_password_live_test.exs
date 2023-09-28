@@ -9,7 +9,7 @@ defmodule IagocavalcanteWeb.UserForgotPasswordLiveTest do
 
   describe "Forgot password page" do
     test "renders email page", %{conn: conn} do
-      {:ok, _lv, html} = live(conn, ~p"/users/reset_password")
+      {:ok, _lv, html} = live(conn, ~p"/admin/users/reset_password")
 
       assert html =~ "Forgot your password?"
       assert html =~ "Register</a>"
@@ -20,7 +20,7 @@ defmodule IagocavalcanteWeb.UserForgotPasswordLiveTest do
       result =
         conn
         |> log_in_user(user_fixture())
-        |> live(~p"/users/reset_password")
+        |> live(~p"/admin/users/reset_password")
         |> follow_redirect(conn, ~p"/")
 
       assert {:ok, _conn} = result
@@ -33,7 +33,7 @@ defmodule IagocavalcanteWeb.UserForgotPasswordLiveTest do
     end
 
     test "sends a new reset password token", %{conn: conn, user: user} do
-      {:ok, lv, _html} = live(conn, ~p"/users/reset_password")
+      {:ok, lv, _html} = live(conn, ~p"/admin/users/reset_password")
 
       {:ok, conn} =
         lv
@@ -48,7 +48,7 @@ defmodule IagocavalcanteWeb.UserForgotPasswordLiveTest do
     end
 
     test "does not send reset password token if email is invalid", %{conn: conn} do
-      {:ok, lv, _html} = live(conn, ~p"/users/reset_password")
+      {:ok, lv, _html} = live(conn, ~p"/admin/users/reset_password")
 
       {:ok, conn} =
         lv

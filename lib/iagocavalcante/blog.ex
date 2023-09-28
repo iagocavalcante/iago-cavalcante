@@ -46,7 +46,7 @@ defmodule Iagocavalcante.Blog do
       description: attrs["description"],
       body: attrs["body"],
       tags: attrs["tags"] || "~w()",
-      published: attrs["published"] || false,
+      published: attrs["published"] || true,
       date: Date.utc_today(),
       locale: attrs["locale"],
       author: "Iago Cavalcante",
@@ -67,7 +67,12 @@ defmodule Iagocavalcante.Blog do
   end
 
   defp create_markdown_file(post) do
-    full_path = Path.join(Application.app_dir(:iagocavalcante, "priv/posts/#{post.locale}/#{post.year}/"), post.path)
+    full_path =
+      Path.join(
+        Application.app_dir(:iagocavalcante, "priv/posts/#{post.locale}/#{post.year}/"),
+        post.path
+      )
+
     File.write(full_path, post.body)
   end
 
