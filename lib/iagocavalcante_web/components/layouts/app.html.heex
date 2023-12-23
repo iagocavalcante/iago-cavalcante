@@ -34,6 +34,11 @@
         text={"#{gettext("Uses", lang: @locale)}"}
         active_item={@active_tab}
       />
+      <.nav_item
+        link={gettext("/videos")}
+        text={"#{gettext("Videos", lang: @locale)}"}
+        active_item={@active_tab}
+      />
     </:nav_items>
     <:toggle_items>
       <.toggle_locale locale={@locale} />

@@ -43,6 +43,9 @@ defmodule IagocavalcanteWeb.Nav do
         {UsesLive, _} ->
           :uses
 
+        {VideosLive, _} ->
+          :videos
+
         {_, _} ->
           nil
       end

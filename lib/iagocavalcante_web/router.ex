@@ -61,7 +61,6 @@ defmodule IagocavalcanteWeb.Router do
   end
 
   ## Authentication routes
-
   scope "/admin", IagocavalcanteWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
@@ -92,6 +91,7 @@ defmodule IagocavalcanteWeb.Router do
       live "/posts/:id/edit", PostsLive.Index, :edit
       live "/posts/:id", PostsLive.Show, :show
       live "/posts/:id/show/edit", PostsLive.Show, :edit
+      live "/videos", VideosLive.Index, :index
     end
   end
 
