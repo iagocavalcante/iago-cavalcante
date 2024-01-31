@@ -13,13 +13,13 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
           %{
             name: "QTube",
             description: "A desktop app built with Electron and Vue.js using Quasar Framework",
-            url: "https://qtube.iagocavalcante.company",
+            url: "https://qtube.iagocavalcante.com",
             image: "/images/projects/qtube.svg"
           },
           %{
             name: "Égua do artigo",
             description: "Project to bypass paywalls on Medium articles",
-            url: "https://eguadoartigo.iagocavalcante.company",
+            url: "https://eguadoartigo.iagocavalcante.com",
             image: "/images/projects/eguadoartigo.svg"
           },
           %{
@@ -44,20 +44,20 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             name: "Me Pague O que Dev",
             description:
               "Webapp to send anonymous messages to people who owe you money, built with Node and Vue.js using Lambda and Giphy API",
-            url: "https://mepagueoque.dev/",
+            url: "https://mepagueoquedev.iagocavalcante.com/",
             image: "/images/projects/mepagueoquedev.svg"
           },
           %{
             name: "Squash Hardcore",
             description: "Game built with Construct 2",
-            url: "https://squash-hardcore.iagocavalcante.company/",
+            url: "https://squash-hardcore.iagocavalcante.com/",
             image: "https://placehold.it/200x200"
           },
           %{
             name: "Personal Board v1",
             description:
               "A personal board to manage tasks and boards, built with Vue.js and Vuex",
-            url: "https://personal-board-v1.iagocavalcante.company/",
+            url: "https://personal-board-v1.iagocavalcante.com/",
             image: "/images/projects/personal-board-v1.png"
           }
         ]

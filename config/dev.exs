@@ -3,8 +3,8 @@ import Config
 # Configure your database
 config :iagocavalcante, Iagocavalcante.Repo,
   username: "postgres",
-  password: "postgres",
-  hostname: "db",
+  password: "",
+  hostname: "localhost",
   database: "iagocavalcante_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,

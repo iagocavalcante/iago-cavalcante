@@ -5,10 +5,19 @@ defmodule IagocavalcanteWeb.Work do
   attr :works, :list,
     default: [
       %{
+        company: "Zarv Inc.",
+        role: "Software Engineer",
+        date_start: "2023.1",
+        date_end: "Present",
+        image: "/images/work/zarv.svg",
+        image_alt: "Zarv Inc Logo",
+        url: "https://zarv.com"
+      },
+      %{
         company: "Truelogic",
         role: "Software Engineer",
         date_start: "2022",
-        date_end: "Present",
+        date_end: "2023.2",
         image: "/images/work/truelogic.jpg",
         image_alt: "Truelogic Logo",
         url: "https://truelogic.io"

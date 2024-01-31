@@ -9,8 +9,12 @@ processes = []
   release_command = "/app/bin/migrate"
 
 [env]
-  PHX_HOST = "iagocavalcante.company"
+  PHX_HOST = "iagocavalcante.com"
   PORT = "8080"
+
+[mounts]
+  source="iagocavalcante"
+  destination="/priv/posts"
 
 [experimental]
   auto_rollback = true

@@ -9,7 +9,7 @@ defmodule Iagocavalcante.Blog.SubscriberNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Iago Cavalcante", "contato@iagocavalcante.company"})
+      |> from({"Iago Cavalcante", "contato@iagocavalcante.com"})
       |> subject(subject)
       |> text_body(body)
 
@@ -47,7 +47,7 @@ defmodule Iagocavalcante.Blog.SubscriberNotifier do
 
     Title: #{post["title"]}
     Description: #{post["description"]}
-    URL: https://iagocavalcante.company/articles/#{post["slug"]}
+    URL: https://iagocavalcante.com/articles/#{post["slug"]}
 
     ==============================
     """)
