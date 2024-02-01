@@ -14,7 +14,7 @@ defmodule IagocavalcanteWeb.UserRegistrationLive do
         phx-submit="save"
         phx-change="validate"
         phx-trigger-action={@trigger_submit}
-        action={~p"/admin/admin/login?_action=registered"}
+        action={~p"/admin/login?_action=registered"}
         method="post"
       >
         <.error :if={@changeset.errors}>

@@ -8,7 +8,7 @@ defmodule IagocavalcanteWeb.UserLoginLive do
         :let={f}
         id="login_form"
         for={:user}
-        action={~p"/admin/admin/login"}
+        action={~p"/admin/login"}
         as={:user}
         phx-update="ignore"
       >
@@ -17,7 +17,7 @@ defmodule IagocavalcanteWeb.UserLoginLive do
 
         <:actions :let={f}>
           <.input field={{f, :remember_me}} type="checkbox" label="Mantenha-me logado" />
-          <.link href={~p"/esqueceu_senha"} class="text-sm font-semibold">
+          <.link href={~p"/admin/esqueceu_senha"} class="text-sm font-semibold">
             Esqueceu sua senha?
           </.link>
         </:actions>
