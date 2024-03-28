@@ -54,13 +54,15 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
                   </div>
                 </article>
 
-                <script src="https://utteranc.es/client.js"
+                <script
+                  src="https://utteranc.es/client.js"
                   repo="iagocavalcante/iago-cavalcante"
                   issue-term="url"
                   label="comments"
                   theme="github-light"
                   crossorigin="anonymous"
-                  async>
+                  async
+                >
                 </script>
               </div>
             </div>
