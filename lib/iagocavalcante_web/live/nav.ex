@@ -54,13 +54,16 @@ defmodule IagocavalcanteWeb.Nav do
   end
 
   defp handle_feature_flags(_params, _url, socket) do
-    ff_donate = Application.get_env(:iagocavalcante, :ff_donate)
-    ff_video = Application.get_env(:iagocavalcante, :ff_video)
+    ff_donate = Application.get_env(:iagocavalcante, :ff_donate) || "0"
+    ff_video = Application.get_env(:iagocavalcante, :ff_video) || "1"
 
-    {:cont, assign(socket, ff: %{
-      donate: ff_donate |> String.to_integer,
-      video: ff_video |> String.to_integer
-    })}
+    {:cont,
+     assign(socket,
+       ff: %{
+         donate: ff_donate |> String.to_integer(),
+         video: ff_video |> String.to_integer()
+       }
+     )}
   end
 
   defp maybe_locale(socket) do

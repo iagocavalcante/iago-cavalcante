@@ -12,35 +12,38 @@
           </form>
 
           <section phx-drop-target={@uploads.avatar.ref}>
+            <%!-- render each avatar entry --%>
+            <%= for entry <- @uploads.avatar.entries do %>
+              <article class="upload-entry">
+                <figure>
+                  <.live_img_preview entry={entry} />
+                  <figcaption><%= entry.client_name %></figcaption>
+                </figure>
 
-          <%!-- render each avatar entry --%>
-          <%= for entry <- @uploads.avatar.entries do %>
-            <article class="upload-entry">
+                <%!-- entry.progress will update automatically for in-flight entries --%>
+                <progress value={entry.progress} max="100"><%= entry.progress %>%</progress>
 
-              <figure>
-                <.live_img_preview entry={entry} />
-                <figcaption><%= entry.client_name %></figcaption>
-              </figure>
+                <%!-- a regular click event whose handler will invoke Phoenix.LiveView.cancel_upload/3 --%>
+                <button
+                  type="button"
+                  phx-click="cancel-upload"
+                  phx-value-ref={entry.ref}
+                  aria-label="cancel"
+                >
+                  &times;
+                </button>
 
-              <%!-- entry.progress will update automatically for in-flight entries --%>
-              <progress value={entry.progress} max="100"> <%= entry.progress %>% </progress>
+                <%!-- Phoenix.Component.upload_errors/2 returns a list of error atoms --%>
+                <%= for err <- upload_errors(@uploads.avatar, entry) do %>
+                  <p class="alert alert-danger"><%= error_to_string(err) %></p>
+                <% end %>
+              </article>
+            <% end %>
 
-              <%!-- a regular click event whose handler will invoke Phoenix.LiveView.cancel_upload/3 --%>
-              <button type="button" phx-click="cancel-upload" phx-value-ref={entry.ref} aria-label="cancel">&times;</button>
-
-              <%!-- Phoenix.Component.upload_errors/2 returns a list of error atoms --%>
-              <%= for err <- upload_errors(@uploads.avatar, entry) do %>
-                <p class="alert alert-danger"><%= error_to_string(err) %></p>
-              <% end %>
-
-            </article>
-          <% end %>
-
-          <%!-- Phoenix.Component.upload_errors/1 returns a list of error atoms --%>
-          <%= for err <- upload_errors(@uploads.avatar) do %>
-            <p class="alert alert-danger"><%= error_to_string(err) %></p>
-          <% end %>
-
+            <%!-- Phoenix.Component.upload_errors/1 returns a list of error atoms --%>
+            <%= for err <- upload_errors(@uploads.avatar) do %>
+              <p class="alert alert-danger"><%= error_to_string(err) %></p>
+            <% end %>
           </section>
         </div>
       </div>

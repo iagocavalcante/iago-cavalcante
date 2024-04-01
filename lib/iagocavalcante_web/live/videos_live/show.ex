@@ -8,6 +8,7 @@ defmodule IagocavalcanteWeb.VideosLive.Show do
     video = get_video_details(id)
     video_embeded = video["preview"] |> String.replace("watch", "iframe")
     video = Map.put(video, "embeded", video_embeded)
+
     {:ok,
      socket
      |> assign(:video, video)}

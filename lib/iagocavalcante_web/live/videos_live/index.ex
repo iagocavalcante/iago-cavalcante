@@ -6,6 +6,7 @@ defmodule IagocavalcanteWeb.VideosLive.Index do
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
     videos = load_videos()
+
     {:ok,
      socket
      |> assign(:videos, videos)}
@@ -18,7 +19,6 @@ defmodule IagocavalcanteWeb.VideosLive.Index do
   end
 
   def cache_videos(videos) do
-
   end
 
   def duration_to_hour(duration_seconds) do
@@ -26,6 +26,7 @@ defmodule IagocavalcanteWeb.VideosLive.Index do
     remaining_seconds = rem(trunc(duration_seconds), 3600)
     minutes = trunc(remaining_seconds / 60)
     seconds = rem(trunc(remaining_seconds), 60)
+
     if hours == 0 do
       "#{minutes}:#{seconds}"
     else

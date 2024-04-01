@@ -49,7 +49,7 @@
     <%= @inner_content %>
   </main>
 
-  <div class="fixed bottom-4 right-4" :if={@ff.donate == 1}>
+  <div :if={@ff.donate == 1} class="fixed bottom-4 right-4">
     <a
       :if={@locale == "pt_BR"}
       href="https://openpix.com.br/pay/c4fb6900-6165-4463-983a-513fdcfb7663"
@@ -74,8 +74,8 @@
   <.footer />
 </div>
 
-<script src="https://embed.cloudflarestream.com/embed/sdk.latest.js"></script>
-
+<script src="https://embed.cloudflarestream.com/embed/sdk.latest.js">
+</script>
 <!-- Your JavaScript code below-->
 <script>
   const player = Stream(document.getElementById('stream-player'));
