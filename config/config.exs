@@ -35,7 +35,7 @@ config :iagocavalcante,
   bucket_name: {:system, "BUCKET_NAME", nil},
   region: {:system, "REGION", nil}
 
-config :iagocavalcante, Iagocavalcante.Cloudflare,
+config :iagocavalcante,
   cloudflare_base_url: System.get_env("CLOUDFLARE_BASE_URL"),
   cloudflare_api_token: System.get_env("CLOUDFLARE_API_TOKEN")
 
