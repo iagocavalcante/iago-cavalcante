@@ -37,7 +37,7 @@ config :iagocavalcante,
 
 config :iagocavalcante, Iagocavalcante.Cloudflare,
   cloudflare_base_url: System.get_env("CLOUDFLARE_BASE_URL"),
-  cloudflare_api_token: System.get_eng("CLOUDFLARE_API_TOKEN")
+  cloudflare_api_token: System.get_env("CLOUDFLARE_API_TOKEN")
 
 config :iagocavalcante,
   ff_donate: System.get_env("FF_DONATE"),
