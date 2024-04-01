@@ -29,6 +29,18 @@ config :iagocavalcante, IagocavalcanteWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :iagocavalcante, Iagocavalcante.Mailer, adapter: Swoosh.Adapters.Local
 
+config :iagocavalcante,
+  aws_access_key: {:system, "AWS_ACCESS_KEY_ID", nil},
+  secret_access_key: {:system, "AWS_SECRET_ACCESS_KEY", nil},
+  bucket_name: {:system, "BUCKET_NAME", nil},
+  region: {:system, "REGION", nil}
+
+config :iagocavalcante,
+  cloudflare_base_url: System.fetch_env!("CLOUDFLARE_BASE_URL"),
+  cloudflare_api_token: System.fetch_env!("CLOUDFLARE_API_TOKEN"),
+  ff_donate: System.fetch_env!("FF_DONATE"),
+  ff_video: System.fetch_env!("FF_VIDEO")
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.41",

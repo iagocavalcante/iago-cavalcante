@@ -22,68 +22,63 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-#: lib/iagocavalcante_web/router.ex:72
-#, elixir-autogen, elixir-format
-msgid "/admin/login"
-msgstr ""
-
-#: lib/iagocavalcante_web/components/social_links.ex:24
-#: lib/iagocavalcante_web/components/social_links.ex:29
+#: lib/iagocavalcante_web/components/social_links.ex:25
+#: lib/iagocavalcante_web/components/social_links.ex:31
 #, elixir-autogen, elixir-format
 msgid "Follow on"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/home.ex:23
+#: lib/iagocavalcante_web/live/home.ex:17
 #, elixir-autogen, elixir-format
 msgid "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education."
 msgstr ""
 
-#: lib/iagocavalcante_web/live/home.ex:20
+#: lib/iagocavalcante_web/live/home.ex:14
 #, elixir-autogen, elixir-format
 msgid "Software alchemist, co-founder, and maker."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/work.ex:63
+#: lib/iagocavalcante_web/components/work.ex:72
 #, elixir-autogen, elixir-format
 msgid "%{date_start} until %{date_end}"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/speaking.ex:15
+#: lib/iagocavalcante_web/live/speaking.ex:17
 #, elixir-autogen, elixir-format
 msgid "Although I enjoy sharing content at events, I still get very nervous and appear very little. But I continue to help the community as the manager of the North devs community and by organizing monthly events."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/work.ex:53
+#: lib/iagocavalcante_web/components/work.ex:62
 #, elixir-autogen, elixir-format
 msgid "Company"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/work.ex:59
+#: lib/iagocavalcante_web/components/work.ex:68
 #, elixir-autogen, elixir-format
 msgid "Date"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/home.ex:102
+#: lib/iagocavalcante_web/live/home.ex:101
 #, elixir-autogen, elixir-format
 msgid "Download CV"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/about.ex:42
+#: lib/iagocavalcante_web/live/about.ex:43
 #, elixir-autogen, elixir-format
 msgid "During college, I discovered my passion for programming and building hardware. After graduation, I continued to build things for fun using Arduinos, Raspberry Pis, and ESPs. I also discovered that I enjoyed helping people and even giving talks (even though I was always very shy about speaking to other people)."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/newsletter.ex:37
+#: lib/iagocavalcante_web/components/newsletter.ex:48
 #, elixir-autogen, elixir-format
 msgid "Email address"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/speaking.ex:28
+#: lib/iagocavalcante_web/live/speaking.ex:31
 #, elixir-autogen, elixir-format
 msgid "Events"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/newsletter.ex:32
+#: lib/iagocavalcante_web/components/newsletter.ex:41
 #, elixir-autogen, elixir-format
 msgid "Get notified when I publish something new, and unsubscribe at any time."
 msgstr ""
@@ -93,7 +88,7 @@ msgstr ""
 msgid "Go back to articles"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/articles_live/index.ex:24
+#: lib/iagocavalcante_web/live/articles_live/index.ex:20
 #, elixir-autogen, elixir-format
 msgid "Here will be centralized all the old and current posts and thoughts, with tips and some solutions that I have implemented throughout my career."
 msgstr ""
@@ -108,13 +103,13 @@ msgstr ""
 msgid "I have been a curious person since childhood, greatly inspired by what my grandfather built and fixed. I always knew that I wanted to be an electrical or computer engineer. During my teenage years, I loved computers and video games, and that's when I made the final decision to study Computer Engineering."
 msgstr ""
 
-#: lib/iagocavalcante_web/live/articles_live/index.ex:19
+#: lib/iagocavalcante_web/live/articles_live/index.ex:14
 #, elixir-autogen, elixir-format
 msgid "I write about software in general, and now I want to talk more about hardware and IoT."
 msgstr ""
 
 #: lib/iagocavalcante_web/components/layouts/root.html.heex:14
-#: lib/iagocavalcante_web/components/layouts/root.html.heex:23
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:24
 #, elixir-autogen, elixir-format, fuzzy
 msgid "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém. CTO and founder of Japu and Redação Travessia ."
 msgstr ""
@@ -129,38 +124,38 @@ msgstr ""
 msgid "Iago Cavalcante. All rights reserved."
 msgstr ""
 
-#: lib/iagocavalcante_web/live/about.ex:47
+#: lib/iagocavalcante_web/live/about.ex:49
 #, elixir-autogen, elixir-format
 msgid "In 2018, my friends Patrick and Amir came up with the idea of starting a movement in our city called VueJs Norte, which is now called DevsNorte. Today, with new organizers, we hold monthly events on a variety of technology topics and try to help people who are just starting out in the field."
 msgstr ""
 
-#: lib/iagocavalcante_web/live/about.ex:52
+#: lib/iagocavalcante_web/live/about.ex:55
 #, elixir-autogen, elixir-format
 msgid "In addition to trying to create content in my spare time and mentoring people who are entering the field, I am now a partner with Juliana Ranieri where we are developing a marketplace platform for hardware stores called Japu. I also work full-time as a software engineer for the consultancy firm Truelogic and for a client directly in the United States."
 msgstr ""
 
-#: lib/iagocavalcante_web/live/uses.ex:15
+#: lib/iagocavalcante_web/live/uses.ex:17
 #, elixir-autogen, elixir-format
 msgid "I’ve been using a lot of different software and hardware over the years, but now I've finally stopped to focus on selecting and maintaining cool gadgets and equipment for work and productivity."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/newsletter.ex:47
+#: lib/iagocavalcante_web/components/newsletter.ex:60
 #, elixir-autogen, elixir-format
 msgid "Join"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/events.ex:49
+#: lib/iagocavalcante_web/components/events.ex:51
 #, elixir-autogen, elixir-format
 msgid "Link to presentation or video"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/articles_list.ex:54
-#: lib/iagocavalcante_web/components/posts.ex:63
+#: lib/iagocavalcante_web/components/articles_list.ex:34
+#: lib/iagocavalcante_web/components/posts.ex:35
 #, elixir-autogen, elixir-format
 msgid "Read article"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/work.ex:57
+#: lib/iagocavalcante_web/components/work.ex:66
 #, elixir-autogen, elixir-format
 msgid "Role"
 msgstr ""
@@ -170,72 +165,125 @@ msgstr ""
 msgid "Software I use, gadgets I love, and other things I recommend."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/newsletter.ex:29
+#: lib/iagocavalcante_web/components/newsletter.ex:38
 #, elixir-autogen, elixir-format
 msgid "Stay up to date"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/home.ex:91
+#: lib/iagocavalcante_web/live/home.ex:90
 #, elixir-autogen, elixir-format
 msgid "Work"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:10
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:13
 #: lib/iagocavalcante_web/router.ex:53
 #, elixir-autogen, elixir-format
 msgid "/about"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:12
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:18
+#: lib/iagocavalcante_web/live/articles_live/show.ex:20
 #: lib/iagocavalcante_web/router.ex:54
 #, elixir-autogen, elixir-format
 msgid "/articles"
 msgstr ""
 
-#: lib/iagocavalcante_web/router.ex:55
-#, elixir-autogen, elixir-format
-msgid "/articles/:slug"
-msgstr ""
-
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:17
-#: lib/iagocavalcante_web/router.ex:56
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:28
+#: lib/iagocavalcante_web/router.ex:58
 #, elixir-autogen, elixir-format
 msgid "/projects"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:22
-#: lib/iagocavalcante_web/router.ex:57
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:33
+#: lib/iagocavalcante_web/router.ex:59
 #, elixir-autogen, elixir-format
 msgid "/speaking"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:26
-#: lib/iagocavalcante_web/router.ex:58
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:38
+#: lib/iagocavalcante_web/router.ex:60
 #, elixir-autogen, elixir-format
 msgid "/uses"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:10
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:14
 #, elixir-autogen, elixir-format, fuzzy
 msgid "About"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:13
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:19
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Articles"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:18
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:29
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Projects"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:23
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:34
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Speaking"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:26
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:39
 #, elixir-autogen, elixir-format
 msgid "Uses"
+msgstr ""
+
+#: lib/iagocavalcante_web/router.ex:55
+#, elixir-autogen, elixir-format, fuzzy
+msgid "/articles/:id"
+msgstr ""
+
+#: lib/iagocavalcante_web/router.ex:75
+#, elixir-autogen, elixir-format
+msgid "/login"
+msgstr ""
+
+#: lib/iagocavalcante_web/live/subscriber_verify.ex:25
+#, elixir-autogen, elixir-format
+msgid "Email verified. Thanks <3"
+msgstr ""
+
+#: lib/iagocavalcante_web/live/subscriber_verify.ex:23
+#, elixir-autogen, elixir-format
+msgid "Invalid token."
+msgstr ""
+
+#: lib/iagocavalcante_web/live/projects.ex:16
+#, elixir-autogen, elixir-format
+msgid "I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+msgstr ""
+
+#: lib/iagocavalcante_web/live/projects.ex:13
+#, elixir-autogen, elixir-format
+msgid "Things I’ve made trying to put my dent in the universe."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:61
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:71
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Buy me a coffee ☕"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:23
+#: lib/iagocavalcante_web/router.ex:56
+#, elixir-autogen, elixir-format
+msgid "/videos"
+msgstr ""
+
+#: lib/iagocavalcante_web/router.ex:57
+#, elixir-autogen, elixir-format
+msgid "/videos/:id"
+msgstr ""
+
+#: lib/iagocavalcante_web/live/videos_live/index.html.heex:6
+#, elixir-autogen, elixir-format
+msgid "Recorded videos"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:24
+#, elixir-autogen, elixir-format
+msgid "Videos"
 msgstr ""

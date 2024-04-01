@@ -1,4 +1,4 @@
-defmodule IagocavalcanteWeb.PostsLive.Show do
+defmodule IagocavalcanteWeb.Admin.PostsLive.New do
   use IagocavalcanteWeb, :live_view
 
   alias Iagocavalcante.Blog
@@ -9,13 +9,12 @@ defmodule IagocavalcanteWeb.PostsLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id}, _, socket) do
+  def handle_params(_, _, socket) do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:posts, Blog.get_post_by_id!(id))}
+     |> assign(:post, %{})}
   end
 
-  defp page_title(:show), do: "Show Posts"
-  defp page_title(:edit), do: "Edit Posts"
+  defp page_title(:new), do: "New Post"
 end

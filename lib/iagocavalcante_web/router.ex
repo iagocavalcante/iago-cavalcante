@@ -53,6 +53,8 @@ defmodule IagocavalcanteWeb.Router do
       live gettext("/about"), AboutLive, :about
       live gettext("/articles"), ArticlesLive.Index, :index
       live gettext("/articles/:id"), ArticlesLive.Show, :show
+      live gettext("/videos"), VideosLive.Index, :index
+      live gettext("/videos/:id"), VideosLive.Show, :show
       live gettext("/projects"), ProjectsLive, :projects
       live gettext("/speaking"), SpeakingLive, :speaking
       live gettext("/uses"), UsesLive, :uses
@@ -87,11 +89,12 @@ defmodule IagocavalcanteWeb.Router do
       # live "/users/register", UserRegistrationLive, :new
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
-      live "/posts", PostsLive.Index, :index
-      live "/posts/new", PostsLive.New, :new
-      live "/posts/:id/edit", PostsLive.Index, :edit
-      live "/posts/:id", PostsLive.Show, :show
-      live "/posts/:id/show/edit", PostsLive.Show, :edit
+      live "/posts", Admin.PostsLive.Index, :index
+      live "/posts/new", Admin.PostsLive.New, :new
+      live "/posts/:id/edit", Admin.PostsLive.Index, :edit
+      live "/posts/:id", Admin.PostsLive.Show, :show
+      live "/posts/:id/show/edit", Admin.PostsLive.Show, :edit
+      live "/videos", Admin.VideosLive.Index, :index
     end
   end
 

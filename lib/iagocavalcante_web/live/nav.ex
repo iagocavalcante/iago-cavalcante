@@ -16,7 +16,7 @@ defmodule IagocavalcanteWeb.Nav do
      socket
      |> assign(locale: maybe_locale(socket))
      |> attach_hook(:active_tab, :handle_params, &handle_active_tab_params/3)
-     |> attach_hook(:theme, :handle_params, &handle_theme_params/3)}
+     |> attach_hook(:ff, :handle_params, &handle_feature_flags/3)}
   end
 
   defp handle_active_tab_params(_params, _url, socket) do
@@ -30,6 +30,9 @@ defmodule IagocavalcanteWeb.Nav do
 
         {ArticlesLive.Index, _} ->
           :articles
+
+        {VideosLive.Index, _} ->
+          :videos
 
         {ArticlesLive.Show, _} ->
           :articles
@@ -50,15 +53,17 @@ defmodule IagocavalcanteWeb.Nav do
     {:cont, assign(socket, active_tab: active_tab)}
   end
 
-  defp handle_theme_params(_params, _url, socket) do
-    theme = "light"
+  defp handle_feature_flags(_params, _url, socket) do
+    ff_donate = Application.fetch_env!(:iagocavalcante, :ff_donate)
+    ff_video = Application.fetch_env!(:iagocavalcante, :ff_video)
 
-    {:cont, assign(socket, theme: theme)}
+    {:cont, assign(socket, ff: %{
+      donate: ff_donate |> String.to_integer,
+      video: ff_video |> String.to_integer
+    })}
   end
 
   defp maybe_locale(socket) do
-    IO.inspect(socket.assigns)
-
     case socket.assigns[:locale] do
       nil -> "en"
       _ -> socket.assigns.locale

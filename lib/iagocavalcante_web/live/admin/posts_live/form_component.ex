@@ -1,4 +1,4 @@
-defmodule IagocavalcanteWeb.PostsLive.FormComponent do
+defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
   use IagocavalcanteWeb, :live_component
 
   alias Iagocavalcante.Blog

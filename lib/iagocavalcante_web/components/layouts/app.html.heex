@@ -20,6 +20,11 @@
         active_item={@active_tab}
       />
       <.nav_item
+        link={gettext("/videos")}
+        text={"#{gettext("Videos", lang: @locale)}"}
+        active_item={@active_tab}
+      />
+      <.nav_item
         link={gettext("/projects")}
         text={"#{gettext("Projects", lang: @locale)}"}
         active_item={@active_tab}
@@ -37,11 +42,49 @@
     </:nav_items>
     <:toggle_items>
       <.toggle_locale locale={@locale} />
-      <.toggle_theme theme={@theme} />
+      <.toggle_theme />
     </:toggle_items>
   </.header>
   <main>
     <%= @inner_content %>
   </main>
+
+  <div class="fixed bottom-4 right-4" :if={@ff.donate == 1}>
+    <a
+      :if={@locale == "pt_BR"}
+      href="https://openpix.com.br/pay/c4fb6900-6165-4463-983a-513fdcfb7663"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items dark:bg-zinc-500/80 hover:bg-zinc-500/80 dark:hover:bg-zinc-500/80 dark:text-white hover:text-white text-sm font-semibold items
+      -center justify-center p-4 bg-zinc-500 text-white rounded-full shadow-lg"
+    >
+      <%= gettext("Buy me a coffee ☕", lang: @locale) %>
+    </a>
+    <a
+      :if={@locale == "en"}
+      href="https://www.buymeacoffee.com/iagocavalcante"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items dark:bg-zinc-500/80 hover:bg-zinc-500/80 dark:hover:bg-zinc-500/80 dark:text-white hover:text-white text-sm font-semibold items
+      -center justify-center p-4 bg-zinc-500 text-white rounded-full shadow-lg"
+    >
+      <%= gettext("Buy me a coffee ☕", lang: @locale) %>
+    </a>
+  </div>
   <.footer />
 </div>
+
+<script src="https://embed.cloudflarestream.com/embed/sdk.latest.js"></script>
+
+<!-- Your JavaScript code below-->
+<script>
+  const player = Stream(document.getElementById('stream-player'));
+  player.addEventListener('play', () => {
+    console.log('playing!');
+  });
+  player.play().catch(() => {
+    console.log('playback failed, muting to try again');
+    player.muted = true;
+    player.play();
+  });
+</script>

@@ -1,4 +1,4 @@
-defmodule IagocavalcanteWeb.PostsLive.Index do
+defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
   use IagocavalcanteWeb, :live_view
 
   alias Iagocavalcante.Blog
@@ -32,7 +32,7 @@ defmodule IagocavalcanteWeb.PostsLive.Index do
   end
 
   @impl true
-  def handle_info({IagocavalcanteWeb.PostsLive.FormComponent, {:saved, posts}}, socket) do
+  def handle_info({IagocavalcanteWeb.Admin.PostsLive.FormComponent, {:saved, posts}}, socket) do
     {:noreply, stream_insert(socket, :posts_collection, posts)}
   end
 
