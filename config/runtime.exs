@@ -67,6 +67,14 @@ if config_env() == :prod do
     adapter: Resend.Swoosh.Adapter,
     api_key: System.fetch_env!("RESEND_API_KEY")
 
+  config :iagocavalcante,
+    cloudflare_base_url: System.fetch_env!("CLOUDFLARE_BASE_URL"),
+    cloudflare_api_token: System.fetch_env!("CLOUDFLARE_API_TOKEN")
+
+  config :iagocavalcante,
+    ff_donate: System.fetch_env!("FF_DONATE") || "0",
+    ff_video: System.fetch_env!("FF_VIDEO") || "1"
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key
