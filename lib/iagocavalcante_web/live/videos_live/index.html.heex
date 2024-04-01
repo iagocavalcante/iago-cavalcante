@@ -7,7 +7,7 @@
             <%= gettext("Recorded videos", lang: @locale) %>
           </h1>
           <div class="mt-6 sm:mt-10">
-            <div class="grid grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 gap-2 md:grid-cols-4">
               <a
                 :for={video <- @videos}
                 href={~p"/videos/#{video["uid"]}"}
