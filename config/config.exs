@@ -35,11 +35,13 @@ config :iagocavalcante,
   bucket_name: {:system, "BUCKET_NAME", nil},
   region: {:system, "REGION", nil}
 
-config :iagocavalcante,
+config :iagocavalcante, Iagocavalcante.Cloudflare,
   cloudflare_base_url: System.fetch_env!("CLOUDFLARE_BASE_URL"),
-  cloudflare_api_token: System.fetch_env!("CLOUDFLARE_API_TOKEN"),
-  ff_donate: System.fetch_env!("FF_DONATE"),
-  ff_video: System.fetch_env!("FF_VIDEO")
+  cloudflare_api_token: System.fetch_env!("CLOUDFLARE_API_TOKEN")
+
+config :iagocavalcante,
+  ff_donate: {:system, "FF_DONATE", nil},
+  ff_video: {:system, "FF_VIDEO", nil}
 
 # Configure esbuild (the version is required)
 config :esbuild,
