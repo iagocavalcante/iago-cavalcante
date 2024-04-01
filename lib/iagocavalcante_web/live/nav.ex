@@ -54,8 +54,8 @@ defmodule IagocavalcanteWeb.Nav do
   end
 
   defp handle_feature_flags(_params, _url, socket) do
-    ff_donate = Application.fetch_env!(:iagocavalcante, :ff_donate)
-    ff_video = Application.fetch_env!(:iagocavalcante, :ff_video)
+    ff_donate = Application.get_env(:iagocavalcante, :ff_donate)
+    ff_video = Application.get_env(:iagocavalcante, :ff_video)
 
     {:cont, assign(socket, ff: %{
       donate: ff_donate |> String.to_integer,

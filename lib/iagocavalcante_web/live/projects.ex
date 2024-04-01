@@ -4,7 +4,7 @@ defmodule IagocavalcanteWeb.ProjectsLive do
   def render(assigns) do
     ~H"""
     <main>
-      <div class="sm:px-8 mt-16 sm:mt-32">
+      <div class="sm:px-8 mt-8 sm:mt-16">
         <div class="mx-auto max-w-7xl lg:px-8">
           <div class="relative px-4 sm:px-8 lg:px-12">
             <div class="mx-auto max-w-2xl lg:max-w-5xl">
