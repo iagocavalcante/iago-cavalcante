@@ -236,7 +236,7 @@ msgstr ""
 msgid "/articles/:id"
 msgstr ""
 
-#: lib/iagocavalcante_web/router.ex:75
+#: lib/iagocavalcante_web/router.ex:76
 #, elixir-autogen, elixir-format
 msgid "/login"
 msgstr ""
@@ -261,8 +261,8 @@ msgstr ""
 msgid "Things I’ve made trying to put my dent in the universe."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:61
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:71
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:66
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:76
 #, elixir-autogen, elixir-format
 msgid "Buy me a coffee ☕"
 msgstr ""
@@ -278,7 +278,7 @@ msgstr ""
 msgid "/videos/:id"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/videos_live/index.html.heex:6
+#: lib/iagocavalcante_web/live/videos_live/index.html.heex:7
 #, elixir-autogen, elixir-format
 msgid "Recorded videos"
 msgstr ""
@@ -286,4 +286,25 @@ msgstr ""
 #: lib/iagocavalcante_web/components/layouts/app.html.heex:24
 #, elixir-autogen, elixir-format
 msgid "Videos"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:43
+#: lib/iagocavalcante_web/router.ex:61
+#, elixir-autogen, elixir-format
+msgid "/analytics"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:44
+#, elixir-autogen, elixir-format
+msgid "Analytics"
+msgstr ""
+
+#: lib/iagocavalcante_web/live/analytics.ex:29
+#, elixir-autogen, elixir-format
+msgid "Stats powered by"
+msgstr ""
+
+#: lib/iagocavalcante_web/live/analytics.ex:12
+#, elixir-autogen, elixir-format
+msgid "You can see the site analytics."
 msgstr ""
