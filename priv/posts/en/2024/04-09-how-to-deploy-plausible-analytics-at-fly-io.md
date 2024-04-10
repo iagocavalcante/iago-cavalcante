@@ -1,7 +1,7 @@
 %{
-  title: "How to deploy Plausible Analytics at Fly.io ",
+  title: "How to deploy Plausible Analytics at Fly.io",
   author: "Iago Cavalcante",
-  tags: ~w(javascript recursion),
+  tags: ~w(fly infrastructure plausible-analytics),
   description: "In this article, I want to help you deploy a self-hosted analystics tool for free!",
   locale: "en",
   published: true
