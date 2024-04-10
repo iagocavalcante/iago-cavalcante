@@ -20,7 +20,7 @@ It's an open-source tool that's easy to use. You can opt for a monthly subscript
 
 ### Let's Get Started
 
-To run Plausible in full, we would typically need an SMTP server if we intend to send emails. However, for the purpose of this blog post, we won't delve into that.
+To run Plausible in full, we would typically need an SMTP server if we intend to send emails. However, for the purpose of this blog post, we won't dive into that.
 
 Firstly, you'll need a fly.io account. We'll deploy three machines here: one for [Fast Open-Source OLAP DBMS - ClickHouse](https://clickhouse.com/), another for Postgres, and the third for [Plausible Community Edition (CE)](https://plausible.io/docs/self-hosting).
 
@@ -62,7 +62,9 @@ flyctl volumes create plausible_clickhouse_data --region gru --size 1
 ```
 
 ![Captura de Tela 2024-04-09 às 20.48.22](https://uploads.inkdrop.app/attachments/user-fdfaa371b7f6d16427ab769a7f8931cd/file:nwhog2hno/index-public)
+
 ![Captura de Tela 2024-04-09 às 20.50.04](https://uploads.inkdrop.app/attachments/user-fdfaa371b7f6d16427ab769a7f8931cd/file:g6fbYKkmJ/index-public)
+
 Once created, deploy the ClickHouse app:
 
 ```bash
@@ -70,6 +72,7 @@ fly deploy
 ```
 
 ![Captura de Tela 2024-04-09 às 20.54.48](https://uploads.inkdrop.app/attachments/user-fdfaa371b7f6d16427ab769a7f8931cd/file:BDhZLYQP7/index-public)
+
 Now, let's move to the Plausible folder:
 
 ```bash
@@ -83,13 +86,17 @@ fly launch --no-deploy
 ```
 
 ![Captura de Tela 2024-04-09 às 21.03.04](https://uploads.inkdrop.app/attachments/user-fdfaa371b7f6d16427ab769a7f8931cd/file:AeYyDntn7/index-public)
+
 Follow the prompts, changing the database part in the browser settings as necessary. Confirm the settings and proceed. This command will create an app and Postgres database for us.
 
 From:
+
 ![Captura de Tela 2024-04-09 às 21.04.21](https://uploads.inkdrop.app/attachments/user-fdfaa371b7f6d16427ab769a7f8931cd/file:zop7pKhzM/index-public)
 
 To:
+
 ![Captura de Tela 2024-04-09 às 21.07.14](https://uploads.inkdrop.app/attachments/user-fdfaa371b7f6d16427ab769a7f8931cd/file:C3N8Xr-9W/index-public)
+
 Save `DATABASE_URL` in a safe place if you want to connect later.
 
 ![Captura de Tela 2024-04-09 às 21.09.41](https://uploads.inkdrop.app/attachments/user-fdfaa371b7f6d16427ab769a7f8931cd/file:F9yy_3cxi/index-public)
@@ -103,6 +110,13 @@ ADMIN_USER_EMAIL=your_email@example.com
 ADMIN_USER_PWD=generated_password
 BASE_URL=https://yourdomain.com
 DISABLE_REGISTRATION=invite_only
+```
+
+Also change the `CLICKHOUSE_DATABASE_URL` to the ClickHouse URL app we create after deploying the ClickHouse app. It should look like this:
+
+```toml
+[env]
+  CLICKHOUSE_DATABASE_URL= "http://plausible-clickhouse-wandering-sun-4794.internal:8123/plausible_events_db"
 ```
 
 Now, set these secrets inside our app at fly:
@@ -152,3 +166,10 @@ Check the URL for the app, and if everything is okay, you should see the screen 
 ![Captura de Tela 2024-04-09 às 21.32.53](https://uploads.inkdrop.app/attachments/user-fdfaa371b7f6d16427ab769a7f8931cd/file:lerWuRR3A/index-public)
 
 That's it, folks. See you soon! 🚀
+
+
+references:
+
+- [Plausible Analytics](https://plausible.io/)
+- [Fly.io](https://fly.io/)
+- [Self host Plausible with Fly](https://blog.liallen.me/self-host-plausible-with-fly)
