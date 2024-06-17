@@ -49,6 +49,9 @@ defmodule IagocavalcanteWeb.Nav do
         {AnalyticsLive, _} ->
           :analytics
 
+        {BookmarksLive, _} ->
+          :bookmarks
+
         {_, _} ->
           nil
       end

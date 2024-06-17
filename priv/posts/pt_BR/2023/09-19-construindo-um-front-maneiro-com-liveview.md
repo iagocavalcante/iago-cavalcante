@@ -1,11 +1,12 @@
 %{
-  title: "Construindo um frontend maneiro com liveview",
-  author: "Iago Cavalcante",
-  tags: ~w(liveview),
-  description: "Neste artigo, eu irei compartilhar como eu construi esse site e como componentizar com o novo liveview.",
-  locale: "pt_BR",
-  published: true
+title: "Construindo um frontend maneiro com liveview",
+author: "Iago Cavalcante",
+tags: ~w(liveview),
+description: "Neste artigo, eu irei compartilhar como eu construi esse site e como componentizar com o novo liveview.",
+locale: "pt_BR",
+published: true
 }
+
 ---
 
 Neste artigo quero trazer uma ideia interessante, como o liveview nos dias de hoje, nos traz o poder que teríamos com qualquer framework javascript no mercado, possibilitando assim ter códigos com zero ou quase zero javascript dentro da sua aplicação `Phoenix`.
@@ -69,7 +70,7 @@ defmodule IagocavalcanteWeb.CoreComponents do
 end
 ```
 
-Feito isso, dentro do nosso `lib/iagocavalcante_web/components/layouts/app.html.heex`, podemos chamar o componente que criamos e passar as propriedades que ele espera, tal qual as `props` do `React`, `Vue` e similares.
+Feito isso, dentro do nosso `lib/iago_cavalcante_web/components/layouts/app.html.heex`, podemos chamar o componente que criamos e passar as propriedades que ele espera, tal qual as `props` do `React`, `Vue` e similares.
 
 ```heex
 <div class="fixed inset-0 flex justify-center sm:px-8">

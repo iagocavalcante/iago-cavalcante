@@ -59,6 +59,7 @@ defmodule IagocavalcanteWeb.Router do
       live gettext("/speaking"), SpeakingLive, :speaking
       live gettext("/uses"), UsesLive, :uses
       live gettext("/analytics"), AnalyticsLive, :analytics
+      live gettext("/bookmarks"), BookmarksLive, :bookmarks
       live "/subscribers/confirm/:token", SubscriberVerifyLive, :subscriber_verify
     end
   end

@@ -40,6 +40,11 @@
         active_item={@active_tab}
       />
       <.nav_item
+        link={gettext("/bookmarks")}
+        text={"#{gettext("Bookmarks", lang: @locale)}"}
+        active_item={@active_tab}
+      />
+      <.nav_item
         link={gettext("/analytics")}
         text={"#{gettext("Analytics", lang: @locale)}"}
         active_item={@active_tab}
