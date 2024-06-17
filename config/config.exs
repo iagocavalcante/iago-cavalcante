@@ -43,6 +43,8 @@ config :iagocavalcante,
   ff_donate: System.get_env("FF_DONATE"),
   ff_video: System.get_env("FF_VIDEO")
 
+config :iagocavalcante, blog_post_path: System.get_env("BLOG_POST_PATH")
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.41",

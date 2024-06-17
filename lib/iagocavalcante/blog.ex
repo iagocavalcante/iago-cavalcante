@@ -5,7 +5,7 @@ defmodule Iagocavalcante.Blog do
 
   use NimblePublisher,
     build: Post,
-    from: Application.app_dir(:iagocavalcante, "priv/posts/**/*.md"),
+    from: Application.fetch_env!(:iagocavalcante, :blog_post_path) <> "/**/*.md",
     as: :posts,
     highlighters: [:makeup_elixir, :makeup_erlang]
 
@@ -69,7 +69,7 @@ defmodule Iagocavalcante.Blog do
   defp create_markdown_file(post) do
     full_path =
       Path.join(
-        Application.app_dir(:iagocavalcante, "priv/posts/#{post.locale}/#{post.year}/"),
+        Application.fetch_env!(:iagocavalcante, :blog_post_path) <> "#{post.locale}/#{post.year}/",
         post.path
       )
 

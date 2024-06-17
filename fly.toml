@@ -14,7 +14,7 @@ processes = []
 
 [mounts]
   source="iagocavalcante"
-  destination="/priv/posts"
+  destination="/data/app"
 
 [experimental]
   auto_rollback = true
