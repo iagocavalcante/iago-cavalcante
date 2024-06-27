@@ -24,16 +24,5 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
 
-  # Custom service for running mix deps.get
-  deps-get:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev  # Use the same Dockerfile as your app
-    volumes:
-      - .:/app  # Mount the application code
-    entrypoint: ["mix", "deps.get"]  # Run mix deps.get command
-    depends_on:
-      - app  # Ensure the app service is started before running deps.get
-
 volumes:
   pg_data: # Named volume for persisting data

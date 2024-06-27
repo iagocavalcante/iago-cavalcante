@@ -29,6 +29,8 @@ config :iagocavalcante, IagocavalcanteWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
+config :iagocavalcante, blog_post_path: "./priv/posts/**/*.md"
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

@@ -5,7 +5,7 @@ defmodule Iagocavalcante.Blog do
 
   use NimblePublisher,
     build: Post,
-    from: Application.fetch_env!(:iagocavalcante, :blog_post_path) <> "/**/*.md",
+    from: Application.app_dir(:iagocavalcante, "priv/posts/**/*.md"),
     as: :posts,
     highlighters: [:makeup_elixir, :makeup_erlang]
 

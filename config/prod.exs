@@ -12,6 +12,8 @@ import Config
 config :iagocavalcante, IagocavalcanteWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :iagocavalcante, blog_post_path: "/data/app/**/*.md"
+
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: Iagocavalcante.Finch
 

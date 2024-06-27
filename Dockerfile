@@ -33,7 +33,6 @@ RUN mix local.hex --force && \
 
 # set build ENV
 ENV MIX_ENV="prod"
-ENV BLOG_POST_PATH="/data/app/"
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
