@@ -25,7 +25,7 @@ By the end of the first month, the savings amounted to 2,500 reais. The simplici
 
 ### Standardization and Scalability
 
-To meet the need for high scalability, I chose to build a monolith using Elixir, unifying several services into domains within the Elixir API. During the process, I found and resolved a bug in the MyXQL library when deploying the API on Fly.io (link to the bug).
+To meet the need for high scalability, I chose to build a monolith using Elixir, unifying several services into domains within the Elixir API. During the process, I found and resolved a bug in the MyXQL library when deploying the API on Fly.io [(link to the bug)](https://community.fly.io/t/fixed-mysql-support-for-phoenix-and-ecto/19983).
 
 Additionally, to ensure a consistent and professional experience, we standardized projects and hired a designer to develop a dashboard for client use.
 
