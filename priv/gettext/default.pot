@@ -28,17 +28,12 @@ msgstr ""
 msgid "Follow on"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/home.ex:17
-#, elixir-autogen, elixir-format
-msgid "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education."
-msgstr ""
-
 #: lib/iagocavalcante_web/live/home.ex:14
 #, elixir-autogen, elixir-format
 msgid "Software alchemist, co-founder, and maker."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/work.ex:72
+#: lib/iagocavalcante_web/components/work.ex:81
 #, elixir-autogen, elixir-format
 msgid "%{date_start} until %{date_end}"
 msgstr ""
@@ -48,12 +43,12 @@ msgstr ""
 msgid "Although I enjoy sharing content at events, I still get very nervous and appear very little. But I continue to help the community as the manager of the North devs community and by organizing monthly events."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/work.ex:62
+#: lib/iagocavalcante_web/components/work.ex:71
 #, elixir-autogen, elixir-format
 msgid "Company"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/work.ex:68
+#: lib/iagocavalcante_web/components/work.ex:77
 #, elixir-autogen, elixir-format
 msgid "Date"
 msgstr ""
@@ -155,7 +150,7 @@ msgstr ""
 msgid "Read article"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/work.ex:66
+#: lib/iagocavalcante_web/components/work.ex:75
 #, elixir-autogen, elixir-format
 msgid "Role"
 msgstr ""
@@ -236,7 +231,7 @@ msgstr ""
 msgid "/articles/:id"
 msgstr ""
 
-#: lib/iagocavalcante_web/router.ex:76
+#: lib/iagocavalcante_web/router.ex:77
 #, elixir-autogen, elixir-format
 msgid "/login"
 msgstr ""
@@ -261,8 +256,8 @@ msgstr ""
 msgid "Things I’ve made trying to put my dent in the universe."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:66
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:76
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:71
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:81
 #, elixir-autogen, elixir-format
 msgid "Buy me a coffee ☕"
 msgstr ""
@@ -288,13 +283,13 @@ msgstr ""
 msgid "Videos"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:43
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:48
 #: lib/iagocavalcante_web/router.ex:61
 #, elixir-autogen, elixir-format
 msgid "/analytics"
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:44
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:49
 #, elixir-autogen, elixir-format
 msgid "Analytics"
 msgstr ""
@@ -307,4 +302,25 @@ msgstr ""
 #: lib/iagocavalcante_web/live/analytics.ex:12
 #, elixir-autogen, elixir-format
 msgid "You can see the site analytics."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:43
+#: lib/iagocavalcante_web/router.ex:62
+#, elixir-autogen, elixir-format
+msgid "/bookmarks"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:44
+#, elixir-autogen, elixir-format
+msgid "Bookmarks"
+msgstr ""
+
+#: lib/iagocavalcante_web/live/home.ex:17
+#, elixir-autogen, elixir-format
+msgid "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education and both failed. Now I'm focused in building Agendflow (https://agendflow.com.br)"
+msgstr ""
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:12
+#, elixir-autogen, elixir-format
+msgid "Thats my favorite links from pocket and my base knowledge using tags"
 msgstr ""

@@ -15,7 +15,7 @@ defmodule IagocavalcanteWeb.HomeLive do
               </h1>
               <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
                 <%= gettext(
-                  "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education.",
+                  "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education and both failed. Now I'm focused in building Agendflow (https://agendflow.com.br)",
                   lang: @locale
                 ) %>
               </p>
