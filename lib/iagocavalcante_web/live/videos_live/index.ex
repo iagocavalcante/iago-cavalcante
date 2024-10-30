@@ -1,24 +1,15 @@
 defmodule IagocavalcanteWeb.VideosLive.Index do
   use IagocavalcanteWeb, :live_view
 
-  alias Iagocavalcante.Cloudflare
+  alias Iagocavalcante.Clients.Cloudflare.API.Stream
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
-    videos = load_videos()
+    {:ok, videos} = Stream.list_videos()
 
     {:ok,
      socket
      |> assign(:videos, videos)}
-  end
-
-  def load_videos do
-    req = Cloudflare.req_cloudflare()
-    response = Req.get!(req, url: "/stream")
-    response.body["result"]
-  end
-
-  def cache_videos(videos) do
   end
 
   def duration_to_hour(duration_seconds) do
