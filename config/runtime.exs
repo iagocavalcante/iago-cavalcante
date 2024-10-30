@@ -69,7 +69,8 @@ if config_env() == :prod do
 
   config :iagocavalcante,
     cloudflare_base_url: System.fetch_env!("CLOUDFLARE_BASE_URL"),
-    cloudflare_api_token: System.fetch_env!("CLOUDFLARE_API_TOKEN")
+    cloudflare_api_token: System.fetch_env!("CLOUDFLARE_API_TOKEN"),
+    cloudflare_account_id: System.get_env("CLOUDFLARE_ACCOUNT_ID")
 
   config :iagocavalcante,
     ff_donate: System.fetch_env!("FF_DONATE") || "0",

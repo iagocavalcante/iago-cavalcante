@@ -1,7 +1,7 @@
 defmodule IagocavalcanteWeb.VideosLive.Show do
   use IagocavalcanteWeb, :live_view
 
-  alias Iagocavalcante.Cloudflare
+  alias Iagocavalcante.Clients.Cloudflare.API
 
   @impl Phoenix.LiveView
   def mount(%{"id" => id}, _session, socket) do
@@ -15,7 +15,7 @@ defmodule IagocavalcanteWeb.VideosLive.Show do
   end
 
   def get_video_details(id) do
-    req = Cloudflare.req_cloudflare()
+    req = API.do_request()
     response = Req.get!(req, url: "/stream/#{id}")
     response.body["result"]
   end

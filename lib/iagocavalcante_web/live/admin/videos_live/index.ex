@@ -1,12 +1,53 @@
 defmodule IagocavalcanteWeb.Admin.VideosLive.Index do
   use IagocavalcanteWeb, :live_view
+  alias Iagocavalcante.Clients.Cloudflare.API.Stream
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
-    {:ok,
+    case Stream.list_videos() do
+      {:ok, videos} ->
+        formatted_videos = Enum.map(videos, &format_video/1)
+
+        {
+          :ok,
+          socket
+          |> assign(:videos, formatted_videos)
+          |> assign(:uploading, false)
+          |> assign(:error, nil)
+          |> assign(:video_name, nil)
+          |> allow_upload(:video,
+            accept: ~w(.mp4 .avi .mov),
+            max_file_size: 1024 * 1024 * 1024
+          )
+        }
+
+      {:error, message} ->
+        {:ok, assign(socket, :error, message)}
+    end
+  end
+
+  @impl Phoenix.LiveView
+  def handle_event("save", %{"video_name" => video_name} = _params, socket) do
+    user_email = socket.assigns.current_user.email
+
+    socket = assign(socket, :uploading, true)
+
+    video =
+      consume_uploaded_entries(socket, :video, fn %{path: path}, entry ->
+        case Stream.upload_video(path, user_email, video_name, entry) do
+          {:ok, video} ->
+            Stream.enable_download(video["uid"])
+            {:ok, video}
+
+          {:error, reason} ->
+            {:postpone, reason}
+        end
+      end)
+
+    {:noreply,
      socket
-     |> assign(:uploaded_files, [])
-     |> allow_upload(:avatar, accept: ~w(.jpg .jpeg), max_entries: 2)}
+     |> update(:videos, &[video | &1])
+     |> assign(:uploading, false)}
   end
 
   @impl Phoenix.LiveView
@@ -16,20 +57,54 @@ defmodule IagocavalcanteWeb.Admin.VideosLive.Index do
 
   @impl Phoenix.LiveView
   def handle_event("cancel-upload", %{"ref" => ref}, socket) do
-    {:noreply, cancel_upload(socket, :avatar, ref)}
+    {:noreply, cancel_upload(socket, :video, ref)}
   end
 
   @impl Phoenix.LiveView
-  def handle_event("save", _params, socket) do
-    uploaded_files =
-      consume_uploaded_entries(socket, :avatar, fn %{path: path}, _entry ->
-        dest = Path.join(Application.app_dir(:my_app, "priv/static/uploads"), Path.basename(path))
-        # You will need to create `priv/static/uploads` for `File.cp!/2` to work.
-        File.cp!(path, dest)
-        {:ok, ~p"/uploads/#{Path.basename(dest)}"}
-      end)
+  def handle_event("delete-video", %{"id" => video_id}, socket) do
+    case Stream.delete_video(video_id) do
+      {:ok, _} ->
+        videos = Enum.reject(socket.assigns.videos, &(&1["id"] == video_id))
+        {:noreply, assign(socket, :videos, videos)}
 
-    {:noreply, update(socket, :uploaded_files, &(&1 ++ uploaded_files))}
+      {:error, message} ->
+        {:noreply, assign(socket, :error, message)}
+    end
+  end
+
+  def handle_event("download-video", %{"id" => video_uid}, socket) do
+    url = get_download_url(video_uid)
+
+    {:noreply, redirect(socket, url)}
+  end
+
+  def get_download_url(video_uid) do
+    "https://customer-4db4ju1s3max6u8j.cloudflarestream.com/#{video_uid}/downloads/default.mp4?filename=MY_VIDEO.mp4"
+  end
+
+  defp format_video(video) do
+    # Garante que video é um mapa com string keys
+    video = for {key, val} <- video, into: %{}, do: {to_string(key), val}
+
+    %{
+      "id" => video["uid"],
+      "name" => get_in(video, ["publicDetails", "title"]) || "Untitled",
+      "duration" => video["duration"] || 0,
+      "thumbnail" => video["thumbnail"] || nil,
+      "preview" => video["preview"] || nil,
+      "size" => video["size"] || 0,
+      "resolution" => %{
+        "width" => get_in(video, ["input", "width"]) || 0,
+        "height" => get_in(video, ["input", "height"]) || 0
+      },
+      "status" => get_in(video, ["status", "state"]) || "processing",
+      "created_at" => video["created"],
+      "requireSignedURLs" => video["requireSignedURLs"] || false,
+      "playback" => %{
+        "hls" => get_in(video, ["playback", "hls"]) || nil,
+        "dash" => get_in(video, ["playback", "dash"]) || nil
+      }
+    }
   end
 
   defp error_to_string(:too_large), do: "Too large"
