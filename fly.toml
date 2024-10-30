@@ -13,7 +13,7 @@ PHX_HOST = "iagocavalcante.com"
 PORT = "8080"
 
 [mounts]
-source = "app"
+source = "iagocavalcante"
 destination = "/data/posts"
 
 [experimental]
