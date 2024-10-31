@@ -1,3 +1,5 @@
 #!/bin/sh
+set -eu
+
 cd -P -- "$(dirname -- "$0")"
 exec ./iagocavalcante eval Iagocavalcante.Release.migrate

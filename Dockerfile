@@ -7,13 +7,13 @@
 # This file is based on these images:
 #
 #   - https://hub.docker.com/r/hexpm/elixir/tags - for the build image
-#   - https://hub.docker.com/_/debian?tab=tags&page=1&name=bullseye-20230109-slim - for the release image
+#   - https://hub.docker.com/_/debian?tab=tags&page=1&name=bullseye-20240130-slim - for the release image
 #   - https://pkgs.org/ - resource for finding needed packages
-#   - Ex: hexpm/elixir:1.14.0-erlang-25.2.2-debian-bullseye-20230109-slim
+#   - Ex: hexpm/elixir:1.16.1-erlang-26.2.2-debian-bullseye-20240130-slim
 #
-ARG ELIXIR_VERSION=1.14.0
-ARG OTP_VERSION=25.2.2
-ARG DEBIAN_VERSION=bullseye-20230109-slim
+ARG ELIXIR_VERSION=1.16.1
+ARG OTP_VERSION=26.2.2
+ARG DEBIAN_VERSION=bullseye-20240130-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
@@ -67,8 +67,9 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
-  && apt-get clean && rm -f /var/lib/apt/lists/*_*
+RUN apt-get update -y && \
+    apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates \
+    && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
@@ -88,8 +89,9 @@ COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/iagocavalcant
 
 USER nobody
 
-CMD ["/app/bin/server"]
+# If using an environment that doesn't automatically reap zombie processes, it is
+# advised to add an init process such as tini via `apt-get install`
+# above and adding an entrypoint. See https://github.com/krallin/tini for details
+# ENTRYPOINT ["/tini", "--"]
 
-# Appended by flyctl
-ENV ECTO_IPV6 true
-ENV ERL_AFLAGS "-proto_dist inet6_tcp"
+CMD ["/app/bin/server"]
