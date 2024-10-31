@@ -16,6 +16,10 @@ release_command = '/app/bin/migrate'
 PHX_HOST = 'iagocavalcante.fly.dev'
 PORT = '8080'
 
+[mounts]
+source = "iagocavalcante"
+destination = "/data/posts"
+
 [http_service]
 internal_port = 8080
 force_https = true
