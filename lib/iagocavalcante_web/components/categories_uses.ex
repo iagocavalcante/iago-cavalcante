@@ -10,9 +10,9 @@ defmodule IagocavalcanteWeb.CategoriesUses do
         has_image: true,
         uses: [
           %{
-            name: "MacBook Air, M1 Max, 8GB RAM (2021)",
+            name: "MacBook Air, M3 16GB RAM (2024)",
             description:
-              "Satify all my needs for work and personal projects. I use it for web development, mobile development, backend development, and even for video editing."
+              "Satisfy all my needs for work and personal projects. I use it for web development, mobile development, backend development, and even for video editing."
           },
           %{
             name: "Monitor Gamer LG Ultrawide 29UM69G",
@@ -35,9 +35,9 @@ defmodule IagocavalcanteWeb.CategoriesUses do
               "I decide to buy this because I want to make almost all my peripherals being bluetooth."
           },
           %{
-            name: "Chair - FlexForm Uni",
+            name: "Chair - FlexForm Uni Pro",
             description:
-              "This is a low budget chair, but it's very comfortable. I use it for 5 hours a day and it's very good."
+              "This is a medium budget chair, but it's very comfortable. I use it for 5 hours a day and it's very good."
           },
           %{
             name: "AirPods Pro",
@@ -61,11 +61,11 @@ defmodule IagocavalcanteWeb.CategoriesUses do
         has_image: false,
         uses: [
           %{
-            name: "Visual Studio Code",
-            description: "My favorite code editor. It's very powerful and it's very easy to use."
+            name: "Zed Editor",
+            description: "My favorite code editor at this point. It's very powerful and it's very easy to use."
           },
           %{
-            name: "iTerm2 + Tmux",
+            name: "Rio terminal",
             description: "My favorite terminal and session manager."
           },
           %{
@@ -85,11 +85,11 @@ defmodule IagocavalcanteWeb.CategoriesUses do
             description: "My favorite design tool."
           },
           %{
-            name: "Inkdrop",
+            name: "Obsidian",
             description: "My favorite note taking app."
           },
           %{
-            name: "RememBear",
+            name: "1password",
             description: "My favorite password manager."
           }
         ]

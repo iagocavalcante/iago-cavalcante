@@ -5,6 +5,15 @@ defmodule IagocavalcanteWeb.Work do
   attr :works, :list,
     default: [
       %{
+        company: "Woovi",
+        role: "Software Engineer",
+        date_start: "2024.2",
+        date_end: "Present",
+        image: "/images/work/woovi.svg",
+        image_alt: "Woovi Logo",
+        url: "https://woovi.com"
+      },
+      %{
         company: "Terras Apps Solutions",
         role: "Software Engineer Consultant",
         date_start: "2024.1",
