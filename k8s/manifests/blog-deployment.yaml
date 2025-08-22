@@ -1,0 +1,127 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-app
+  namespace: iagocavalcante-blog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blog-app
+  template:
+    metadata:
+      labels:
+        app: blog-app
+    spec:
+      dnsPolicy: ClusterFirst
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:15-alpine
+          command:
+            - sh
+            - -c
+            - |
+              until pg_isready -h postgres -U postgres; do
+                echo "Waiting for PostgreSQL..."
+                sleep 2
+              done
+      containers:
+        - name: blog-app
+          image: iagocavalcante-blog:latest
+          imagePullPolicy: Never # Use local image built with docker
+          ports:
+            - containerPort: 4000
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://postgres:$(POSTGRES_PASSWORD)@postgres:5432/iagocavalcante_blog"
+            - name: ERL_INETRC
+              value: "/etc/erlang/inetrc"
+            - name: ECTO_IPV6
+              value: "false"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: blog-secrets
+                  key: postgres-password
+            - name: PHX_HOST
+              value: "iagocavalcante.com"
+            - name: PORT
+              value: "4000"
+            - name: PHX_SERVER
+              value: "true"
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: blog-secrets
+                  key: secret-key-base
+            - name: RESEND_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: blog-secrets
+                  key: resend-api-key
+            - name: CLOUDFLARE_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: blog-secrets
+                  key: cloudflare-base-url
+            - name: CLOUDFLARE_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: blog-secrets
+                  key: cloudflare-api-token
+            - name: CLOUDFLARE_ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: blog-secrets
+                  key: cloudflare-account-id
+            - name: FF_DONATE
+              valueFrom:
+                secretKeyRef:
+                  name: blog-secrets
+                  key: ff-donate
+            - name: FF_VIDEO
+              valueFrom:
+                secretKeyRef:
+                  name: blog-secrets
+                  key: ff-video
+            - name: BLOG_POST_PATH
+              valueFrom:
+                secretKeyRef:
+                  name: blog-secrets
+                  key: blog-post-path
+            - name: MIX_ENV
+              value: "prod"
+            - name: REPLACE_OS_VARS
+              value: "true"
+          volumeMounts:
+            - name: blog-posts
+              mountPath: /data/posts
+            - name: inetrc-config
+              mountPath: /etc/erlang
+              readOnly: true
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 4000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 4000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+      volumes:
+        - name: blog-posts
+          persistentVolumeClaim:
+            claimName: blog-posts-pvc
+        - name: inetrc-config
+          configMap:
+            name: inetrc-config

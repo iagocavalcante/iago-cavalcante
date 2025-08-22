@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inetrc-config
+  namespace: iagocavalcante-blog
+data:
+  inetrc: |
+    %% Force IPv4 only to avoid IPv6 issues
+    {inet6, false}.
+    %% Disable DNS caching
+    {cache_size, 0}.
+    %% Use standard lookup order
+    {lookup, [dns, file]}.
