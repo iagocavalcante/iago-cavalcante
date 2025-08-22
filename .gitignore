@@ -36,3 +36,8 @@ npm-debug.log
 .DS_Store
 
 .env
+
+# Kubernetes secrets - never commit these!
+k8s/**/secret.yaml
+k8s/**/secrets.yaml
+*secret*.yaml
