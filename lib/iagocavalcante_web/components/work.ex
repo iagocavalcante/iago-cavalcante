@@ -5,22 +5,13 @@ defmodule IagocavalcanteWeb.Work do
   attr :works, :list,
     default: [
       %{
-        company: "Woovi",
+        company: "Iago Cavalcante Desenvolvimento e Consultoria",
         role: "Software Engineer",
-        date_start: "2024.2",
-        date_end: "Present",
-        image: "/images/work/woovi.svg",
-        image_alt: "Woovi Logo",
-        url: "https://woovi.com"
-      },
-      %{
-        company: "Terras Apps Solutions",
-        role: "Software Engineer Consultant",
         date_start: "2024.1",
         date_end: "Present",
-        image: "/images/work/terras.svg",
-        image_alt: "Terras Logo",
-        url: "https://terras.agr.br/"
+        image: "/images/myself.jpg",
+        image_alt: "Iago Cavalcante Logo",
+        url: "https://iagocavalcante.com"
       },
       %{
         company: "Zarv Inc.",

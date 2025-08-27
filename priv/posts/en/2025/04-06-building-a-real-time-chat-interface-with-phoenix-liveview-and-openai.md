@@ -243,7 +243,7 @@ Consider these enhancements for your chat application:
 - [ ] Add typing indicators between messages
 - [ ] Implement message reactions
 
-The complete code for this implementation is available in my [GitHub repository](https://github.com/IagoCavalcante/fly-challenge).
+The complete code for this implementation is available in my [GitHub repository](https://github.com/IagoCavalcante/elixir-open-ai).
 
 For more Elixir deployment tips, check out my guide on [deploying Phoenix apps to Fly.io](https://fly.io/docs/elixir/getting-started/).
 
