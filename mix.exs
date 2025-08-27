@@ -53,6 +53,7 @@ defmodule Iagocavalcante.MixProject do
       {:phoenix, "~> 1.7.1", override: true},
       {:plug_cowboy, "~> 2.5"},
       {:postgrex, ">= 0.0.0"},
+      {:dns_cluster, "~> 0.1.1"},
       {:resend, "~> 0.2.1"},
       {:req, "~> 0.5.6"},
       {:multipart, "~> 0.4.0"},

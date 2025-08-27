@@ -14,6 +14,9 @@ defmodule Iagocavalcante.Application do
       Iagocavalcante.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: Iagocavalcante.PubSub},
+      # Start DNSCluster for DNS resolution
+      {DNSCluster,
+       query: Application.get_env(:iagocavalcante, :dns_cluster_query) || :ignore},
       # Start Finch
       {Finch, name: Iagocavalcante.Finch},
       # Start the Endpoint (http/https)
