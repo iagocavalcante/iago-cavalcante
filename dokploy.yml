@@ -1,12 +1,31 @@
 version: "3.8"
 
 services:
+  iago-cavalcante-migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # Database
+      - DATABASE_URL=${DATABASE_URL}
+
+      # IPv6 Support (disabled to force IPv4 for DNS resolution)
+      - ECTO_IPV6=false
+
+      # Production Environment
+      - MIX_ENV=prod
+    command:
+      ["./bin/iagocavalcante", "eval", "Iagocavalcante.Release.migrate()"]
+    restart: "no"
+
   iago-cavalcante:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "4000:4000"
+    depends_on:
+      - iago-cavalcante-migrate
     environment:
       # Database
       - DATABASE_URL=${DATABASE_URL}
@@ -18,7 +37,7 @@ services:
       - POOL_SIZE=10
 
       # IPv6 Support
-      - ECTO_IPV6=true
+      - ECTO_IPV6=${ECTO_IPV6}
 
       # Cloudflare (if needed)
       - CLOUDFLARE_BASE_URL=${CLOUDFLARE_BASE_URL}
