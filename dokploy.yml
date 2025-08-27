@@ -1,43 +1,43 @@
-version: '3.8'
+version: "3.8"
 
 services:
   iago-cavalcante:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "4000:4000"
     environment:
       # Database
-      - DATABASE_URL=postgresql://postgres:TQ4ZYv0wYGKO28T1@db.mnflzqbowrqvcjyoeumo.supabase.co:5432/postgres
-      
+      - DATABASE_URL=${DATABASE_URL}
+
       # Phoenix
       - PHX_HOST=${PHX_HOST}
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
       - PORT=4000
       - POOL_SIZE=10
-      
+
       # IPv6 Support
       - ECTO_IPV6=true
-      
+
       # Cloudflare (if needed)
       - CLOUDFLARE_BASE_URL=${CLOUDFLARE_BASE_URL}
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
       - CLOUDFLARE_ACCOUNT_ID=${CLOUDFLARE_ACCOUNT_ID}
-      
+
       # Email
       - RESEND_API_KEY=${RESEND_API_KEY}
-      
+
       # Feature flags
-      - FF_DONATE=0
-      - FF_VIDEO=1
-      
+      - FF_DONATE=${FF_DONATE}
+      - FF_VIDEO=${FF_VIDEO}
+
       # Production Environment
       - MIX_ENV=prod
       - PHX_SERVER=true
-    
+
     restart: unless-stopped
-    
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4000"]
       interval: 30s
