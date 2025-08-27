@@ -32,6 +32,9 @@ services:
       - FF_DONATE=${FF_DONATE}
       - FF_VIDEO=${FF_VIDEO}
 
+      # DNS Configuration (leave empty to disable DNSCluster)
+      - DNS_CLUSTER_QUERY=
+
       # Production Environment
       - MIX_ENV=prod
       - PHX_SERVER=true
