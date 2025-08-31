@@ -1,11 +1,12 @@
 %{
-  title: "Dokploy: A Plataforma de Deployment Mais Simples para seu VPS ou Homelab",
-  author: "Iago Cavalcante",
-  tags: ~w(dokploy deployment vps homelab devops docker),
-  description: "Guia completo de como configurar e usar Dokploy para simplificar deployments em VPS ou homelab - a alternativa open source ao Vercel e Netlify para infraestrutura própria.",
-  locale: "pt_BR",
-  published: true
+title: "Dokploy: A Plataforma de Deployment Mais Simples para seu VPS ou Homelab",
+author: "Iago Cavalcante",
+tags: ~w(dokploy deployment vps homelab devops docker),
+description: "Guia completo de como configurar e usar Dokploy para simplificar deployments em VPS ou homelab - a alternativa open source ao Vercel e Netlify para infraestrutura própria.",
+locale: "pt_BR",
+published: true
 }
+
 ---
 
 # Dokploy: A Plataforma de Deployment Mais Simples para seu VPS ou Homelab
@@ -33,12 +34,14 @@ Depois de anos lutando com Kubernetes, Docker Swarm e scripts bash customizados,
 Antes de começarmos, você vai precisar de:
 
 ### Hardware Mínimo
+
 - **CPU**: 2 cores (4 cores recomendado)
 - **RAM**: 4GB (8GB recomendado)
 - **Storage**: 20GB livres (SSD preferível)
 - **Rede**: IP público com portas 80, 443 e 3000 abertas
 
 ### Software Base
+
 - **OS**: Ubuntu 20.04+ (testado e recomendado)
 - **Docker**: Versão 20.10+
 - **Docker Compose**: Versão 2.0+
@@ -97,6 +100,7 @@ curl -sSL https://dokploy.com/install.sh | sh
 ```
 
 Esse script vai:
+
 1. Baixar a imagem Docker do Dokploy
 2. Configurar docker-compose.yml
 3. Iniciar todos os serviços necessários
@@ -119,6 +123,7 @@ docker ps
 ### Acessando a Interface Web
 
 Abra seu navegador e acesse:
+
 ```
 http://SEU_IP:3000
 ```
@@ -146,6 +151,7 @@ Vamos fazer o deploy de uma aplicação Elixir/Phoenix para demonstrar o poder d
 ### 1. Preparando o Repositório
 
 Certifique-se que seu projeto tenha:
+
 - `Dockerfile` na raiz
 - Variáveis de ambiente configuradas
 - Port binding correto
@@ -330,18 +336,21 @@ dig exemplo.com  # Deve retornar IP do servidor
 ## Vantagens do Dokploy vs. Alternativas
 
 ### Dokploy vs. Kubernetes
+
 - ✅ **Simplicidade**: Interface web vs. YAML complexos
 - ✅ **Recursos**: Menor footprint de CPU/RAM
 - ✅ **Manutenção**: Updates automáticos vs. cluster management
 - ✅ **Curva de aprendizado**: Horas vs. semanas
 
 ### Dokploy vs. Docker Compose Manual
+
 - ✅ **UI Visual**: Interface web vs. linha de comando
 - ✅ **Git Integration**: Deploy automático vs. manual
 - ✅ **SSL**: Certificados automáticos vs. configuração manual
 - ✅ **Monitoring**: Dashboards integrados vs. ferramentas externas
 
 ### Dokploy vs. Serviços Cloud
+
 - ✅ **Custo**: Seu servidor vs. pricing por deployment
 - ✅ **Controle**: Acesso total vs. limitações de platform
 - ✅ **Privacy**: Dados locais vs. third-party
@@ -349,20 +358,10 @@ dig exemplo.com  # Deve retornar IP do servidor
 
 ## Casos de Uso Reais
 
-### Startup com Múltiplas Apps
-
-Configurei Dokploy para uma startup que precisava hospedar:
-- API em Elixir
-- Frontend em React
-- Admin panel em Vue.js
-- Banco PostgreSQL
-- Redis para cache
-
-**Resultado**: Deploy time reduzido de 2 horas para 5 minutos por aplicação.
-
 ### Freelancer com Projetos de Clientes
 
 Como freelancer, uso Dokploy para hospedar projetos de diferentes clientes:
+
 - Isolamento por aplicação
 - SSL automático para cada domínio
 - Backups independentes
@@ -373,6 +372,7 @@ Como freelancer, uso Dokploy para hospedar projetos de diferentes clientes:
 ### Homelab para Projetos Pessoais
 
 Rodando Dokploy em um mini PC em casa:
+
 - Projetos side-projects
 - Ambientes de teste
 - Protótipos para clientes
@@ -422,11 +422,13 @@ jobs:
 ## Recursos Úteis
 
 ### Documentação e Comunidade
+
 - [Documentação Oficial](https://dokploy.com/docs)
 - [Discord Community](https://discord.gg/dokploy)
 - [GitHub Repository](https://github.com/dokploy/dokploy)
 
 ### Templates e Exemplos
+
 - [Dokploy Templates](https://github.com/dokploy/templates)
 - [Community Examples](https://github.com/dokploy/examples)
 
@@ -437,6 +439,7 @@ Dokploy transformou completamente como gerencio deployments. Em vez de passar ho
 A combinação de simplicidade do Heroku, flexibilidade do Docker, e controle total da infraestrutura própria faz do Dokploy a escolha perfeita para desenvolvedores que querem focar no que fazem de melhor: criar produtos incríveis.
 
 **Para quem recomendo Dokploy:**
+
 - Desenvolvedores indie com múltiplos projetos
 - Freelancers que hospedam projetos de clientes
 - Startups que precisam de controle de custos
@@ -448,4 +451,4 @@ A combinação de simplicidade do Heroku, flexibilidade do Docker, e controle to
 
 Tem dúvidas sobre a implementação ou quer compartilhar sua experiência? Me encontre no [Twitter](https://twitter.com/iagocavalcante) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
-*Deploy simples, resultados complexos. Esse é o poder do Dokploy! 🚀*
+_Deploy simples, resultados complexos. Esse é o poder do Dokploy! 🚀_
