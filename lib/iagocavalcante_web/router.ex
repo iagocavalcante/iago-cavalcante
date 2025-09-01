@@ -69,6 +69,7 @@ defmodule IagocavalcanteWeb.Router do
       live gettext("/uses"), UsesLive, :uses
       live gettext("/analytics"), AnalyticsLive, :analytics
       live gettext("/bookmarks"), BookmarksLive, :bookmarks
+      live "/privacy", PrivacyLive, :privacy
       live "/subscribers/confirm/:token", SubscriberVerifyLive, :subscriber_verify
     end
   end

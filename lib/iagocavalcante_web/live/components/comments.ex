@@ -50,11 +50,11 @@ defmodule IagocavalcanteWeb.Components.Comments do
             type="checkbox"
             id="comment-terms"
             required
-            class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-zinc-300 rounded"
+            class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-zinc-300 dark:border-zinc-600 dark:bg-zinc-800 rounded"
           />
           <label for="comment-terms" class="text-sm text-zinc-600 dark:text-zinc-400">
             I agree that my comment will be moderated before publication and I understand the 
-            <a href="/privacy" class="text-blue-600 hover:text-blue-800">privacy policy</a>.
+            <a href="/privacy" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">privacy policy</a>.
           </label>
         </div>
 
@@ -81,16 +81,18 @@ defmodule IagocavalcanteWeb.Components.Comments do
       <%= if @message do %>
         <div class={[
           "mb-6 p-4 rounded-md",
-          if(@message_type == :success, do: "bg-green-50 text-green-700 border border-green-200", else: "bg-red-50 text-red-700 border border-red-200")
+          if(@message_type == :success, 
+            do: "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800", 
+            else: "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800")
         ]}>
           <div class="flex">
             <div class="flex-shrink-0">
               <%= if @message_type == :success do %>
-                <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <svg class="h-5 w-5 text-green-400 dark:text-green-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
               <% else %>
-                <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <svg class="h-5 w-5 text-red-400 dark:text-red-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
                 </svg>
               <% end %>
