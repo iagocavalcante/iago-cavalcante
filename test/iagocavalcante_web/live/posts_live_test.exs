@@ -9,7 +9,7 @@ defmodule IagocavalcanteWeb.PostsLiveTest do
   @invalid_attrs %{}
 
   defp create_posts(_) do
-    posts = posts_fixture()
+    posts = post_fixture()
     %{posts: posts}
   end
 

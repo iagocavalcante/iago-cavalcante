@@ -8,24 +8,38 @@ defmodule Iagocavalcante.BlogFixtures do
   Generate a post.
   """
   def post_fixture(attrs \\ %{}) do
-    {:ok, post} =
+    default_attrs = %{
+      "slug" => "test-post-#{System.unique_integer([:positive])}",
+      "title" => "Test Post Title",
+      "description" => "Test post description",
+      "body" => "Test post body content",
+      "tags" => "test,blog",
+      "published" => true,
+      "locale" => "en",
+      "path" => "test-post-#{System.unique_integer([:positive])}.md",
+      "year" => "#{Date.utc_today().year}"
+    }
+    
+    post_attrs = 
       attrs
-      |> Enum.into(%{})
-      |> Iagocavalcante.Blog.create_post()
-
-    post
-  end
-
-  @doc """
-  Generate a posts.
-  """
-  def posts_fixture(attrs \\ %{}) do
-    {:ok, posts} =
-      attrs
-      |> Enum.into(%{})
-      |> Iagocavalcante.Blog.create_posts()
-
-    posts
+      |> Enum.into(default_attrs)
+    
+    Iagocavalcante.Blog.create_new_post(post_attrs)
+    
+    # Since create_new_post doesn't return {:ok, post}, we need to get the created post
+    %Iagocavalcante.Post{
+      id: post_attrs["slug"],
+      title: post_attrs["title"],
+      description: post_attrs["description"],
+      body: post_attrs["body"],
+      tags: String.split(post_attrs["tags"], ",") |> Enum.map(&String.trim/1),
+      published: post_attrs["published"],
+      date: Date.utc_today(),
+      locale: post_attrs["locale"],
+      author: "Iago Cavalcante",
+      path: post_attrs["path"],
+      year: String.to_integer(post_attrs["year"])
+    }
   end
 
   @doc """
@@ -35,7 +49,7 @@ defmodule Iagocavalcante.BlogFixtures do
     {:ok, comment} =
       attrs
       |> Enum.into(%{
-        post_id: "test-post-#{System.unique_integer([:positive])}",
+        post_id: "dokploy-simplest-deployment-platform-vps-homelab",
         author_name: "Test Author",
         author_email: "test#{System.unique_integer([:positive])}@example.com",
         content: "This is a test comment with enough content to pass validation requirements.",

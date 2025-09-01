@@ -26,9 +26,9 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
 
   describe "update/2" do
     test "loads comments and sets up form for given post" do
-      post_id = "test-post"
-      comment1 = approved_comment_fixture(%{post_id: post_id})
-      comment2 = approved_comment_fixture(%{post_id: post_id})
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
+      _comment1 = approved_comment_fixture(%{post_id: post_id})
+      _comment2 = approved_comment_fixture(%{post_id: post_id})
       
       socket = %Phoenix.LiveView.Socket{}
       assigns = %{post_id: post_id}
@@ -42,7 +42,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "loads comments with nested replies" do
-      post_id = "test-post"
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
       parent_comment = approved_comment_fixture(%{post_id: post_id})
       reply_comment = approved_comment_fixture(%{
         post_id: post_id,
@@ -64,7 +64,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
 
   describe "handle_event submit_comment with honeypot" do
     test "rejects submission when honeypot field is filled" do
-      post_id = "test-post"
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
       socket = build_socket_with_post(post_id)
       
       params = Map.merge(@valid_comment_attrs, %{"website" => "http://spam.com"})
@@ -79,7 +79,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
 
   describe "handle_event submit_comment" do
     test "creates comment with valid data" do
-      post_id = "test-post"
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
       socket = build_socket_with_post(post_id)
       
       {:noreply, updated_socket} = Comments.handle_event("submit_comment", @valid_comment_attrs, socket)
@@ -101,11 +101,11 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "creates comment with reply_to when replying" do
-      post_id = "test-post"
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
       parent_comment = approved_comment_fixture(%{post_id: post_id})
       socket = build_socket_with_post(post_id, reply_to: parent_comment.id)
       
-      {:noreply, updated_socket} = Comments.handle_event("submit_comment", @valid_comment_attrs, socket)
+      {:noreply, _updated_socket} = Comments.handle_event("submit_comment", @valid_comment_attrs, socket)
       
       # Check that reply comment was created
       comments = Blog.list_comments_for_post(post_id, :pending)
@@ -117,7 +117,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "shows success message for auto-approved comments" do
-      post_id = "test-post"
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
       
       # Create a trusted commenter
       trusted_email = "trusted@example.com"
@@ -140,7 +140,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "handles spam comments appropriately" do
-      post_id = "test-post"
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
       socket = build_socket_with_post(post_id)
       
       spam_attrs = %{
@@ -156,7 +156,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "handles validation errors" do
-      post_id = "test-post"
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
       socket = build_socket_with_post(post_id)
       
       invalid_attrs = %{
@@ -178,8 +178,8 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "refreshes comments list after successful submission" do
-      post_id = "test-post"
-      existing_comment = approved_comment_fixture(%{post_id: post_id})
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
+      _existing_comment = approved_comment_fixture(%{post_id: post_id})
       socket = build_socket_with_post(post_id)
       
       # Initial state should have 1 comment
@@ -197,7 +197,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "sets loading state during submission" do
-      post_id = "test-post"
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
       socket = build_socket_with_post(post_id)
       
       # Mock the socket to capture intermediate state
@@ -212,7 +212,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
 
   describe "handle_event reply_to_comment" do
     test "sets reply_to in socket assigns" do
-      socket = build_socket_with_post("test-post")
+      socket = build_socket_with_post("dokploy-simplest-deployment-platform-vps-homelab")
       comment_id = "123"
       
       {:noreply, updated_socket} = Comments.handle_event("reply_to_comment", %{"comment-id" => comment_id}, socket)
@@ -223,9 +223,9 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
 
   describe "render/1" do
     test "renders comment form with proper fields" do
-      socket = build_socket_with_post("test-post")
+      {:ok, view, _html} = live_isolated(build_conn(), Comments, %{post_id: "dokploy-simplest-deployment-platform-vps-homelab"})
       
-      html = render_component(Comments, socket.assigns)
+      html = render(view)
       
       assert html =~ "Comments ("
       assert html =~ ~s(name="author_name")
@@ -236,21 +236,21 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "renders existing comments" do
-      post_id = "test-post"
-      comment1 = approved_comment_fixture(%{
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
+      _comment1 = approved_comment_fixture(%{
         post_id: post_id,
         author_name: "Alice",
         content: "Great article!"
       })
-      comment2 = approved_comment_fixture(%{
+      _comment2 = approved_comment_fixture(%{
         post_id: post_id, 
         author_name: "Bob",
         content: "I agree with Alice."
       })
       
-      socket = build_socket_with_post(post_id)
+      {:ok, view, _html} = live_isolated(build_conn(), Comments, %{post_id: post_id})
       
-      html = render_component(Comments, socket.assigns)
+      html = render(view)
       
       assert html =~ "Alice"
       assert html =~ "Great article!"
@@ -259,7 +259,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "renders success message when present" do
-      socket = build_socket_with_post("test-post", 
+      socket = build_socket_with_post("dokploy-simplest-deployment-platform-vps-homelab", 
         message: "Comment posted successfully!", 
         message_type: :success
       )
@@ -271,7 +271,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "renders error message when present" do
-      socket = build_socket_with_post("test-post",
+      socket = build_socket_with_post("dokploy-simplest-deployment-platform-vps-homelab",
         message: "There was an error",
         message_type: :error
       )
@@ -283,7 +283,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "shows empty state when no comments" do
-      socket = build_socket_with_post("test-post-empty")
+      socket = build_socket_with_post("dokploy-simplest-deployment-platform-vps-homelab")
       
       html = render_component(Comments, socket.assigns)
       
@@ -292,13 +292,13 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "renders nested replies correctly" do
-      post_id = "test-post"
+      post_id = "dokploy-simplest-deployment-platform-vps-homelab"
       parent_comment = approved_comment_fixture(%{
         post_id: post_id,
         author_name: "Parent",
         content: "Original comment"
       })
-      reply_comment = approved_comment_fixture(%{
+      _reply_comment = approved_comment_fixture(%{
         post_id: post_id,
         parent_id: parent_comment.id,
         author_name: "Replier", 
@@ -317,7 +317,7 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
     end
 
     test "shows loading state on submit button" do
-      socket = build_socket_with_post("test-post", loading: true)
+      socket = build_socket_with_post("dokploy-simplest-deployment-platform-vps-homelab", loading: true)
       
       html = render_component(Comments, socket.assigns)
       
@@ -343,7 +343,10 @@ defmodule IagocavalcanteWeb.Components.CommentsTest do
       reply_to: nil
     ] ++ additional_assigns
     
-    %Phoenix.LiveView.Socket{}
+    socket = %Phoenix.LiveView.Socket{}
     |> Phoenix.Component.assign(assigns)
+    
+    # Add myself assign using put_assign to bypass the reserved key check
+    %{socket | assigns: Map.put(socket.assigns, :myself, %Phoenix.LiveComponent.CID{cid: 1})}
   end
 end
