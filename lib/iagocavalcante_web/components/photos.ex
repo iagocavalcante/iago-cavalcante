@@ -2,19 +2,17 @@ defmodule IagocavalcanteWeb.Photos do
   use Phoenix.Component
 
   def photos(assigns) do
-    photos = [
+    assigns = assign(assigns, :photos, [
       %{img: "/images/home-1.jpeg", rotate: "rotate-2"},
       %{img: "/images/home-2.jpeg", rotate: "-rotate-2"},
       %{img: "/images/home-3.jpeg", rotate: "rotate-2"},
       %{img: "/images/home-4.jpeg", rotate: "-rotate-2"},
       %{img: "/images/home-5.jpeg", rotate: "rotate-2"}
-    ]
-
-    # getvalue from tuple
+    ])
 
     ~H"""
     <div
-      :for={photo <- photos}
+      :for={photo <- @photos}
       class={"relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl #{photo.rotate}"}
     >
       <img

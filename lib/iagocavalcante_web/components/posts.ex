@@ -1,6 +1,6 @@
 defmodule IagocavalcanteWeb.Posts do
   use Phoenix.Component
-  import IagocavalcanteWeb.Gettext
+  use Gettext, backend: IagocavalcanteWeb.Gettext
 
   attr :locale, :string, default: "en"
   attr :articles, :list
@@ -48,7 +48,4 @@ defmodule IagocavalcanteWeb.Posts do
     """
   end
 
-  defp format_date(date) do
-    date |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_date()
-  end
 end

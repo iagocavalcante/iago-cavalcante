@@ -1,8 +1,6 @@
 defmodule IagocavalcanteWeb.CategoriesUses do
   use Phoenix.Component
 
-  import IagocavalcanteWeb.Gettext
-
   attr :categories, :list,
     default: [
       %{

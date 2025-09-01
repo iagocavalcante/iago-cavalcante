@@ -1,7 +1,5 @@
 defmodule IagocavalcanteWeb.Header do
   use Phoenix.Component
-  import IagocavalcanteWeb.Gettext
-  import IagocavalcanteWeb.NavItem
 
   slot :nav_items, required: true
   slot :toggle_items, required: true

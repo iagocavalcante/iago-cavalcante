@@ -15,8 +15,6 @@ defmodule IagocavalcanteWeb.UserConfirmationInstructionsLive do
     </.simple_form>
 
     <p>
-      <.link href={~p"/admin/users/register"}>Register</.link>
-      |
       <.link href={~p"/admin/login"}>Log in</.link>
     </p>
     """
@@ -30,7 +28,7 @@ defmodule IagocavalcanteWeb.UserConfirmationInstructionsLive do
     if user = Accounts.get_user_by_email(email) do
       Accounts.deliver_user_confirmation_instructions(
         user,
-        &url(~p"/admin/users/confirm/#{&1}")
+        &url(~p"/users/confirm/#{&1}")
       )
     end
 

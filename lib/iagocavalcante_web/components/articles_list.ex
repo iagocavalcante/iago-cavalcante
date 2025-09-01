@@ -1,8 +1,7 @@
 defmodule IagocavalcanteWeb.ArticlesList do
   use Phoenix.Component
 
-  import IagocavalcanteWeb.Gettext
-  alias IagocavalcanteWeb.ArticleView
+  use Gettext, backend: IagocavalcanteWeb.Gettext
 
   attr :locale, :string, default: "en"
   attr :articles, :list
@@ -54,7 +53,4 @@ defmodule IagocavalcanteWeb.ArticlesList do
     """
   end
 
-  defp format_date(date) do
-    date |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_date()
-  end
 end

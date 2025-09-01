@@ -43,7 +43,7 @@ defmodule IagocavalcanteWeb do
         layouts: [html: IagocavalcanteWeb.Layouts]
 
       import Plug.Conn
-      import IagocavalcanteWeb.Gettext
+      use Gettext, backend: IagocavalcanteWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -79,13 +79,28 @@ defmodule IagocavalcanteWeb do
     end
   end
 
+  def view do
+    quote do
+      use Phoenix.View,
+        root: "lib/iagocavalcante_web/templates",
+        namespace: IagocavalcanteWeb
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [get_csrf_token: 0, view_module: 1, view_template: 1]
+
+      # Include shared imports and aliases for views
+      unquote(html_helpers())
+    end
+  end
+
   defp html_helpers do
     quote do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
       import IagocavalcanteWeb.CoreComponents
-      import IagocavalcanteWeb.Gettext
+      use Gettext, backend: IagocavalcanteWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

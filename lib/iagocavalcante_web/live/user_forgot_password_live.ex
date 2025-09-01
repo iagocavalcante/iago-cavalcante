@@ -20,8 +20,6 @@ defmodule IagocavalcanteWeb.UserForgotPasswordLive do
         </:actions>
       </.simple_form>
       <p class="text-center mt-4">
-        <.link href={~p"/admin/users/register"}>Register</.link>
-        |
         <.link href={~p"/admin/login"}>Log in</.link>
       </p>
     </div>
@@ -36,7 +34,7 @@ defmodule IagocavalcanteWeb.UserForgotPasswordLive do
     if user = Accounts.get_user_by_email(email) do
       Accounts.deliver_user_reset_password_instructions(
         user,
-        &url(~p"/admin/users/reset_password/#{&1}")
+        &url(~p"/admin/reset_password/#{&1}")
       )
     end
 

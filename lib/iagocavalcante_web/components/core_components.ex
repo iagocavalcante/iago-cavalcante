@@ -12,7 +12,7 @@ defmodule IagocavalcanteWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import IagocavalcanteWeb.Gettext
+  use Gettext, backend: IagocavalcanteWeb.Gettext
 
   @doc """
   Renders a modal.
@@ -458,7 +458,7 @@ defmodule IagocavalcanteWeb.CoreComponents do
         </thead>
         <tbody class="relative divide-y divide-zinc-100 border-t border-zinc-200 text-sm leading-6 text-zinc-700">
           <tr
-            :for={{id, row} <- @rows}
+            :for={{_id, row} <- @rows}
             id={"#{@id}-#{Phoenix.Param.to_param(row)}"}
             class="relative group hover:bg-zinc-50"
           >
@@ -633,9 +633,9 @@ defmodule IagocavalcanteWeb.CoreComponents do
 
   defdelegate articles_list(assigns), to: IagocavalcanteWeb.ArticlesList, as: :articles_list
 
-  defdelegate categories_projects(assigns),
-    to: IagocavalcanteWeb.CategoriesProjects,
-    as: :categories_projects
+  # defdelegate categories_projects(assigns),
+  #   to: IagocavalcanteWeb.CategoriesProjects,
+  #   as: :categories_projects
 
   defdelegate footer(assigns), to: IagocavalcanteWeb.Footer, as: :footer
   defdelegate header(assigns), to: IagocavalcanteWeb.Header, as: :header

@@ -2,7 +2,6 @@ defmodule IagocavalcanteWeb.Nav do
   import Phoenix.LiveView
   use Phoenix.Component
 
-  import IagocavalcanteWeb.Gettext
 
   alias IagocavalcanteWeb.AboutLive
   alias IagocavalcanteWeb.ArticlesLive

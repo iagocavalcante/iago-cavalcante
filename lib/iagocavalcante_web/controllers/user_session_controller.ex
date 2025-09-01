@@ -4,6 +4,9 @@ defmodule IagocavalcanteWeb.UserSessionController do
   alias Iagocavalcante.Accounts
   alias IagocavalcanteWeb.UserAuth
 
+  @locale_cookie "locale"
+  @locale_options [max_age: 365 * 24 * 60 * 60, http_only: false]
+
   def create(conn, %{"_action" => "registered"} = params) do
     create(conn, params, "Account created successfully!")
   end

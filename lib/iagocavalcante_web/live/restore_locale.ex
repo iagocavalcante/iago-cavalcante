@@ -2,8 +2,6 @@ defmodule IagocavalcanteWeb.RestoreLocale do
   import Phoenix.LiveView
   use Phoenix.Component
 
-  import IagocavalcanteWeb.Gettext
-
   def on_mount(:default, _params, %{"locale" => locale}, socket) do
     Gettext.put_locale(IagocavalcanteWeb.Gettext, locale)
 

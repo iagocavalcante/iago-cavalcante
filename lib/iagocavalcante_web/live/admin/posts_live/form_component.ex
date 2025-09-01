@@ -39,27 +39,21 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
      |> assign(:form, to_form(post))}
   end
 
+  @impl true
   def handle_event("save", posts_params, socket) do
     save_posts(socket, socket.assigns.action, posts_params)
   end
 
-  defp save_posts(socket, :edit, posts_params) do
-    case Blogs.update_posts(socket.assigns.posts, posts_params) do
-      {:ok, posts} ->
-        notify_parent({:saved, posts})
-
-        {:noreply,
-         socket
-         |> put_flash(:info, "Posts updated successfully")
-         |> push_patch(to: socket.assigns.patch)}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, socket |> assign(:form, to_form(changeset))}
-    end
+  defp save_posts(socket, :edit, _posts_params) do
+    # TODO: Implement post editing functionality  
+    {:noreply,
+     socket
+     |> put_flash(:error, "Post editing not implemented yet")
+     |> push_patch(to: socket.assigns.patch)}
   end
 
   defp save_posts(socket, :new, posts_params) do
-    locale = posts_params["locale"]
+    _locale = posts_params["locale"]
     day = if Date.utc_today().day < 10, do: "0#{Date.utc_today().day}", else: Date.utc_today().day
 
     month =
@@ -95,7 +89,7 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
     end
   end
 
-  defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
+  # defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
 
   defp slug_from_title(post) do
     post["title"]

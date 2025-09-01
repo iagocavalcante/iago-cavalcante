@@ -1,8 +1,6 @@
 defmodule IagocavalcanteWeb.ToggleLocale do
   use Phoenix.Component
 
-  import IagocavalcanteWeb.Gettext
-
   def toggle_locale(assigns) do
     ~H"""
     <button

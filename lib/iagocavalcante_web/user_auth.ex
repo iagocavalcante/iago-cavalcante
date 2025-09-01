@@ -172,6 +172,32 @@ defmodule IagocavalcanteWeb.UserAuth do
     end
   end
 
+  def on_mount(:ensure_authenticated_admin, _params, session, socket) do
+    socket = mount_current_user(session, socket)
+
+    case socket.assigns.current_user do
+      user when not is_nil(user) ->
+        if IagocavalcanteWeb.Plugs.RequireAdmin.is_admin_user?(user) do
+          {:cont, socket}
+        else
+          socket =
+            socket
+            |> Phoenix.LiveView.put_flash(:error, "Access denied. Admin privileges required.")
+            |> Phoenix.LiveView.redirect(to: ~p"/")
+
+          {:halt, socket}
+        end
+
+      nil ->
+        socket =
+          socket
+          |> Phoenix.LiveView.put_flash(:error, "You must log in to access this page.")
+          |> Phoenix.LiveView.redirect(to: ~p"/admin/login")
+
+        {:halt, socket}
+    end
+  end
+
   defp mount_current_user(session, socket) do
     case session do
       %{"user_token" => user_token} ->

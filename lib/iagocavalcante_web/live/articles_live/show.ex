@@ -1,6 +1,6 @@
 defmodule IagocavalcanteWeb.ArticlesLive.Show do
   use IagocavalcanteWeb, :live_view
-  import IagocavalcanteWeb.Gettext
+  use Gettext, backend: IagocavalcanteWeb.Gettext
 
   alias Iagocavalcante.Blog
 
@@ -54,16 +54,12 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
                   </div>
                 </article>
 
-                <script
-                  src="https://utteranc.es/client.js"
-                  repo="iagocavalcante/iago-cavalcante"
-                  issue-term="url"
-                  label="comments"
-                  theme="github-light"
-                  crossorigin="anonymous"
-                  async
-                >
-                </script>
+                <!-- Comments Section -->
+                <.live_component 
+                  module={IagocavalcanteWeb.Components.Comments} 
+                  id="comments"
+                  post_id={@article.id}
+                />
               </div>
             </div>
           </div>

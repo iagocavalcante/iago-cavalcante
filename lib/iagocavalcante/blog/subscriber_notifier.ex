@@ -1,6 +1,5 @@
 defmodule Iagocavalcante.Blog.SubscriberNotifier do
   import Swoosh.Email
-  import IagocavalcanteWeb.Gettext
 
   alias Iagocavalcante.Mailer
 

@@ -1,6 +1,6 @@
 defmodule IagocavalcanteWeb.SocialLinks do
   use Phoenix.Component
-  import IagocavalcanteWeb.Gettext
+  use Gettext, backend: IagocavalcanteWeb.Gettext
 
   attr :link, :string, required: true
   attr :social, :string, required: true

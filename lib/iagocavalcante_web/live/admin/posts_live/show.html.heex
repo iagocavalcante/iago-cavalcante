@@ -8,11 +8,11 @@
           title={@page_title}
           action={@live_action}
           posts={@posts}
-          patch={~p"/posts/#{@posts}"}
+          patch={~p"/admin/posts/#{@posts}"}
         />
       </div>
     </div>
   </div>
 </div>
 
-<.back navigate={~p"/posts"}>Back to posts</.back>
+<.back navigate={~p"/admin/posts"}>Back to posts</.back>

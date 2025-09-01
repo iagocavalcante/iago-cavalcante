@@ -1,6 +1,6 @@
 defmodule IagocavalcanteWeb.Work do
   use Phoenix.Component
-  import IagocavalcanteWeb.Gettext
+  use Gettext, backend: IagocavalcanteWeb.Gettext
 
   attr :works, :list,
     default: [

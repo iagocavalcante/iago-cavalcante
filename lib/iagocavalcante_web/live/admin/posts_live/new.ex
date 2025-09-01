@@ -1,8 +1,6 @@
 defmodule IagocavalcanteWeb.Admin.PostsLive.New do
   use IagocavalcanteWeb, :live_view
 
-  alias Iagocavalcante.Blog
-
   @impl true
   def mount(_params, _session, socket) do
     {:ok, socket}

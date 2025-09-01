@@ -20,5 +20,5 @@ defmodule IagocavalcanteWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :iagocavalcante
+  use Gettext.Backend, otp_app: :iagocavalcante
 end

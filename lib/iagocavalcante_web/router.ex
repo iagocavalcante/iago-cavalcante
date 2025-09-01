@@ -2,7 +2,7 @@ defmodule IagocavalcanteWeb.Router do
   use IagocavalcanteWeb, :router
 
   import IagocavalcanteWeb.UserAuth
-  import IagocavalcanteWeb.Gettext
+  use Gettext, backend: IagocavalcanteWeb.Gettext
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -17,6 +17,11 @@ defmodule IagocavalcanteWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :require_authenticated_admin do
+    plug :require_authenticated_user
+    plug IagocavalcanteWeb.Plugs.RequireAdmin
   end
 
   # Other scopes may use custom stacks.
@@ -39,6 +44,10 @@ defmodule IagocavalcanteWeb.Router do
       live_dashboard "/dashboard", metrics: IagocavalcanteWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+  end
+
+  pipeline :comment_rate_limit do
+    plug IagocavalcanteWeb.Plugs.RateLimiter
   end
 
   scope "/", IagocavalcanteWeb do
@@ -75,7 +84,8 @@ defmodule IagocavalcanteWeb.Router do
         IagocavalcanteWeb.Nav
       ] do
       live gettext("/login"), UserLoginLive, :new
-      live "/register", UserRegistrationLive, :new
+      # Registration disabled - only specific admin email allowed
+      # live "/register", UserRegistrationLive, :new
       live "/reset_password", UserForgotPasswordLive, :new
       live "/reset_password/:token", UserResetPasswordLive, :edit
     end
@@ -84,10 +94,10 @@ defmodule IagocavalcanteWeb.Router do
   end
 
   scope "/admin", IagocavalcanteWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through [:browser, :require_authenticated_admin]
 
-    live_session :require_authenticated_user,
-      on_mount: [{IagocavalcanteWeb.UserAuth, :ensure_authenticated}, IagocavalcanteWeb.Nav] do
+    live_session :require_authenticated_admin,
+      on_mount: [{IagocavalcanteWeb.UserAuth, :ensure_authenticated_admin}, IagocavalcanteWeb.Nav] do
       # live "/users/register", UserRegistrationLive, :new
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
@@ -97,6 +107,7 @@ defmodule IagocavalcanteWeb.Router do
       live "/posts/:id", Admin.PostsLive.Show, :show
       live "/posts/:id/show/edit", Admin.PostsLive.Show, :edit
       live "/videos", Admin.VideosLive.Index, :index
+      live "/comments", Admin.CommentsLive, :index
     end
   end
 

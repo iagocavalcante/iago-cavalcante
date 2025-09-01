@@ -20,7 +20,7 @@ defmodule IagocavalcanteWeb.ProjectsLive do
                 </p>
               </header>
               <div class="mt-16 sm:mt-20">
-                <.categories_projects />
+                <.live_component module={IagocavalcanteWeb.Components.CategoriesProjects} id="categories_projects" />
               </div>
             </div>
           </div>

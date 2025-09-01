@@ -16,8 +16,6 @@ defmodule IagocavalcanteWeb.UserConfirmationLive do
       </.simple_form>
 
       <p class="text-center mt-4">
-        <.link href={~p"/admin/users/register"}>Register</.link>
-        |
         <.link href={~p"/admin/login"}>Log in</.link>
       </p>
     </div>

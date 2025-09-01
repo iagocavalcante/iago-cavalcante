@@ -1,9 +1,7 @@
 defmodule IagocavalcanteWeb.Newsletter do
   use IagocavalcanteWeb, :live_component
-  import IagocavalcanteWeb.Gettext
+  use Gettext, backend: IagocavalcanteWeb.Gettext
 
-  alias Iagocavalcante.Blog.Subscriber
-  alias Iagocavalcante.Mailer
   alias Iagocavalcante.Subscribers
 
   def render(assigns) do

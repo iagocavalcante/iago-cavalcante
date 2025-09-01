@@ -1,6 +1,6 @@
 defmodule IagocavalcanteWeb.Footer do
   use Phoenix.Component
-  import IagocavalcanteWeb.Gettext
+  use Gettext, backend: IagocavalcanteWeb.Gettext
 
   def footer(assigns) do
     ~H"""

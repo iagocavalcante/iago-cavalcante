@@ -38,13 +38,12 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    case Blog.delete_post(id) do
-      :ok ->
-        IO.inspect("ok")
-        {:noreply, socket |> put_flash(:info, "Posts deleted successfully")}
-
-      {:error, _} ->
-        {:noreply, socket}
+    try do
+      Blog.delete_post(id)
+      {:noreply, socket |> put_flash(:info, "Posts deleted successfully")}
+    rescue
+      _ ->
+        {:noreply, socket |> put_flash(:error, "Failed to delete post")}
     end
   end
 end

@@ -1,5 +1,8 @@
 defmodule Iagocavalcante.Blog do
   alias Iagocavalcante.Post
+  alias Iagocavalcante.Blog.Comment
+  alias Iagocavalcante.Repo
+  import Ecto.Query
 
   defmodule NotFoundError, do: defexception([:message, plug_status: 404])
 
@@ -57,7 +60,9 @@ defmodule Iagocavalcante.Blog do
     |> create_markdown_file()
   end
 
-  def update_post(id, attrs) do
+  def update_post(_id, _attrs) do
+    # TODO: Implement post update functionality
+    {:error, :not_implemented}
   end
 
   def delete_post(id) do
@@ -99,5 +104,110 @@ defmodule Iagocavalcante.Blog do
     |> Enum.map(&String.trim/1)
     |> Enum.map(&String.downcase/1)
     |> Enum.join(" ")
+  end
+
+  # Comments functions
+  def list_comments_for_post(post_id, status \\ :approved) do
+    from(c in Comment,
+      where: c.post_id == ^post_id and c.status == ^status,
+      where: is_nil(c.parent_id),
+      order_by: [desc: c.inserted_at],
+      preload: [:replies]
+    )
+    |> Repo.all()
+    |> Enum.map(&load_nested_replies/1)
+  end
+
+  def list_pending_comments do
+    from(c in Comment,
+      where: c.status == :pending,
+      order_by: [desc: c.inserted_at]
+    )
+    |> Repo.all()
+  end
+
+  def create_comment(attrs) do
+    %Comment{}
+    |> Comment.changeset(attrs)
+    |> Repo.insert()
+    |> maybe_auto_approve()
+  end
+
+  def approve_comment(id) do
+    get_comment!(id)
+    |> Comment.changeset(%{status: "approved"})
+    |> Repo.update()
+  end
+
+  def reject_comment(id) do
+    get_comment!(id)
+    |> Comment.changeset(%{status: "rejected"})
+    |> Repo.update()
+  end
+
+  def mark_as_spam(id) do
+    get_comment!(id)
+    |> Comment.changeset(%{status: "spam"})
+    |> Repo.update()
+  end
+
+  def get_comment!(id), do: Repo.get!(Comment, id)
+
+  defp load_nested_replies(comment) do
+    replies = 
+      from(c in Comment,
+        where: c.parent_id == ^comment.id and c.status == :approved,
+        order_by: [asc: c.inserted_at]
+      )
+      |> Repo.all()
+      |> Enum.map(&load_nested_replies/1)
+
+    %{comment | replies: replies}
+  end
+
+  defp maybe_auto_approve({:ok, comment}) do
+    cond do
+      comment.spam_score >= 0.7 ->
+        # High spam score - mark as spam
+        {:ok, comment} = 
+          comment
+          |> Comment.changeset(%{status: "spam"})
+          |> Repo.update()
+        
+        {:ok, comment}
+      
+      comment.spam_score <= 0.3 and trusted_commenter?(comment.author_email) ->
+        # Low spam score and trusted commenter - auto approve
+        {:ok, comment} =
+          comment
+          |> Comment.changeset(%{status: "approved"})
+          |> Repo.update()
+        
+        {:ok, comment}
+      
+      true ->
+        # Medium spam score - keep as pending for manual review
+        {:ok, comment}
+    end
+  end
+
+  defp maybe_auto_approve(error), do: error
+
+  defp trusted_commenter?(email) do
+    # Check if this email has had comments approved before
+    approved_count = 
+      from(c in Comment,
+        where: c.author_email == ^email and c.status == :approved
+      )
+      |> Repo.aggregate(:count)
+
+    approved_count >= 3
+  end
+
+  def comment_count_for_post(post_id) do
+    from(c in Comment,
+      where: c.post_id == ^post_id and c.status == :approved
+    )
+    |> Repo.aggregate(:count)
   end
 end

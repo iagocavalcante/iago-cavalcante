@@ -1,8 +1,6 @@
 defmodule IagocavalcanteWeb.CategoriesProjects do
   use IagocavalcanteWeb, :live_component
 
-  import IagocavalcanteWeb.Gettext
-
   attr :categories, :list,
     default: [
       %{
@@ -120,7 +118,11 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
       }
     ]
 
-  def categories_projects(assigns) do
+  def render(assigns) do
+    render_categories(assigns)
+  end
+
+  defp render_categories(assigns) do
     ~H"""
     <div :for={category <- @categories} class="space-y-20">
       <div>
