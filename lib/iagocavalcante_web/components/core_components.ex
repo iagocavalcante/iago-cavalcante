@@ -200,7 +200,7 @@ defmodule IagocavalcanteWeb.CoreComponents do
   def simple_form(assigns) do
     ~H"""
     <.form :let={f} for={@for} as={@as} {@rest}>
-      <div class="space-y-8 bg-white mt-10">
+      <div class="space-y-8 bg-white dark:bg-zinc-900 mt-10">
         <%= render_slot(@inner_block, f) %>
         <div :for={action <- @actions} class="mt-2 flex items-center justify-between gap-6">
           <%= render_slot(action, f) %>
@@ -333,9 +333,11 @@ defmodule IagocavalcanteWeb.CoreComponents do
         name={@name}
         class={[
           input_border(@errors),
-          "mt-2 block min-h-[6rem] w-full rounded-lg border-zinc-300 py-[7px] px-[11px]",
-          "text-zinc-900 focus:border-zinc-400 focus:outline-none focus:ring-4 focus:ring-zinc-800/5 sm:text-sm sm:leading-6",
-          "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 phx-no-feedback:focus:ring-zinc-800/5"
+          "mt-2 block min-h-[6rem] w-full rounded-lg border-zinc-300 dark:border-zinc-700 py-[7px] px-[11px]",
+          "text-zinc-900 dark:text-zinc-200 bg-white dark:bg-zinc-800 focus:border-zinc-400 dark:focus:border-zinc-600 focus:outline-none focus:ring-4 focus:ring-zinc-800/5 dark:focus:ring-zinc-400/10 sm:text-sm sm:leading-6",
+          "placeholder:text-zinc-400 dark:placeholder:text-zinc-500",
+          "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 phx-no-feedback:focus:ring-zinc-800/5",
+          "phx-no-feedback:dark:border-zinc-700 phx-no-feedback:dark:focus:border-zinc-600 phx-no-feedback:dark:focus:ring-zinc-400/10"
         ]}
         {@rest}
       >
@@ -356,9 +358,11 @@ defmodule IagocavalcanteWeb.CoreComponents do
         value={@value}
         class={[
           input_border(@errors),
-          "mt-2 block w-full rounded-lg border-zinc-300 py-[7px] px-[11px]",
-          "text-zinc-900 focus:outline-none focus:ring-4 sm:text-sm sm:leading-6",
-          "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 phx-no-feedback:focus:ring-zinc-800/5"
+          "mt-2 block w-full rounded-lg border-zinc-300 dark:border-zinc-700 py-[7px] px-[11px]",
+          "text-zinc-900 dark:text-zinc-200 bg-white dark:bg-zinc-800 focus:outline-none focus:ring-4 sm:text-sm sm:leading-6",
+          "placeholder:text-zinc-400 dark:placeholder:text-zinc-500",
+          "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 phx-no-feedback:focus:ring-zinc-800/5",
+          "phx-no-feedback:dark:border-zinc-700 phx-no-feedback:dark:focus:border-zinc-600 phx-no-feedback:dark:focus:ring-zinc-400/10"
         ]}
         {@rest}
       />
@@ -368,10 +372,10 @@ defmodule IagocavalcanteWeb.CoreComponents do
   end
 
   defp input_border([] = _errors),
-    do: "border-zinc-300 focus:border-zinc-400 focus:ring-zinc-800/5"
+    do: "border-zinc-300 dark:border-zinc-700 focus:border-zinc-400 dark:focus:border-zinc-600 focus:ring-zinc-800/5 dark:focus:ring-zinc-400/10"
 
   defp input_border([_ | _] = _errors),
-    do: "border-rose-400 focus:border-rose-400 focus:ring-rose-400/10"
+    do: "border-rose-400 dark:border-rose-500 focus:border-rose-400 dark:focus:border-rose-500 focus:ring-rose-400/10 dark:focus:ring-rose-400/10"
 
   @doc """
   Renders a label.

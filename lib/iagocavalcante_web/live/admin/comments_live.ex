@@ -215,9 +215,16 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
      |> assign(:pending_comments_count, length(pending_comments))}
   end
 
-  defp format_datetime(datetime) do
+  defp format_datetime(%DateTime{} = datetime) do
     datetime
     |> DateTime.to_naive()
+    |> NaiveDateTime.to_string()
+    |> String.replace("T", " ")
+    |> String.slice(0, 16)
+  end
+
+  defp format_datetime(%NaiveDateTime{} = naive_datetime) do
+    naive_datetime
     |> NaiveDateTime.to_string()
     |> String.replace("T", " ")
     |> String.slice(0, 16)
