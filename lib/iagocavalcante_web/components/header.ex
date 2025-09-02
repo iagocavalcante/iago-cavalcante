@@ -6,6 +6,13 @@ defmodule IagocavalcanteWeb.Header do
 
   def header(assigns) do
     ~H"""
+    <!-- Mobile menu backdrop -->
+    <div
+      id="mobile-menu-backdrop"
+      class="fixed inset-0 z-40 bg-zinc-800/40 opacity-0 transition-opacity duration-200 pointer-events-none hidden md:hidden"
+      onclick="closeMobileMenu()"
+    ></div>
+    
     <header
       class="pointer-events-none relative z-50 flex flex-col"
       style="height:var(--header-height);margin-bottom:var(--header-mb)"
@@ -38,18 +45,19 @@ defmodule IagocavalcanteWeb.Header do
                     </div>
                   </div>
                   <div class="flex flex-1 justify-end md:justify-center">
-                    <div class="pointer-events-auto md:hidden" data-headlessui-state="">
+                    <div class="pointer-events-auto md:hidden relative">
                       <button
+                        id="mobile-menu-button"
                         class="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20"
                         type="button"
                         aria-expanded="false"
-                        data-headlessui-state=""
-                        id="headlessui-popover-button-:Rb9cm:"
+                        onclick="toggleMobileMenu()"
                       >
                         Menu<svg
                           viewBox="0 0 8 6"
                           aria-hidden="true"
-                          class="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400"
+                          class="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400 transition-transform duration-200"
+                          id="mobile-menu-arrow"
                         ><path
                             d="M1.75 1.75 4 4.25l2.25-2.5"
                             fill="none"
@@ -58,6 +66,18 @@ defmodule IagocavalcanteWeb.Header do
                             stroke-linejoin="round"
                           ></path></svg>
                       </button>
+                      
+                      <div
+                        id="mobile-menu-dropdown"
+                        class="hidden absolute right-0 top-full mt-3 w-64 rounded-2xl bg-white p-6 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:bg-zinc-800 dark:ring-zinc-700 z-50"
+                        style="transform: translateY(0px);"
+                      >
+                        <nav>
+                          <ul class="divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-700 dark:text-zinc-300">
+                            <%= render_slot(@nav_items) %>
+                          </ul>
+                        </nav>
+                      </div>
                     </div>
                     <nav class="pointer-events-auto hidden md:block">
                       <ul class="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
@@ -77,6 +97,73 @@ defmodule IagocavalcanteWeb.Header do
         </div>
       </div>
     </header>
+
+    <script>
+      function toggleMobileMenu() {
+        const dropdown = document.getElementById('mobile-menu-dropdown');
+        const backdrop = document.getElementById('mobile-menu-backdrop');
+        const button = document.getElementById('mobile-menu-button');
+        const arrow = document.getElementById('mobile-menu-arrow');
+        
+        const isHidden = dropdown.classList.contains('hidden');
+        
+        if (isHidden) {
+          // Show menu
+          dropdown.classList.remove('hidden');
+          backdrop.classList.remove('hidden', 'pointer-events-none');
+          backdrop.classList.add('pointer-events-auto');
+          button.setAttribute('aria-expanded', 'true');
+          arrow.style.transform = 'rotate(180deg)';
+          
+          // Animate backdrop
+          setTimeout(() => {
+            backdrop.classList.remove('opacity-0');
+            backdrop.classList.add('opacity-100');
+          }, 10);
+        } else {
+          closeMobileMenu();
+        }
+      }
+      
+      function closeMobileMenu() {
+        const dropdown = document.getElementById('mobile-menu-dropdown');
+        const backdrop = document.getElementById('mobile-menu-backdrop');
+        const button = document.getElementById('mobile-menu-button');
+        const arrow = document.getElementById('mobile-menu-arrow');
+        
+        // Hide menu
+        dropdown.classList.add('hidden');
+        backdrop.classList.add('opacity-0');
+        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        backdrop.classList.add('pointer-events-none');
+        button.setAttribute('aria-expanded', 'false');
+        arrow.style.transform = 'rotate(0deg)';
+        
+        // Hide backdrop after transition
+        setTimeout(() => {
+          backdrop.classList.add('hidden');
+        }, 200);
+      }
+      
+      // Close menu when clicking on a navigation link
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileDropdown = document.getElementById('mobile-menu-dropdown');
+        if (mobileDropdown) {
+          mobileDropdown.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+              closeMobileMenu();
+            }
+          });
+        }
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            closeMobileMenu();
+          }
+        });
+      });
+    </script>
     """
   end
 end
