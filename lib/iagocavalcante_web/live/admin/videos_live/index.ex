@@ -1,9 +1,12 @@
 defmodule IagocavalcanteWeb.Admin.VideosLive.Index do
   use IagocavalcanteWeb, :live_view
   alias Iagocavalcante.Clients.Cloudflare.API.Stream
+  alias Iagocavalcante.Blog
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
+    pending_comments_count = Blog.list_pending_comments() |> length()
+    
     case Stream.list_videos() do
       {:ok, videos} ->
         formatted_videos = Enum.map(videos, &format_video/1)
@@ -15,6 +18,8 @@ defmodule IagocavalcanteWeb.Admin.VideosLive.Index do
           |> assign(:uploading, false)
           |> assign(:error, nil)
           |> assign(:video_name, nil)
+          |> assign(:current_page, :videos)
+          |> assign(:pending_comments_count, pending_comments_count)
           |> allow_upload(:video,
             accept: ~w(.mp4 .avi .mov),
             max_file_size: 1024 * 1024 * 1024
@@ -22,7 +27,11 @@ defmodule IagocavalcanteWeb.Admin.VideosLive.Index do
         }
 
       {:error, message} ->
-        {:ok, assign(socket, :error, message)}
+        {:ok, 
+         socket
+         |> assign(:error, message)
+         |> assign(:current_page, :videos)
+         |> assign(:pending_comments_count, pending_comments_count)}
     end
   end
 
@@ -110,4 +119,5 @@ defmodule IagocavalcanteWeb.Admin.VideosLive.Index do
   defp error_to_string(:too_large), do: "Too large"
   defp error_to_string(:not_accepted), do: "You have selected an unacceptable file type"
   defp error_to_string(:too_many_files), do: "You have selected too many files"
+
 end

@@ -15,6 +15,10 @@ defmodule IagocavalcanteWeb.Router do
     plug IagocavalcanteWeb.Plugs.Locale
   end
 
+  pipeline :admin_layout do
+    plug :put_layout, {IagocavalcanteWeb.Layouts, :admin}
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -95,7 +99,7 @@ defmodule IagocavalcanteWeb.Router do
   end
 
   scope "/admin", IagocavalcanteWeb do
-    pipe_through [:browser, :require_authenticated_admin]
+    pipe_through [:browser, :require_authenticated_admin, :admin_layout]
 
     live_session :require_authenticated_admin,
       on_mount: [{IagocavalcanteWeb.UserAuth, :ensure_authenticated_admin}, IagocavalcanteWeb.Nav] do

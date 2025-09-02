@@ -17,11 +17,6 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
 
   def render(assigns) do
     ~H"""
-    <IagocavalcanteWeb.Components.AdminNav.admin_navigation 
-      current_page={@current_page}
-      pending_comments_count={@pending_comments_count}
-    />
-    
     <div class="sm:px-8 mt-8 lg:mt-16">
       <div class="mx-auto max-w-7xl lg:px-8">
         <div class="relative px-4 sm:px-8 lg:px-12">
@@ -122,6 +117,19 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
                           </svg>
                           Spam
                         </button>
+
+                        <button
+                          phx-click="delete_comment"
+                          phx-value-comment-id={comment.id}
+                          disabled={@loading}
+                          data-confirm="Are you sure you want to permanently delete this comment? This action cannot be undone."
+                          class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-red-900 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
+                        >
+                          <svg class="mr-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -198,6 +206,28 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
          socket
          |> assign(:loading, false)
          |> put_flash(:error, "Error marking comment as spam")}
+    end
+  end
+
+  def handle_event("delete_comment", %{"comment-id" => comment_id}, socket) do
+    socket = assign(socket, :loading, true)
+
+    case Blog.delete_comment(comment_id) do
+      {:ok, _comment} ->
+        pending_comments = Blog.list_pending_comments()
+        
+        {:noreply,
+         socket
+         |> assign(:loading, false)
+         |> assign(:pending_comments, pending_comments)
+         |> assign(:pending_comments_count, length(pending_comments))
+         |> put_flash(:info, "Comment deleted permanently")}
+
+      {:error, _changeset} ->
+        {:noreply,
+         socket
+         |> assign(:loading, false)
+         |> put_flash(:error, "Error deleting comment")}
     end
   end
 

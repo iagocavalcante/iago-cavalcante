@@ -219,6 +219,50 @@ defmodule Iagocavalcante.BlogTest do
       assert updated_comment.status == :spam
     end
 
+    test "delete_comment/1 deletes a comment permanently" do
+      comment = comment_fixture()
+      
+      assert {:ok, %Comment{} = deleted_comment} = Blog.delete_comment(comment.id)
+      assert deleted_comment.id == comment.id
+      
+      # Verify comment is gone from database
+      assert_raise Ecto.NoResultsError, fn -> Blog.get_comment!(comment.id) end
+    end
+
+    test "delete_comment/1 raises when comment not found" do
+      assert_raise Ecto.NoResultsError, fn -> Blog.delete_comment(99999) end
+    end
+
+    test "delete_comment/1 with approved comment removes it from public lists" do
+      comment = approved_comment_fixture(%{post_id: "test-post"})
+      
+      # Verify comment appears in public list
+      comments = Blog.list_comments_for_post("test-post")
+      assert length(comments) == 1
+      
+      # Delete the comment
+      {:ok, _} = Blog.delete_comment(comment.id)
+      
+      # Verify comment is gone from public list
+      comments = Blog.list_comments_for_post("test-post")
+      assert Enum.empty?(comments)
+    end
+
+    test "delete_comment/1 with pending comment removes it from pending list" do
+      comment = comment_fixture(%{post_id: "test-post"})
+      
+      # Verify comment appears in pending list
+      pending_comments = Blog.list_pending_comments()
+      assert Enum.any?(pending_comments, fn c -> c.id == comment.id end)
+      
+      # Delete the comment
+      {:ok, _} = Blog.delete_comment(comment.id)
+      
+      # Verify comment is gone from pending list
+      pending_comments = Blog.list_pending_comments()
+      refute Enum.any?(pending_comments, fn c -> c.id == comment.id end)
+    end
+
     test "get_comment!/1 returns the comment with given id" do
       comment = comment_fixture()
       fetched_comment = Blog.get_comment!(comment.id)

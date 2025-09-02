@@ -5,7 +5,13 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :posts_collection, Blog.all_posts())}
+    pending_comments_count = Blog.list_pending_comments() |> length()
+    
+    {:ok, 
+     socket
+     |> stream(:posts_collection, Blog.all_posts())
+     |> assign(:current_page, :posts)
+     |> assign(:pending_comments_count, pending_comments_count)}
   end
 
   @impl true
@@ -46,4 +52,5 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
         {:noreply, socket |> put_flash(:error, "Failed to delete post")}
     end
   end
+
 end

@@ -1,34 +1,37 @@
-<div class="sm:px-8 mt-16 sm:mt-32">
+<div class="sm:px-8 mt-8">
   <div class="mx-auto max-w-7xl lg:px-8">
     <div class="relative px-4 sm:px-8 lg:px-12">
       <div class="mx-auto max-w-2xl lg:max-w-5xl">
-        <.link class="flex justify-end" patch={~p"/admin/posts/new"}>
-          <.button>New Post</.button>
-        </.link>
-        <div class="grid grid-cols-1 gap-y-16 lg:grid-cols-1 lg:grid-rows-[auto_1fr] lg:gap-y-12">
-          <.table
-            id="posts"
-            rows={@streams.posts_collection}
-            row_click={&JS.navigate(~p"/admin/posts/#{&1.id}")}
-          >
-            <:col :let={post} label="Title"><%= post.title %></:col>
-            <:col :let={post} label="Description"><%= post.description %></:col>
-            <:action :let={post}>
-              <div class="sr-only">
-                <.link navigate={~p"/admin/posts/#{post.id}"}>Show</.link>
-              </div>
-              <.link patch={~p"/admin/posts/#{post.id}/edit"}>Edit</.link>
-            </:action>
-            <:action :let={post}>
-              <.link
-                phx-click={JS.push("delete", value: %{id: post.id}) |> hide("##{post.id}")}
-                data-confirm="Are you sure?"
-              >
-                Delete
-              </.link>
-            </:action>
-          </.table>
+        <div class="flex items-center justify-between mb-8">
+          <h1 class="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+            Posts Management
+          </h1>
+          <.link patch={~p"/admin/posts/new"}>
+            <.button>New Post</.button>
+          </.link>
         </div>
+        <.table
+          id="posts"
+          rows={@streams.posts_collection}
+          row_click={&JS.navigate(~p"/admin/posts/#{&1.id}")}
+        >
+          <:col :let={post} label="Title"><%= post.title %></:col>
+          <:col :let={post} label="Description"><%= post.description %></:col>
+          <:action :let={post}>
+            <div class="sr-only">
+              <.link navigate={~p"/admin/posts/#{post.id}"}>Show</.link>
+            </div>
+            <.link patch={~p"/admin/posts/#{post.id}/edit"}>Edit</.link>
+          </:action>
+          <:action :let={post}>
+            <.link
+              phx-click={JS.push("delete", value: %{id: post.id}) |> hide("##{post.id}")}
+              data-confirm="Are you sure?"
+            >
+              Delete
+            </.link>
+          </:action>
+        </.table>
       </div>
     </div>
   </div>

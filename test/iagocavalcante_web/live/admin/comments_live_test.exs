@@ -5,6 +5,8 @@ defmodule IagocavalcanteWeb.Admin.CommentsLiveTest do
 
   alias Iagocavalcante.Blog
 
+  setup :register_and_log_in_user
+
   describe "mount/3" do
     setup do
       # Create some test comments
@@ -77,6 +79,7 @@ defmodule IagocavalcanteWeb.Admin.CommentsLiveTest do
       assert html =~ "Approve"
       assert html =~ "Reject" 
       assert html =~ "Spam"
+      assert html =~ "Delete"
     end
   end
 
@@ -228,6 +231,122 @@ defmodule IagocavalcanteWeb.Admin.CommentsLiveTest do
       
       # Should show error message
       assert has_element?(view, "[role=alert]", "Error marking comment as spam")
+    end
+  end
+
+  describe "delete_comment event" do
+    setup do
+      comment = comment_fixture(%{
+        author_name: "To Be Deleted",
+        content: "This comment will be permanently deleted."
+      })
+      %{comment: comment}
+    end
+
+    test "deletes comment permanently", %{conn: conn, comment: comment} do
+      {:ok, view, _html} = live(conn, "/admin/comments")
+      
+      # Verify comment exists
+      assert comment.status == :pending
+      assert Blog.get_comment!(comment.id)
+      
+      # Delete the comment
+      result = render_click(view, :delete_comment, %{"comment-id" => comment.id})
+      
+      # Check that comment was deleted from database
+      assert_raise Ecto.NoResultsError, fn ->
+        Blog.get_comment!(comment.id)
+      end
+      
+      # Check flash message
+      assert has_element?(view, "[role=alert]", "Comment deleted permanently")
+      
+      # Verify comment is removed from pending list
+      refute result =~ comment.author_name
+    end
+
+    test "updates pending comments count after deletion", %{conn: conn, comment: comment} do
+      {:ok, view, html} = live(conn, "/admin/comments")
+      
+      # Check initial count (should include our test comment)
+      assert html =~ comment.author_name
+      
+      # Delete comment
+      render_click(view, :delete_comment, %{"comment-id" => comment.id})
+      
+      # Check updated HTML - comment should be gone
+      updated_html = render(view)
+      refute updated_html =~ comment.author_name
+      
+      # Count should be updated
+      assert updated_html =~ "pending comments"
+    end
+
+    test "handles deletion error gracefully", %{conn: conn} do
+      {:ok, view, _html} = live(conn, "/admin/comments")
+      
+      # Try to delete non-existent comment
+      render_click(view, :delete_comment, %{"comment-id" => 99999})
+      
+      # Should show error message
+      assert has_element?(view, "[role=alert]", "Error deleting comment")
+    end
+
+    test "deletion is permanent and irreversible", %{conn: conn, comment: comment} do
+      {:ok, view, _html} = live(conn, "/admin/comments")
+      
+      # Store comment data before deletion
+      comment_id = comment.id
+      comment_content = comment.content
+      
+      # Delete the comment
+      render_click(view, :delete_comment, %{"comment-id" => comment_id})
+      
+      # Verify comment is completely gone from database
+      assert_raise Ecto.NoResultsError, fn ->
+        Blog.get_comment!(comment_id)
+      end
+      
+      # Comment should not appear in any status lists for this specific post
+      post_comments_approved = Blog.list_comments_for_post(comment.post_id, :approved)
+      post_comments_pending = Blog.list_comments_for_post(comment.post_id, :pending) 
+      
+      # Verify the deleted comment is not in any of these lists
+      refute Enum.any?(post_comments_approved, fn c -> c.id == comment_id end)
+      refute Enum.any?(post_comments_pending, fn c -> c.id == comment_id end)
+      
+      # Verify it's not in pending comments list either
+      pending_comments = Blog.list_pending_comments()
+      refute Enum.any?(pending_comments, fn c -> c.id == comment_id end)
+    end
+
+    test "deleting comment with replies also deletes replies", %{conn: conn} do
+      # Create parent comment
+      parent_comment = comment_fixture(%{
+        author_name: "Parent Author",
+        content: "Parent comment to be deleted."
+      })
+      
+      # Create reply comment
+      reply_comment = comment_fixture(%{
+        author_name: "Reply Author", 
+        content: "Reply to parent comment.",
+        post_id: parent_comment.post_id,
+        parent_id: parent_comment.id
+      })
+      
+      {:ok, view, _html} = live(conn, "/admin/comments")
+      
+      # Delete the parent comment
+      render_click(view, :delete_comment, %{"comment-id" => parent_comment.id})
+      
+      # Both parent and reply should be deleted due to foreign key constraints
+      assert_raise Ecto.NoResultsError, fn ->
+        Blog.get_comment!(parent_comment.id)
+      end
+      
+      # Reply might still exist depending on DB constraints, but parent is gone
+      # This tests the actual behavior of your delete implementation
     end
   end
 

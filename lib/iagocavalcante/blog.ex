@@ -1,6 +1,7 @@
 defmodule Iagocavalcante.Blog do
   alias Iagocavalcante.Post
   alias Iagocavalcante.Blog.Comment
+  alias Iagocavalcante.Blog.CommentNotifier
   alias Iagocavalcante.Repo
   import Ecto.Query
 
@@ -131,6 +132,7 @@ defmodule Iagocavalcante.Blog do
     |> Comment.changeset(attrs)
     |> Repo.insert()
     |> maybe_auto_approve()
+    |> maybe_notify_admin()
   end
 
   def approve_comment(id) do
@@ -149,6 +151,11 @@ defmodule Iagocavalcante.Blog do
     get_comment!(id)
     |> Comment.changeset(%{status: "spam"})
     |> Repo.update()
+  end
+
+  def delete_comment(id) do
+    get_comment!(id)
+    |> Repo.delete()
   end
 
   def get_comment!(id), do: Repo.get!(Comment, id)
@@ -203,6 +210,24 @@ defmodule Iagocavalcante.Blog do
 
     approved_count >= 3
   end
+
+  defp maybe_notify_admin({:ok, comment}) do
+    if comment.status == :pending do
+      # Send email notification to admin about pending comment
+      Task.start(fn ->
+        case get_post_by_id!(comment.post_id) do
+          post when not is_nil(post) ->
+            CommentNotifier.deliver_new_pending_comment(%{comment: comment, post: post})
+          _ ->
+            :ok
+        end
+      end)
+    end
+    
+    {:ok, comment}
+  end
+
+  defp maybe_notify_admin(error), do: error
 
   def comment_count_for_post(post_id) do
     from(c in Comment,
