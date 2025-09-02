@@ -9,7 +9,6 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
     
     {:ok, 
      socket
-     |> stream(:posts_collection, Blog.all_posts())
      |> assign(:current_page, :posts)
      |> assign(:pending_comments_count, pending_comments_count)}
   end
@@ -21,20 +20,45 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Posts")
+    |> assign(:page_title, "Edit Post")
     |> assign(:posts, Blog.get_post_by_id!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Posts")
-    |> assign(:post, %{})
+    |> assign(:page_title, "New Post")
+    |> assign(:posts, %{})
   end
 
-  defp apply_action(socket, :index, _params) do
+  defp apply_action(socket, :index, params) do
+    filter = case params["filter"] do
+      "published" -> :published
+      "draft" -> :draft
+      _ -> :all
+    end
+    
+    posts = Blog.posts_by_status(filter)
+    
+    socket = 
+      if Map.has_key?(socket.assigns, :streams) and Map.has_key?(socket.assigns.streams, :posts_collection) do
+        # Stream exists, clear existing posts and add new ones
+        socket = 
+          Enum.reduce(socket.assigns.streams.posts_collection.inserts, socket, fn {_id, post}, acc ->
+            stream_delete(acc, :posts_collection, post)
+          end)
+        
+        Enum.reduce(posts, socket, fn post, acc ->
+          stream_insert(acc, :posts_collection, post)
+        end)
+      else
+        # Stream doesn't exist, create it
+        stream(socket, :posts_collection, posts)
+      end
+    
     socket
     |> assign(:page_title, "Listing Posts")
     |> assign(:posts, nil)
+    |> assign(:current_filter, filter)
   end
 
   @impl true

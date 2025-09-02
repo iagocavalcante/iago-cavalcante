@@ -26,6 +26,16 @@ defmodule Iagocavalcante.Blog do
     |> Enum.filter(&(&1.locale == locale))
   end
 
+  def draft_posts, do: Enum.filter(all_posts(), &(&1.published == false))
+
+  def posts_by_status(status \\ :all) do
+    case status do
+      :published -> published_posts()
+      :draft -> draft_posts()
+      :all -> all_posts()
+    end
+  end
+
   def recent_posts(num \\ 5), do: Enum.take(published_posts(), num)
 
   def recent_posts_by_locale(num \\ 5, locale),
@@ -61,9 +71,46 @@ defmodule Iagocavalcante.Blog do
     |> create_markdown_file()
   end
 
-  def update_post(_id, _attrs) do
-    # TODO: Implement post update functionality
-    {:error, :not_implemented}
+  def update_post(id, attrs) do
+    try do
+      post = get_post_by_id!(id)
+      
+      updated_post = %Post{
+        id: attrs["slug"] || post.id,
+        title: attrs["title"] || post.title,
+        description: attrs["description"] || post.description,
+        body: attrs["body"] || post.body,
+        tags: attrs["tags"] || Enum.join(post.tags, ", "),
+        published: attrs["published"] || post.published,
+        date: post.date,
+        locale: attrs["locale"] || post.locale,
+        author: post.author,
+        path: post.path,
+        year: post.year
+      }
+      |> insert_header_in_body()
+      
+      # Write updated content to the existing file
+      full_path = resolve_post_path(post.path, post.locale, post.year)
+      case File.write(full_path, updated_post.body) do
+        :ok -> 
+          # If slug changed, rename the file
+          if attrs["slug"] && attrs["slug"] != post.id do
+            new_path = create_new_path_from_slug(attrs["slug"], post)
+            new_full_path = resolve_post_path(new_path, post.locale, post.year)
+            
+            case File.rename(full_path, new_full_path) do
+              :ok -> :ok
+              error -> error
+            end
+          else
+            :ok
+          end
+        error -> error
+      end
+    rescue
+      error -> {:error, error}
+    end
   end
 
   def delete_post(id) do
@@ -105,6 +152,21 @@ defmodule Iagocavalcante.Blog do
     |> Enum.map(&String.trim/1)
     |> Enum.map(&String.downcase/1)
     |> Enum.join(" ")
+  end
+
+  defp resolve_post_path(path, locale, year) do
+    Path.join(
+      Application.fetch_env!(:iagocavalcante, :blog_post_path) <> "#{locale}/#{year}/",
+      path
+    )
+  end
+
+  defp create_new_path_from_slug(slug, post) do
+    # Extract date portion from original filename
+    case String.split(post.path, "-", parts: 3) do
+      [month, day, _] -> "#{month}-#{day}-#{slug}.md"
+      _ -> "#{slug}.md"
+    end
   end
 
   # Comments functions

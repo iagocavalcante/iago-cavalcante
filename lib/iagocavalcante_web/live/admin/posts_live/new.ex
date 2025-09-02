@@ -1,9 +1,16 @@
 defmodule IagocavalcanteWeb.Admin.PostsLive.New do
   use IagocavalcanteWeb, :live_view
 
+  alias Iagocavalcante.Blog
+
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    pending_comments_count = Blog.list_pending_comments() |> length()
+    
+    {:ok, 
+     socket
+     |> assign(:current_page, :posts)
+     |> assign(:pending_comments_count, pending_comments_count)}
   end
 
   @impl true

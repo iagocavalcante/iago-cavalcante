@@ -19,6 +19,10 @@ defmodule IagocavalcanteWeb.Router do
     plug :put_layout, {IagocavalcanteWeb.Layouts, :admin}
   end
 
+  pipeline :app_layout do
+    plug :put_layout, {IagocavalcanteWeb.Layouts, :app}
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -55,9 +59,10 @@ defmodule IagocavalcanteWeb.Router do
   end
 
   scope "/", IagocavalcanteWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :app_layout]
 
     live_session :public_session,
+      layout: {IagocavalcanteWeb.Layouts, :app},
       on_mount: [
         IagocavalcanteWeb.Nav,
         IagocavalcanteWeb.RestoreLocale
@@ -81,12 +86,13 @@ defmodule IagocavalcanteWeb.Router do
   ## Authentication routes
 
   scope "/admin", IagocavalcanteWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through [:browser, :redirect_if_user_is_authenticated, :app_layout]
 
     live_session :redirect_if_user_is_authenticated,
+      layout: {IagocavalcanteWeb.Layouts, :app},
       on_mount: [
         {IagocavalcanteWeb.UserAuth, :redirect_if_user_is_authenticated},
-        IagocavalcanteWeb.Nav
+        IagocavalcanteWeb.AdminNav
       ] do
       live gettext("/login"), UserLoginLive, :new
       # Registration disabled - only specific admin email allowed
@@ -102,7 +108,8 @@ defmodule IagocavalcanteWeb.Router do
     pipe_through [:browser, :require_authenticated_admin, :admin_layout]
 
     live_session :require_authenticated_admin,
-      on_mount: [{IagocavalcanteWeb.UserAuth, :ensure_authenticated_admin}, IagocavalcanteWeb.Nav] do
+      layout: {IagocavalcanteWeb.Layouts, :admin},
+      on_mount: [{IagocavalcanteWeb.UserAuth, :ensure_authenticated_admin}, IagocavalcanteWeb.AdminNav] do
       # live "/users/register", UserRegistrationLive, :new
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
@@ -117,7 +124,7 @@ defmodule IagocavalcanteWeb.Router do
   end
 
   scope "/", IagocavalcanteWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :app_layout]
 
     delete "/users/log_out", UserSessionController, :delete
 
