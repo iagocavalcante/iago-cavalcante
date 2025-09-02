@@ -281,9 +281,15 @@ defmodule IagocavalcanteWeb.Components.Comments do
     end
   end
 
-  defp format_date(datetime) do
+  defp format_date(%DateTime{} = datetime) do
     datetime
     |> DateTime.to_date()
+    |> Date.to_string()
+  end
+
+  defp format_date(%NaiveDateTime{} = naive_datetime) do
+    naive_datetime
+    |> NaiveDateTime.to_date()
     |> Date.to_string()
   end
 
