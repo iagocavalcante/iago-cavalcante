@@ -324,3 +324,73 @@ msgstr "Me chamo Iago Cavalcante, um alquimista de software (dev elixir) e empre
 #, elixir-autogen, elixir-format
 msgid "Thats my favorite links from pocket and my base knowledge using tags"
 msgstr "Aqui estão alguns links favoritos do pocket e minha base de conhecimento"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:20
+#, elixir-autogen, elixir-format
+msgid "My Knowledge Base"
+msgstr "Minha Base de Conhecimento"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:23
+#, elixir-autogen, elixir-format
+msgid "These are my favorite links from Pocket, organized by tags for easy browsing. My personal knowledge base covering programming, architecture, design, and more."
+msgstr "Estes são meus links favoritos do Pocket, organizados por tags para fácil navegação. Minha base de conhecimento pessoal cobrindo programação, arquitetura, design e muito mais."
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:34
+#, elixir-autogen, elixir-format
+msgid "Search bookmarks..."
+msgstr "Buscar favoritos..."
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:51
+#, elixir-autogen, elixir-format
+msgid "Compact View"
+msgstr "Vista Compacta"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:53
+#, elixir-autogen, elixir-format
+msgid "Detailed View"
+msgstr "Vista Detalhada"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:68
+#, elixir-autogen, elixir-format
+msgid "Total Bookmarks"
+msgstr "Total de Favoritos"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:84
+#, elixir-autogen, elixir-format
+msgid "Categories"
+msgstr "Categorias"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:100
+#, elixir-autogen, elixir-format
+msgid "Top Category"
+msgstr "Categoria Principal"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:112
+#, elixir-autogen, elixir-format
+msgid "Popular Tags"
+msgstr "Tags Populares"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:141
+#, elixir-autogen, elixir-format
+msgid "Show all"
+msgstr "Mostrar todos"
+
+#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:23
+#, elixir-autogen, elixir-format
+msgid "bookmark"
+msgstr "favorito"
+
+#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:23
+#, elixir-autogen, elixir-format
+msgid "bookmarks"
+msgstr "favoritos"
+
+#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:68
+#, elixir-autogen, elixir-format
+msgid "Show %{count} more"
+msgstr "Mostrar mais %{count}"
+
+#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:78
+#, elixir-autogen, elixir-format
+msgid "Show less"
+msgstr "Mostrar menos"
