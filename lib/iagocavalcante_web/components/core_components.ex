@@ -637,9 +637,9 @@ defmodule IagocavalcanteWeb.CoreComponents do
 
   defdelegate articles_list(assigns), to: IagocavalcanteWeb.ArticlesList, as: :articles_list
 
-  # defdelegate categories_projects(assigns),
-  #   to: IagocavalcanteWeb.CategoriesProjects,
-  #   as: :categories_projects
+  defdelegate categories_projects(assigns),
+    to: IagocavalcanteWeb.CategoriesProjects,
+    as: :categories_projects
 
   defdelegate footer(assigns), to: IagocavalcanteWeb.Footer, as: :footer
   defdelegate header(assigns), to: IagocavalcanteWeb.Header, as: :header
@@ -652,4 +652,8 @@ defmodule IagocavalcanteWeb.CoreComponents do
   defdelegate categories_uses(assigns), to: IagocavalcanteWeb.CategoriesUses, as: :categories_uses
   defdelegate toggle_locale(assigns), to: IagocavalcanteWeb.ToggleLocale, as: :toggle_locale
   defdelegate toggle_theme(assigns), to: IagocavalcanteWeb.ToggleTheme, as: :toggle_theme
+
+  defdelegate bookmarks_by_tag(assigns),
+    to: IagocavalcanteWeb.Components.BookmarksByTag,
+    as: :bookmarks_by_tag
 end

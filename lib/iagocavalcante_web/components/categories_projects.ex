@@ -1,5 +1,5 @@
 defmodule IagocavalcanteWeb.CategoriesProjects do
-  use IagocavalcanteWeb, :live_component
+  use Phoenix.Component
 
   attr :categories, :list,
     default: [
@@ -118,7 +118,7 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
       }
     ]
 
-  def render(assigns) do
+  def categories_projects(assigns) do
     render_categories(assigns)
   end
 

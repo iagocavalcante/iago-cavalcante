@@ -25,6 +25,14 @@ defmodule IagocavalcanteWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+    plug IagocavalcanteWeb.Plugs.CORS
+  end
+
+  pipeline :api_auth do
+    plug :require_authenticated_user
   end
 
   pipeline :require_authenticated_admin do
@@ -32,10 +40,26 @@ defmodule IagocavalcanteWeb.Router do
     plug IagocavalcanteWeb.Plugs.RequireAdmin
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", IagocavalcanteWeb do
-  #   pipe_through :api
-  # end
+  # API routes
+  scope "/api", IagocavalcanteWeb.API, as: :api do
+    pipe_through :api
+
+    # Public API routes (no auth required)
+    get "/health", HealthController, :check
+  end
+
+  scope "/api", IagocavalcanteWeb.API, as: :api do
+    pipe_through [:api, :api_auth]
+
+    # Bookmark management
+    resources "/bookmarks", BookmarkController, except: [:new, :edit] do
+      patch "/archive", BookmarkController, :archive
+      patch "/favorite", BookmarkController, :toggle_favorite
+      patch "/read", BookmarkController, :mark_as_read
+    end
+
+    get "/bookmarks-stats", BookmarkController, :stats
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:iagocavalcante, :dev_routes) do
