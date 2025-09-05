@@ -18,8 +18,6 @@ defmodule Iagocavalcante.Bookmarks do
     status: String.t()
   }
 
-  @csv_file_path Path.join([:code.priv_dir(:iagocavalcante), "bookmarks.csv"])
-
   ## Database CRUD operations
 
   @doc """
@@ -158,10 +156,59 @@ defmodule Iagocavalcante.Bookmarks do
   ## Legacy CSV support functions
 
   @doc """
+  Debug function to show all potential CSV file paths
+  """
+  def debug_csv_paths do
+    paths = [
+      {"Production (app_dir)", Path.join([Application.app_dir(:iagocavalcante), "priv", "bookmarks.csv"])},
+      {"Development (code.priv_dir)", Path.join([:code.priv_dir(:iagocavalcante), "bookmarks.csv"])},
+      {"Relative path", "priv/bookmarks.csv"},
+      {"Current directory", "bookmarks.csv"}
+    ]
+
+    IO.puts("=== CSV File Path Debug ===")
+    for {label, path} <- paths do
+      exists = File.exists?(path)
+      IO.puts("#{label}: #{path} (exists: #{exists})")
+    end
+    IO.puts("Current working directory: #{File.cwd!()}")
+    IO.puts("Selected path: #{csv_file_path()}")
+    IO.puts("===========================")
+  end
+
+  # Get the CSV file path, handling different environments
+  defp csv_file_path do
+    # Try different path resolution methods for different environments
+    cond do
+      # Production with releases
+      File.exists?(Path.join([Application.app_dir(:iagocavalcante), "priv", "bookmarks.csv"])) ->
+        Path.join([Application.app_dir(:iagocavalcante), "priv", "bookmarks.csv"])
+
+      # Development
+      File.exists?(Path.join([:code.priv_dir(:iagocavalcante), "bookmarks.csv"])) ->
+        Path.join([:code.priv_dir(:iagocavalcante), "bookmarks.csv"])
+
+      # Fallback - relative path
+      File.exists?("priv/bookmarks.csv") ->
+        "priv/bookmarks.csv"
+
+      # Last resort - check if it's in the current directory
+      File.exists?("bookmarks.csv") ->
+        "bookmarks.csv"
+
+      # Default development path (might not exist)
+      true ->
+        Path.join([:code.priv_dir(:iagocavalcante), "bookmarks.csv"])
+    end
+  end
+
+  @doc """
   Load all bookmarks from the CSV file
   """
   def all_bookmarks do
-    case File.read(@csv_file_path) do
+    file_path = csv_file_path()
+
+    case File.read(file_path) do
       {:ok, content} ->
         content
         |> String.split("\n")
@@ -170,7 +217,9 @@ defmodule Iagocavalcante.Bookmarks do
         |> Enum.map(&parse_bookmark_line/1)
         |> Enum.reject(&is_nil/1)
 
-      {:error, _} ->
+      {:error, reason} ->
+        # Log the error for debugging but return empty list for graceful degradation
+        IO.warn("Could not read CSV file at #{file_path}: #{inspect(reason)}")
         []
     end
   end
