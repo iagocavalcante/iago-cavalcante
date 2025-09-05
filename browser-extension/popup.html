@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Save Bookmark</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔖 Bookmark Saver</h1>
+            <p class="subtitle">Save to your knowledge base</p>
+        </div>
+
+        <div id="loginRequired" class="login-required" style="display: none;">
+            <p>Please log in to iagocavalcante.com first</p>
+            <button id="loginBtn" class="btn btn-primary">
+                Open Login Page
+            </button>
+        </div>
+
+        <form id="bookmarkForm" class="bookmark-form">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="url">URL:</label>
+                <input type="url" id="url" name="url" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description (optional):</label>
+                <textarea id="description" name="description" rows="3" placeholder="Add a note about this bookmark..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="tags">Tags (comma-separated):</label>
+                <input type="text" id="tags" name="tags" placeholder="e.g. javascript, tutorial, react">
+                <small class="help-text">Separate tags with commas</small>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="favorite" name="favorite">
+                    Mark as favorite
+                </label>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">
+                    <span class="btn-text">Save Bookmark</span>
+                    <span class="spinner" style="display: none;">⏳</span>
+                </button>
+            </div>
+        </form>
+
+        <div id="successMessage" class="success-message" style="display: none;">
+            <p>✅ Bookmark saved successfully!</p>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <p id="errorText">❌ Error saving bookmark</p>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

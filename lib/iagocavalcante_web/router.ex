@@ -26,13 +26,14 @@ defmodule IagocavalcanteWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
     plug :fetch_session
+    plug :fetch_flash
     plug :put_secure_browser_headers
     plug :fetch_current_user
     plug IagocavalcanteWeb.Plugs.CORS
   end
 
   pipeline :api_auth do
-    plug :require_authenticated_user
+    plug IagocavalcanteWeb.Plugs.ApiAuth
   end
 
   pipeline :require_authenticated_admin do
