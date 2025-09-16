@@ -3,7 +3,7 @@
   description: "Uma análise abrangente das decisões arquiteturais por trás da migração de um processador baseado em Java para uma aplicação moderna em Elixir Phoenix",
   tags: ~w(elixir phoenix java migração arquitetura i9amazon),
   published: true,
-  locale: "pt_br",
+  locale: "pt_BR",
   author: "Iago Cavalcante"
 }
 ---
