@@ -40,6 +40,8 @@ While functional, this system faced several limitations:
 - Complex deployment and scaling procedures
 - Lack of modern web API standards
 - Monolithic architecture making feature additions challenging
+- Heavy disk read and write operations
+- Synchronous processing directly during file writes and database operations using files with `LOAD INFILE`
 
 ## The New Architecture: i9_processador
 
@@ -75,18 +77,18 @@ end
 One of the most critical decisions was implementing a dual database architecture:
 
 ```elixir
-# PostgreSQL for modern application data
+# PostgreSQL for modern application data and background job processing
 config :i9_processador, I9Processador.RepoPostgres,
   adapter: Ecto.Adapters.Postgres
 
-# MySQL for legacy system integration
+# MySQL for legacy system integration and real business data
 config :i9_processador, I9Processador.RepoMysql,
   adapter: Ecto.Adapters.MyXQL
 ```
 
 **Rationale:**
-- **PostgreSQL**: Primary database for new features, job processing (Oban), and modern data structures
-- **MySQL**: Maintained for legacy system integration and existing business data
+- **PostgreSQL**: Primary database for new features, background job processing (Oban), and modern data structures
+- **MySQL**: Maintained for legacy system integration and real production business data
 - **Schema Isolation**: Company-specific data isolation using `_#{cnpj}` pattern
 
 #### 2. Background Job Processing with Oban
@@ -300,6 +302,8 @@ The most dramatic improvement came in bulk data processing operations. Our produ
 
 These improvements are particularly significant when handling enterprise clients with massive data synchronization requirements, where the old system would frequently timeout or require manual intervention.
 
+In terms of API data traffic, we now handle nearly 1TB that flows in and out per month. We currently have around 300 active clients in the company.
+
 ### Production Monitoring Data
 
 Our monitoring dashboard shows the system handling high concurrent loads with consistent performance:
@@ -315,7 +319,7 @@ Our monitoring dashboard shows the system handling high concurrent loads with co
 
 | Metric | Java (Before) | Elixir (After) | Improvement |
 |--------|---------------|----------------|-------------|
-| Memory Usage | ~200MB base | ~50MB base | 75% reduction |
+| Memory Usage | ~1500MB base | ~512MB base | 75% reduction |
 | Concurrent Connections | ~100 | ~10,000+ | 100x increase |
 | Response Time (avg) | 800ms | 50ms | 94% improvement |
 | **Bulk Processing** | **3+ minutes** | **20 seconds** | **90% improvement** |
@@ -324,7 +328,7 @@ Our monitoring dashboard shows the system handling high concurrent loads with co
 
 ### Contributing to Open Source: MyXQL Optimization
 
-During our optimization process, we discovered and contributed to a performance bottleneck in the MyXQL driver that was affecting bulk operations:
+During our optimization process, we discovered and contributed to an existing bug in the native LOAD DATA INFILE method in the MyXQL driver that was affecting bulk operations:
 
 **MyXQL Enhancement Discovery:**
 - **Issue**: [elixir-ecto/myxql#204](https://github.com/elixir-ecto/myxql/pull/204)
@@ -341,7 +345,7 @@ During our optimization process, we discovered and contributed to a performance 
 }
 ```
 
-This optimization was critical for handling our enterprise clients who regularly synchronize tens of thousands of records. The contribution demonstrates how real-world performance challenges can drive meaningful improvements to the broader Elixir ecosystem.
+The bug was discovered when attempting to use the MyXQL driver to perform LOAD DATA INFILE operations. After the contribution, the issue was resolved and performance was significantly improved. The driver continues with the Pull Request open for review and integration into the library. We are using our fork to perform the necessary operations.
 
 ### Reliability Improvements
 
@@ -351,6 +355,8 @@ This optimization was critical for handling our enterprise clients who regularly
 - **Job Processing**: Reliable background processing with Oban handling 56k+ record batches
 - **Error Recovery**: Automatic retry logic for failed bulk operations
 - **Memory Management**: Consistent memory usage even under extreme load conditions
+- **Load Observability**: We use Fly.io's default configuration with two machines to maintain system stability and high availability. Our uptime since migration has been 99.99%.
+- **Scalability**: With support for multiple instances and horizontal scalability, allowing the system to grow according to demand.
 
 ## Business Impact
 
@@ -361,6 +367,7 @@ This optimization was critical for handling our enterprise clients who regularly
 - Interactive development with `iex -S mix phx.server`
 - Comprehensive API documentation and Postman collections
 - Modern tooling and ecosystem
+- Most endpoints now have integration tests
 
 ### Operational Benefits
 
@@ -373,10 +380,11 @@ This optimization was critical for handling our enterprise clients who regularly
 ### Feature Velocity
 
 **New Capabilities Enabled:**
-- Real-time features with Phoenix LiveView
+- Real-time features with Phoenix LiveView for internal dashboard implementation
 - WebSocket support for live updates
 - Modern API design patterns
 - Microservice-ready architecture
+- Ready for asynchronous systems architecture
 
 ## Future Architecture Considerations
 
@@ -422,6 +430,8 @@ The result is a system that not only meets current business requirements but pro
 - **Documentation**: Comprehensive API documentation markdown with 40+ endpoints and Postman collection
 - **Testing**: Extensive curl scripts for all business domains
 - **Deployment**: Fly.io with Docker containers
-- **Monitoring**: Phoenix LiveDashboard and Oban Web UI
+- **Monitoring**: Phoenix LiveDashboard, Oban Web UI, and Grafana with Prometheus
 
 This migration serves as a blueprint for modernizing legacy systems while maintaining business continuity and enabling future innovation.
+
+With this solid foundation, we have peace of mind to spend more time on innovation and continuous development, ensuring our products continue to evolve and meet the growing needs of the market. Additionally, we've reduced operational costs with support calls due to failures or demand spikes, ensuring a more reliable and efficient user experience.
