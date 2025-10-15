@@ -40,6 +40,8 @@ Embora funcional, este sistema enfrentava várias limitações:
 - Procedimentos complexos de deploy e escalonamento
 - Falta de padrões modernos de API web
 - Arquitetura monolítica tornando adição de funcionalidades desafiadora
+- Ações pesadas de escrita e leitura em disco
+- Processamento sincrono diretamente na escrita de arquivos e operações de banco de dados usando os arquivos com `LOAD INFILE`
 
 ## A Nova Arquitetura: i9_processador
 
@@ -49,7 +51,7 @@ O novo `i9_processador` representa um redesign arquitetural completo:
 
 **De Java para Elixir/Phoenix:**
 - **Runtime**: Máquina Virtual BEAM com concorrência baseada no modelo de atores
-- **Framework**: Phoenix 1.8 com capacidades LiveView
+- **Framework**: Phoenix 1.8
 - **Linguagem**: Elixir 1.15+ com paradigmas de programação funcional
 - **Dependências**: Ecossistema moderno e leve
 
@@ -61,7 +63,7 @@ defp deps do
     {:phoenix_ecto, "~> 4.5"},
     {:ecto_sql, "~> 3.10"},
     {:oban, "~> 2.19"},           # Processamento de jobs em background
-    {:ex_aws_s3, "~> 2.0"},      # Armazenamento em nuvem
+    {:ex_aws_s3, "~> 2.0"},      # Armazenamento em nuvem usando Tigris
     {:jose, "~> 1.11"},          # Manipulação de JWT
     {:pdf_generator, "~> 0.6.2"} # Geração de PDF
   ]
@@ -75,7 +77,7 @@ end
 Uma das decisões mais críticas foi implementar uma arquitetura de banco de dados duplo:
 
 ```elixir
-# PostgreSQL para dados modernos da aplicação
+# PostgreSQL para dados modernos da aplicação e processamento de filas
 config :i9_processador, I9Processador.RepoPostgres,
   adapter: Ecto.Adapters.Postgres
 
@@ -211,7 +213,7 @@ Process.info(self(), :memory)
 
 **Funcionalidades Aprimoradas:**
 - Sincronização de dados multi-loja
-- Upload de arquivos com armazenamento S3
+- Upload de arquivos com armazenamento no Storage na nuvem
 - Processamento em background com lógica de retry
 - Logging e monitoramento abrangentes
 
@@ -300,6 +302,8 @@ As melhorias mais dramáticas vieram nas operações de processamento de dados e
 
 Essas melhorias são particularmente significativas ao lidar com clientes empresariais com requisitos massivos de sincronização de dados, onde o sistema antigo frequentemente dava timeout ou exigia intervenção manual.
 
+Em termos de tráfego de dados pela API, hoje são quase 1TB que entram e saem por mês. Hoje temos em torno de 300 clientes ativos na empresa.
+
 ### Dados de Monitoramento de Produção
 
 Nosso dashboard de monitoramento mostra o sistema lidando com cargas concorrentes altas com performance consistente:
@@ -315,7 +319,7 @@ Nosso dashboard de monitoramento mostra o sistema lidando com cargas concorrente
 
 | Métrica | Java (Antes) | Elixir (Depois) | Melhoria |
 |---------|--------------|-----------------|----------|
-| Uso de Memória | ~200MB base | ~50MB base | 75% redução |
+| Uso de Memória | ~1500MB base | ~512MB base | 75% redução |
 | Conexões Concorrentes | ~100 | ~10.000+ | 100x aumento |
 | Tempo de Resposta (média) | 800ms | 50ms | 94% melhoria |
 | **Processamento em Massa** | **3+ minutos** | **20 segundos** | **90% melhoria** |
@@ -324,7 +328,7 @@ Nosso dashboard de monitoramento mostra o sistema lidando com cargas concorrente
 
 ### Contribuindo para Open Source: Otimização MyXQL
 
-Durante nosso processo de otimização, descobrimos e contribuímos para um gargalo de performance no driver MyXQL que estava afetando operações em massa:
+Durante nosso processo de otimização, descobrimos e contribuímos para um bug existente no método nativo de LOAD DATA INFILE no driver MyXQL que estava afetando operações em massa:
 
 **Descoberta de Melhoria MyXQL:**
 - **Issue**: [elixir-ecto/myxql#204](https://github.com/elixir-ecto/myxql/pull/204)
@@ -341,7 +345,7 @@ Durante nosso processo de otimização, descobrimos e contribuímos para um garg
 }
 ```
 
-Esta otimização foi crítica para lidar com nossos clientes empresariais que regularmente sincronizam dezenas de milhares de registros. A contribuição demonstra como desafios de performance do mundo real podem gerar melhorias significativas para o ecossistema Elixir mais amplo.
+O bug foi encontrado ao tentar utilizar o driver MyXQL e tentar realizar uma operação de LOAD DATA INFILE. Após a contribuição, o problema foi resolvido e a performance foi significativamente melhorada. O driver continua com o Pull Request aberto para revisão e integração a lib, estamos utilizando nosso fork para realizar as operações necessárias.
 
 ### Melhorias de Confiabilidade
 
@@ -351,16 +355,19 @@ Esta otimização foi crítica para lidar com nossos clientes empresariais que r
 - **Processamento de Jobs**: Processamento confiável em background com Oban lidando com batches de 56k+ registros
 - **Recuperação de Erros**: Lógica automática de retry para operações em massa que falharam
 - **Gerenciamento de Memória**: Uso consistente de memória mesmo sob carga extrema
+- **Load observabilidade**: Utilizamos o default da fly com duas máquinas para manter sempre o sistema estável e com alta disponibilidade. Nossa disponibilidade desde a migração foi de 99,99%.
+- **Escalabilidade**: Com suporte a múltiplas instâncias e escalabilidade horizontal, permitindo que o sistema cresça conforme a demanda.
 
 ## Impacto nos Negócios
 
 ### Experiência do Desenvolvedor
 
 **Ganhos de Produtividade:**
-- Desenvolvimento mais rápido de funcionalidades com geradores Phoenix
+- Desenvolvimento mais rápido de funcionalidades
 - Desenvolvimento interativo com `iex -S mix phx.server`
 - Documentação abrangente de API e coleções Postman
 - Ferramentas e ecossistema modernos
+- A maioria dos endpoints hoje conta com testes de integração
 
 ### Benefícios Operacionais
 
@@ -373,25 +380,13 @@ Esta otimização foi crítica para lidar com nossos clientes empresariais que r
 ### Velocidade de Funcionalidades
 
 **Novas Capacidades Habilitadas:**
-- Funcionalidades em tempo real com Phoenix LiveView
+- Funcionalidades em tempo real com Phoenix LiveView para implementação do dashboard interno
 - Suporte WebSocket para atualizações ao vivo
 - Padrões modernos de design de API
 - Arquitetura pronta para microsserviços
+- Arquitetura pronta para lidar com sistemas assincronos
 
 ## Considerações Arquiteturais Futuras
-
-### Evolução para Microsserviços
-
-O design monolítico atual está pronto para futura decomposição em microsserviços:
-
-```elixir
-# Fronteiras de domínio já estabelecidas
-- SyncService (processamento de arquivos)
-- FVService (força de vendas)
-- LicenseService (licenciamento)
-- PDFService (geração de documentos)
-- TransferService (operações multi-loja)
-```
 
 ### Arquitetura Orientada a Eventos
 
@@ -408,7 +403,7 @@ Base estabelecida para event sourcing:
 
 ## Conclusão
 
-A migração do `api-desktop-processador` para o `i9_processador` representa mais que uma atualização tecnológica—é uma transformação em direção a uma arquitetura moderna, escalável e sustentável. Fatores-chave de sucesso incluíram:
+A migração do `api-desktop-processador` para o `i9_processador` representa mais que uma atualização tecnológica, é uma transformação em direção a uma arquitetura moderna, escalável e sustentável. Fatores-chave de sucesso incluíram:
 
 1. **Migração Incremental**: Manter estabilidade do sistema enquanto introduz melhorias
 2. **Adequação Tecnológica**: O modelo de concorrência do Elixir combinou perfeitamente com nossas necessidades de processamento
@@ -422,6 +417,8 @@ O resultado é um sistema que não apenas atende aos requisitos atuais de negóc
 - **Documentação**: Documentação abrangente de API em markdown com 40+ endpoints e coleção Postman
 - **Testes**: Scripts curl extensivos para todos os domínios de negócio
 - **Deployment**: Fly.io com contêineres Docker
-- **Monitoramento**: Phoenix LiveDashboard e Oban Web UI
+- **Monitoramento**: Phoenix LiveDashboard, Oban Web UI e Grafana com Prometheus
 
 Esta migração serve como um blueprint para modernizar sistemas legados mantendo continuidade dos negócios e habilitando inovação futura.
+
+Com essa base sólida, temos tranquilidade em gastar mais tempo com inovação e desenvolvimento contínuo, garantindo que nossos produtos continuem a evoluir e atender às necessidades crescentes do mercado. Além disso, diminuimos os custos operacionais com chamados em caso de falhas ou picos de demanda, garantindo uma experiência de usuário mais confiável e eficiente.
