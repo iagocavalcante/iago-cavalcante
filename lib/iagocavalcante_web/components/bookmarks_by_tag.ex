@@ -12,56 +12,68 @@ defmodule IagocavalcanteWeb.Components.BookmarksByTag do
 
   def bookmarks_by_tag(assigns) do
     ~H"""
-    <div class="space-y-12">
-      <div :for={{tag, bookmarks} <- @bookmarks_by_tag} class="space-y-6" id={"tag-#{tag}"}>
-        <div class="flex items-center space-x-3">
-          <div class={"flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg text-sm font-medium text-white #{Bookmarks.tag_color(tag)}"}>
+    <div class="space-y-16">
+      <div :for={{tag, bookmarks} <- @bookmarks_by_tag} class="space-y-8" id={"tag-#{tag}"}>
+        <!-- Tag Header -->
+        <div class="flex items-center gap-4">
+          <div class={"flex h-12 w-12 flex-shrink-0 items-center justify-center text-sm font-mono font-medium text-white #{Bookmarks.tag_color(tag)}"}>
             <%= Bookmarks.tag_initials(tag) %>
           </div>
           <div>
-            <h2 class="text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100">
+            <h2 class="text-xl font-display font-semibold text-ink">
               <%= String.replace(tag, "-", " ") |> String.capitalize() %>
             </h2>
-            <p class="text-sm text-zinc-600 dark:text-zinc-400">
+            <p class="text-sm text-muted font-mono">
               <%= length(bookmarks) %> <%= if length(bookmarks) == 1, do: gettext("bookmark", lang: @locale), else: gettext("bookmarks", lang: @locale) %>
             </p>
           </div>
         </div>
 
+        <!-- Bookmarks Grid -->
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <article
             :for={bookmark <- get_visible_bookmarks(bookmarks, tag, @expanded_tags, @items_per_page, @show_all_view)}
-            class="group relative flex flex-col overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800"
+            class="group editorial-card hover:border-amber-500 transition-all duration-200"
           >
-            <div class="flex flex-1 flex-col p-6">
-              <div class="flex items-start justify-between">
+            <div class="flex flex-col h-full">
+              <!-- Title & Domain -->
+              <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0 flex-1">
-                  <h3 class="text-base font-medium text-zinc-900 dark:text-zinc-100 line-clamp-2">
-                    <a href={bookmark.url} target="_blank" rel="noopener noreferrer" class="hover:underline">
+                  <h3 class="text-base font-semibold text-ink group-hover:text-accent transition-colors duration-200 line-clamp-2">
+                    <a href={bookmark.url} target="_blank" rel="noopener noreferrer">
                       <%= bookmark.title %>
                     </a>
                   </h3>
-                  <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                  <p class="mt-1 text-xs font-mono text-muted">
                     <%= Bookmarks.get_domain(bookmark.url) %>
                   </p>
                 </div>
-                <div class="ml-3 flex-shrink-0">
-                  <svg class="h-5 w-5 text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                <div class="flex-shrink-0">
+                  <svg class="h-4 w-4 text-muted group-hover:text-accent transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                   </svg>
                 </div>
               </div>
 
-              <div class="mt-4 flex items-center justify-between">
+              <!-- Tags & Date -->
+              <div class="mt-auto pt-4 flex items-center justify-between">
                 <div class="flex flex-wrap gap-1">
-                  <span :for={tag <- Enum.take(bookmark.tags, 3)} class="inline-flex items-center rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200">
-                    <%= tag %>
+                  <span
+                    :for={t <- Enum.take(bookmark.tags, 2)}
+                    class="inline-flex items-center px-2 py-0.5 text-xs font-mono text-muted"
+                    style="background: var(--paper-dark);"
+                  >
+                    <%= t %>
                   </span>
-                  <span :if={length(bookmark.tags) > 3} class="inline-flex items-center rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400">
-                    +<%= length(bookmark.tags) - 3 %>
+                  <span
+                    :if={length(bookmark.tags) > 2}
+                    class="inline-flex items-center px-2 py-0.5 text-xs font-mono text-muted"
+                    style="background: var(--paper-dark);"
+                  >
+                    +<%= length(bookmark.tags) - 2 %>
                   </span>
                 </div>
-                <time class="text-xs text-zinc-500 dark:text-zinc-400" datetime={Bookmarks.format_date(bookmark.time_added)}>
+                <time class="text-xs font-mono text-muted" datetime={Bookmarks.format_date(bookmark.time_added)}>
                   <%= Bookmarks.format_date(bookmark.time_added) %>
                 </time>
               </div>
@@ -69,12 +81,13 @@ defmodule IagocavalcanteWeb.Components.BookmarksByTag do
           </article>
         </div>
 
+        <!-- Load More / Show Less Buttons -->
         <%= if show_load_more_button?(bookmarks, tag, @expanded_tags, @items_per_page, @show_all_view) do %>
-          <div class="text-center space-y-2">
+          <div class="text-center">
             <button
               phx-click="load_more"
               phx-value-tag={tag}
-              class="inline-flex items-center rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-600"
+              class="btn-secondary text-sm"
             >
               <%= gettext("Show %{count} more", count: get_remaining_count(bookmarks, tag, @expanded_tags, @items_per_page), lang: @locale) %>
             </button>
@@ -86,9 +99,9 @@ defmodule IagocavalcanteWeb.Components.BookmarksByTag do
             <button
               phx-click="show_less"
               phx-value-tag={tag}
-              class="inline-flex items-center rounded-md bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+              class="text-sm text-muted hover:text-accent transition-colors duration-200"
             >
-              <%= gettext("Show less", lang: @locale) %>
+              <%= gettext("Show less", lang: @locale) %> ↑
             </button>
           </div>
         <% end %>

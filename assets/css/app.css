@@ -3,4 +3,435 @@
 @import './prism.css';
 @import "tailwindcss/utilities";
 
-/* This file is for your main application CSS */
+/* ============================================
+   EDITORIAL DESIGN SYSTEM
+   A typographic, magazine-inspired aesthetic
+   Portfolio for Iago Cavalcante
+   ============================================ */
+
+/* Fonts: Playfair Display (editorial serif) + DM Sans (clean body) + IBM Plex Mono */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ============================================
+   CSS Custom Properties
+   ============================================ */
+:root {
+  /* Editorial Color Palette - Warm Stone & Amber */
+  --ink: #1c1917;
+  --ink-light: #44403c;
+  --paper: #fafaf9;
+  --paper-dark: #f5f5f4;
+  --accent: #d97706;
+  --accent-hover: #b45309;
+  --muted: #a8a29e;
+  --border: #e7e5e4;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+.dark {
+  --ink: #fafaf9;
+  --ink-light: #d6d3d1;
+  --paper: #0c0a09;
+  --paper-dark: #1c1917;
+  --accent: #fbbf24;
+  --accent-hover: #f59e0b;
+  --muted: #78716c;
+  --border: #292524;
+}
+
+/* ============================================
+   Base Layer
+   ============================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* Editorial Typography Scale */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  h1 { font-size: clamp(2.5rem, 8vw, 4rem); }
+  h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+  h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: var(--accent);
+    color: var(--paper);
+  }
+
+  /* Focus states */
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================
+   Component Layer
+   ============================================ */
+@layer components {
+  /* Editorial Card - Clean, bordered */
+  .editorial-card {
+    @apply relative p-6 border transition-all duration-300;
+    background: var(--paper);
+    border-color: var(--border);
+  }
+
+  .editorial-card:hover {
+    border-color: var(--accent);
+  }
+
+  /* Accent line decoration */
+  .accent-line {
+    @apply relative pl-4;
+  }
+
+  .accent-line::before {
+    content: '';
+    @apply absolute left-0 top-0 bottom-0 w-0.5;
+    background-color: var(--accent);
+  }
+
+  /* Editorial Link - Underline animation */
+  .editorial-link {
+    @apply relative inline-block font-medium;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .editorial-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .editorial-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .editorial-link:hover {
+    color: var(--accent);
+  }
+
+  /* Primary Button - Solid, minimal */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-all duration-200;
+    background-color: var(--ink);
+    color: var(--paper);
+    letter-spacing: 0.1em;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--accent);
+  }
+
+  /* Secondary Button - Outlined */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold uppercase tracking-wider border-2 transition-all duration-200;
+    background: transparent;
+    border-color: var(--ink);
+    color: var(--ink);
+    letter-spacing: 0.1em;
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--ink);
+    color: var(--paper);
+  }
+
+  /* Tag/Badge - Minimal */
+  .editorial-tag {
+    @apply inline-block px-3 py-1 text-xs font-mono uppercase tracking-widest;
+    background-color: var(--paper-dark);
+    color: var(--ink-light);
+  }
+
+  /* Input - Clean bordered */
+  .editorial-input {
+    @apply w-full px-4 py-3 text-base border transition-all duration-200;
+    background: transparent;
+    border-color: var(--border);
+    color: var(--ink);
+  }
+
+  .editorial-input::placeholder {
+    color: var(--muted);
+  }
+
+  .editorial-input:focus {
+    @apply outline-none;
+    border-color: var(--ink);
+  }
+
+  /* Navigation - Pill Style */
+  .nav-pill {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-link-desktop {
+    @apply relative z-10;
+    color: var(--ink-light);
+  }
+
+  .nav-link-desktop:hover {
+    color: var(--ink);
+  }
+
+  .nav-link-desktop.active {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Toggle buttons in pill container */
+  .toggle-btn {
+    @apply relative z-10;
+  }
+
+  /* Mobile navigation styles */
+  .mobile-nav-link {
+    @apply text-2xl font-semibold;
+    font-family: var(--font-display);
+  }
+
+  /* Avatar - Simple circle with border */
+  .avatar-editorial {
+    @apply rounded-full border-2 overflow-hidden;
+    border-color: var(--border);
+  }
+
+  .avatar-editorial:hover {
+    border-color: var(--accent);
+  }
+
+  /* Article Card */
+  .article-card {
+    @apply relative flex flex-col items-start py-6 border-b transition-all duration-200;
+    border-color: var(--border);
+  }
+
+  .article-card:last-child {
+    border-bottom: none;
+  }
+
+  .article-card:hover {
+    @apply pl-4;
+  }
+
+  .article-card:hover .article-title {
+    color: var(--accent);
+  }
+
+  .article-title {
+    @apply text-lg font-semibold transition-colors duration-200;
+    font-family: var(--font-display);
+    color: var(--ink);
+  }
+
+  .article-meta {
+    @apply text-xs font-mono uppercase tracking-wider;
+    color: var(--muted);
+  }
+
+  .article-excerpt {
+    @apply text-sm leading-relaxed mt-2;
+    color: var(--ink-light);
+  }
+
+  /* Divider with label */
+  .divider-label {
+    @apply flex items-center gap-4 text-xs font-mono uppercase tracking-widest;
+    color: var(--muted);
+  }
+
+  .divider-label::before,
+  .divider-label::after {
+    content: '';
+    @apply flex-1 h-px;
+    background-color: var(--border);
+  }
+
+  /* Section Title */
+  .section-title {
+    @apply flex items-center gap-3 text-xs font-mono uppercase tracking-widest mb-6;
+    color: var(--muted);
+  }
+
+  .section-title::after {
+    content: '';
+    @apply flex-1 h-px;
+    background-color: var(--border);
+  }
+
+  /* Quote block */
+  .editorial-quote {
+    @apply relative pl-6 py-2 text-xl italic;
+    font-family: var(--font-display);
+    color: var(--ink);
+  }
+
+  .editorial-quote::before {
+    content: '';
+    @apply absolute left-0 top-0 bottom-0 w-1;
+    background-color: var(--accent);
+  }
+
+  /* Work Experience Item */
+  .work-item {
+    @apply flex gap-4 py-4 border-b transition-all duration-200;
+    border-color: var(--border);
+  }
+
+  .work-item:last-child {
+    border-bottom: none;
+  }
+
+  .work-item:hover {
+    @apply pl-2;
+  }
+
+  .work-item:hover .work-company {
+    color: var(--accent);
+  }
+
+  .work-company {
+    @apply font-semibold transition-colors duration-200;
+    color: var(--ink);
+  }
+
+  .work-role {
+    @apply text-xs font-mono uppercase tracking-wider;
+    color: var(--muted);
+  }
+
+  .work-date {
+    @apply text-xs font-mono;
+    color: var(--muted);
+  }
+}
+
+/* ============================================
+   Utility Layer
+   ============================================ */
+@layer utilities {
+  /* Text utilities */
+  .text-ink { color: var(--ink); }
+  .text-ink-light { color: var(--ink-light); }
+  .text-muted { color: var(--muted); }
+  .text-accent { color: var(--accent); }
+
+  .bg-paper { background-color: var(--paper); }
+  .bg-paper-dark { background-color: var(--paper-dark); }
+
+  .border-editorial { border-color: var(--border); }
+
+  /* Stagger animations */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+
+  /* Fade in animation */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Keyframes
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   Print
+   ============================================ */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

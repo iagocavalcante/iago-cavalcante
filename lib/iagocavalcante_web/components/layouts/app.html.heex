@@ -1,12 +1,34 @@
+<!-- Fixed Background - Clean Editorial -->
 <div class="fixed inset-0 flex justify-center sm:px-8">
   <div class="flex w-full max-w-7xl lg:px-8">
-    <div class="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20">
-      <p class="alert alert-info" role="alert"><%= Phoenix.Flash.get(@flash, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= Phoenix.Flash.get(@flash, :error) %></p>
+    <div class="w-full bg-paper dark:bg-paper ring-1 ring-stone-200 dark:ring-stone-800">
     </div>
   </div>
 </div>
-<div class="relative">
+
+<!-- Flash Messages -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4">
+  <p :if={Phoenix.Flash.get(@flash, :info)} class="editorial-card p-4 mb-2 text-sm text-ink border-amber-500/30" role="alert">
+    <span class="flex items-center gap-2">
+      <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+      </svg>
+      <%= Phoenix.Flash.get(@flash, :info) %>
+    </span>
+  </p>
+  <p :if={Phoenix.Flash.get(@flash, :error)} class="editorial-card p-4 mb-2 text-sm text-red-700 dark:text-red-300 border-red-500/30" role="alert">
+    <span class="flex items-center gap-2">
+      <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+      </svg>
+      <%= Phoenix.Flash.get(@flash, :error) %>
+    </span>
+  </p>
+</div>
+
+<!-- Main Content -->
+<div class="relative min-h-screen">
+  <!-- Header -->
   <.header>
     <:nav_items>
       <.nav_item
@@ -50,38 +72,43 @@
       <.toggle_theme />
     </:toggle_items>
   </.header>
+
+  <!-- Page Content -->
   <main>
     <%= @inner_content %>
   </main>
 
-  <div :if={@ff.donate == 1} class="fixed bottom-4 right-4">
+  <!-- Buy Me a Coffee Button -->
+  <div :if={@ff.donate == 1} class="fixed bottom-4 right-4 z-40">
     <a
       :if={@locale == "pt_BR"}
       href="https://openpix.com.br/pay/de728e21-fd0d-464b-8519-459986b74a00"
       target="_blank"
       rel="noopener noreferrer"
-      class="flex items dark:bg-zinc-500/80 hover:bg-zinc-500/80 dark:hover:bg-zinc-500/80 dark:text-white hover:text-white text-sm font-semibold items
-      -center justify-center p-4 bg-zinc-500 text-white rounded-full shadow-lg"
+      class="btn-primary flex items-center gap-2 text-sm"
     >
-      <%= gettext("Buy me a coffee ☕", lang: @locale) %>
+      <span><%= gettext("Buy me a coffee", lang: @locale) %></span>
+      <span>☕</span>
     </a>
     <a
       :if={@locale == "en"}
       href="https://www.buymeacoffee.com/iagocavalcante"
       target="_blank"
       rel="noopener noreferrer"
-      class="flex items dark:bg-zinc-500/80 hover:bg-zinc-500/80 dark:hover:bg-zinc-500/80 dark:text-white hover:text-white text-sm font-semibold items
-      -center justify-center p-4 bg-zinc-500 text-white rounded-full shadow-lg"
+      class="btn-primary flex items-center gap-2 text-sm"
     >
-      <%= gettext("Buy me a coffee ☕", lang: @locale) %>
+      <span><%= gettext("Buy me a coffee", lang: @locale) %></span>
+      <span>☕</span>
     </a>
   </div>
+
+  <!-- Footer -->
   <.footer />
 </div>
 
+<!-- Cloudflare Stream Player Script -->
 <script src="https://embed.cloudflarestream.com/embed/sdk.latest.js">
 </script>
-<!-- Your JavaScript code below-->
 <script>
   const player = Stream(document.getElementById('stream-player'));
   player.addEventListener('play', () => {

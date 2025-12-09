@@ -4,39 +4,56 @@ defmodule IagocavalcanteWeb.Footer do
 
   def footer(assigns) do
     ~H"""
-    <footer class="mt-32">
+    <footer class="mt-32 relative">
+      <!-- Simple top border -->
+      <div class="absolute top-0 left-0 right-0 h-px" style="background-color: var(--border);"></div>
+
       <div class="sm:px-8">
         <div class="mx-auto max-w-7xl lg:px-8">
-          <div class="border-t border-zinc-100 pt-10 pb-16 dark:border-zinc-700/40">
+          <div class="pt-10 pb-16">
             <div class="relative px-4 sm:px-8 lg:px-12">
               <div class="mx-auto max-w-2xl lg:max-w-5xl">
                 <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-                  <div class="flex gap-6 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                    <a class="transition hover:text-teal-500 dark:hover:text-teal-400" href="/about">
+                  <!-- Navigation Links -->
+                  <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-ink-light">
+                    <a
+                      class="editorial-link py-1"
+                      href="/about"
+                    >
                       About
                     </a>
                     <a
-                      class="transition hover:text-teal-500 dark:hover:text-teal-400"
+                      class="editorial-link py-1"
                       href="/projects"
                     >
                       Projects
                     </a>
                     <a
-                      class="transition hover:text-teal-500 dark:hover:text-teal-400"
+                      class="editorial-link py-1"
                       href="/speaking"
                     >
                       Speaking
                     </a>
-                    <a class="transition hover:text-teal-500 dark:hover:text-teal-400" href="/uses">
+                    <a
+                      class="editorial-link py-1"
+                      href="/uses"
+                    >
                       Uses
                     </a>
                   </div>
-                  <p class="text-sm text-zinc-400 dark:text-zinc-500">
-                    © <!-- -->
-                    <%= DateTime.utc_now().year %>
-                    <!-- -->
-                    <%= gettext("Iago Cavalcante. All rights reserved.") %>
+
+                  <!-- Copyright -->
+                  <p class="text-sm text-muted">
+                    <span>&copy;</span>
+                    <span class="mx-1"><%= DateTime.utc_now().year %></span>
+                    <span class="font-medium text-ink">Iago Cavalcante</span>
+                    <span>. <%= gettext("All rights reserved.") %></span>
                   </p>
+                </div>
+
+                <!-- Minimal decorative element -->
+                <div class="mt-8 flex justify-center">
+                  <div class="h-px w-16" style="background-color: var(--border);"></div>
                 </div>
               </div>
             </div>

@@ -84,15 +84,20 @@ defmodule IagocavalcanteWeb.BookmarksLive do
 
   def render(assigns) do
     ~H"""
-    <div class="sm:px-8 mt-8 sm:mt-16">
+    <div class="sm:px-8 mt-12 sm:mt-20">
       <div class="mx-auto max-w-7xl lg:px-8">
         <div class="relative px-4 sm:px-8 lg:px-12">
           <div class="mx-auto max-w-2xl lg:max-w-5xl">
             <header class="max-w-2xl">
-              <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+              <!-- Section Label -->
+              <div class="section-title mb-8">
+                <span><%= gettext("Collection", lang: @locale) %></span>
+              </div>
+
+              <h1 class="text-4xl sm:text-5xl font-display font-semibold tracking-tight text-ink">
                 <%= gettext("My Knowledge Base", lang: @locale) %>
               </h1>
-              <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+              <p class="mt-6 text-base text-ink-light leading-relaxed">
                 <%= gettext("These are my favorite links from Pocket, organized by tags for easy browsing. My personal knowledge base covering programming, architecture, design, and more.", lang: @locale) %>
               </p>
             </header>
@@ -100,11 +105,12 @@ defmodule IagocavalcanteWeb.BookmarksLive do
             <!-- Search and Filter Section -->
             <div class="mt-16 sm:mt-20">
               <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 sm:items-center">
+                <!-- Search Input -->
                 <div class="flex-1">
                   <label for="search" class="sr-only">Search bookmarks</label>
                   <div class="relative">
-                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <svg class="h-5 w-5 text-zinc-400" viewBox="0 0 20 20" fill="currentColor">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                      <svg class="h-5 w-5 text-muted" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
                       </svg>
                     </div>
@@ -114,27 +120,30 @@ defmodule IagocavalcanteWeb.BookmarksLive do
                       type="search"
                       value={@search_query}
                       phx-change="search"
-                      class="block w-full rounded-md border-0 bg-zinc-50 py-1.5 pl-10 pr-3 text-zinc-900 ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 dark:bg-zinc-900 dark:text-zinc-100 dark:ring-zinc-700 dark:placeholder:text-zinc-500 sm:text-sm sm:leading-6"
+                      class="editorial-input pl-12"
                       placeholder={gettext("Search bookmarks...", lang: @locale)}
                     />
                   </div>
                 </div>
+
+                <!-- View Toggle -->
                 <div class="flex-shrink-0">
                   <button
                     phx-click="toggle_view"
                     class={[
-                      "inline-flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                      "inline-flex items-center px-4 py-3 text-sm font-medium border transition-all duration-200",
                       if(@show_all_view,
-                        do: "bg-orange-100 text-orange-800 hover:bg-orange-200 dark:bg-orange-500/20 dark:text-orange-300 dark:hover:bg-orange-500/30",
-                        else: "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+                        do: "border-amber-500 text-amber-600 dark:text-amber-400",
+                        else: "text-ink-light hover:border-amber-500"
                       )
                     ]}
+                    style="background: var(--paper); border-color: var(--border);"
                   >
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <%= if @show_all_view do %>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                       <% else %>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       <% end %>
                     </svg>
                     <%= if @show_all_view do %>
@@ -146,78 +155,67 @@ defmodule IagocavalcanteWeb.BookmarksLive do
                 </div>
               </div>
 
-              <!-- Stats -->
-              <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <div class="bg-white dark:bg-zinc-800 overflow-hidden shadow rounded-lg">
-                  <div class="p-5">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 110 2h-1v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6H3a1 1 0 110-2h4zM9 6v10a1 1 0 102 0V6a1 1 0 10-2 0z" />
-                        </svg>
-                      </div>
-                      <div class="ml-5 w-0 flex-1">
-                        <dl>
-                          <dt class="text-sm font-medium text-zinc-500 dark:text-zinc-400 truncate">
-                            <%= gettext("Total Bookmarks", lang: @locale) %>
-                          </dt>
-                          <dd class="text-lg font-medium text-zinc-900 dark:text-zinc-100">
-                            <%= total_bookmarks_count(@bookmarks_by_tag_list) %>
-                          </dd>
-                        </dl>
-                      </div>
+              <!-- Stats Cards -->
+              <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+                <div class="editorial-card">
+                  <div class="flex items-center gap-4">
+                    <div class="flex h-10 w-10 items-center justify-center" style="background: var(--paper-dark);">
+                      <svg class="h-5 w-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-xs font-mono uppercase tracking-wider text-muted">
+                        <%= gettext("Total Bookmarks", lang: @locale) %>
+                      </p>
+                      <p class="text-2xl font-display font-semibold text-ink">
+                        <%= total_bookmarks_count(@bookmarks_by_tag_list) %>
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                <div class="bg-white dark:bg-zinc-800 overflow-hidden shadow rounded-lg">
-                  <div class="p-5">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                        </svg>
-                      </div>
-                      <div class="ml-5 w-0 flex-1">
-                        <dl>
-                          <dt class="text-sm font-medium text-zinc-500 dark:text-zinc-400 truncate">
-                            <%= gettext("Categories", lang: @locale) %>
-                          </dt>
-                          <dd class="text-lg font-medium text-zinc-900 dark:text-zinc-100">
-                            <%= length(@bookmarks_by_tag_list) %>
-                          </dd>
-                        </dl>
-                      </div>
+                <div class="editorial-card">
+                  <div class="flex items-center gap-4">
+                    <div class="flex h-10 w-10 items-center justify-center" style="background: var(--paper-dark);">
+                      <svg class="h-5 w-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-xs font-mono uppercase tracking-wider text-muted">
+                        <%= gettext("Categories", lang: @locale) %>
+                      </p>
+                      <p class="text-2xl font-display font-semibold text-ink">
+                        <%= length(@bookmarks_by_tag_list) %>
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                <div class="bg-white dark:bg-zinc-800 overflow-hidden shadow rounded-lg">
-                  <div class="p-5">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                      </div>
-                      <div class="ml-5 w-0 flex-1">
-                        <dl>
-                          <dt class="text-sm font-medium text-zinc-500 dark:text-zinc-400 truncate">
-                            <%= gettext("Top Category", lang: @locale) %>
-                          </dt>
-                          <dd class="text-lg font-medium text-zinc-900 dark:text-zinc-100">
-                            <%= get_top_category(@featured_tags) %>
-                          </dd>
-                        </dl>
-                      </div>
+                <div class="editorial-card">
+                  <div class="flex items-center gap-4">
+                    <div class="flex h-10 w-10 items-center justify-center" style="background: var(--paper-dark);">
+                      <svg class="h-5 w-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-xs font-mono uppercase tracking-wider text-muted">
+                        <%= gettext("Top Category", lang: @locale) %>
+                      </p>
+                      <p class="text-2xl font-display font-semibold text-ink">
+                        <%= get_top_category(@featured_tags) %>
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
 
               <!-- Featured Tags -->
-              <div class="mt-8">
-                <h2 class="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-4">
+              <div class="mt-10">
+                <h2 class="text-sm font-mono uppercase tracking-wider text-muted mb-4">
                   <%= gettext("Popular Tags", lang: @locale) %>
                 </h2>
                 <div class="flex flex-wrap gap-2">
@@ -226,17 +224,15 @@ defmodule IagocavalcanteWeb.BookmarksLive do
                     phx-click="filter_tag"
                     phx-value-tag={tag}
                     class={[
-                      "inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium transition-colors",
+                      "editorial-tag transition-all duration-200",
                       if(@selected_tag == tag,
-                        do: "bg-orange-100 text-orange-800 ring-1 ring-orange-600/20 dark:bg-orange-500/20 dark:text-orange-300",
-                        else: "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+                        do: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
+                        else: "hover:bg-stone-200 dark:hover:bg-stone-700"
                       )
                     ]}
                   >
                     <%= String.replace(tag, "-", " ") |> String.capitalize() %>
-                    <span class="ml-1.5 rounded-full bg-zinc-200 px-1.5 py-0.5 text-xs dark:bg-zinc-700">
-                      <%= count %>
-                    </span>
+                    <span class="ml-2 opacity-60"><%= count %></span>
                   </button>
                 </div>
               </div>
@@ -245,17 +241,17 @@ defmodule IagocavalcanteWeb.BookmarksLive do
             <!-- Bookmarks Content -->
             <div class="mt-16 sm:mt-20">
               <%= if @selected_tag do %>
-                <div class="mb-8">
+                <div class="mb-10">
                   <div class="flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-zinc-800 dark:text-zinc-100">
+                    <h2 class="text-2xl font-display font-semibold text-ink">
                       <%= String.replace(@selected_tag, "-", " ") |> String.capitalize() %>
                     </h2>
                     <button
                       phx-click="filter_tag"
                       phx-value-tag={@selected_tag}
-                      class="text-sm text-zinc-600 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+                      class="text-sm text-muted hover:text-accent transition-colors duration-200"
                     >
-                      <%= gettext("Show all", lang: @locale) %>
+                      <%= gettext("Show all", lang: @locale) %> →
                     </button>
                   </div>
                 </div>

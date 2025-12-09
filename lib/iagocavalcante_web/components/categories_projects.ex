@@ -4,6 +4,34 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
   attr :categories, :list,
     default: [
       %{
+        name: "My SaaS Products",
+        slug: "saas-products",
+        description: "Products I've built and maintain",
+        projects: [
+          %{
+            name: "LeafTok",
+            description:
+              "AI-powered reading app that transforms books into interactive, bite-sized learning cards. Convert PDFs and EPUBs into swipeable cards with spaced repetition.",
+            url: "https://leaftok.app",
+            image: "/images/projects/leaftok.png"
+          },
+          %{
+            name: "AgendFlow",
+            description:
+              "Sistema de Agendamento e Gestão de Serviços. Complete scheduling and service management platform for businesses.",
+            url: "https://agendflow.com.br",
+            image: "/images/projects/agendflow.ico"
+          },
+          %{
+            name: "AbaetéFest App",
+            description:
+              "Mobile app to help people find the best events, restaurants, and attractions in Abaetetuba, Brazil.",
+            url: "https://app.abaetefest.com.br",
+            image: "/images/projects/abaetefest.png"
+          }
+        ]
+      },
+      %{
         name: "Open-source",
         slug: "open-source",
         description: "Open-source projects I've contributed to",
@@ -19,12 +47,6 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             description: "Project to bypass paywalls on Medium articles",
             url: "https://eguadoartigo.iagocavalcante.com",
             image: "/images/projects/eguadoartigo.svg"
-          },
-          %{
-            name: "AbaetéFest",
-            description: "App to help people find the best events and more in Abaeté, Brazil",
-            url: "https://abaetefest.com.br/",
-            image: "/images/projects/abaetefest.png"
           },
           %{
             name: "RN-Zendesk",
@@ -49,7 +71,7 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             name: "Squash Hardcore",
             description: "Game built with Construct 2",
             url: "https://squash-hardcore.iagocavalcante.com/",
-            image: "https://placehold.it/200x200"
+            image: "/images/projects/gstack.webp"
           },
           %{
             name: "Personal Board v1",
@@ -65,6 +87,20 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
         slug: "clients-projects",
         description: "Freelance projects I've worked on",
         projects: [
+          %{
+            name: "VRDEBank",
+            description:
+              "Digital banking platform. Worked on the web internet banking frontend and mobile applications.",
+            url: "https://www.vrdebank.com/",
+            image: "/images/projects/vrdebank.ico"
+          },
+          %{
+            name: "Funqtion",
+            description:
+              "Full-stack development work building modern web applications and services.",
+            url: "https://funqtion.co/",
+            image: "/images/projects/funqtion.ico"
+          },
           %{
             name: "Gstack",
             description:
@@ -105,7 +141,7 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             description:
               "Webapp is a platform where users can answer questions and get paid for it. Built with Vue, Postgres, Bootstrap, and AdonisJS.",
             url: "https://questoespro.com/",
-            image: "https://placehold.it/200x200"
+            image: "/images/projects/gstack.webp"
           },
           %{
             name: "Trail Club de Goiás",
@@ -124,53 +160,52 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
 
   defp render_categories(assigns) do
     ~H"""
-    <div :for={category <- @categories} class="space-y-20">
-      <div>
-        <h2
-          id="cursos"
-          class="text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 mt-10"
-        >
-          <a href={"##{category.slug}"}><%= category.name %></a>
-        </h2>
-        <ul role="list" class="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 mt-10">
-          <li :for={project <- category.projects} class="group relative flex flex-col items-start">
-            <div class="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+    <div :for={category <- @categories} class="mb-20">
+      <!-- Section Title -->
+      <div class="section-title mb-8">
+        <span id={category.slug}><%= category.name %></span>
+      </div>
+
+      <!-- Projects Grid -->
+      <ul role="list" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <li :for={project <- category.projects} class="group">
+          <a href={project.url} target="_blank" class="block editorial-card h-full hover:border-amber-500 transition-all duration-200">
+            <!-- Project Icon -->
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg p-2 mb-4"
+                 style="background: var(--paper-dark);">
               <img
-                alt=""
+                alt={project.name}
                 src={project.image}
                 decoding="async"
-                data-nimg="1"
-                class="h-8 w-8"
+                class="h-full w-full object-contain"
                 loading="lazy"
-                style="color: transparent;"
-                width="32"
-                height="32"
               />
             </div>
-            <h2 class="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-              <div class="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl">
-              </div>
-              <a href={project.url} target="_blank">
-                <span class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
-                <span class="relative z-10"><%= project.name %></span>
-              </a>
-            </h2>
-            <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+
+            <!-- Project Name -->
+            <h3 class="text-base font-semibold text-ink group-hover:text-accent transition-colors duration-200">
+              <%= project.name %>
+            </h3>
+
+            <!-- Project Description -->
+            <p class="mt-2 text-sm text-ink-light leading-relaxed">
               <%= project.description %>
             </p>
-            <p class="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">
-              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6 flex-none">
+
+            <!-- Link Indicator -->
+            <div class="mt-4 flex items-center text-xs font-mono text-muted group-hover:text-accent transition-colors duration-200">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 flex-none stroke-current" fill="none" stroke-width="1.5">
                 <path
-                  d="M15.712 11.823a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm-4.95 1.768a.75.75 0 0 0 1.06-1.06l-1.06 1.06Zm-2.475-1.414a.75.75 0 1 0-1.06-1.06l1.06 1.06Zm4.95-1.768a.75.75 0 1 0-1.06 1.06l1.06-1.06Zm3.359.53-.884.884 1.06 1.06.885-.883-1.061-1.06Zm-4.95-2.12 1.414-1.415L12 6.344l-1.415 1.413 1.061 1.061Zm0 3.535a2.5 2.5 0 0 1 0-3.536l-1.06-1.06a4 4 0 0 0 0 5.656l1.06-1.06Zm4.95-4.95a2.5 2.5 0 0 1 0 3.535L17.656 12a4 4 0 0 0 0-5.657l-1.06 1.06Zm1.06-1.06a4 4 0 0 0-5.656 0l1.06 1.06a2.5 2.5 0 0 1 3.536 0l1.06-1.06Zm-7.07 7.07.176.177 1.06-1.06-.176-.177-1.06 1.06Zm-3.183-.353.884-.884-1.06-1.06-.884.883 1.06 1.06Zm4.95 2.121-1.414 1.414 1.06 1.06 1.415-1.413-1.06-1.061Zm0-3.536a2.5 2.5 0 0 1 0 3.536l1.06 1.06a4 4 0 0 0 0-5.656l-1.06 1.06Zm-4.95 4.95a2.5 2.5 0 0 1 0-3.535L6.344 12a4 4 0 0 0 0 5.656l1.06-1.06Zm-1.06 1.06a4 4 0 0 0 5.657 0l-1.061-1.06a2.5 2.5 0 0 1-3.535 0l-1.061 1.06Zm7.07-7.07-.176-.177-1.06 1.06.176.178 1.06-1.061Z"
-                  fill="currentColor"
-                >
-                </path>
+                  d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
-              <span class="ml-2 break-all"><%= project.url %></span>
-            </p>
-          </li>
-        </ul>
-      </div>
+              <span class="ml-2 truncate"><%= URI.parse(project.url).host %></span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </div>
     """
   end

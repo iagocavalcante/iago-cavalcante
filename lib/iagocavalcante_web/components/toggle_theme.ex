@@ -9,13 +9,15 @@ defmodule IagocavalcanteWeb.ToggleTheme do
       phx-hook="DarkThemeToggle"
       type="button"
       aria-label="Toggle dark mode"
-      class="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+      class="toggle-btn group relative flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300 hover:bg-stone-100 dark:hover:bg-stone-800"
     >
+      <!-- Moon icon (shown in dark mode) -->
       <svg
         id="theme-toggle-dark-icon"
         viewBox="0 0 24 24"
         aria-hidden="true"
-        class="h-6 w-6 fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-400 [@media_not_(prefers-color-scheme:dark)]:fill-teal-400/10 [@media_not_(prefers-color-scheme:dark)]:stroke-teal-500"
+        class="h-[18px] w-[18px] transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
+        style="fill: var(--muted); stroke: var(--ink-light);"
       >
         <path
           d="M17.25 16.22a6.937 6.937 0 0 1-9.47-9.47 7.451 7.451 0 1 0 9.47 9.47ZM12.75 7C17 7 17 2.75 17 2.75S17 7 21.25 7C17 7 17 11.25 17 11.25S17 7 12.75 7Z"
@@ -25,6 +27,7 @@ defmodule IagocavalcanteWeb.ToggleTheme do
         >
         </path>
       </svg>
+      <!-- Sun icon (shown in light mode) -->
       <svg
         id="theme-toggle-light-icon"
         viewBox="0 0 24 24"
@@ -32,7 +35,8 @@ defmodule IagocavalcanteWeb.ToggleTheme do
         stroke-linecap="round"
         stroke-linejoin="round"
         aria-hidden="true"
-        class="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-teal-50 [@media(prefers-color-scheme:dark)]:stroke-teal-500 [@media(prefers-color-scheme:dark)]:group-hover:fill-teal-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-teal-600"
+        class="hidden h-[18px] w-[18px] transition-all duration-300 group-hover:scale-110 group-hover:rotate-45"
+        style="fill: var(--paper-dark); stroke: var(--ink-light);"
       >
         <path d="M8 12.25A4.25 4.25 0 0 1 12.25 8v0a4.25 4.25 0 0 1 4.25 4.25v0a4.25 4.25 0 0 1-4.25 4.25v0A4.25 4.25 0 0 1 8 12.25v0Z">
         </path>
@@ -45,15 +49,22 @@ defmodule IagocavalcanteWeb.ToggleTheme do
     </button>
 
     <script>
-      const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-      const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-      if (themeToggleDarkIcon != null && themeToggleLightIcon != null) {
-        let dark = document.documentElement.classList.contains('dark');
-        const show = dark ? themeToggleDarkIcon : themeToggleLightIcon
-        const hide = dark ? themeToggleLightIcon : themeToggleDarkIcon
-        show.classList.remove('hidden', 'text-transparent');
-        hide.classList.add('hidden', 'text-transparent');
-      }
+      // Initialize theme icons immediately (before LiveView mounts)
+      (function() {
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        if (darkIcon && lightIcon) {
+          const isDark = localStorage.getItem('theme') === 'dark' ||
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            darkIcon.classList.remove('hidden');
+            lightIcon.classList.add('hidden');
+          } else {
+            darkIcon.classList.add('hidden');
+            lightIcon.classList.remove('hidden');
+          }
+        }
+      })();
     </script>
     """
   end

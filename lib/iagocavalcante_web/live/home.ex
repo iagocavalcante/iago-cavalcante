@@ -5,21 +5,42 @@ defmodule IagocavalcanteWeb.HomeLive do
 
   def render(assigns) do
     ~H"""
-    <div class="sm:px-8 mt-8 sm:mt-16">
+    <!-- Hero Section - Clean Editorial Design -->
+    <div class="relative sm:px-8 mt-12 sm:mt-20">
       <div class="mx-auto max-w-7xl lg:px-8">
         <div class="relative px-4 sm:px-8 lg:px-12">
           <div class="mx-auto max-w-2xl lg:max-w-5xl">
             <div class="max-w-2xl">
-              <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-                <%= gettext("Software alchemist, co-founder, and maker.", lang: @locale) %>
+              <!-- Section Label -->
+              <div class="section-title mb-8">
+                <span><%= gettext("Introduction", lang: @locale) %></span>
+              </div>
+
+              <!-- Main Heading - Editorial Typography -->
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold tracking-tight leading-tight animate-fade-in">
+                <span class="text-ink">
+                  <%= gettext("Software engineer,", lang: @locale) %>
+                </span>
+                <br />
+                <span class="text-ink">
+                  <%= gettext("builder, and", lang: @locale) %>
+                </span>
+                <br />
+                <span class="text-accent">
+                  <%= gettext("Elixir enthusiast.", lang: @locale) %>
+                </span>
               </h1>
-              <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+
+              <!-- Description - Clean prose -->
+              <p class="mt-8 text-lg text-ink-light leading-relaxed animate-slide-up stagger-1">
                 <%= gettext(
-                  "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education and both failed. Now I'm focused in building Agendflow (https://agendflow.com.br)",
+                  "I'm Iago, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI building intelligent solutions. Previously co-founded Japu and Travessia, and now focused on building Agendflow.",
                   lang: @locale
                 ) %>
               </p>
-              <div class="mt-6 flex gap-6">
+
+              <!-- Social Links - Minimal Style -->
+              <div class="mt-8 flex gap-6 animate-slide-up stagger-2">
                 <.social_links
                   link="https://twitter.com/iagoangelimc"
                   only_icon={true}
@@ -46,27 +67,42 @@ defmodule IagocavalcanteWeb.HomeLive do
         </div>
       </div>
     </div>
+
+    <!-- Photo Gallery - Clean with subtle borders -->
     <div class="mt-16 sm:mt-20">
       <div class="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
         <.photos />
       </div>
     </div>
+
+    <!-- Main Content Grid -->
     <div class="sm:px-8 mt-24 md:mt-28">
       <div class="mx-auto max-w-7xl lg:px-8">
         <div class="relative px-4 sm:px-8 lg:px-12">
           <div class="mx-auto max-w-2xl lg:max-w-5xl">
             <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-              <div class="flex flex-col gap-16">
-                <.posts articles={Blog.recent_posts_by_locale(@locale)} locale={@locale} />
+              <!-- Recent Articles -->
+              <div class="flex flex-col">
+                <div class="section-title">
+                  <span><%= gettext("Recent Articles", lang: @locale) %></span>
+                </div>
+                <div class="mt-6">
+                  <.posts articles={Blog.recent_posts_by_locale(@locale)} locale={@locale} />
+                </div>
               </div>
+
+              <!-- Sidebar -->
               <div class="space-y-10 lg:pl-16 xl:pl-24">
+                <!-- Newsletter Card -->
                 <.live_component
                   module={IagocavalcanteWeb.Newsletter}
                   id="newsletter"
                   locale={@locale}
                 />
-                <div class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-                  <h2 class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+
+                <!-- Work Experience Card -->
+                <div class="editorial-card">
+                  <h2 class="flex items-center text-sm font-mono uppercase tracking-wider text-muted mb-6">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -74,41 +110,41 @@ defmodule IagocavalcanteWeb.HomeLive do
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       aria-hidden="true"
-                      class="h-6 w-6 flex-none"
+                      class="h-5 w-5 flex-none stroke-current"
                     >
                       <path
                         d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-                        class="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-                      >
-                      </path>
+                      />
                       <path
                         d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-                        class="stroke-zinc-400 dark:stroke-zinc-500"
-                      >
-                      </path>
+                      />
                     </svg>
                     <span class="ml-3"><%= gettext("Work", lang: @locale) %></span>
                   </h2>
-                  <ol class="mt-6 space-y-4">
+
+                  <ol class="space-y-0">
                     <.work />
                   </ol>
+
                   <a
-                    class="inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none bg-zinc-50 font-medium text-zinc-900 hover:bg-zinc-100 active:bg-zinc-100 active:text-zinc-900/60 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70 group mt-6 w-full"
+                    class="btn-secondary w-full mt-6 text-sm"
                     href="https://www.linkedin.com/in/iago-a-cavalcante/?locale=en_US"
-                    download
                     target="_blank"
                   >
-                    <%= gettext("Download CV", lang: @locale) %><svg
+                    <%= gettext("Download CV", lang: @locale) %>
+                    <svg
                       viewBox="0 0 16 16"
                       fill="none"
                       aria-hidden="true"
-                      class="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50"
-                    ><path
+                      class="h-4 w-4 ml-2 stroke-current"
+                    >
+                      <path
                         d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5"
                         stroke-width="1.5"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                      ></path></svg>
+                      />
+                    </svg>
                   </a>
                 </div>
               </div>

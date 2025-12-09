@@ -13,7 +13,8 @@ defmodule IagocavalcanteWeb.Photos do
     ~H"""
     <div
       :for={photo <- @photos}
-      class={"relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl #{photo.rotate}"}
+      class={"relative aspect-[9/10] w-44 flex-none overflow-hidden border sm:w-72 #{photo.rotate} transition-all duration-300 hover:scale-105"}
+      style="background: var(--paper-dark); border-color: var(--border);"
     >
       <img
         alt=""
