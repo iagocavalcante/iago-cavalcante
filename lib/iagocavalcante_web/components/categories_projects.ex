@@ -40,7 +40,7 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             name: "Oasis",
             description:
               "A hydration tracking app built with React Native and Expo. Features daily water intake tracking, streak system, reminders, and beautiful progress visualizations.",
-            url: "https://github.com/iagocavalcante/Oasis",
+            url: "https://apps.apple.com/br/app/oasis-drink-water/id6756798684?l=en-GB",
             image: "/images/projects/gstack.webp"
           },
           %{
@@ -54,14 +54,14 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             name: "Termshare",
             description:
               "Share your terminal with anyone via QR code. Built with Bun, WebSockets, and PTY for real-time terminal streaming.",
-            url: "https://github.com/IagoCavalcante/termshare",
+            url: "https://termshare.fly.dev/",
             image: "/images/projects/gstack.webp"
           },
           %{
             name: "Age of Empires Clone",
             description:
               "A browser-based Age of Empires clone built with Three.js and TypeScript. Features 3D rendering and real-time strategy gameplay.",
-            url: "https://github.com/iagocavalcante/age-of-empires-clone",
+            url: "https://age-of-empires-clone.fly.dev/",
             image: "/images/projects/gstack.webp"
           },
           %{
