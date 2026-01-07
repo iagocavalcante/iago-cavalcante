@@ -37,6 +37,34 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
         description: "Open-source projects I've contributed to",
         projects: [
           %{
+            name: "Oasis",
+            description:
+              "A hydration tracking app built with React Native and Expo. Features daily water intake tracking, streak system, reminders, and beautiful progress visualizations.",
+            url: "https://github.com/iagocavalcante/Oasis",
+            image: "/images/projects/gstack.webp"
+          },
+          %{
+            name: "Izi Queue",
+            description:
+              "A minimal, reliable, database-backed job queue for Node.js inspired by Oban. Supports PostgreSQL, SQLite, and MySQL with full TypeScript support.",
+            url: "https://github.com/iagocavalcante/izi-queue",
+            image: "/images/projects/gstack.webp"
+          },
+          %{
+            name: "Termshare",
+            description:
+              "Share your terminal with anyone via QR code. Built with Bun, WebSockets, and PTY for real-time terminal streaming.",
+            url: "https://github.com/IagoCavalcante/termshare",
+            image: "/images/projects/gstack.webp"
+          },
+          %{
+            name: "Age of Empires Clone",
+            description:
+              "A browser-based Age of Empires clone built with Three.js and TypeScript. Features 3D rendering and real-time strategy gameplay.",
+            url: "https://github.com/iagocavalcante/age-of-empires-clone",
+            image: "/images/projects/gstack.webp"
+          },
+          %{
             name: "QTube",
             description: "A desktop app built with Electron and Vue.js using Quasar Framework",
             url: "https://qtube.iagocavalcante.com",
@@ -165,14 +193,19 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
       <div class="section-title mb-8">
         <span id={category.slug}><%= category.name %></span>
       </div>
-
       <!-- Projects Grid -->
       <ul role="list" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         <li :for={project <- category.projects} class="group">
-          <a href={project.url} target="_blank" class="block editorial-card h-full hover:border-amber-500 transition-all duration-200">
+          <a
+            href={project.url}
+            target="_blank"
+            class="block editorial-card h-full hover:border-amber-500 transition-all duration-200"
+          >
             <!-- Project Icon -->
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg p-2 mb-4"
-                 style="background: var(--paper-dark);">
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-lg p-2 mb-4"
+              style="background: var(--paper-dark);"
+            >
               <img
                 alt={project.name}
                 src={project.image}
@@ -181,20 +214,23 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
                 loading="lazy"
               />
             </div>
-
             <!-- Project Name -->
             <h3 class="text-base font-semibold text-ink group-hover:text-accent transition-colors duration-200">
               <%= project.name %>
             </h3>
-
             <!-- Project Description -->
             <p class="mt-2 text-sm text-ink-light leading-relaxed">
               <%= project.description %>
             </p>
-
             <!-- Link Indicator -->
             <div class="mt-4 flex items-center text-xs font-mono text-muted group-hover:text-accent transition-colors duration-200">
-              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 flex-none stroke-current" fill="none" stroke-width="1.5">
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                class="h-4 w-4 flex-none stroke-current"
+                fill="none"
+                stroke-width="1.5"
+              >
                 <path
                   d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
                   stroke-linecap="round"
