@@ -213,4 +213,13 @@ That's vibe coding with steroids.
 
 Have questions or want to share your setup? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
+## References & Resources
+
+Want to dive deeper? Here are some valuable resources:
+
+- **[Awesome Claude Code Subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)** - Curated list of agents you can use with Claude Code
+- **[System Prompts Collection](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)** - Leaked prompts that can inspire custom agent creation
+- **[Official Claude Plugins](https://github.com/anthropics/claude-plugins-official)** - Official plugins from Anthropic
+- **[Superpowers](https://github.com/obra/superpowers)** - The superpowers skills that transform your Claude Code workflow
+
 Happy coding!

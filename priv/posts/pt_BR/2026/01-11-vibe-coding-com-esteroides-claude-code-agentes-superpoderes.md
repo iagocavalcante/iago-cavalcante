@@ -213,4 +213,13 @@ Isso é vibe coding com esteroides.
 
 Tem dúvidas ou quer compartilhar sua configuração? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
+## Referências & Recursos
+
+Quer se aprofundar mais? Aqui vão alguns recursos valiosos:
+
+- **[Awesome Claude Code Subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)** - Lista curada de agentes que você pode usar com Claude Code
+- **[System Prompts Collection](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)** - Prompts vazados que podem inspirar a criação de agentes customizados
+- **[Official Claude Plugins](https://github.com/anthropics/claude-plugins-official)** - Plugins oficiais da Anthropic
+- **[Superpowers](https://github.com/obra/superpowers)** - As skills de superpoderes que transformam seu fluxo de trabalho com Claude Code
+
 É isso, pessoal! Bora codar!
