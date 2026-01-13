@@ -449,6 +449,6 @@ A combinação de simplicidade do Heroku, flexibilidade do Docker, e controle to
 
 **Experimente Dokploy hoje mesmo!** A instalação leva menos de 10 minutos, e você vai se perguntar como viveu sem essa ferramenta.
 
-Tem dúvidas sobre a implementação ou quer compartilhar sua experiência? Me encontre no [Twitter](https://twitter.com/iagocavalcante) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Tem dúvidas sobre a implementação ou quer compartilhar sua experiência? Me encontre no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
 _Deploy simples, resultados complexos. Esse é o poder do Dokploy! 🚀_

@@ -211,6 +211,6 @@ Isso é vibe coding com esteroides.
 
 **Pronto pra testar?** Comece com um arquivo `CLAUDE.md` simples no seu projeto e vá evoluindo. A curva de aprendizado é mais suave do que você imagina.
 
-Tem dúvidas ou quer compartilhar sua configuração? Me encontra no [Twitter](https://twitter.com/iagocavalcante) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Tem dúvidas ou quer compartilhar sua configuração? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
 É isso, pessoal! Bora codar!

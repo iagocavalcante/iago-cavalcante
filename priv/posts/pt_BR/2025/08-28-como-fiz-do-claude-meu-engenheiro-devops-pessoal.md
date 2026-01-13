@@ -200,6 +200,6 @@ Se este post despertou seu interesse, aqui estão alguns recursos para ir mais f
 
 **Experimente e me conte como foi!** DevOps assistido por AI não é ficção científica - é uma realidade prática que pode transformar como você gerencia infraestrutura.
 
-Tem dúvidas ou quer compartilhar sua própria experiência? Me encontre no [Twitter](https://twitter.com/iagocavalcante) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Tem dúvidas ou quer compartilhar sua própria experiência? Me encontre no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
 *Claude, obrigado por ser o melhor companheiro de DevOps que um desenvolvedor indie poderia pedir! 🤖✨*

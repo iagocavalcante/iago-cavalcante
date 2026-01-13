@@ -211,6 +211,6 @@ That's vibe coding with steroids.
 
 **Ready to try it?** Start with a simple `CLAUDE.md` file in your project and go from there. The learning curve is gentler than you'd think.
 
-Have questions or want to share your setup? Find me on [Twitter](https://twitter.com/iagocavalcante) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Have questions or want to share your setup? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
 Happy coding!

@@ -200,6 +200,6 @@ If this post sparked your interest, here are some resources to dive deeper:
 
 **Give it a try and let me know how it goes!** AI-assisted DevOps isn't science fiction - it's a practical reality that can transform how you manage infrastructure.
 
-Have questions or want to share your own experience? Find me on [Twitter](https://twitter.com/iagocavalcante) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Have questions or want to share your own experience? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
 *Claude, thanks for being the best DevOps companion an indie developer could ask for! 🤖✨*
