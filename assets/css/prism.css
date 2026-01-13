@@ -1,47 +1,144 @@
-pre[class*='language-'] {
-  color: theme('colors.zinc.100');
+/* Syntax highlighting for MDEx html_linked formatter */
+/* GitHub Dark inspired theme with customizable colors */
+
+/* Base code block styling */
+pre.highlight,
+pre.athl {
+  color: theme('colors.stone.100');
+  background-color: theme('colors.stone.900');
 }
 
-.token.tag,
-.token.class-name,
-.token.selector,
-.token.selector .class,
-.token.selector.class,
-.token.function {
-  color: theme('colors.pink.400');
+/* Dark mode adjustments */
+.dark pre.highlight,
+.dark pre.athl {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.token.attr-name,
-.token.keyword,
-.token.rule,
-.token.pseudo-class,
-.token.important {
-  color: theme('colors.zinc.300');
+/* Line wrapper */
+pre .line {
+  display: block;
 }
 
-.token.module {
-  color: theme('colors.pink.400');
+/* Keywords: def, defmodule, do, end, if, else, case, etc. */
+.keyword {
+  color: #ff7b72;
 }
 
-.token.attr-value,
-.token.class,
-.token.string,
-.token.property {
-  color: theme('colors.teal.300');
+/* Modules and types */
+.module,
+.type {
+  color: #ffa657;
 }
 
-.token.punctuation,
-.token.attr-equals {
-  color: theme('colors.zinc.500');
+/* Variables and identifiers */
+.variable,
+.identifier {
+  color: #e6edf3;
 }
 
-.token.unit,
-.language-css .token.function {
-  color: theme('colors.sky.200');
+/* Functions */
+.function,
+.function-call {
+  color: #d2a8ff;
 }
 
-.token.comment,
-.token.operator,
-.token.combinator {
-  color: theme('colors.zinc.400');
+/* Strings */
+.string {
+  color: #a5d6ff;
+}
+
+/* String special symbols (atoms, symbols) */
+.string-special-symbol,
+.atom,
+.symbol {
+  color: #79c0ff;
+}
+
+/* Numbers */
+.number,
+.constant-numeric {
+  color: #79c0ff;
+}
+
+/* Comments */
+.comment {
+  color: #8b949e;
+  font-style: italic;
+}
+
+/* Operators */
+.operator {
+  color: #ff7b72;
+}
+
+/* Punctuation */
+.punctuation,
+.punctuation-delimiter,
+.punctuation-bracket {
+  color: #e6edf3;
+}
+
+/* Constants and booleans */
+.constant,
+.boolean {
+  color: #79c0ff;
+}
+
+/* HTML/XML specific */
+.tag {
+  color: #7ee787;
+}
+
+.attribute {
+  color: #79c0ff;
+}
+
+/* CSS specific */
+.property {
+  color: #79c0ff;
+}
+
+.selector {
+  color: #7ee787;
+}
+
+/* Regex */
+.regex {
+  color: #a5d6ff;
+}
+
+/* Embedded code (like ~H sigils in Elixir) */
+.embedded {
+  color: #e6edf3;
+}
+
+/* Error highlighting */
+.error {
+  color: #f85149;
+}
+
+/* Namespace */
+.namespace {
+  color: #ffa657;
+}
+
+/* Special - interpolation markers, sigils, etc. */
+.special {
+  color: #ff7b72;
+}
+
+/* Light mode overrides */
+@media (prefers-color-scheme: light) {
+  :root:not(.dark) pre.highlight,
+  :root:not(.dark) pre.athl {
+    background-color: theme('colors.stone.900');
+  }
+
+  :root:not(.dark) .keyword { color: #cf222e; }
+  :root:not(.dark) .module, :root:not(.dark) .type { color: #953800; }
+  :root:not(.dark) .string { color: #0a3069; }
+  :root:not(.dark) .string-special-symbol, :root:not(.dark) .atom { color: #0550ae; }
+  :root:not(.dark) .comment { color: #6e7781; }
+  :root:not(.dark) .function { color: #8250df; }
+  :root:not(.dark) .number { color: #0550ae; }
 }

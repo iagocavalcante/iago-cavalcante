@@ -11,7 +11,7 @@ defmodule Iagocavalcante.Blog do
     build: Post,
     from: Application.app_dir(:iagocavalcante, "priv/posts/**/*.md"),
     as: :posts,
-    highlighters: [:makeup_elixir, :makeup_erlang]
+    html_converter: Iagocavalcante.Blog.MDExConverter
 
   @posts Enum.sort_by(@posts, & &1.date, {:desc, Date})
   @tags @posts |> Enum.flat_map(& &1.tags) |> Enum.uniq() |> Enum.sort()
