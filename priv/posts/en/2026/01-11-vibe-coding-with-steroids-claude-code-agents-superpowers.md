@@ -8,8 +8,6 @@
 }
 ---
 
-# Vibe Coding with Steroids: Claude Code, Agents, and Skills with Superpowers
-
 Hey folks! Let me tell you about something that completely changed how I code. You've probably heard about "vibe coding" - that flow state where you're just describing what you want and AI helps you build it. But what if I told you there's a way to supercharge this experience?
 
 I'm talking about Claude Code with custom skills, parallel agents, and what I like to call "superpowers." It's not just vibe coding anymore - it's vibe coding on steroids.

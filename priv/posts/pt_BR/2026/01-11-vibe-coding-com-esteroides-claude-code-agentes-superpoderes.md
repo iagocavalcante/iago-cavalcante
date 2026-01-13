@@ -8,8 +8,6 @@
 }
 ---
 
-# Vibe Coding com Esteroides: Claude Code, Agentes e Skills com Superpoderes
-
 Fala, pessoal! Deixa eu contar sobre algo que mudou completamente a forma como eu codifico. Você provavelmente já ouviu falar de "vibe coding" - aquele estado de fluxo onde você só descreve o que quer e a IA te ajuda a construir. Mas e se eu te dissesse que existe uma forma de turbinar essa experiência?
 
 Estou falando do Claude Code com skills personalizadas, agentes paralelos e o que eu gosto de chamar de "superpoderes". Não é mais só vibe coding - é vibe coding com esteroides.
