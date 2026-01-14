@@ -36,29 +36,15 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
       "draft" -> :draft
       _ -> :all
     end
-    
+
     posts = Blog.posts_by_status(filter)
-    
-    socket = 
-      if Map.has_key?(socket.assigns, :streams) and Map.has_key?(socket.assigns.streams, :posts_collection) do
-        # Stream exists, clear existing posts and add new ones
-        socket = 
-          Enum.reduce(socket.assigns.streams.posts_collection.inserts, socket, fn {_id, post}, acc ->
-            stream_delete(acc, :posts_collection, post)
-          end)
-        
-        Enum.reduce(posts, socket, fn post, acc ->
-          stream_insert(acc, :posts_collection, post)
-        end)
-      else
-        # Stream doesn't exist, create it
-        stream(socket, :posts_collection, posts)
-      end
-    
+
     socket
+    |> stream(:posts_collection, posts, reset: true)
     |> assign(:page_title, "Listing Posts")
     |> assign(:posts, nil)
     |> assign(:current_filter, filter)
+    |> assign(:posts_count, length(posts))
   end
 
   @impl true

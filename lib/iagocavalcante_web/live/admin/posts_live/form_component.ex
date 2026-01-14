@@ -14,15 +14,21 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
         <div class="pt-12 pb-8 px-6">
           <div class="text-center">
             <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              <%= if @action == :edit, do: "Edit Story", else: "Write a new story" %>
+              {if @action == :edit, do: "Edit Story", else: "Write a new story"}
             </h1>
             <p class="text-xl text-gray-600 dark:text-gray-400">
-              <%= if @action == :edit, do: "Update your story", else: "Share your ideas with the world" %>
+              {if @action == :edit, do: "Update your story", else: "Share your ideas with the world"}
             </p>
           </div>
         </div>
 
-        <form id="posts-form" phx-target={@myself} phx-submit="save" class="px-6">
+        <form
+          id="posts-form"
+          phx-target={@myself}
+          phx-change="validate"
+          phx-submit="save"
+          class="px-6"
+        >
           <!-- Story Metadata -->
           <div class="mb-12 space-y-8">
             <!-- Title Input - Medium Style -->
@@ -38,8 +44,8 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
                 style="line-height: 1.2;"
               />
             </div>
-
-            <!-- Subtitle/Description - Medium Style -->
+            
+    <!-- Subtitle/Description - Medium Style -->
             <div class="space-y-2">
               <textarea
                 id={@form[:description].id}
@@ -51,8 +57,8 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
                 style="line-height: 1.4;"
               ><%= Phoenix.HTML.Form.normalize_value("textarea", @form[:description].value) %></textarea>
             </div>
-
-            <!-- Metadata Row -->
+            
+    <!-- Metadata Row -->
             <div class="flex flex-wrap items-center gap-6 pt-4 border-t border-gray-200 dark:border-gray-700">
               <div class="flex items-center space-x-2">
                 <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Language:</label>
@@ -66,7 +72,7 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
                   <option value="pt_BR" selected={@form[:locale].value == "pt_BR"}>Portuguese</option>
                 </select>
               </div>
-              
+
               <div class="flex items-center space-x-2 flex-1">
                 <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Tags:</label>
                 <input
@@ -87,10 +93,10 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
               </div>
             </div>
           </div>
-
-          <!-- Medium-Style WYSIWYG Editor -->
+          
+    <!-- Medium-Style WYSIWYG Editor -->
           <div class="mb-6">
-            <.live_component 
+            <.live_component
               module={WysiwygEditor}
               id="wysiwyg-editor"
               content={@editor_content}
@@ -98,58 +104,40 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
               parent_id={@id}
             />
           </div>
-
-          <!-- Content Spacing for Fixed Bottom Bar -->
+          
+    <!-- Content Spacing for Fixed Bottom Bar -->
           <div class="h-20"></div>
         </form>
-
-        <!-- Medium-Style Action Bar -->
+        
+    <!-- Medium-Style Action Bar -->
         <div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-6 py-4 z-10">
           <div class="max-w-4xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-4">
-              <button 
-                type="button" 
-                phx-click="save_draft" 
+              <button
+                type="button"
+                phx-click="save_draft"
                 phx-target={@myself}
                 class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
               >
                 Save Draft
               </button>
             </div>
-            
+
             <div class="flex items-center space-x-4">
               <span class="text-sm text-gray-500 dark:text-gray-400">
                 Auto-saved
               </span>
-              <button 
+              <button
                 type="submit"
                 form="posts-form"
-                phx-disable-with="Publishing..." 
+                phx-disable-with="Publishing..."
                 class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full transition-colors"
               >
-                <%= if @action == :edit, do: "Update", else: "Publish" %>
+                {if @action == :edit, do: "Update", else: "Publish"}
               </button>
             </div>
           </div>
         </div>
-
-        <!-- JavaScript for slug preview -->
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            const titleInput = document.querySelector('input[name="title"]');
-            const slugPreview = document.querySelector('#slug-preview-url span.font-mono');
-            
-            if (titleInput && slugPreview) {
-              titleInput.addEventListener('input', function() {
-                const slug = this.value
-                  .toLowerCase()
-                  .replace(/[^a-z0-9]+/g, '-')
-                  .replace(/^-+|-+$/g, '');
-                slugPreview.textContent = slug || 'your-post-title';
-              });
-            }
-          });
-        </script>
       </div>
     </div>
     """
@@ -164,25 +152,35 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
   @impl true
   def update(%{posts: post} = assigns, socket) do
     # Convert Post struct to map for form handling
-    post_data = case post do
-      %Iagocavalcante.Post{} = p ->
-        %{
-          "title" => p.title,
-          "description" => p.description,
-          "body" => p.body,
-          "tags" => Enum.join(p.tags, ", "),
-          "locale" => p.locale,
-          "published" => p.published
-        }
-      %{} = p -> p
-      _ -> %{}
-    end
-    
+    post_data =
+      case post do
+        %Iagocavalcante.Post{} = p ->
+          %{
+            "title" => p.title,
+            "description" => p.description,
+            "body" => p.body,
+            "tags" => Enum.join(p.tags, ", "),
+            "locale" => p.locale,
+            "published" => p.published
+          }
+
+        %{} = p ->
+          p
+
+        _ ->
+          %{}
+      end
+
     {:ok,
      socket
      |> assign(assigns)
      |> assign(:form, to_form(post_data))
      |> assign(:editor_content, post_data["body"] || "")}
+  end
+
+  @impl true
+  def handle_event("validate", posts_params, socket) do
+    {:noreply, assign(socket, :form, to_form(posts_params))}
   end
 
   @impl true
@@ -193,14 +191,15 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
   end
 
   @impl true
-  def handle_event("save_draft", posts_params, socket) do
-    posts_params = 
-      posts_params
+  def handle_event("save_draft", _params, socket) do
+    # Get form data from assigns since this button is outside the form
+    posts_params =
+      socket.assigns.form.params
       |> Map.put("published", false)
       |> Map.put("body", socket.assigns.editor_content)
+
     save_posts(socket, socket.assigns.action, posts_params)
   end
-
 
   defp save_posts(socket, :edit, posts_params) do
     case Blog.update_post(socket.assigns.posts.id, posts_params) do
@@ -209,7 +208,7 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
          socket
          |> put_flash(:info, "Post updated successfully")
          |> push_patch(to: socket.assigns.patch)}
-      
+
       {:error, reason} ->
         {:noreply,
          socket
@@ -266,13 +265,13 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.FormComponent do
   defp slug_from_title(%{"title" => title}) when is_binary(title) do
     slug_from_title(title)
   end
-  
+
   defp slug_from_title(post) when is_map(post) do
     case post["title"] do
       title when is_binary(title) -> slug_from_title(title)
       _ -> "untitled"
     end
   end
-  
+
   defp slug_from_title(_), do: "untitled"
 end
