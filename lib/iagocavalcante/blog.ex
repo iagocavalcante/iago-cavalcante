@@ -41,6 +41,47 @@ defmodule Iagocavalcante.Blog do
   def recent_posts_by_locale(num \\ 5, locale),
     do: Enum.take(published_posts_by_locale(locale), num)
 
+  @doc """
+  Returns paginated posts for a given locale.
+
+  ## Options
+    * `:page` - The page number (default: 1)
+    * `:per_page` - Number of posts per page (default: 10)
+
+  Returns a map with:
+    * `:posts` - List of posts for the current page
+    * `:page` - Current page number
+    * `:per_page` - Posts per page
+    * `:total_posts` - Total number of posts
+    * `:total_pages` - Total number of pages
+    * `:has_prev` - Whether there's a previous page
+    * `:has_next` - Whether there's a next page
+  """
+  def paginate_posts_by_locale(locale, opts \\ []) do
+    page = max(opts[:page] || 1, 1)
+    per_page = opts[:per_page] || 10
+
+    all_posts = published_posts_by_locale(locale)
+    total_posts = length(all_posts)
+    total_pages = max(ceil(total_posts / per_page), 1)
+    page = min(page, total_pages)
+
+    posts =
+      all_posts
+      |> Enum.drop((page - 1) * per_page)
+      |> Enum.take(per_page)
+
+    %{
+      posts: posts,
+      page: page,
+      per_page: per_page,
+      total_posts: total_posts,
+      total_pages: total_pages,
+      has_prev: page > 1,
+      has_next: page < total_pages
+    }
+  end
+
   def get_post_by_id!(id) do
     Enum.find(all_posts(), &(&1.id == id)) ||
       raise NotFoundError, "post with id=#{id} not found"

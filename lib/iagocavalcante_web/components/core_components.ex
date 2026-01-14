@@ -654,4 +654,6 @@ defmodule IagocavalcanteWeb.CoreComponents do
   defdelegate bookmarks_by_tag(assigns),
     to: IagocavalcanteWeb.Components.BookmarksByTag,
     as: :bookmarks_by_tag
+
+  defdelegate pagination(assigns), to: IagocavalcanteWeb.Pagination, as: :pagination
 end
