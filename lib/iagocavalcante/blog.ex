@@ -95,51 +95,64 @@ defmodule Iagocavalcante.Blog do
   end
 
   def create_new_post(attrs) do
-    %Post{
-      id: attrs["slug"],
-      title: attrs["title"],
-      description: attrs["description"],
-      body: attrs["body"],
-      tags: attrs["tags"] || "~w()",
-      published: attrs["published"] || true,
-      date: Date.utc_today(),
-      locale: attrs["locale"],
-      author: "Iago Cavalcante",
-      path: attrs["path"],
-      year: attrs["year"]
-    }
-    |> insert_header_in_body()
-    |> create_markdown_file()
+    locale = attrs["locale"]
+    year = attrs["year"]
+    slug = attrs["slug"]
+
+    # Validate inputs
+    with :ok <- validate_locale(locale),
+         :ok <- validate_year(year),
+         :ok <- validate_slug(slug) do
+      %Post{
+        id: slug,
+        title: attrs["title"],
+        description: attrs["description"],
+        body: attrs["body"],
+        tags: attrs["tags"] || "~w()",
+        published: attrs["published"] || true,
+        date: Date.utc_today(),
+        locale: locale,
+        author: "Iago Cavalcante",
+        path: attrs["path"],
+        year: year
+      }
+      |> insert_header_in_body()
+      |> create_markdown_file()
+    else
+      {:error, reason} -> {:error, reason}
+    end
   end
 
   def update_post(id, attrs) do
     try do
       post = get_post_by_id!(id)
-      
-      updated_post = %Post{
-        id: attrs["slug"] || post.id,
-        title: attrs["title"] || post.title,
-        description: attrs["description"] || post.description,
-        body: attrs["body"] || post.body,
-        tags: attrs["tags"] || Enum.join(post.tags, ", "),
-        published: attrs["published"] || post.published,
-        date: post.date,
-        locale: attrs["locale"] || post.locale,
-        author: post.author,
-        path: post.path,
-        year: post.year
-      }
-      |> insert_header_in_body()
-      
+
+      updated_post =
+        %Post{
+          id: attrs["slug"] || post.id,
+          title: attrs["title"] || post.title,
+          description: attrs["description"] || post.description,
+          body: attrs["body"] || post.body,
+          tags: attrs["tags"] || Enum.join(post.tags, ", "),
+          published: attrs["published"] || post.published,
+          date: post.date,
+          locale: attrs["locale"] || post.locale,
+          author: post.author,
+          path: post.path,
+          year: post.year
+        }
+        |> insert_header_in_body()
+
       # Write updated content to the existing file
       full_path = resolve_post_path(post.path, post.locale, post.year)
+
       case File.write(full_path, updated_post.body) do
-        :ok -> 
+        :ok ->
           # If slug changed, rename the file
           if attrs["slug"] && attrs["slug"] != post.id do
             new_path = create_new_path_from_slug(attrs["slug"], post)
             new_full_path = resolve_post_path(new_path, post.locale, post.year)
-            
+
             case File.rename(full_path, new_full_path) do
               :ok -> :ok
               error -> error
@@ -147,7 +160,9 @@ defmodule Iagocavalcante.Blog do
           else
             :ok
           end
-        error -> error
+
+        error ->
+          error
       end
     rescue
       error -> {:error, error}
@@ -195,31 +210,119 @@ defmodule Iagocavalcante.Blog do
     |> Enum.join(" ")
   end
 
+  @allowed_locales ~w(en pt_BR)
+  @allowed_year_range 2020..2100
+
   defp resolve_post_path(path, locale, year) do
-    Path.join(
-      Application.fetch_env!(:iagocavalcante, :blog_post_path) <> "#{locale}/#{year}/",
-      path
-    )
+    base_path = Application.fetch_env!(:iagocavalcante, :blog_post_path)
+    full_path = Path.join([base_path, locale, to_string(year), path])
+
+    # Validate the path is within the allowed directory
+    case validate_path(full_path, base_path) do
+      :ok -> full_path
+      {:error, reason} -> raise "Invalid path: #{reason}"
+    end
   end
 
+  defp validate_path(full_path, base_path) do
+    # Expand paths to resolve any .. or symlinks
+    expanded_full = Path.expand(full_path)
+    expanded_base = Path.expand(base_path)
+
+    cond do
+      # Ensure path stays within base directory
+      not String.starts_with?(expanded_full, expanded_base) ->
+        {:error, "path traversal detected"}
+
+      # Ensure file has .md extension
+      not String.ends_with?(full_path, ".md") ->
+        {:error, "invalid file extension"}
+
+      true ->
+        :ok
+    end
+  end
+
+  defp validate_locale(locale) when locale in @allowed_locales, do: :ok
+  defp validate_locale(_locale), do: {:error, "invalid locale"}
+
+  defp validate_year(year) when is_integer(year) and year in @allowed_year_range, do: :ok
+  defp validate_year(_year), do: {:error, "invalid year"}
+
+  defp validate_slug(slug) when is_binary(slug) do
+    # Only allow alphanumeric, hyphens, and underscores
+    if Regex.match?(~r/^[a-zA-Z0-9_-]+$/, slug) do
+      :ok
+    else
+      {:error, "invalid slug characters"}
+    end
+  end
+
+  defp validate_slug(_slug), do: {:error, "slug must be a string"}
+
   defp create_new_path_from_slug(slug, post) do
-    # Extract date portion from original filename
-    case String.split(post.path, "-", parts: 3) do
-      [month, day, _] -> "#{month}-#{day}-#{slug}.md"
-      _ -> "#{slug}.md"
+    # Validate slug before using
+    case validate_slug(slug) do
+      :ok ->
+        case String.split(post.path, "-", parts: 3) do
+          [month, day, _] -> "#{month}-#{day}-#{slug}.md"
+          _ -> "#{slug}.md"
+        end
+
+      {:error, reason} ->
+        raise "Invalid slug: #{reason}"
     end
   end
 
   # Comments functions
+
+  @max_reply_depth 5
+
+  @doc """
+  Lists all comments for a post with nested replies loaded efficiently.
+
+  Uses a single query to fetch all comments and builds the tree in memory,
+  avoiding N+1 queries from recursive database calls.
+  """
   def list_comments_for_post(post_id, status \\ :approved) do
-    from(c in Comment,
-      where: c.post_id == ^post_id and c.status == ^status,
-      where: is_nil(c.parent_id),
-      order_by: [desc: c.inserted_at],
-      preload: [:replies]
-    )
-    |> Repo.all()
-    |> Enum.map(&load_nested_replies/1)
+    # Fetch all comments for the post in a single query
+    all_comments =
+      from(c in Comment,
+        where: c.post_id == ^post_id and c.status == ^status,
+        order_by: [asc: c.inserted_at]
+      )
+      |> Repo.all()
+
+    # Build the comment tree in memory
+    build_comment_tree(all_comments)
+  end
+
+  # Build nested comment tree from flat list
+  defp build_comment_tree(comments) do
+    # Group comments by parent_id
+    by_parent = Enum.group_by(comments, & &1.parent_id)
+
+    # Get root comments (no parent)
+    root_comments = Map.get(by_parent, nil, [])
+
+    # Recursively attach replies
+    root_comments
+    |> Enum.map(&attach_replies(&1, by_parent, 0))
+    |> Enum.sort_by(& &1.inserted_at, {:desc, DateTime})
+  end
+
+  defp attach_replies(comment, _by_parent, depth) when depth >= @max_reply_depth do
+    %{comment | replies: []}
+  end
+
+  defp attach_replies(comment, by_parent, depth) do
+    replies =
+      by_parent
+      |> Map.get(comment.id, [])
+      |> Enum.map(&attach_replies(&1, by_parent, depth + 1))
+      |> Enum.sort_by(& &1.inserted_at, {:asc, DateTime})
+
+    %{comment | replies: replies}
   end
 
   def list_pending_comments do
@@ -263,38 +366,26 @@ defmodule Iagocavalcante.Blog do
 
   def get_comment!(id), do: Repo.get!(Comment, id)
 
-  defp load_nested_replies(comment) do
-    replies = 
-      from(c in Comment,
-        where: c.parent_id == ^comment.id and c.status == :approved,
-        order_by: [asc: c.inserted_at]
-      )
-      |> Repo.all()
-      |> Enum.map(&load_nested_replies/1)
-
-    %{comment | replies: replies}
-  end
-
   defp maybe_auto_approve({:ok, comment}) do
     cond do
       comment.spam_score >= 0.7 ->
         # High spam score - mark as spam
-        {:ok, comment} = 
+        {:ok, comment} =
           comment
           |> Comment.changeset(%{status: "spam"})
           |> Repo.update()
-        
+
         {:ok, comment}
-      
+
       comment.spam_score <= 0.3 and trusted_commenter?(comment.author_email) ->
         # Low spam score and trusted commenter - auto approve
         {:ok, comment} =
           comment
           |> Comment.changeset(%{status: "approved"})
           |> Repo.update()
-        
+
         {:ok, comment}
-      
+
       true ->
         # Medium spam score - keep as pending for manual review
         {:ok, comment}
@@ -305,7 +396,7 @@ defmodule Iagocavalcante.Blog do
 
   defp trusted_commenter?(email) do
     # Check if this email has had comments approved before
-    approved_count = 
+    approved_count =
       from(c in Comment,
         where: c.author_email == ^email and c.status == :approved
       )
@@ -317,16 +408,18 @@ defmodule Iagocavalcante.Blog do
   defp maybe_notify_admin({:ok, comment}) do
     if comment.status == :pending do
       # Send email notification to admin about pending comment
-      Task.start(fn ->
+      # Use Task.Supervisor for graceful shutdown handling
+      Task.Supervisor.start_child(Iagocavalcante.TaskSupervisor, fn ->
         case get_post_by_id!(comment.post_id) do
           post when not is_nil(post) ->
             CommentNotifier.deliver_new_pending_comment(%{comment: comment, post: post})
+
           _ ->
             :ok
         end
       end)
     end
-    
+
     {:ok, comment}
   end
 

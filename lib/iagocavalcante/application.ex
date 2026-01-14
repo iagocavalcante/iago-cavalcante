@@ -15,14 +15,15 @@ defmodule Iagocavalcante.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Iagocavalcante.PubSub},
       # Start DNSCluster for DNS resolution
-      {DNSCluster,
-       query: Application.get_env(:iagocavalcante, :dns_cluster_query) || :ignore},
+      {DNSCluster, query: Application.get_env(:iagocavalcante, :dns_cluster_query) || :ignore},
       # Start Finch
       {Finch, name: Iagocavalcante.Finch},
+      # Task supervisor for async operations (email notifications, etc.)
+      {Task.Supervisor, name: Iagocavalcante.TaskSupervisor},
+      # Bookmarks cache for CSV data
+      Iagocavalcante.Bookmarks.Cache,
       # Start the Endpoint (http/https)
       IagocavalcanteWeb.Endpoint
-      # Start a worker by calling: Iagocavalcante.Worker.start_link(arg)
-      # {Iagocavalcante.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

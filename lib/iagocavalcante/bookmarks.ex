@@ -11,12 +11,12 @@ defmodule Iagocavalcante.Bookmarks do
   defstruct [:title, :url, :time_added, :tags, :status]
 
   @type csv_bookmark :: %__MODULE__{
-    title: String.t(),
-    url: String.t(),
-    time_added: integer(),
-    tags: list(String.t()),
-    status: String.t()
-  }
+          title: String.t(),
+          url: String.t(),
+          time_added: integer(),
+          tags: list(String.t()),
+          status: String.t()
+        }
 
   ## Database CRUD operations
 
@@ -102,8 +102,12 @@ defmodule Iagocavalcante.Bookmarks do
   """
   def get_stats(user_id) do
     total_query = from(b in Bookmark, where: b.user_id == ^user_id and not b.archived)
-    read_query = from(b in Bookmark, where: b.user_id == ^user_id and b.status == "read" and not b.archived)
-    favorites_query = from(b in Bookmark, where: b.user_id == ^user_id and b.favorite == true and not b.archived)
+
+    read_query =
+      from(b in Bookmark, where: b.user_id == ^user_id and b.status == "read" and not b.archived)
+
+    favorites_query =
+      from(b in Bookmark, where: b.user_id == ^user_id and b.favorite == true and not b.archived)
 
     %{
       total: Repo.aggregate(total_query, :count),
@@ -117,10 +121,11 @@ defmodule Iagocavalcante.Bookmarks do
   Get all tags used by a user.
   """
   def get_user_tags(user_id) do
-    query = from(b in Bookmark,
-      where: b.user_id == ^user_id and not b.archived,
-      select: b.tags
-    )
+    query =
+      from(b in Bookmark,
+        where: b.user_id == ^user_id and not b.archived,
+        select: b.tags
+      )
 
     query
     |> Repo.all()
@@ -133,113 +138,61 @@ defmodule Iagocavalcante.Bookmarks do
   # Query helpers
   defp maybe_filter_by_tags(query, nil), do: query
   defp maybe_filter_by_tags(query, []), do: query
+
   defp maybe_filter_by_tags(query, tags) when is_list(tags) do
     where(query, [b], fragment("? && ?", b.tags, ^tags))
   end
 
   defp maybe_filter_by_status(query, nil), do: query
+
   defp maybe_filter_by_status(query, status) when is_binary(status) do
     where(query, [b], b.status == ^status)
   end
 
   defp maybe_filter_by_search(query, nil), do: query
   defp maybe_filter_by_search(query, ""), do: query
+
   defp maybe_filter_by_search(query, search) when is_binary(search) do
     search_term = "%#{search}%"
-    where(query, [b],
+
+    where(
+      query,
+      [b],
       ilike(b.title, ^search_term) or
-      ilike(b.url, ^search_term) or
-      ilike(b.description, ^search_term)
+        ilike(b.url, ^search_term) or
+        ilike(b.description, ^search_term)
     )
   end
 
   ## Legacy CSV support functions
 
-  @doc """
-  Debug function to show all potential CSV file paths
-  """
-  def debug_csv_paths do
-    paths = [
-      {"Production (app_dir)", Path.join([Application.app_dir(:iagocavalcante), "priv", "bookmarks.csv"])},
-      {"Development (code.priv_dir)", Path.join([:code.priv_dir(:iagocavalcante), "bookmarks.csv"])},
-      {"Relative path", "priv/bookmarks.csv"},
-      {"Current directory", "bookmarks.csv"}
-    ]
-
-    IO.puts("=== CSV File Path Debug ===")
-    for {label, path} <- paths do
-      exists = File.exists?(path)
-      IO.puts("#{label}: #{path} (exists: #{exists})")
-    end
-    IO.puts("Current working directory: #{File.cwd!()}")
-    IO.puts("Selected path: #{csv_file_path()}")
-    IO.puts("===========================")
-  end
-
-  # Get the CSV file path, handling different environments
-  defp csv_file_path do
-    # Try different path resolution methods for different environments
-    cond do
-      # Production with releases
-      File.exists?(Path.join([Application.app_dir(:iagocavalcante), "priv", "bookmarks.csv"])) ->
-        Path.join([Application.app_dir(:iagocavalcante), "priv", "bookmarks.csv"])
-
-      # Development
-      File.exists?(Path.join([:code.priv_dir(:iagocavalcante), "bookmarks.csv"])) ->
-        Path.join([:code.priv_dir(:iagocavalcante), "bookmarks.csv"])
-
-      # Fallback - relative path
-      File.exists?("priv/bookmarks.csv") ->
-        "priv/bookmarks.csv"
-
-      # Last resort - check if it's in the current directory
-      File.exists?("bookmarks.csv") ->
-        "bookmarks.csv"
-
-      # Default development path (might not exist)
-      true ->
-        Path.join([:code.priv_dir(:iagocavalcante), "bookmarks.csv"])
-    end
-  end
+  alias Iagocavalcante.Bookmarks.Cache
 
   @doc """
-  Load all bookmarks from the CSV file
+  Load all bookmarks from cache (originally from CSV file).
+
+  Uses ETS cache for fast access. Call `invalidate_cache/0` to refresh.
   """
   def all_bookmarks do
-    file_path = csv_file_path()
-
-    case File.read(file_path) do
-      {:ok, content} ->
-        content
-        |> String.split("\n")
-        |> Enum.drop(1) # Skip header
-        |> Enum.filter(&(&1 != ""))
-        |> Enum.map(&parse_bookmark_line/1)
-        |> Enum.reject(&is_nil/1)
-
-      {:error, reason} ->
-        # Log the error for debugging but return empty list for graceful degradation
-        IO.warn("Could not read CSV file at #{file_path}: #{inspect(reason)}")
-        []
-    end
+    Cache.all_bookmarks()
   end
 
   @doc """
-  Get bookmarks grouped by tags
+  Get bookmarks grouped by tags from cache.
   """
   def bookmarks_by_tag do
-    all_bookmarks()
-    |> Enum.flat_map(fn bookmark ->
-      Enum.map(bookmark.tags, fn tag ->
-        {tag, bookmark}
-      end)
-    end)
-    |> Enum.group_by(fn {tag, _bookmark} -> tag end, fn {_tag, bookmark} -> bookmark end)
-    |> Enum.sort_by(fn {_tag, bookmarks} -> -length(bookmarks) end)
+    Cache.bookmarks_by_tag()
   end
 
   @doc """
-  Get all unique tags sorted by frequency
+  Invalidate the bookmarks cache and reload from CSV.
+  """
+  def invalidate_cache do
+    Cache.invalidate()
+  end
+
+  @doc """
+  Get all unique tags sorted by frequency.
   """
   def all_tags do
     bookmarks_by_tag()
@@ -247,57 +200,21 @@ defmodule Iagocavalcante.Bookmarks do
   end
 
   @doc """
-  Get bookmarks for a specific tag
+  Get bookmarks for a specific tag.
   """
   def bookmarks_for_tag(tag) do
     bookmarks_by_tag()
+    |> Map.new()
     |> Map.get(tag, [])
     |> Enum.sort_by(&(-&1.time_added))
   end
 
   @doc """
-  Get featured tags (top tags with most bookmarks)
+  Get featured tags (top tags with most bookmarks).
   """
   def featured_tags(limit \\ 10) do
     all_tags()
     |> Enum.take(limit)
-  end
-
-  defp parse_bookmark_line(line) do
-    # Handle CSV parsing with potential commas in titles and URLs
-    case parse_csv_line(line) do
-      [title, url, time_added_str, tags_str, status] ->
-        time_added = String.to_integer(time_added_str)
-        tags = parse_tags(tags_str)
-
-        %__MODULE__{
-          title: title,
-          url: url,
-          time_added: time_added,
-          tags: tags,
-          status: status
-        }
-
-      _ ->
-        nil
-    end
-  rescue
-    _ -> nil
-  end
-
-  defp parse_csv_line(line) do
-    # Simple CSV parser - splits by comma but handles quoted fields
-    line
-    |> String.split(",")
-    |> Enum.map(&String.trim/1)
-  end
-
-  defp parse_tags(""), do: []
-  defp parse_tags(tags_str) when is_binary(tags_str) do
-    tags_str
-    |> String.split(",")
-    |> Enum.map(&String.trim/1)
-    |> Enum.filter(&(&1 != ""))
   end
 
   @doc """
@@ -337,9 +254,18 @@ defmodule Iagocavalcante.Bookmarks do
   """
   def tag_color(tag) do
     colors = [
-      "bg-red-500", "bg-green-500", "bg-blue-500", "bg-yellow-500",
-      "bg-purple-500", "bg-pink-500", "bg-indigo-500", "bg-orange-500",
-      "bg-teal-500", "bg-cyan-500", "bg-emerald-500", "bg-rose-500"
+      "bg-red-500",
+      "bg-green-500",
+      "bg-blue-500",
+      "bg-yellow-500",
+      "bg-purple-500",
+      "bg-pink-500",
+      "bg-indigo-500",
+      "bg-orange-500",
+      "bg-teal-500",
+      "bg-cyan-500",
+      "bg-emerald-500",
+      "bg-rose-500"
     ]
 
     hash = :erlang.phash2(tag, length(colors))
