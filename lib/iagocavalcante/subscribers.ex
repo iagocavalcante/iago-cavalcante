@@ -1,6 +1,8 @@
 defmodule Iagocavalcante.Subscribers do
   @moduledoc """
-  The Blog context.
+  The Subscribers context for managing newsletter subscriptions.
+
+  Handles subscriber creation, verification, and notification delivery.
   """
 
   import Ecto.Query, warn: false
@@ -10,48 +12,94 @@ defmodule Iagocavalcante.Subscribers do
   alias Iagocavalcante.Blog.SubscriberNotifier
 
   @doc """
-  Returns the list of subscriber.
+  Returns all subscribers.
 
   ## Examples
 
-      iex> list_subscriber()
+      iex> list_subscribers()
       [%Subscriber{}, ...]
 
   """
-  def list_subscriber do
+  def list_subscribers do
     Repo.all(Subscriber)
   end
 
-  def list_last_subscriber do
-    Repo.all(from p in Subscriber, order_by: [desc: p.inserted_at], limit: 3)
+  # Deprecated: Use list_subscribers/0 instead
+  def list_subscriber, do: list_subscribers()
+
+  @doc """
+  Returns the most recent subscribers.
+  """
+  def list_recent_subscribers(limit \\ 3) do
+    from(s in Subscriber, order_by: [desc: s.inserted_at], limit: ^limit)
+    |> Repo.all()
   end
 
-  def already_subscribed?(email) do
-    query = from(s in Subscriber, where: s.email == ^email)
-    Repo.exists?(query)
+  # Deprecated: Use list_recent_subscribers/1 instead
+  def list_last_subscriber, do: list_recent_subscribers(3)
+
+  @doc """
+  Returns all verified subscribers.
+  """
+  def list_verified_subscribers do
+    from(s in Subscriber, where: not is_nil(s.verified_at))
+    |> Repo.all()
   end
 
   @doc """
-  Gets a single subscriber.
+  Returns the count of verified subscribers.
+  """
+  def count_verified_subscribers do
+    from(s in Subscriber, where: not is_nil(s.verified_at))
+    |> Repo.aggregate(:count)
+  end
 
-  Raises `Ecto.NoResultsError` if the Subscriber does not exist.
+  @doc """
+  Checks if an email is already subscribed.
+  """
+  def already_subscribed?(email) do
+    from(s in Subscriber, where: s.email == ^email)
+    |> Repo.exists?()
+  end
 
-  ## Examples
+  @doc """
+  Gets a subscriber by ID. Returns `{:ok, subscriber}` or `{:error, :not_found}`.
+  """
+  def get_subscriber(id) do
+    case Repo.get(Subscriber, id) do
+      nil -> {:error, :not_found}
+      subscriber -> {:ok, subscriber}
+    end
+  end
 
-      iex> get_subscriber!(123)
-      %Subscriber{}
-
-      iex> get_subscriber!(456)
-      ** (Ecto.NoResultsError)
-
+  @doc """
+  Gets a subscriber by ID. Raises `Ecto.NoResultsError` if not found.
   """
   def get_subscriber!(id), do: Repo.get!(Subscriber, id)
 
-  def get_by_email!(email),
-    do: from(s in Subscriber, where: s.email == ^email and is_nil(s.verified_at)) |> Repo.one()
+  @doc """
+  Gets an unverified subscriber by email.
+  Returns the subscriber or nil.
+  """
+  def get_unverified_by_email(email) do
+    from(s in Subscriber, where: s.email == ^email and is_nil(s.verified_at))
+    |> Repo.one()
+  end
 
-  def get_by_token(token),
-    do: from(s in Subscriber, where: s.token == ^token and is_nil(s.verified_at)) |> Repo.one()
+  # Deprecated: naming inconsistent (has ! but returns nil)
+  def get_by_email!(email), do: get_unverified_by_email(email)
+
+  @doc """
+  Gets an unverified subscriber by token.
+  Returns the subscriber or nil.
+  """
+  def get_unverified_by_token(token) do
+    from(s in Subscriber, where: s.token == ^token and is_nil(s.verified_at))
+    |> Repo.one()
+  end
+
+  # Deprecated: Use get_unverified_by_token/1 instead
+  def get_by_token(token), do: get_unverified_by_token(token)
 
   @doc """
   Creates a subscriber.
@@ -118,8 +166,14 @@ defmodule Iagocavalcante.Subscribers do
     Subscriber.changeset(subscriber, attrs)
   end
 
+  @doc """
+  Verifies a subscriber using a token.
+
+  Returns `{:ok, subscriber}` on success, `{:ok, :already_verified}` if already verified,
+  or `{:error, :invalid_token}` if token is invalid or expired.
+  """
   def verify_subscriber(socket, token) do
-    subscriber = get_by_token(token)
+    subscriber = get_unverified_by_token(token)
 
     if is_nil(subscriber) do
       {:ok, :already_verified}
@@ -136,15 +190,80 @@ defmodule Iagocavalcante.Subscribers do
     end
   end
 
+  @doc """
+  Sends new post notifications synchronously (legacy).
+  """
   def notify_new_post(post_params) do
-    subscribers = Repo.all(from s in Subscriber, where: not is_nil(s.verified_at))
+    subscribers = list_verified_subscribers()
 
     Enum.chunk_every(subscribers, 50)
-    |> Enum.each(fn subscribers ->
-      Enum.each(subscribers, fn subscriber ->
+    |> Enum.each(fn chunk ->
+      Enum.each(chunk, fn subscriber ->
         SubscriberNotifier.deliver_new_post(subscriber.email, post_params)
       end)
     end)
+  end
+
+  @doc """
+  Sends new post notifications asynchronously with progress updates.
+
+  Sends progress updates to the LiveView component via send_update.
+  """
+  def notify_new_post_async(post_params, liveview_pid, component_id) do
+    subscribers = list_verified_subscribers()
+    total = length(subscribers)
+
+    result =
+      subscribers
+      |> Enum.with_index(1)
+      |> Enum.reduce(%{sent: 0, failed: 0}, fn {subscriber, index}, acc ->
+        case SubscriberNotifier.deliver_new_post(subscriber.email, post_params) do
+          {:ok, _} ->
+            new_acc = %{acc | sent: acc.sent + 1}
+
+            # Send progress update every 5 emails or on the last one
+            if rem(index, 5) == 0 or index == total do
+              send_progress_update(liveview_pid, component_id, %{
+                sent: new_acc.sent,
+                failed: new_acc.failed,
+                status: :sending
+              })
+            end
+
+            new_acc
+
+          {:error, _} ->
+            new_acc = %{acc | failed: acc.failed + 1}
+
+            if rem(index, 5) == 0 or index == total do
+              send_progress_update(liveview_pid, component_id, %{
+                sent: new_acc.sent,
+                failed: new_acc.failed,
+                status: :sending
+              })
+            end
+
+            new_acc
+        end
+      end)
+
+    # Send final status
+    final_status = if result.failed > 0, do: :error, else: :completed
+
+    send_progress_update(liveview_pid, component_id, %{
+      sent: result.sent,
+      failed: result.failed,
+      status: final_status
+    })
+
+    result
+  end
+
+  defp send_progress_update(liveview_pid, component_id, progress) do
+    send(
+      liveview_pid,
+      {:update_notification_progress, component_id, progress}
+    )
   end
 
   def deliver_confirmation_subscription(%Subscriber{} = subscriber, confirmation_url_fun)

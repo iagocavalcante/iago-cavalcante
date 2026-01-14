@@ -1,6 +1,14 @@
 defmodule Iagocavalcante.Blog do
+  @moduledoc """
+  The Blog context for managing static markdown posts and comments.
+
+  Posts are stored as markdown files and compiled at build time using NimblePublisher.
+  Comments are stored in the database.
+  """
+
   alias Iagocavalcante.Post
   alias Iagocavalcante.Blog.Comment
+  alias Iagocavalcante.Blog.CommentApprovalPolicy
   alias Iagocavalcante.Blog.CommentNotifier
   alias Iagocavalcante.Repo
   import Ecto.Query
@@ -82,15 +90,50 @@ defmodule Iagocavalcante.Blog do
     }
   end
 
-  def get_post_by_id!(id) do
-    Enum.find(all_posts(), &(&1.id == id)) ||
-      raise NotFoundError, "post with id=#{id} not found"
+  @doc """
+  Gets a post by ID. Returns `{:ok, post}` or `{:error, :not_found}`.
+  """
+  def get_post_by_id(id) do
+    case Enum.find(all_posts(), &(&1.id == id)) do
+      nil -> {:error, :not_found}
+      post -> {:ok, post}
+    end
   end
 
-  def get_posts_by_tag!(tag) do
+  @doc """
+  Gets a post by ID. Raises `NotFoundError` if not found.
+  """
+  def get_post_by_id!(id) do
+    case get_post_by_id(id) do
+      {:ok, post} -> post
+      {:error, :not_found} -> raise NotFoundError, "post with id=#{id} not found"
+    end
+  end
+
+  @doc """
+  Checks if a post exists by ID.
+  """
+  def post_exists?(id) do
+    Enum.any?(all_posts(), &(&1.id == id))
+  end
+
+  @doc """
+  Gets posts by tag. Returns `{:ok, posts}` or `{:error, :not_found}`.
+  """
+  def get_posts_by_tag(tag) do
     case Enum.filter(published_posts(), &(tag in &1.tags)) do
-      [] -> raise NotFoundError, "posts with tag=#{tag} not found"
-      posts -> posts
+      [] -> {:error, :not_found}
+      posts -> {:ok, posts}
+    end
+  end
+
+  @doc """
+  Gets posts by tag. Raises `NotFoundError` if none found.
+  """
+  def get_posts_by_tag!(tag) do
+    case get_posts_by_tag(tag) do
+      {:ok, posts} -> posts
+      {:error, :not_found} -> raise NotFoundError, "posts with tag=#{tag} not found"
     end
   end
 
@@ -178,7 +221,8 @@ defmodule Iagocavalcante.Blog do
   defp create_markdown_file(post) do
     full_path =
       Path.join(
-        Application.fetch_env!(:iagocavalcante, :blog_post_path) <> "#{post.locale}/#{post.year}/",
+        Application.fetch_env!(:iagocavalcante, :blog_post_path) <>
+          "#{post.locale}/#{post.year}/",
         post.path
       )
 
@@ -325,6 +369,9 @@ defmodule Iagocavalcante.Blog do
     %{comment | replies: replies}
   end
 
+  @doc """
+  Returns all pending comments for moderation.
+  """
   def list_pending_comments do
     from(c in Comment,
       where: c.status == :pending,
@@ -333,88 +380,119 @@ defmodule Iagocavalcante.Blog do
     |> Repo.all()
   end
 
+  @doc """
+  Creates a comment with post validation and auto-approval logic.
+  """
   def create_comment(attrs) do
-    %Comment{}
-    |> Comment.changeset(attrs)
-    |> Repo.insert()
-    |> maybe_auto_approve()
-    |> maybe_notify_admin()
+    post_id = attrs["post_id"] || attrs[:post_id]
+
+    # Validate post exists before creating comment (moved from schema)
+    if post_exists?(post_id) do
+      # Check if commenter is trusted (do once, not in approval)
+      email = attrs["author_email"] || attrs[:author_email]
+      is_trusted = trusted_commenter?(email)
+
+      %Comment{}
+      |> Comment.create_changeset(attrs)
+      |> Repo.insert()
+      |> maybe_auto_approve(is_trusted)
+      |> maybe_notify_admin()
+    else
+      {:error, :post_not_found}
+    end
   end
 
+  @doc """
+  Approves a pending comment.
+  """
   def approve_comment(id) do
     get_comment!(id)
-    |> Comment.changeset(%{status: "approved"})
+    |> Comment.status_changeset(:approved)
     |> Repo.update()
   end
 
+  @doc """
+  Rejects a comment.
+  """
   def reject_comment(id) do
     get_comment!(id)
-    |> Comment.changeset(%{status: "rejected"})
+    |> Comment.status_changeset(:rejected)
     |> Repo.update()
   end
 
+  @doc """
+  Marks a comment as spam.
+  """
   def mark_as_spam(id) do
     get_comment!(id)
-    |> Comment.changeset(%{status: "spam"})
+    |> Comment.status_changeset(:spam)
     |> Repo.update()
   end
 
+  @doc """
+  Deletes a comment by ID.
+  """
   def delete_comment(id) do
     get_comment!(id)
     |> Repo.delete()
   end
 
-  def get_comment!(id), do: Repo.get!(Comment, id)
-
-  defp maybe_auto_approve({:ok, comment}) do
-    cond do
-      comment.spam_score >= 0.7 ->
-        # High spam score - mark as spam
-        {:ok, comment} =
-          comment
-          |> Comment.changeset(%{status: "spam"})
-          |> Repo.update()
-
-        {:ok, comment}
-
-      comment.spam_score <= 0.3 and trusted_commenter?(comment.author_email) ->
-        # Low spam score and trusted commenter - auto approve
-        {:ok, comment} =
-          comment
-          |> Comment.changeset(%{status: "approved"})
-          |> Repo.update()
-
-        {:ok, comment}
-
-      true ->
-        # Medium spam score - keep as pending for manual review
-        {:ok, comment}
+  @doc """
+  Gets a comment by ID. Returns `{:ok, comment}` or `{:error, :not_found}`.
+  """
+  def get_comment(id) do
+    case Repo.get(Comment, id) do
+      nil -> {:error, :not_found}
+      comment -> {:ok, comment}
     end
   end
 
-  defp maybe_auto_approve(error), do: error
+  @doc """
+  Gets a comment by ID. Raises if not found.
+  """
+  def get_comment!(id), do: Repo.get!(Comment, id)
+
+  # Uses the CommentApprovalPolicy to determine status
+  defp maybe_auto_approve({:ok, comment}, trusted_commenter?) do
+    new_status = CommentApprovalPolicy.determine_status(comment, trusted_commenter?)
+
+    if new_status != :pending do
+      {:ok, updated} =
+        comment
+        |> Comment.status_changeset(new_status)
+        |> Repo.update()
+
+      {:ok, updated}
+    else
+      {:ok, comment}
+    end
+  end
+
+  defp maybe_auto_approve(error, _trusted), do: error
+
+  # Optimized: Uses exists? with limit instead of aggregate count
+  defp trusted_commenter?(nil), do: false
 
   defp trusted_commenter?(email) do
-    # Check if this email has had comments approved before
-    approved_count =
-      from(c in Comment,
-        where: c.author_email == ^email and c.status == :approved
-      )
-      |> Repo.aggregate(:count)
+    threshold = CommentApprovalPolicy.trusted_threshold()
 
-    approved_count >= 3
+    # More efficient than count - stops at threshold
+    from(c in Comment,
+      where: c.author_email == ^email and c.status == :approved,
+      limit: ^threshold
+    )
+    |> Repo.aggregate(:count) >= threshold
   end
 
   defp maybe_notify_admin({:ok, comment}) do
     if comment.status == :pending do
-      # Send email notification to admin about pending comment
-      # Use Task.Supervisor for graceful shutdown handling
       Task.Supervisor.start_child(Iagocavalcante.TaskSupervisor, fn ->
-        case get_post_by_id!(comment.post_id) do
-          post when not is_nil(post) ->
+        # Use non-bang version to avoid crashes in Task
+        case get_post_by_id(comment.post_id) do
+          {:ok, post} ->
             CommentNotifier.deliver_new_pending_comment(%{comment: comment, post: post})
 
-          _ ->
+          {:error, :not_found} ->
             :ok
         end
       end)
@@ -425,6 +503,9 @@ defmodule Iagocavalcante.Blog do
 
   defp maybe_notify_admin(error), do: error
 
+  @doc """
+  Returns the count of approved comments for a post.
+  """
   def comment_count_for_post(post_id) do
     from(c in Comment,
       where: c.post_id == ^post_id and c.status == :approved

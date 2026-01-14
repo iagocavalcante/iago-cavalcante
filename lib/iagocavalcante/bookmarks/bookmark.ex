@@ -1,6 +1,9 @@
 defmodule Iagocavalcante.Bookmarks.Bookmark do
   @moduledoc """
-  Schema for bookmarks
+  Schema for bookmarks.
+
+  Note: user_id is stored as a plain field to avoid cross-context coupling.
+  Use Accounts.get_user!/1 when you need user data.
   """
   use Ecto.Schema
   import Ecto.Changeset
@@ -25,8 +28,8 @@ defmodule Iagocavalcante.Bookmarks.Bookmark do
     field :source, Ecto.Enum, values: @sources, default: :extension
     field :domain, :string
     field :added_at, :utc_datetime
-
-    belongs_to :user, Iagocavalcante.Accounts.User
+    # Store user_id as plain field - avoids cross-context coupling
+    field :user_id, :id
 
     timestamps()
   end
@@ -53,6 +56,9 @@ defmodule Iagocavalcante.Bookmarks.Bookmark do
     |> Sanitizer.sanitize_fields([:title, :url, :description, :domain])
     |> Sanitizer.sanitize_array_fields([:tags])
     |> validate_required([:title, :url, :user_id])
+    |> validate_length(:title, min: 1, max: 500)
+    |> validate_length(:description, max: 2000)
+    |> validate_number(:read_time_minutes, greater_than_or_equal_to: 0, less_than: 1000)
     |> validate_url(:url)
     |> validate_inclusion(:status, @statuses)
     |> validate_inclusion(:source, @sources)

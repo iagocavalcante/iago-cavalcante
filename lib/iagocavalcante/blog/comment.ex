@@ -1,6 +1,9 @@
 defmodule Iagocavalcante.Blog.Comment do
   @moduledoc """
   Schema for blog post comments with spam detection and nested replies.
+
+  Note: Post validation is done in the Blog context, not in the schema,
+  to avoid cross-context coupling.
   """
 
   use Ecto.Schema
@@ -27,51 +30,63 @@ defmodule Iagocavalcante.Blog.Comment do
     timestamps()
   end
 
-  @doc false
+  @cast_fields ~w(post_id author_name author_email content status ip_address user_agent spam_score parent_id)a
+  @sanitize_fields ~w(author_name author_email content ip_address user_agent)a
+
+  @doc """
+  Changeset for creating a new comment.
+  Includes spam score calculation.
+  """
+  def create_changeset(comment, attrs) do
+    comment
+    |> cast(attrs, @cast_fields)
+    |> Sanitizer.sanitize_fields(@sanitize_fields)
+    |> validate_required([:post_id, :author_name, :author_email, :content])
+    |> validate_format(:author_email, ~r/^[^\s]+@[^\s]+$/, message: "must be a valid email")
+    |> validate_length(:author_name, min: 2, max: 50)
+    |> validate_length(:content, min: 10, max: 2000)
+    |> put_spam_score()
+  end
+
+  @doc """
+  Changeset for updating comment content (edit by admin).
+  """
+  def update_changeset(comment, attrs) do
+    comment
+    |> cast(attrs, [:content])
+    |> Sanitizer.sanitize_fields([:content])
+    |> validate_length(:content, min: 10, max: 2000)
+  end
+
+  @doc """
+  Lightweight changeset for status changes only.
+  Does not recalculate spam score.
+  """
+  def status_changeset(comment, status) when status in @statuses do
+    comment
+    |> change(%{status: status})
+  end
+
+  def status_changeset(comment, status) when is_binary(status) do
+    status_changeset(comment, String.to_existing_atom(status))
+  rescue
+    ArgumentError -> add_error(change(comment), :status, "invalid status")
+  end
+
+  @doc """
+  Legacy changeset - kept for backwards compatibility.
+  Prefer create_changeset/2 for new comments, status_changeset/2 for status changes.
+  """
   def changeset(comment, attrs) do
     comment
-    |> cast(attrs, [
-      :post_id,
-      :author_name,
-      :author_email,
-      :content,
-      :status,
-      :ip_address,
-      :user_agent,
-      :spam_score,
-      :parent_id
-    ])
-    |> Sanitizer.sanitize_fields([
-      :author_name,
-      :author_email,
-      :content,
-      :ip_address,
-      :user_agent
-    ])
+    |> cast(attrs, @cast_fields)
+    |> Sanitizer.sanitize_fields(@sanitize_fields)
     |> validate_required([:post_id, :author_name, :author_email, :content])
     |> validate_format(:author_email, ~r/^[^\s]+@[^\s]+$/, message: "must be a valid email")
     |> validate_length(:author_name, min: 2, max: 50)
     |> validate_length(:content, min: 10, max: 2000)
     |> validate_inclusion(:status, @statuses)
     |> validate_number(:spam_score, greater_than_or_equal_to: 0.0, less_than_or_equal_to: 1.0)
-    |> validate_post_exists()
-    |> put_spam_score()
-  end
-
-  defp validate_post_exists(changeset) do
-    case get_field(changeset, :post_id) do
-      nil ->
-        changeset
-
-      post_id ->
-        try do
-          Iagocavalcante.Blog.get_post_by_id!(post_id)
-          changeset
-        rescue
-          Iagocavalcante.Blog.NotFoundError ->
-            add_error(changeset, :post_id, "post does not exist")
-        end
-    end
   end
 
   defp put_spam_score(changeset) do
@@ -94,4 +109,5 @@ defmodule Iagocavalcante.Blog.Comment do
   def approved_statuses, do: [:approved]
   def pending_statuses, do: [:pending]
   def spam_statuses, do: [:spam, :rejected]
+  def all_statuses, do: @statuses
 end

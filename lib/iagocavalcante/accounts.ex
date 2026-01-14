@@ -170,8 +170,13 @@ defmodule Iagocavalcante.Accounts do
       when is_function(update_email_url_fun, 1) do
     {encoded_token, user_token} = UserToken.build_email_token(user, "change:#{current_email}")
 
-    Repo.insert!(user_token)
-    UserNotifier.deliver_update_email_instructions(user, update_email_url_fun.(encoded_token))
+    case Repo.insert(user_token) do
+      {:ok, _token} ->
+        UserNotifier.deliver_update_email_instructions(user, update_email_url_fun.(encoded_token))
+
+      {:error, _changeset} ->
+        {:error, :token_creation_failed}
+    end
   end
 
   @doc """
@@ -219,11 +224,16 @@ defmodule Iagocavalcante.Accounts do
 
   @doc """
   Generates a session token.
+
+  Returns the token on success, raises on failure (session tokens are critical).
   """
   def generate_user_session_token(user) do
     {token, user_token} = UserToken.build_session_token(user)
-    Repo.insert!(user_token)
-    token
+
+    case Repo.insert(user_token) do
+      {:ok, _} -> token
+      {:error, _} -> raise "Failed to generate session token"
+    end
   end
 
   @doc """
@@ -262,8 +272,17 @@ defmodule Iagocavalcante.Accounts do
       {:error, :already_confirmed}
     else
       {encoded_token, user_token} = UserToken.build_email_token(user, "confirm")
-      Repo.insert!(user_token)
-      UserNotifier.deliver_confirmation_instructions(user, confirmation_url_fun.(encoded_token))
+
+      case Repo.insert(user_token) do
+        {:ok, _token} ->
+          UserNotifier.deliver_confirmation_instructions(
+            user,
+            confirmation_url_fun.(encoded_token)
+          )
+
+        {:error, _changeset} ->
+          {:error, :token_creation_failed}
+      end
     end
   end
 
@@ -303,8 +322,17 @@ defmodule Iagocavalcante.Accounts do
   def deliver_user_reset_password_instructions(%User{} = user, reset_password_url_fun)
       when is_function(reset_password_url_fun, 1) do
     {encoded_token, user_token} = UserToken.build_email_token(user, "reset_password")
-    Repo.insert!(user_token)
-    UserNotifier.deliver_reset_password_instructions(user, reset_password_url_fun.(encoded_token))
+
+    case Repo.insert(user_token) do
+      {:ok, _token} ->
+        UserNotifier.deliver_reset_password_instructions(
+          user,
+          reset_password_url_fun.(encoded_token)
+        )
+
+      {:error, _changeset} ->
+        {:error, :token_creation_failed}
+    end
   end
 
   @doc """

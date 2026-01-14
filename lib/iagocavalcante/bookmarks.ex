@@ -1,11 +1,14 @@
 defmodule Iagocavalcante.Bookmarks do
   @moduledoc """
   The Bookmarks context for managing bookmarks from both CSV import and API.
+
+  For presentation/formatting helpers, see `Iagocavalcante.Bookmarks.Formatter`.
   """
 
   import Ecto.Query, warn: false
   alias Iagocavalcante.Repo
   alias Iagocavalcante.Bookmarks.Bookmark
+  alias Iagocavalcante.Bookmarks.Formatter
 
   # Legacy CSV support struct
   defstruct [:title, :url, :time_added, :tags, :status]
@@ -99,41 +102,53 @@ defmodule Iagocavalcante.Bookmarks do
 
   @doc """
   Get bookmarks statistics for a user.
+
+  Optimized to use a single query with conditional aggregation instead of
+  4 separate queries.
   """
   def get_stats(user_id) do
-    total_query = from(b in Bookmark, where: b.user_id == ^user_id and not b.archived)
-
-    read_query =
-      from(b in Bookmark, where: b.user_id == ^user_id and b.status == :read and not b.archived)
-
-    favorites_query =
-      from(b in Bookmark, where: b.user_id == ^user_id and b.favorite == true and not b.archived)
+    # Single query with conditional counts using filter
+    {total, read, favorites} =
+      from(b in Bookmark,
+        where: b.user_id == ^user_id and not b.archived,
+        select: {
+          count(b.id),
+          filter(count(b.id), b.status == :read),
+          filter(count(b.id), b.favorite == true)
+        }
+      )
+      |> Repo.one() || {0, 0, 0}
 
     %{
-      total: Repo.aggregate(total_query, :count),
-      read: Repo.aggregate(read_query, :count),
-      favorites: Repo.aggregate(favorites_query, :count),
-      tags: get_user_tags(user_id)
+      total: total,
+      read: read,
+      favorites: favorites,
+      tags: list_user_tags(user_id)
     }
   end
 
   @doc """
-  Get all tags used by a user.
-  """
-  def get_user_tags(user_id) do
-    query =
-      from(b in Bookmark,
-        where: b.user_id == ^user_id and not b.archived,
-        select: b.tags
-      )
+  Get all unique tags used by a user.
 
-    query
+  Optimized to use PostgreSQL's unnest for efficient tag extraction
+  instead of loading all tag arrays into memory.
+  """
+  def list_user_tags(user_id) do
+    from(b in Bookmark,
+      where: b.user_id == ^user_id and not b.archived,
+      select: fragment("DISTINCT unnest(?)", b.tags),
+      order_by: fragment("1")
+    )
     |> Repo.all()
-    |> List.flatten()
-    |> Enum.uniq()
     |> Enum.reject(&(&1 == "" or is_nil(&1)))
-    |> Enum.sort()
   end
+
+  @doc """
+  Get all tags used by a user.
+
+  Deprecated: Use `list_user_tags/1` instead for better naming consistency.
+  """
+  def get_user_tags(user_id), do: list_user_tags(user_id)
 
   # Query helpers
   defp maybe_filter_by_tags(query, nil), do: query
@@ -227,58 +242,30 @@ defmodule Iagocavalcante.Bookmarks do
     |> Enum.take(limit)
   end
 
-  @doc """
-  Convert Unix timestamp to readable date
-  """
-  def format_date(timestamp) when is_integer(timestamp) do
-    timestamp
-    |> DateTime.from_unix!()
-    |> DateTime.to_date()
-    |> Date.to_string()
-  end
+  # Presentation helpers - delegated to Formatter module for separation of concerns
+  # Kept here for backwards compatibility
 
   @doc """
-  Get domain from URL for display
+  Convert Unix timestamp to readable date.
+  See `Iagocavalcante.Bookmarks.Formatter.format_date/1`.
   """
-  def get_domain(url) do
-    case URI.parse(url) do
-      %URI{host: host} when is_binary(host) -> host
-      _ -> ""
-    end
-  end
+  defdelegate format_date(timestamp), to: Formatter
 
   @doc """
-  Get initials for a tag (for display purposes)
+  Get domain from URL for display.
+  See `Iagocavalcante.Bookmarks.Formatter.get_domain/1`.
   """
-  def tag_initials(tag) do
-    tag
-    |> String.split(["-", "_", " "])
-    |> Enum.map(&String.first/1)
-    |> Enum.take(2)
-    |> Enum.join("")
-    |> String.upcase()
-  end
+  defdelegate get_domain(url), to: Formatter
 
   @doc """
-  Get a color for a tag based on its hash
+  Get initials for a tag (for display purposes).
+  See `Iagocavalcante.Bookmarks.Formatter.tag_initials/1`.
   """
-  def tag_color(tag) do
-    colors = [
-      "bg-red-500",
-      "bg-green-500",
-      "bg-blue-500",
-      "bg-yellow-500",
-      "bg-purple-500",
-      "bg-pink-500",
-      "bg-indigo-500",
-      "bg-orange-500",
-      "bg-teal-500",
-      "bg-cyan-500",
-      "bg-emerald-500",
-      "bg-rose-500"
-    ]
+  defdelegate tag_initials(tag), to: Formatter
 
-    hash = :erlang.phash2(tag, length(colors))
-    Enum.at(colors, hash)
-  end
+  @doc """
+  Get a color for a tag based on its hash.
+  See `Iagocavalcante.Bookmarks.Formatter.tag_color/1`.
+  """
+  defdelegate tag_color(tag), to: Formatter
 end
