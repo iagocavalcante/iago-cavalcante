@@ -80,7 +80,7 @@ defmodule Iagocavalcante.Bookmarks do
   Archives a bookmark (soft delete).
   """
   def archive_bookmark(%Bookmark{} = bookmark) do
-    update_bookmark(bookmark, %{archived: true, status: "archived"})
+    update_bookmark(bookmark, %{archived: true, status: :archived})
   end
 
   @doc """
@@ -94,7 +94,7 @@ defmodule Iagocavalcante.Bookmarks do
   Marks a bookmark as read.
   """
   def mark_as_read(%Bookmark{} = bookmark) do
-    update_bookmark(bookmark, %{status: "read"})
+    update_bookmark(bookmark, %{status: :read})
   end
 
   @doc """
@@ -104,7 +104,7 @@ defmodule Iagocavalcante.Bookmarks do
     total_query = from(b in Bookmark, where: b.user_id == ^user_id and not b.archived)
 
     read_query =
-      from(b in Bookmark, where: b.user_id == ^user_id and b.status == "read" and not b.archived)
+      from(b in Bookmark, where: b.user_id == ^user_id and b.status == :read and not b.archived)
 
     favorites_query =
       from(b in Bookmark, where: b.user_id == ^user_id and b.favorite == true and not b.archived)
@@ -145,15 +145,25 @@ defmodule Iagocavalcante.Bookmarks do
 
   defp maybe_filter_by_status(query, nil), do: query
 
-  defp maybe_filter_by_status(query, status) when is_binary(status) do
+  defp maybe_filter_by_status(query, status) when is_atom(status) do
     where(query, [b], b.status == ^status)
+  end
+
+  defp maybe_filter_by_status(query, status) when is_binary(status) do
+    # Convert string to atom for Ecto.Enum compatibility
+    status_atom = String.to_existing_atom(status)
+    where(query, [b], b.status == ^status_atom)
+  rescue
+    ArgumentError -> query
   end
 
   defp maybe_filter_by_search(query, nil), do: query
   defp maybe_filter_by_search(query, ""), do: query
 
   defp maybe_filter_by_search(query, search) when is_binary(search) do
-    search_term = "%#{search}%"
+    # Sanitize null bytes before using in query
+    sanitized_search = String.replace(search, "\0", "")
+    search_term = "%#{sanitized_search}%"
 
     where(
       query,

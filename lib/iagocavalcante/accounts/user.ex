@@ -2,6 +2,8 @@ defmodule Iagocavalcante.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Iagocavalcante.Ecto.Sanitizer
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true, redact: true
@@ -43,6 +45,7 @@ defmodule Iagocavalcante.Accounts.User do
 
   defp validate_email(changeset, opts) do
     changeset
+    |> Sanitizer.sanitize_fields([:email])
     |> validate_required([:email])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> validate_length(:email, max: 160)

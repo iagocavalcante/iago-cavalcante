@@ -5,19 +5,24 @@ defmodule Iagocavalcante.Bookmarks.Bookmark do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Iagocavalcante.Ecto.Sanitizer
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :id
+
+  @statuses ~w(unread read archived)a
+  @sources ~w(extension import manual)a
 
   schema "bookmarks" do
     field :title, :string
     field :url, :string
     field :description, :string
     field :tags, {:array, :string}, default: []
-    field :status, :string, default: "unread"
+    field :status, Ecto.Enum, values: @statuses, default: :unread
     field :archived, :boolean, default: false
     field :favorite, :boolean, default: false
     field :read_time_minutes, :integer
-    field :source, :string, default: "extension" # "extension", "import", "manual"
+    field :source, Ecto.Enum, values: @sources, default: :extension
     field :domain, :string
     field :added_at, :utc_datetime
 
@@ -26,7 +31,9 @@ defmodule Iagocavalcante.Bookmarks.Bookmark do
     timestamps()
   end
 
-  @doc false
+  @doc """
+  Changeset for creating a new bookmark.
+  """
   def changeset(bookmark, attrs) do
     bookmark
     |> cast(attrs, [
@@ -43,13 +50,32 @@ defmodule Iagocavalcante.Bookmarks.Bookmark do
       :added_at,
       :user_id
     ])
+    |> Sanitizer.sanitize_fields([:title, :url, :description, :domain])
+    |> Sanitizer.sanitize_array_fields([:tags])
     |> validate_required([:title, :url, :user_id])
     |> validate_url(:url)
-    |> validate_inclusion(:status, ["unread", "read", "archived"])
-    |> validate_inclusion(:source, ["extension", "import", "manual"])
+    |> validate_inclusion(:status, @statuses)
+    |> validate_inclusion(:source, @sources)
     |> put_domain_from_url()
     |> put_added_at()
     |> unique_constraint([:url, :user_id], name: :bookmarks_url_user_id_index)
+  end
+
+  @doc """
+  Changeset for updating bookmark status only.
+  """
+  def status_changeset(bookmark, attrs) do
+    bookmark
+    |> cast(attrs, [:status])
+    |> validate_inclusion(:status, @statuses)
+  end
+
+  @doc """
+  Changeset for toggling favorite status.
+  """
+  def favorite_changeset(bookmark, attrs) do
+    bookmark
+    |> cast(attrs, [:favorite])
   end
 
   defp validate_url(changeset, field) do
@@ -57,6 +83,7 @@ defmodule Iagocavalcante.Bookmarks.Bookmark do
       case URI.parse(url) do
         %URI{scheme: scheme, host: host} when scheme in ["http", "https"] and not is_nil(host) ->
           []
+
         _ ->
           [{field, "must be a valid HTTP or HTTPS URL"}]
       end
@@ -65,11 +92,14 @@ defmodule Iagocavalcante.Bookmarks.Bookmark do
 
   defp put_domain_from_url(changeset) do
     case get_change(changeset, :url) do
-      nil -> changeset
+      nil ->
+        changeset
+
       url ->
         case URI.parse(url) do
           %URI{host: host} when is_binary(host) ->
             put_change(changeset, :domain, host)
+
           _ ->
             changeset
         end

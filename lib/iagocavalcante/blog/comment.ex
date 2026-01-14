@@ -7,6 +7,7 @@ defmodule Iagocavalcante.Blog.Comment do
   import Ecto.Changeset
 
   alias Iagocavalcante.Blog.SpamDetector
+  alias Iagocavalcante.Ecto.Sanitizer
 
   @statuses ~w(pending approved rejected spam)a
 
@@ -39,6 +40,13 @@ defmodule Iagocavalcante.Blog.Comment do
       :user_agent,
       :spam_score,
       :parent_id
+    ])
+    |> Sanitizer.sanitize_fields([
+      :author_name,
+      :author_email,
+      :content,
+      :ip_address,
+      :user_agent
     ])
     |> validate_required([:post_id, :author_name, :author_email, :content])
     |> validate_format(:author_email, ~r/^[^\s]+@[^\s]+$/, message: "must be a valid email")
