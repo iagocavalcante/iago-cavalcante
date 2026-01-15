@@ -4,14 +4,15 @@ defmodule IagocavalcanteWeb.Plugs.RateLimiter do
 
   @bucket_name :comment_rate_limiter
   @max_requests 5
-  @window_seconds 300  # 5 minutes
+  # 5 minutes
+  @window_seconds 300
 
   def init(opts), do: opts
 
   def call(conn, _opts) do
     client_ip = get_client_ip(conn)
     key = "comment_rate_limit:#{client_ip}"
-    
+
     case check_rate_limit(key) do
       :ok ->
         conn
@@ -35,7 +36,7 @@ defmodule IagocavalcanteWeb.Plugs.RateLimiter do
 
       [{^key, count, timestamp}] ->
         current_time = :os.system_time(:second)
-        
+
         if current_time - timestamp > @window_seconds do
           # Window expired, reset counter
           :ets.insert(@bucket_name, {key, 1, current_time})

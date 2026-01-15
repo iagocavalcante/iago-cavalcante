@@ -6,8 +6,8 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     pending_comments_count = Blog.list_pending_comments() |> length()
-    
-    {:ok, 
+
+    {:ok,
      socket
      |> assign(:current_page, :posts)
      |> assign(:pending_comments_count, pending_comments_count)}
@@ -31,11 +31,12 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
   end
 
   defp apply_action(socket, :index, params) do
-    filter = case params["filter"] do
-      "published" -> :published
-      "draft" -> :draft
-      _ -> :all
-    end
+    filter =
+      case params["filter"] do
+        "published" -> :published
+        "draft" -> :draft
+        _ -> :all
+      end
 
     posts = Blog.posts_by_status(filter)
 
@@ -62,5 +63,4 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
         {:noreply, socket |> put_flash(:error, "Failed to delete post")}
     end
   end
-
 end

@@ -60,7 +60,8 @@ defmodule IagocavalcanteWeb.CategoriesUses do
         uses: [
           %{
             name: "Zed Editor",
-            description: "My favorite code editor at this point. It's very powerful and it's very easy to use."
+            description:
+              "My favorite code editor at this point. It's very powerful and it's very easy to use."
           },
           %{
             name: "Rio terminal",
@@ -109,16 +110,16 @@ defmodule IagocavalcanteWeb.CategoriesUses do
       <% end %>
       <div class="grid max-w-3xl grid-cols-1 items-baseline gap-y-8 md:grid-cols-4">
         <h2 id=":r9:" class="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
-          <%= category.name %>
+          {category.name}
         </h2>
         <div class="md:col-span-3">
           <ul role="list" class="space-y-12">
             <li :for={used <- category.uses} class="group relative flex flex-col items-start">
               <h3 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-                <%= used.name %>
+                {used.name}
               </h3>
               <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                <%= used.description %>
+                {used.description}
               </p>
             </li>
           </ul>

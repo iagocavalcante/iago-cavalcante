@@ -23,10 +23,10 @@ defmodule IagocavalcanteWeb.NavItem do
         href={@link}
         {@rest}
       >
-        <%= @text %>
+        {@text}
       </a>
-
-      <!-- Mobile Nav Link -->
+      
+    <!-- Mobile Nav Link -->
       <a
         class="md:hidden group flex items-center justify-between py-4 px-2"
         href={@link}
@@ -36,7 +36,7 @@ defmodule IagocavalcanteWeb.NavItem do
           "text-2xl font-display font-semibold transition-all duration-300",
           if(@is_active, do: "text-amber-400", else: "text-stone-100 group-hover:text-amber-400")
         ]}>
-          <%= @text %>
+          {@text}
         </span>
         <svg
           class={[
@@ -47,7 +47,12 @@ defmodule IagocavalcanteWeb.NavItem do
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"
+          />
         </svg>
       </a>
     </li>

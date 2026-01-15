@@ -4,7 +4,7 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
 
   def mount(_params, _session, socket) do
     if connected?(socket), do: refresh_comments()
-    
+
     pending_comments = Blog.list_pending_comments()
 
     {:ok,
@@ -26,16 +26,28 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
                 Comment Moderation
               </h1>
               <div class="text-sm text-zinc-500 dark:text-zinc-400">
-                <%= length(@pending_comments) %> pending comments
+                {length(@pending_comments)} pending comments
               </div>
             </div>
 
             <%= if Enum.empty?(@pending_comments) do %>
               <div class="text-center py-12">
-                <svg class="mx-auto h-12 w-12 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  class="mx-auto h-12 w-12 text-zinc-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
-                <h3 class="mt-2 text-lg font-medium text-zinc-900 dark:text-zinc-100">No pending comments</h3>
+                <h3 class="mt-2 text-lg font-medium text-zinc-900 dark:text-zinc-100">
+                  No pending comments
+                </h3>
                 <p class="mt-1 text-zinc-500 dark:text-zinc-400">All comments have been reviewed!</p>
               </div>
             <% else %>
@@ -46,36 +58,37 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
                       <div class="flex-1">
                         <div class="flex items-center space-x-2">
                           <h3 class="text-lg font-medium text-zinc-900 dark:text-zinc-100">
-                            <%= comment.author_name %>
+                            {comment.author_name}
                           </h3>
                           <span class="text-zinc-400">•</span>
                           <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                            <%= comment.author_email %>
+                            {comment.author_email}
                           </p>
                           <span class="text-zinc-400">•</span>
                           <time class="text-sm text-zinc-500 dark:text-zinc-400">
-                            <%= format_datetime(comment.inserted_at) %>
+                            {format_datetime(comment.inserted_at)}
                           </time>
                         </div>
 
                         <div class="mt-2">
                           <p class="text-sm text-zinc-600 dark:text-zinc-400">
-                            Post: <span class="font-medium"><%= comment.post_id %></span>
+                            Post: <span class="font-medium">{comment.post_id}</span>
                           </p>
                         </div>
 
                         <div class="mt-4 prose prose-sm dark:prose-invert">
-                          <%= format_content(comment.content) %>
+                          {format_content(comment.content)}
                         </div>
 
                         <div class="mt-4 flex items-center space-x-4 text-xs text-zinc-500 dark:text-zinc-400">
-                          <span>IP: <%= comment.ip_address %></span>
-                          <span>Spam Score: 
+                          <span>IP: {comment.ip_address}</span>
+                          <span>
+                            Spam Score:
                             <span class={[
                               "font-medium",
                               spam_score_color(comment.spam_score)
                             ]}>
-                              <%= Float.round(comment.spam_score * 100, 1) %>%
+                              {Float.round(comment.spam_score * 100, 1)}%
                             </span>
                           </span>
                         </div>
@@ -88,8 +101,18 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
                           disabled={@loading}
                           class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
                         >
-                          <svg class="mr-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                          <svg
+                            class="mr-1 h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M5 13l4 4L19 7"
+                            />
                           </svg>
                           Approve
                         </button>
@@ -100,8 +123,18 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
                           disabled={@loading}
                           class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
                         >
-                          <svg class="mr-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                          <svg
+                            class="mr-1 h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
                           </svg>
                           Reject
                         </button>
@@ -112,8 +145,18 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
                           disabled={@loading}
                           class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50"
                         >
-                          <svg class="mr-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                          <svg
+                            class="mr-1 h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
+                            />
                           </svg>
                           Spam
                         </button>
@@ -125,8 +168,18 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
                           data-confirm="Are you sure you want to permanently delete this comment? This action cannot be undone."
                           class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-red-900 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
                         >
-                          <svg class="mr-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          <svg
+                            class="mr-1 h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
                           </svg>
                           Delete
                         </button>
@@ -149,7 +202,7 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
     case Blog.approve_comment(comment_id) do
       {:ok, _comment} ->
         pending_comments = Blog.list_pending_comments()
-        
+
         {:noreply,
          socket
          |> assign(:loading, false)
@@ -171,7 +224,7 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
     case Blog.reject_comment(comment_id) do
       {:ok, _comment} ->
         pending_comments = Blog.list_pending_comments()
-        
+
         {:noreply,
          socket
          |> assign(:loading, false)
@@ -193,7 +246,7 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
     case Blog.mark_as_spam(comment_id) do
       {:ok, _comment} ->
         pending_comments = Blog.list_pending_comments()
-        
+
         {:noreply,
          socket
          |> assign(:loading, false)
@@ -215,7 +268,7 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
     case Blog.delete_comment(comment_id) do
       {:ok, _comment} ->
         pending_comments = Blog.list_pending_comments()
-        
+
         {:noreply,
          socket
          |> assign(:loading, false)
@@ -232,14 +285,15 @@ defmodule IagocavalcanteWeb.Admin.CommentsLive do
   end
 
   defp refresh_comments do
-    Process.send_after(self(), :refresh_comments, 30_000)  # Refresh every 30 seconds
+    # Refresh every 30 seconds
+    Process.send_after(self(), :refresh_comments, 30_000)
   end
 
   def handle_info(:refresh_comments, socket) do
     refresh_comments()
     pending_comments = Blog.list_pending_comments()
-    
-    {:noreply, 
+
+    {:noreply,
      socket
      |> assign(:pending_comments, pending_comments)
      |> assign(:pending_comments_count, length(pending_comments))}

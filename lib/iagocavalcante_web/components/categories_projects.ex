@@ -191,7 +191,7 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
     <div :for={category <- @categories} class="mb-20">
       <!-- Section Title -->
       <div class="section-title mb-8">
-        <span id={category.slug}><%= category.name %></span>
+        <span id={category.slug}>{category.name}</span>
       </div>
       <!-- Projects Grid -->
       <ul role="list" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -216,11 +216,11 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
             </div>
             <!-- Project Name -->
             <h3 class="text-base font-semibold text-ink group-hover:text-accent transition-colors duration-200">
-              <%= project.name %>
+              {project.name}
             </h3>
             <!-- Project Description -->
             <p class="mt-2 text-sm text-ink-light leading-relaxed">
-              <%= project.description %>
+              {project.description}
             </p>
             <!-- Link Indicator -->
             <div class="mt-4 flex items-center text-xs font-mono text-muted group-hover:text-accent transition-colors duration-200">
@@ -237,7 +237,7 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
                   stroke-linejoin="round"
                 />
               </svg>
-              <span class="ml-2 truncate"><%= URI.parse(project.url).host %></span>
+              <span class="ml-2 truncate">{URI.parse(project.url).host}</span>
             </div>
           </a>
         </li>

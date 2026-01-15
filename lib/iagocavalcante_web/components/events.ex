@@ -39,16 +39,16 @@ defmodule IagocavalcanteWeb.Events do
         <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
           <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
         </span>
-        <%= "#{event.event} #{event.year}" %>
+        {"#{event.event} #{event.year}"}
       </p>
       <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        <%= event.description %>
+        {event.description}
       </p>
       <div
         aria-hidden="true"
         class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
       >
-        <%= gettext("Link to presentation or video", lang: @locale) %><svg
+        {gettext("Link to presentation or video", lang: @locale)}<svg
           viewBox="0 0 16 16"
           fill="none"
           aria-hidden="true"

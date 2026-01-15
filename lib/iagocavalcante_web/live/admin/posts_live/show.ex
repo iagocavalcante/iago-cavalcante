@@ -6,8 +6,8 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Show do
   @impl true
   def mount(_params, _session, socket) do
     pending_comments_count = Blog.list_pending_comments() |> length()
-    
-    {:ok, 
+
+    {:ok,
      socket
      |> assign(:current_page, :posts)
      |> assign(:pending_comments_count, pending_comments_count)}

@@ -23,11 +23,12 @@ defmodule IagocavalcanteWeb.BookmarksLive do
   end
 
   def handle_event("search", %{"query" => query}, socket) do
-    filtered_bookmarks = if String.trim(query) == "" do
-      socket.assigns.bookmarks_by_tag_list
-    else
-      search_bookmarks(socket.assigns.bookmarks_by_tag_list, query)
-    end
+    filtered_bookmarks =
+      if String.trim(query) == "" do
+        socket.assigns.bookmarks_by_tag_list
+      else
+        search_bookmarks(socket.assigns.bookmarks_by_tag_list, query)
+      end
 
     {:noreply, assign(socket, search_query: query, bookmarks_by_tag_list: filtered_bookmarks)}
   end
@@ -60,8 +61,8 @@ defmodule IagocavalcanteWeb.BookmarksLive do
         bookmarks
         |> Enum.filter(fn bookmark ->
           String.contains?(String.downcase(bookmark.title), query_lower) ||
-          String.contains?(String.downcase(bookmark.url), query_lower) ||
-          Enum.any?(bookmark.tags, &String.contains?(String.downcase(&1), query_lower))
+            String.contains?(String.downcase(bookmark.url), query_lower) ||
+            Enum.any?(bookmark.tags, &String.contains?(String.downcase(&1), query_lower))
         end)
 
       {tag, filtered_bookmarks}
@@ -91,18 +92,21 @@ defmodule IagocavalcanteWeb.BookmarksLive do
             <header class="max-w-2xl">
               <!-- Section Label -->
               <div class="section-title mb-8">
-                <span><%= gettext("Collection", lang: @locale) %></span>
+                <span>{gettext("Collection", lang: @locale)}</span>
               </div>
 
               <h1 class="text-4xl sm:text-5xl font-display font-semibold tracking-tight text-ink">
-                <%= gettext("My Knowledge Base", lang: @locale) %>
+                {gettext("My Knowledge Base", lang: @locale)}
               </h1>
               <p class="mt-6 text-base text-ink-light leading-relaxed">
-                <%= gettext("These are my favorite links from Pocket, organized by tags for easy browsing. My personal knowledge base covering programming, architecture, design, and more.", lang: @locale) %>
+                {gettext(
+                  "These are my favorite links from Pocket, organized by tags for easy browsing. My personal knowledge base covering programming, architecture, design, and more.",
+                  lang: @locale
+                )}
               </p>
             </header>
-
-            <!-- Search and Filter Section -->
+            
+    <!-- Search and Filter Section -->
             <div class="mt-16 sm:mt-20">
               <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 sm:items-center">
                 <!-- Search Input -->
@@ -111,7 +115,11 @@ defmodule IagocavalcanteWeb.BookmarksLive do
                   <div class="relative">
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
                       <svg class="h-5 w-5 text-muted" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                        <path
+                          fill-rule="evenodd"
+                          d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                          clip-rule="evenodd"
+                        />
                       </svg>
                     </div>
                     <input
@@ -125,8 +133,8 @@ defmodule IagocavalcanteWeb.BookmarksLive do
                     />
                   </div>
                 </div>
-
-                <!-- View Toggle -->
+                
+    <!-- View Toggle -->
                 <div class="flex-shrink-0">
                   <button
                     phx-click="toggle_view"
@@ -141,35 +149,58 @@ defmodule IagocavalcanteWeb.BookmarksLive do
                   >
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <%= if @show_all_view do %>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                        />
                       <% else %>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       <% end %>
                     </svg>
                     <%= if @show_all_view do %>
-                      <%= gettext("Compact View", lang: @locale) %>
+                      {gettext("Compact View", lang: @locale)}
                     <% else %>
-                      <%= gettext("Detailed View", lang: @locale) %>
+                      {gettext("Detailed View", lang: @locale)}
                     <% end %>
                   </button>
                 </div>
               </div>
-
-              <!-- Stats Cards -->
+              
+    <!-- Stats Cards -->
               <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
                 <div class="editorial-card">
                   <div class="flex items-center gap-4">
-                    <div class="flex h-10 w-10 items-center justify-center" style="background: var(--paper-dark);">
-                      <svg class="h-5 w-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                    <div
+                      class="flex h-10 w-10 items-center justify-center"
+                      style="background: var(--paper-dark);"
+                    >
+                      <svg
+                        class="h-5 w-5 text-muted"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                        />
                       </svg>
                     </div>
                     <div>
                       <p class="text-xs font-mono uppercase tracking-wider text-muted">
-                        <%= gettext("Total Bookmarks", lang: @locale) %>
+                        {gettext("Total Bookmarks", lang: @locale)}
                       </p>
                       <p class="text-2xl font-display font-semibold text-ink">
-                        <%= total_bookmarks_count(@bookmarks_by_tag_list) %>
+                        {total_bookmarks_count(@bookmarks_by_tag_list)}
                       </p>
                     </div>
                   </div>
@@ -177,18 +208,31 @@ defmodule IagocavalcanteWeb.BookmarksLive do
 
                 <div class="editorial-card">
                   <div class="flex items-center gap-4">
-                    <div class="flex h-10 w-10 items-center justify-center" style="background: var(--paper-dark);">
-                      <svg class="h-5 w-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                    <div
+                      class="flex h-10 w-10 items-center justify-center"
+                      style="background: var(--paper-dark);"
+                    >
+                      <svg
+                        class="h-5 w-5 text-muted"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
+                        />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
                       </svg>
                     </div>
                     <div>
                       <p class="text-xs font-mono uppercase tracking-wider text-muted">
-                        <%= gettext("Categories", lang: @locale) %>
+                        {gettext("Categories", lang: @locale)}
                       </p>
                       <p class="text-2xl font-display font-semibold text-ink">
-                        <%= length(@bookmarks_by_tag_list) %>
+                        {length(@bookmarks_by_tag_list)}
                       </p>
                     </div>
                   </div>
@@ -196,27 +240,40 @@ defmodule IagocavalcanteWeb.BookmarksLive do
 
                 <div class="editorial-card">
                   <div class="flex items-center gap-4">
-                    <div class="flex h-10 w-10 items-center justify-center" style="background: var(--paper-dark);">
-                      <svg class="h-5 w-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                    <div
+                      class="flex h-10 w-10 items-center justify-center"
+                      style="background: var(--paper-dark);"
+                    >
+                      <svg
+                        class="h-5 w-5 text-muted"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+                        />
                       </svg>
                     </div>
                     <div>
                       <p class="text-xs font-mono uppercase tracking-wider text-muted">
-                        <%= gettext("Top Category", lang: @locale) %>
+                        {gettext("Top Category", lang: @locale)}
                       </p>
                       <p class="text-2xl font-display font-semibold text-ink">
-                        <%= get_top_category(@featured_tags) %>
+                        {get_top_category(@featured_tags)}
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <!-- Featured Tags -->
+              
+    <!-- Featured Tags -->
               <div class="mt-10">
                 <h2 class="text-sm font-mono uppercase tracking-wider text-muted mb-4">
-                  <%= gettext("Popular Tags", lang: @locale) %>
+                  {gettext("Popular Tags", lang: @locale)}
                 </h2>
                 <div class="flex flex-wrap gap-2">
                   <button
@@ -231,32 +288,34 @@ defmodule IagocavalcanteWeb.BookmarksLive do
                       )
                     ]}
                   >
-                    <%= String.replace(tag, "-", " ") |> String.capitalize() %>
-                    <span class="ml-2 opacity-60"><%= count %></span>
+                    {String.replace(tag, "-", " ") |> String.capitalize()}
+                    <span class="ml-2 opacity-60">{count}</span>
                   </button>
                 </div>
               </div>
             </div>
-
-            <!-- Bookmarks Content -->
+            
+    <!-- Bookmarks Content -->
             <div class="mt-16 sm:mt-20">
               <%= if @selected_tag do %>
                 <div class="mb-10">
                   <div class="flex items-center justify-between">
                     <h2 class="text-2xl font-display font-semibold text-ink">
-                      <%= String.replace(@selected_tag, "-", " ") |> String.capitalize() %>
+                      {String.replace(@selected_tag, "-", " ") |> String.capitalize()}
                     </h2>
                     <button
                       phx-click="filter_tag"
                       phx-value-tag={@selected_tag}
                       class="text-sm text-muted hover:text-accent transition-colors duration-200"
                     >
-                      <%= gettext("Show all", lang: @locale) %> →
+                      {gettext("Show all", lang: @locale)} →
                     </button>
                   </div>
                 </div>
                 <.bookmarks_by_tag
-                  bookmarks_by_tag={[{@selected_tag, Map.get(@bookmarks_by_tag_map, @selected_tag, [])}]}
+                  bookmarks_by_tag={[
+                    {@selected_tag, Map.get(@bookmarks_by_tag_map, @selected_tag, [])}
+                  ]}
                   locale={@locale}
                   expanded_tags={@expanded_tags}
                   items_per_page={@items_per_page}

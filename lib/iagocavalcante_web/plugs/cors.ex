@@ -19,7 +19,10 @@ defmodule IagocavalcanteWeb.Plugs.CORS do
     conn
     |> put_resp_header("access-control-allow-origin", allowed_origin(origin))
     |> put_resp_header("access-control-allow-methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
-    |> put_resp_header("access-control-allow-headers", "accept, authorization, content-type, x-requested-with")
+    |> put_resp_header(
+      "access-control-allow-headers",
+      "accept, authorization, content-type, x-requested-with"
+    )
     |> put_resp_header("access-control-allow-credentials", "true")
     |> put_resp_header("access-control-max-age", "3600")
   end
@@ -29,6 +32,7 @@ defmodule IagocavalcanteWeb.Plugs.CORS do
     |> send_resp(200, "")
     |> halt()
   end
+
   defp handle_preflight(conn), do: conn
 
   defp allowed_origin(origin) do

@@ -3,12 +3,17 @@
     <div class="space-y-8">
       <div class="bg-white dark:bg-zinc-800 shadow sm:rounded-lg">
         <div class="px-4 py-5 sm:p-6">
-          <h3 class="text-lg font-medium leading-6 text-zinc-900 dark:text-zinc-100">Upload New Video</h3>
+          <h3 class="text-lg font-medium leading-6 text-zinc-900 dark:text-zinc-100">
+            Upload New Video
+          </h3>
 
           <form phx-submit="save" phx-change="validate" id="upload-form" class="mt-5">
             <div class="space-y-4">
               <div>
-                <label for="video_name" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                <label
+                  for="video_name"
+                  class="block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+                >
                   Video Name *
                 </label>
                 <div class="mt-1">
@@ -57,10 +62,10 @@
                 <div class="flex items-center space-x-4">
                   <div class="flex-1 min-w-0">
                     <p class="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">
-                      <%= entry.client_name %>
+                      {entry.client_name}
                     </p>
                     <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                      <%= entry.progress %>%
+                      {entry.progress}%
                     </p>
                   </div>
                   <div>
@@ -80,7 +85,7 @@
                     <div class="flex">
                       <div class="ml-3">
                         <p class="text-sm font-medium text-red-800 dark:text-red-200">
-                          <%= error_to_string(err) %>
+                          {error_to_string(err)}
                         </p>
                       </div>
                     </div>
@@ -119,17 +124,17 @@
                       </div>
                       <div class="flex-1 min-w-0">
                         <h3 class="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">
-                          <%= video["name"] %>
+                          {video["name"]}
                         </h3>
                         <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                          Duration: <%= case video["duration"] do
+                          Duration: {case video["duration"] do
                             duration when is_float(duration) -> Float.round(duration, 1)
                             duration when is_integer(duration) -> duration
                             _ -> 0
-                          end %>s
+                          end}s
                         </p>
                         <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                          Status: <%= video["status"] %>
+                          Status: {video["status"]}
                         </p>
                       </div>
                     </div>
@@ -137,21 +142,21 @@
                     <div class="text-sm text-zinc-500 dark:text-zinc-400 space-y-1">
                       <div class="flex justify-between">
                         <span>Size:</span>
-                        <span><%= Float.round(video["size"] / 1_000_000, 2) %> MB</span>
+                        <span>{Float.round(video["size"] / 1_000_000, 2)} MB</span>
                       </div>
                       <div class="flex justify-between">
                         <span>Resolution:</span>
                         <span>
-                          <%= video["resolution"]["width"] %>x<%= video["resolution"]["height"] %>
+                          {video["resolution"]["width"]}x{video["resolution"]["height"]}
                         </span>
                       </div>
                       <div class="flex justify-between">
                         <span>Created:</span>
                         <span>
-                          <%= video["created_at"]
+                          {video["created_at"]
                           |> DateTime.from_iso8601()
                           |> elem(1)
-                          |> Calendar.strftime("%Y-%m-%d %H:%M") %>
+                          |> Calendar.strftime("%Y-%m-%d %H:%M")}
                         </span>
                       </div>
                     </div>

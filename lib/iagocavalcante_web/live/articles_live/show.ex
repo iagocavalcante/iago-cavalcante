@@ -40,7 +40,7 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
                 <article>
                   <header class="flex flex-col">
                     <h1 class="mt-6 text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-                      <%= @article.title %>
+                      {@article.title}
                     </h1>
                     <time
                       datetime={@article.date}
@@ -50,13 +50,13 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
                     </time>
                   </header>
                   <div class="mt-8 prose dark:prose-invert text-lg">
-                    <%= raw(@article.body) %>
+                    {raw(@article.body)}
                   </div>
                 </article>
-
-                <!-- Comments Section -->
-                <.live_component 
-                  module={IagocavalcanteWeb.Components.Comments} 
+                
+    <!-- Comments Section -->
+                <.live_component
+                  module={IagocavalcanteWeb.Components.Comments}
                   id="comments"
                   post_id={@article.id}
                 />

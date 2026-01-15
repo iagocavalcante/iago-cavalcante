@@ -4,7 +4,7 @@
       <div class="relative px-4 sm:px-8 lg:px-12">
         <div class="mx-auto max-w-2xl lg:max-w-5xl">
           <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            <%= gettext("Recorded videos", lang: @locale) %>
+            {gettext("Recorded videos", lang: @locale)}
           </h1>
           <div class="mt-6 sm:mt-10">
             <div class="grid grid-cols-1 gap-2 md:grid-cols-4">
@@ -18,10 +18,10 @@
                 <div class="p-4">
                   <div class="flex items-center mt-4">
                     <span class="text-blue-500 text-xs font-medium">
-                      <%= video["publicDetails"]["title"] %>
+                      {video["publicDetails"]["title"]}
                     </span>
                     <span class="text-gray-500 text-xs ml-2">
-                      <%= duration_to_hour(video["duration"]) %>
+                      {duration_to_hour(video["duration"])}
                     </span>
                   </div>
                   <%!-- <div class="flex items-center mt-2">

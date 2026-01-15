@@ -2,13 +2,14 @@ defmodule IagocavalcanteWeb.Photos do
   use Phoenix.Component
 
   def photos(assigns) do
-    assigns = assign(assigns, :photos, [
-      %{img: "/images/home-1.jpeg", rotate: "rotate-2"},
-      %{img: "/images/home-2.jpeg", rotate: "-rotate-2"},
-      %{img: "/images/home-3.jpeg", rotate: "rotate-2"},
-      %{img: "/images/home-4.jpeg", rotate: "-rotate-2"},
-      %{img: "/images/home-5.jpeg", rotate: "rotate-2"}
-    ])
+    assigns =
+      assign(assigns, :photos, [
+        %{img: "/images/home-1.jpeg", rotate: "rotate-2"},
+        %{img: "/images/home-2.jpeg", rotate: "-rotate-2"},
+        %{img: "/images/home-3.jpeg", rotate: "rotate-2"},
+        %{img: "/images/home-4.jpeg", rotate: "-rotate-2"},
+        %{img: "/images/home-5.jpeg", rotate: "rotate-2"}
+      ])
 
     ~H"""
     <div

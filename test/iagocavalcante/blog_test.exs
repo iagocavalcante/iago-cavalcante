@@ -55,7 +55,6 @@ defmodule Iagocavalcante.BlogTest do
     end
   end
 
-
   describe "comments" do
     alias Iagocavalcante.Blog.Comment
     import Iagocavalcante.BlogFixtures
@@ -66,7 +65,7 @@ defmodule Iagocavalcante.BlogTest do
       post_id = "test-post"
       comment1 = comment_fixture(%{post_id: post_id})
       comment2 = approved_comment_fixture(%{post_id: post_id})
-      
+
       # Only approved comments should be returned
       comments = Blog.list_comments_for_post(post_id)
       assert length(comments) == 1
@@ -78,12 +77,12 @@ defmodule Iagocavalcante.BlogTest do
       post_id = "test-post"
       pending_comment = comment_fixture(%{post_id: post_id})
       approved_comment = approved_comment_fixture(%{post_id: post_id})
-      
+
       # Get pending comments
       pending_comments = Blog.list_comments_for_post(post_id, :pending)
       assert length(pending_comments) == 1
       assert hd(pending_comments).id == pending_comment.id
-      
+
       # Get approved comments
       approved_comments = Blog.list_comments_for_post(post_id, :approved)
       assert length(approved_comments) == 1
@@ -93,14 +92,16 @@ defmodule Iagocavalcante.BlogTest do
     test "list_comments_for_post/2 loads nested replies correctly" do
       post_id = "test-post"
       parent_comment = approved_comment_fixture(%{post_id: post_id})
-      reply_comment = approved_comment_fixture(%{
-        post_id: post_id,
-        parent_id: parent_comment.id
-      })
-      
+
+      reply_comment =
+        approved_comment_fixture(%{
+          post_id: post_id,
+          parent_id: parent_comment.id
+        })
+
       comments = Blog.list_comments_for_post(post_id)
       assert length(comments) == 1
-      
+
       parent = hd(comments)
       assert parent.id == parent_comment.id
       assert length(parent.replies) == 1
@@ -110,11 +111,13 @@ defmodule Iagocavalcante.BlogTest do
     test "list_comments_for_post/2 only returns top-level comments" do
       post_id = "test-post"
       parent_comment = approved_comment_fixture(%{post_id: post_id})
-      reply_comment = approved_comment_fixture(%{
-        post_id: post_id, 
-        parent_id: parent_comment.id
-      })
-      
+
+      reply_comment =
+        approved_comment_fixture(%{
+          post_id: post_id,
+          parent_id: parent_comment.id
+        })
+
       comments = Blog.list_comments_for_post(post_id)
       # Should only return the parent, not the reply as a separate top-level comment
       assert length(comments) == 1
@@ -125,10 +128,10 @@ defmodule Iagocavalcante.BlogTest do
       comment1 = comment_fixture()
       comment2 = approved_comment_fixture()
       comment3 = comment_fixture()
-      
+
       pending_comments = Blog.list_pending_comments()
       pending_ids = Enum.map(pending_comments, & &1.id)
-      
+
       assert comment1.id in pending_ids
       assert comment3.id in pending_ids
       assert comment2.id not in pending_ids
@@ -161,12 +164,12 @@ defmodule Iagocavalcante.BlogTest do
     test "create_comment/1 auto-approves low spam score comments from trusted commenters" do
       # First, create some approved comments for this email to make them trusted
       trusted_email = "trusted@example.com"
-      
+
       for _ <- 1..3 do
         comment = comment_fixture(%{author_email: trusted_email})
         {:ok, _} = Blog.approve_comment(comment.id)
       end
-      
+
       # Now create a new comment from the trusted email with low spam score
       attrs = %{
         post_id: "test-post",
@@ -176,7 +179,7 @@ defmodule Iagocavalcante.BlogTest do
         ip_address: "192.168.1.1",
         user_agent: "Mozilla/5.0"
       }
-      
+
       assert {:ok, %Comment{} = comment} = Blog.create_comment(attrs)
       assert comment.status == :approved
     end
@@ -186,11 +189,12 @@ defmodule Iagocavalcante.BlogTest do
         post_id: "test-post",
         author_name: "Spammer",
         author_email: "spam@example.com",
-        content: "Buy cheap viagra! Free money! Casino discount! http://spam1.com http://spam2.com http://spam3.com http://spam4.com http://spam5.com",
+        content:
+          "Buy cheap viagra! Free money! Casino discount! http://spam1.com http://spam2.com http://spam3.com http://spam4.com http://spam5.com",
         ip_address: "192.168.1.1",
         user_agent: "Mozilla/5.0"
       }
-      
+
       assert {:ok, %Comment{} = comment} = Blog.create_comment(attrs)
       assert comment.status == :spam
       assert comment.spam_score >= 0.7
@@ -199,7 +203,7 @@ defmodule Iagocavalcante.BlogTest do
     test "approve_comment/1 approves a pending comment" do
       comment = comment_fixture()
       assert comment.status == :pending
-      
+
       assert {:ok, %Comment{} = updated_comment} = Blog.approve_comment(comment.id)
       assert updated_comment.status == :approved
     end
@@ -207,24 +211,24 @@ defmodule Iagocavalcante.BlogTest do
     test "reject_comment/1 rejects a pending comment" do
       comment = comment_fixture()
       assert comment.status == :pending
-      
+
       assert {:ok, %Comment{} = updated_comment} = Blog.reject_comment(comment.id)
       assert updated_comment.status == :rejected
     end
 
     test "mark_as_spam/1 marks a comment as spam" do
       comment = comment_fixture()
-      
+
       assert {:ok, %Comment{} = updated_comment} = Blog.mark_as_spam(comment.id)
       assert updated_comment.status == :spam
     end
 
     test "delete_comment/1 deletes a comment permanently" do
       comment = comment_fixture()
-      
+
       assert {:ok, %Comment{} = deleted_comment} = Blog.delete_comment(comment.id)
       assert deleted_comment.id == comment.id
-      
+
       # Verify comment is gone from database
       assert_raise Ecto.NoResultsError, fn -> Blog.get_comment!(comment.id) end
     end
@@ -235,14 +239,14 @@ defmodule Iagocavalcante.BlogTest do
 
     test "delete_comment/1 with approved comment removes it from public lists" do
       comment = approved_comment_fixture(%{post_id: "test-post"})
-      
+
       # Verify comment appears in public list
       comments = Blog.list_comments_for_post("test-post")
       assert length(comments) == 1
-      
+
       # Delete the comment
       {:ok, _} = Blog.delete_comment(comment.id)
-      
+
       # Verify comment is gone from public list
       comments = Blog.list_comments_for_post("test-post")
       assert Enum.empty?(comments)
@@ -250,14 +254,14 @@ defmodule Iagocavalcante.BlogTest do
 
     test "delete_comment/1 with pending comment removes it from pending list" do
       comment = comment_fixture(%{post_id: "test-post"})
-      
+
       # Verify comment appears in pending list
       pending_comments = Blog.list_pending_comments()
       assert Enum.any?(pending_comments, fn c -> c.id == comment.id end)
-      
+
       # Delete the comment
       {:ok, _} = Blog.delete_comment(comment.id)
-      
+
       # Verify comment is gone from pending list
       pending_comments = Blog.list_pending_comments()
       refute Enum.any?(pending_comments, fn c -> c.id == comment.id end)
@@ -276,13 +280,18 @@ defmodule Iagocavalcante.BlogTest do
 
     test "comment_count_for_post/1 returns count of approved comments only" do
       post_id = "test-post"
-      comment1 = comment_fixture(%{post_id: post_id})  # pending
-      comment2 = approved_comment_fixture(%{post_id: post_id})  # approved
-      comment3 = comment_fixture(%{post_id: post_id})  # pending
-      {:ok, _} = Blog.mark_as_spam(comment3.id)  # spam
-      
+      # pending
+      comment1 = comment_fixture(%{post_id: post_id})
+      # approved
+      comment2 = approved_comment_fixture(%{post_id: post_id})
+      # pending
+      comment3 = comment_fixture(%{post_id: post_id})
+      # spam
+      {:ok, _} = Blog.mark_as_spam(comment3.id)
+
       count = Blog.comment_count_for_post(post_id)
-      assert count == 1  # Only the approved comment
+      # Only the approved comment
+      assert count == 1
     end
 
     test "comment_count_for_post/1 includes nested replies in count" do
@@ -290,9 +299,10 @@ defmodule Iagocavalcante.BlogTest do
       parent_comment = approved_comment_fixture(%{post_id: post_id})
       reply1 = approved_comment_fixture(%{post_id: post_id, parent_id: parent_comment.id})
       reply2 = approved_comment_fixture(%{post_id: post_id, parent_id: parent_comment.id})
-      
+
       count = Blog.comment_count_for_post(post_id)
-      assert count == 3  # parent + 2 replies
+      # parent + 2 replies
+      assert count == 3
     end
 
     test "comment_count_for_post/1 returns 0 for post with no comments" do

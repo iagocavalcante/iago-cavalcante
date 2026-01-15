@@ -25,10 +25,10 @@ defmodule IagocavalcanteWeb.SocialLinks do
       aria-label={gettext("Follow on", lang: @locale) <> " " <> String.capitalize(@social)}
       {@rest}
     >
-      <%= social_icon(assigns) %>
+      {social_icon(assigns)}
       <%= unless assigns.only_icon do %>
         <span class="ml-4">
-          <%= gettext("Follow on", lang: @locale) %> <%= String.capitalize(@social) %>
+          {gettext("Follow on", lang: @locale)} {String.capitalize(@social)}
         </span>
       <% end %>
     </a>

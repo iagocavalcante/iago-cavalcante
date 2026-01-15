@@ -24,13 +24,13 @@ defmodule IagocavalcanteWeb.ArticlesList do
           <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true"><span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span></span>September 5, 2022
         </time>
         <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-          <%= article.description %>
+          {article.description}
         </p>
         <div
           aria-hidden="true"
           class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
         >
-          <%= gettext("Read article") %><svg
+          {gettext("Read article")}<svg
             viewBox="0 0 16 16"
             fill="none"
             aria-hidden="true"
@@ -47,10 +47,9 @@ defmodule IagocavalcanteWeb.ArticlesList do
         class="mt-1 hidden md:block relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500"
         datetime="2022-09-05"
       >
-        <%= article.date %>
+        {article.date}
       </time>
     </article>
     """
   end
-
 end

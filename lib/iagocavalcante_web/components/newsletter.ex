@@ -22,21 +22,16 @@ defmodule IagocavalcanteWeb.Newsletter do
           aria-hidden="true"
           class="h-5 w-5 flex-none stroke-current"
         >
-          <path
-            d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-          >
+          <path d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z">
           </path>
-          <path
-            d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-          >
-          </path>
+          <path d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"></path>
         </svg>
-        <span class="ml-3"><%= gettext("Stay up to date", lang: @locale) %></span>
+        <span class="ml-3">{gettext("Stay up to date", lang: @locale)}</span>
       </h2>
       <p class="text-sm text-ink-light leading-relaxed">
-        <%= gettext("Get notified when I publish something new, and unsubscribe at any time.",
+        {gettext("Get notified when I publish something new, and unsubscribe at any time.",
           lang: @locale
-        ) %>
+        )}
       </p>
       <div class="mt-6 flex">
         <input
@@ -52,14 +47,14 @@ defmodule IagocavalcanteWeb.Newsletter do
           class="btn-primary ml-4 flex-none"
           type="submit"
         >
-          <%= gettext("Join", lang: @locale) %>
+          {gettext("Join", lang: @locale)}
         </button>
       </div>
       <%= if assigns[:error] do %>
-        <p class="text-sm mt-3 font-medium text-red-600 dark:text-red-400"><%= assigns[:error] %></p>
+        <p class="text-sm mt-3 font-medium text-red-600 dark:text-red-400">{assigns[:error]}</p>
       <% end %>
       <%= if assigns[:message] do %>
-        <p class="text-sm mt-3 font-medium text-accent"><%= assigns[:message] %></p>
+        <p class="text-sm mt-3 font-medium text-accent">{assigns[:message]}</p>
       <% end %>
     </form>
     """

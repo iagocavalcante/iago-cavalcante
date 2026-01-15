@@ -134,7 +134,10 @@ defmodule IagocavalcanteWeb.Router do
 
     live_session :require_authenticated_admin,
       layout: {IagocavalcanteWeb.Layouts, :admin},
-      on_mount: [{IagocavalcanteWeb.UserAuth, :ensure_authenticated_admin}, IagocavalcanteWeb.AdminNav] do
+      on_mount: [
+        {IagocavalcanteWeb.UserAuth, :ensure_authenticated_admin},
+        IagocavalcanteWeb.AdminNav
+      ] do
       # live "/users/register", UserRegistrationLive, :new
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email

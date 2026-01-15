@@ -9,9 +9,9 @@ defmodule IagocavalcanteWeb.AnalyticsLive do
           <div class="mx-auto max-w-2xl lg:max-w-5xl">
             <header class="max-w-2xl">
               <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-                <%= gettext("You can see the site analytics.",
+                {gettext("You can see the site analytics.",
                   lang: @locale
-                ) %>
+                )}
               </h1>
             </header>
             <div class="mt-16 sm:mt-20">
@@ -26,9 +26,9 @@ defmodule IagocavalcanteWeb.AnalyticsLive do
                 >
                 </iframe>
                 <div style="font-size: 14px; padding-bottom: 14px;">
-                  <%= gettext("Stats powered by",
+                  {gettext("Stats powered by",
                     lang: @locale
-                  ) %>
+                  )}
                   <a
                     target="_blank"
                     style="color: #4F46E5; text-decoration: underline;"

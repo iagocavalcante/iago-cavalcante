@@ -9,8 +9,8 @@ defmodule IagocavalcanteWeb.HeaderTest do
   describe "header/1" do
     test "renders mobile menu button" do
       assigns = %{}
-      
-      html = 
+
+      html =
         rendered_to_string(~H"""
         <Header.header>
           <:nav_items>
@@ -30,8 +30,8 @@ defmodule IagocavalcanteWeb.HeaderTest do
 
     test "renders mobile menu backdrop" do
       assigns = %{}
-      
-      html = 
+
+      html =
         rendered_to_string(~H"""
         <Header.header>
           <:nav_items>
@@ -49,8 +49,8 @@ defmodule IagocavalcanteWeb.HeaderTest do
 
     test "renders JavaScript functions for mobile menu" do
       assigns = %{}
-      
-      html = 
+
+      html =
         rendered_to_string(~H"""
         <Header.header>
           <:nav_items>

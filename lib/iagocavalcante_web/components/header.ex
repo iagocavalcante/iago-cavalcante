@@ -12,7 +12,8 @@ defmodule IagocavalcanteWeb.Header do
       class="fixed inset-0 z-40 backdrop-blur-md opacity-0 transition-all duration-500 pointer-events-none hidden md:hidden"
       style="background: linear-gradient(to bottom, rgba(28, 25, 23, 0.95), rgba(28, 25, 23, 0.8));"
       onclick="closeMobileMenu()"
-    ></div>
+    >
+    </div>
 
     <header
       class="pointer-events-none relative z-50 flex flex-col"
@@ -36,8 +37,10 @@ defmodule IagocavalcanteWeb.Header do
                     >
                       <div class="relative">
                         <!-- Hover ring effect -->
-                        <div class="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500"
-                             style="background: linear-gradient(135deg, var(--accent), transparent); filter: blur(8px);">
+                        <div
+                          class="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500"
+                          style="background: linear-gradient(135deg, var(--accent), transparent); filter: blur(8px);"
+                        >
                         </div>
                         <img
                           alt="Iago Cavalcante"
@@ -51,8 +54,8 @@ defmodule IagocavalcanteWeb.Header do
                       </div>
                     </a>
                   </div>
-
-                  <!-- Navigation -->
+                  
+    <!-- Navigation -->
                   <div class="flex flex-1 justify-end md:justify-center">
                     <!-- Mobile Menu Button - Hamburger style -->
                     <div class="pointer-events-auto md:hidden relative">
@@ -69,57 +72,74 @@ defmodule IagocavalcanteWeb.Header do
                             id="hamburger-top"
                             class="block h-0.5 w-6 origin-center transition-all duration-300"
                             style="background-color: var(--ink);"
-                          ></span>
+                          >
+                          </span>
                           <span
                             id="hamburger-middle"
                             class="block h-0.5 w-4 transition-all duration-300 ml-auto"
                             style="background-color: var(--ink);"
-                          ></span>
+                          >
+                          </span>
                           <span
                             id="hamburger-bottom"
                             class="block h-0.5 w-6 origin-center transition-all duration-300"
                             style="background-color: var(--ink);"
-                          ></span>
+                          >
+                          </span>
                         </div>
                       </button>
-
-                      <!-- Mobile Full-screen Menu -->
+                      
+    <!-- Mobile Full-screen Menu -->
                       <div
                         id="mobile-menu-dropdown"
                         class="fixed inset-x-0 top-20 bottom-0 hidden z-50 overflow-hidden"
                       >
                         <nav class="flex flex-col h-full px-6 py-8">
                           <ul class="flex flex-col gap-2" id="mobile-nav-list">
-                            <%= render_slot(@nav_items) %>
+                            {render_slot(@nav_items)}
                           </ul>
-
-                          <!-- Mobile toggles -->
-                          <div class="mt-auto pt-8 border-t flex items-center justify-between" style="border-color: rgba(255,255,255,0.1);">
+                          
+    <!-- Mobile toggles -->
+                          <div
+                            class="mt-auto pt-8 border-t flex items-center justify-between"
+                            style="border-color: rgba(255,255,255,0.1);"
+                          >
                             <span class="text-sm font-mono text-stone-400">Settings</span>
                             <div class="flex items-center gap-3">
-                              <%= render_slot(@toggle_items) %>
+                              {render_slot(@toggle_items)}
                             </div>
                           </div>
                         </nav>
                       </div>
                     </div>
-
-                    <!-- Desktop Navigation - Pill style -->
+                    
+    <!-- Desktop Navigation - Pill style -->
                     <nav class="pointer-events-auto hidden md:block">
-                      <div class="nav-pill relative flex items-center gap-1 px-2 py-1.5 rounded-full border" style="background: var(--paper); border-color: var(--border);">
+                      <div
+                        class="nav-pill relative flex items-center gap-1 px-2 py-1.5 rounded-full border"
+                        style="background: var(--paper); border-color: var(--border);"
+                      >
                         <!-- Active indicator (animated background) -->
-                        <div id="nav-indicator" class="absolute h-8 rounded-full transition-all duration-300 ease-out" style="background: var(--paper-dark); opacity: 0;"></div>
+                        <div
+                          id="nav-indicator"
+                          class="absolute h-8 rounded-full transition-all duration-300 ease-out"
+                          style="background: var(--paper-dark); opacity: 0;"
+                        >
+                        </div>
                         <ul class="relative flex items-center gap-1 text-sm font-medium">
-                          <%= render_slot(@nav_items) %>
+                          {render_slot(@nav_items)}
                         </ul>
                       </div>
                     </nav>
                   </div>
-
-                  <!-- Toggle Items (Theme/Locale) - Desktop only -->
+                  
+    <!-- Toggle Items (Theme/Locale) - Desktop only -->
                   <div class="hidden md:flex justify-end md:flex-1">
-                    <div class="pointer-events-auto flex items-center gap-1 p-1 rounded-full border" style="background: var(--paper); border-color: var(--border);">
-                      <%= render_slot(@toggle_items) %>
+                    <div
+                      class="pointer-events-auto flex items-center gap-1 p-1 rounded-full border"
+                      style="background: var(--paper); border-color: var(--border);"
+                    >
+                      {render_slot(@toggle_items)}
                     </div>
                   </div>
                 </div>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
     <.live_title suffix=" · Software Engineer">
-      <%= assigns[:page_title] || "Iago Cavalcante" %>
+      {assigns[:page_title] || "Iago Cavalcante"}
     </.live_title>
     <meta property="og:title" content="Iago Cavalcante · Software Engineer" />
     <meta
@@ -41,7 +41,7 @@
     </script>
   </head>
   <body class="flex h-full flex-col bg-zinc-50 dark:bg-black">
-    <%= @inner_content %>
+    {@inner_content}
   </body>
   <script
     defer

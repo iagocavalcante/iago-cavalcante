@@ -129,17 +129,21 @@ defmodule IagocavalcanteWeb.API.BookmarkController do
 
   defp parse_tags(nil), do: nil
   defp parse_tags(""), do: []
+
   defp parse_tags(tags) when is_binary(tags) do
     tags
     |> String.split(",")
     |> Enum.map(&String.trim/1)
     |> Enum.reject(&(&1 == ""))
   end
+
   defp parse_tags(tags) when is_list(tags), do: tags
 
   defp maybe_extract_metadata(params) do
     case params["url"] do
-      nil -> params
+      nil ->
+        params
+
       url ->
         # In a real implementation, you'd fetch the page and extract title/description
         # For now, we'll use the URL as title if no title is provided
@@ -157,7 +161,9 @@ defmodule IagocavalcanteWeb.API.BookmarkController do
           "/" -> host
           path -> "#{host}#{path}"
         end
-      _ -> url
+
+      _ ->
+        url
     end
   end
 end

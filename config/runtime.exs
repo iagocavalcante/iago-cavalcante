@@ -38,7 +38,7 @@ if config_env() == :prod do
     prepare: :unnamed,
     parameters: [
       tcp_keepalives_idle: "600",
-      tcp_keepalives_interval: "30", 
+      tcp_keepalives_interval: "30",
       tcp_keepalives_count: "3"
     ]
 

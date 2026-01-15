@@ -95,7 +95,9 @@ defmodule Iagocavalcante.Blog.CommentTest do
 
   describe "spam detection" do
     test "calculates higher spam score for excessive links" do
-      content = "Check out these links: https://spam1.com https://spam2.com https://spam3.com https://spam4.com https://spam5.com"
+      content =
+        "Check out these links: https://spam1.com https://spam2.com https://spam3.com https://spam4.com https://spam5.com"
+
       attrs = Map.put(@valid_attrs, "content", content)
       changeset = Comment.changeset(%Comment{}, attrs)
       spam_score = Ecto.Changeset.get_field(changeset, :spam_score)
@@ -103,7 +105,9 @@ defmodule Iagocavalcante.Blog.CommentTest do
     end
 
     test "calculates higher spam score for suspicious keywords" do
-      content = "Buy cheap discount viagra and get free money from our casino! This amazing offer won't last long!"
+      content =
+        "Buy cheap discount viagra and get free money from our casino! This amazing offer won't last long!"
+
       attrs = Map.put(@valid_attrs, "content", content)
       changeset = Comment.changeset(%Comment{}, attrs)
       spam_score = Ecto.Changeset.get_field(changeset, :spam_score)
@@ -111,9 +115,11 @@ defmodule Iagocavalcante.Blog.CommentTest do
     end
 
     test "calculates higher spam score for name-email mismatch" do
-      attrs = @valid_attrs
-      |> Map.put("author_name", "John Smith")
-      |> Map.put("author_email", "xyz123@example.com")
+      attrs =
+        @valid_attrs
+        |> Map.put("author_name", "John Smith")
+        |> Map.put("author_email", "xyz123@example.com")
+
       changeset = Comment.changeset(%Comment{}, attrs)
       spam_score = Ecto.Changeset.get_field(changeset, :spam_score)
       assert spam_score > 0.0
@@ -128,11 +134,15 @@ defmodule Iagocavalcante.Blog.CommentTest do
     end
 
     test "calculates lower spam score for legitimate content" do
-      content = "Thank you for this insightful article. I particularly found the section about testing strategies very helpful for my current project."
-      attrs = @valid_attrs
-      |> Map.put("author_name", "Jane Doe")
-      |> Map.put("author_email", "jane.doe@company.com")
-      |> Map.put("content", content)
+      content =
+        "Thank you for this insightful article. I particularly found the section about testing strategies very helpful for my current project."
+
+      attrs =
+        @valid_attrs
+        |> Map.put("author_name", "Jane Doe")
+        |> Map.put("author_email", "jane.doe@company.com")
+        |> Map.put("content", content)
+
       changeset = Comment.changeset(%Comment{}, attrs)
       spam_score = Ecto.Changeset.get_field(changeset, :spam_score)
       assert spam_score < 0.1

@@ -32,17 +32,17 @@ defmodule Iagocavalcante.Blog.CommentNotifier do
 
     Post: #{post.title}
     Author: #{comment.author_name} (#{comment.author_email})
-    
+
     Comment:
     #{comment.content}
-    
+
     Spam Score: #{comment.spam_score}
     Status: #{comment.status}
     IP Address: #{comment.ip_address || "Not recorded"}
-    
+
     Review and moderate this comment at:
     https://iagocavalcante.com/admin/comments
-    
+
     --
     Iago Cavalcante Blog
     """

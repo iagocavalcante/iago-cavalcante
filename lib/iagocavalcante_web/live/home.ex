@@ -13,33 +13,33 @@ defmodule IagocavalcanteWeb.HomeLive do
             <div class="max-w-2xl">
               <!-- Section Label -->
               <div class="section-title mb-8">
-                <span><%= gettext("Introduction", lang: @locale) %></span>
+                <span>{gettext("Introduction", lang: @locale)}</span>
               </div>
-
-              <!-- Main Heading - Editorial Typography -->
+              
+    <!-- Main Heading - Editorial Typography -->
               <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold tracking-tight leading-tight animate-fade-in">
                 <span class="text-ink">
-                  <%= gettext("Software engineer,", lang: @locale) %>
+                  {gettext("Software engineer,", lang: @locale)}
                 </span>
                 <br />
                 <span class="text-ink">
-                  <%= gettext("builder, and", lang: @locale) %>
+                  {gettext("builder, and", lang: @locale)}
                 </span>
                 <br />
                 <span class="text-accent">
-                  <%= gettext("Elixir enthusiast.", lang: @locale) %>
+                  {gettext("Elixir enthusiast.", lang: @locale)}
                 </span>
               </h1>
-
-              <!-- Description - Clean prose -->
+              
+    <!-- Description - Clean prose -->
               <p class="mt-8 text-lg text-ink-light leading-relaxed animate-slide-up stagger-1">
-                <%= gettext(
+                {gettext(
                   "I'm Iago, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI building intelligent solutions. Previously co-founded Japu and Travessia, and now focused on building Agendflow.",
                   lang: @locale
-                ) %>
+                )}
               </p>
-
-              <!-- Social Links - Minimal Style -->
+              
+    <!-- Social Links - Minimal Style -->
               <div class="mt-8 flex gap-6 animate-slide-up stagger-2">
                 <.social_links
                   link="https://twitter.com/iagoangelimc"
@@ -84,14 +84,14 @@ defmodule IagocavalcanteWeb.HomeLive do
               <!-- Recent Articles -->
               <div class="flex flex-col">
                 <div class="section-title">
-                  <span><%= gettext("Recent Articles", lang: @locale) %></span>
+                  <span>{gettext("Recent Articles", lang: @locale)}</span>
                 </div>
                 <div class="mt-6">
                   <.posts articles={Blog.recent_posts_by_locale(@locale)} locale={@locale} />
                 </div>
               </div>
-
-              <!-- Sidebar -->
+              
+    <!-- Sidebar -->
               <div class="space-y-10 lg:pl-16 xl:pl-24">
                 <!-- Newsletter Card -->
                 <.live_component
@@ -99,8 +99,8 @@ defmodule IagocavalcanteWeb.HomeLive do
                   id="newsletter"
                   locale={@locale}
                 />
-
-                <!-- Work Experience Card -->
+                
+    <!-- Work Experience Card -->
                 <div class="editorial-card">
                   <h2 class="flex items-center text-sm font-mono uppercase tracking-wider text-muted mb-6">
                     <svg
@@ -112,14 +112,10 @@ defmodule IagocavalcanteWeb.HomeLive do
                       aria-hidden="true"
                       class="h-5 w-5 flex-none stroke-current"
                     >
-                      <path
-                        d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-                      />
-                      <path
-                        d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-                      />
+                      <path d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z" />
+                      <path d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5" />
                     </svg>
-                    <span class="ml-3"><%= gettext("Work", lang: @locale) %></span>
+                    <span class="ml-3">{gettext("Work", lang: @locale)}</span>
                   </h2>
 
                   <ol class="space-y-0">
@@ -131,7 +127,7 @@ defmodule IagocavalcanteWeb.HomeLive do
                     href="https://www.linkedin.com/in/iago-a-cavalcante/?locale=en_US"
                     target="_blank"
                   >
-                    <%= gettext("Download CV", lang: @locale) %>
+                    {gettext("Download CV", lang: @locale)}
                     <svg
                       viewBox="0 0 16 16"
                       fill="none"

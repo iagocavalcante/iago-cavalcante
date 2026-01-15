@@ -1,27 +1,42 @@
 <!-- Fixed Background - Clean Editorial -->
 <div class="fixed inset-0 flex justify-center sm:px-8">
   <div class="flex w-full max-w-7xl lg:px-8">
-    <div class="w-full bg-paper dark:bg-paper ring-1 ring-stone-200 dark:ring-stone-800">
-    </div>
+    <div class="w-full bg-paper dark:bg-paper ring-1 ring-stone-200 dark:ring-stone-800"></div>
   </div>
 </div>
 
 <!-- Flash Messages -->
 <div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4">
-  <p :if={Phoenix.Flash.get(@flash, :info)} class="editorial-card p-4 mb-2 text-sm text-ink border-amber-500/30" role="alert">
+  <p
+    :if={Phoenix.Flash.get(@flash, :info)}
+    class="editorial-card p-4 mb-2 text-sm text-ink border-amber-500/30"
+    role="alert"
+  >
     <span class="flex items-center gap-2">
       <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+        <path
+          fill-rule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+          clip-rule="evenodd"
+        />
       </svg>
-      <%= Phoenix.Flash.get(@flash, :info) %>
+      {Phoenix.Flash.get(@flash, :info)}
     </span>
   </p>
-  <p :if={Phoenix.Flash.get(@flash, :error)} class="editorial-card p-4 mb-2 text-sm text-red-700 dark:text-red-300 border-red-500/30" role="alert">
+  <p
+    :if={Phoenix.Flash.get(@flash, :error)}
+    class="editorial-card p-4 mb-2 text-sm text-red-700 dark:text-red-300 border-red-500/30"
+    role="alert"
+  >
     <span class="flex items-center gap-2">
       <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+          clip-rule="evenodd"
+        />
       </svg>
-      <%= Phoenix.Flash.get(@flash, :error) %>
+      {Phoenix.Flash.get(@flash, :error)}
     </span>
   </p>
 </div>
@@ -72,13 +87,13 @@
       <.toggle_theme />
     </:toggle_items>
   </.header>
-
-  <!-- Page Content -->
+  
+<!-- Page Content -->
   <main>
-    <%= @inner_content %>
+    {@inner_content}
   </main>
-
-  <!-- Buy Me a Coffee Button -->
+  
+<!-- Buy Me a Coffee Button -->
   <div :if={@ff.donate == 1} class="fixed bottom-4 right-4 z-40">
     <a
       :if={@locale == "pt_BR"}
@@ -87,7 +102,7 @@
       rel="noopener noreferrer"
       class="btn-primary flex items-center gap-2 text-sm"
     >
-      <span><%= gettext("Buy me a coffee", lang: @locale) %></span>
+      <span>{gettext("Buy me a coffee", lang: @locale)}</span>
       <span>☕</span>
     </a>
     <a
@@ -97,12 +112,12 @@
       rel="noopener noreferrer"
       class="btn-primary flex items-center gap-2 text-sm"
     >
-      <span><%= gettext("Buy me a coffee", lang: @locale) %></span>
+      <span>{gettext("Buy me a coffee", lang: @locale)}</span>
       <span>☕</span>
     </a>
   </div>
-
-  <!-- Footer -->
+  
+<!-- Footer -->
   <.footer />
 </div>
 

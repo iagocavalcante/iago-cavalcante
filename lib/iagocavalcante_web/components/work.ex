@@ -58,10 +58,16 @@ defmodule IagocavalcanteWeb.Work do
 
   def work(assigns) do
     ~H"""
-    <li :for={work <- @works} class="group flex gap-4 py-3 border-b border-stone-200 dark:border-stone-800 last:border-0 transition-all duration-200 hover:pl-2">
+    <li
+      :for={work <- @works}
+      class="group flex gap-4 py-3 border-b border-stone-200 dark:border-stone-800 last:border-0 transition-all duration-200 hover:pl-2"
+    >
       <div class={[
         "relative mt-1 flex flex-none items-center justify-center overflow-hidden",
-        if(Map.get(work, :is_avatar, false), do: "h-10 w-10 rounded-full", else: "h-10 w-10 rounded-lg p-1.5"),
+        if(Map.get(work, :is_avatar, false),
+          do: "h-10 w-10 rounded-full",
+          else: "h-10 w-10 rounded-lg p-1.5"
+        ),
         "bg-stone-100 dark:bg-stone-800"
       ]}>
         <img
@@ -69,19 +75,25 @@ defmodule IagocavalcanteWeb.Work do
           src={work.image}
           decoding="async"
           data-nimg="1"
-          class={if Map.get(work, :is_avatar, false), do: "h-full w-full object-cover", else: "h-full w-full object-contain"}
+          class={
+            if Map.get(work, :is_avatar, false),
+              do: "h-full w-full object-cover",
+              else: "h-full w-full object-contain"
+          }
           loading="lazy"
           style="color: transparent;"
         />
       </div>
       <dl class="flex flex-auto flex-wrap gap-x-2">
-        <dt class="sr-only"><%= gettext("Company") %></dt>
+        <dt class="sr-only">{gettext("Company")}</dt>
         <dd class="w-full flex-none text-sm font-semibold text-stone-900 dark:text-stone-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-          <%= work.company %>
+          {work.company}
         </dd>
-        <dt class="sr-only"><%= gettext("Role") %></dt>
-        <dd class="text-xs text-stone-500 dark:text-stone-500 font-mono uppercase tracking-wider"><%= work.role %></dd>
-        <dt class="sr-only"><%= gettext("Date") %></dt>
+        <dt class="sr-only">{gettext("Role")}</dt>
+        <dd class="text-xs text-stone-500 dark:text-stone-500 font-mono uppercase tracking-wider">
+          {work.role}
+        </dd>
+        <dt class="sr-only">{gettext("Date")}</dt>
         <dd
           class="ml-auto text-xs text-stone-400 dark:text-stone-600 font-mono"
           aria-label={
@@ -91,9 +103,9 @@ defmodule IagocavalcanteWeb.Work do
             )
           }
         >
-          <time datetime={work.date_start}><%= work.date_start %></time>
+          <time datetime={work.date_start}>{work.date_start}</time>
           <span aria-hidden="true" class="mx-1">→</span>
-          <time datetime={work.date_end}><%= work.date_end %></time>
+          <time datetime={work.date_end}>{work.date_end}</time>
         </dd>
       </dl>
     </li>

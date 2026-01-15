@@ -13,24 +13,24 @@ defmodule IagocavalcanteWeb.Components.AdminNav do
               </h2>
             </div>
             <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <.admin_nav_link 
-                href="/admin/posts" 
+              <.admin_nav_link
+                href="/admin/posts"
                 active={@current_page == :posts}
                 badge_count={nil}
               >
                 Posts
               </.admin_nav_link>
-              
-              <.admin_nav_link 
-                href="/admin/comments" 
+
+              <.admin_nav_link
+                href="/admin/comments"
                 active={@current_page == :comments}
                 badge_count={@pending_comments_count}
               >
                 Comments
               </.admin_nav_link>
-              
-              <.admin_nav_link 
-                href="/admin/videos" 
+
+              <.admin_nav_link
+                href="/admin/videos"
                 active={@current_page == :videos}
                 badge_count={nil}
               >
@@ -38,7 +38,7 @@ defmodule IagocavalcanteWeb.Components.AdminNav do
               </.admin_nav_link>
             </div>
           </div>
-          
+
           <div class="flex items-center space-x-4">
             <a
               href="/"
@@ -46,7 +46,7 @@ defmodule IagocavalcanteWeb.Components.AdminNav do
             >
               ← Back to Site
             </a>
-            
+
             <.link
               href="/users/log_out"
               method="delete"
@@ -69,14 +69,15 @@ defmodule IagocavalcanteWeb.Components.AdminNav do
         "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
         if(@active,
           do: "border-blue-500 text-zinc-900 dark:text-zinc-100",
-          else: "border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-600"
+          else:
+            "border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-600"
         )
       ]}
     >
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
       <%= if @badge_count && @badge_count > 0 do %>
         <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-          <%= @badge_count %>
+          {@badge_count}
         </span>
       <% end %>
     </a>

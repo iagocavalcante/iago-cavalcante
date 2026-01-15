@@ -19,13 +19,13 @@ defmodule Iagocavalcante.BlogFixtures do
       "path" => "test-post-#{System.unique_integer([:positive])}.md",
       "year" => "#{Date.utc_today().year}"
     }
-    
-    post_attrs = 
+
+    post_attrs =
       attrs
       |> Enum.into(default_attrs)
-    
+
     Iagocavalcante.Blog.create_new_post(post_attrs)
-    
+
     # Since create_new_post doesn't return {:ok, post}, we need to get the created post
     %Iagocavalcante.Post{
       id: post_attrs["slug"],
@@ -74,12 +74,13 @@ defmodule Iagocavalcante.BlogFixtures do
   Generate a spam comment.
   """
   def spam_comment_fixture(attrs \\ %{}) do
-    attrs = 
+    attrs =
       attrs
       |> Enum.into(%{
-        content: "Buy cheap viagra! Free money! Click here: http://spam1.com http://spam2.com http://spam3.com http://spam4.com http://spam5.com"
+        content:
+          "Buy cheap viagra! Free money! Click here: http://spam1.com http://spam2.com http://spam3.com http://spam4.com http://spam5.com"
       })
-    
+
     comment_fixture(attrs)
   end
 
@@ -87,14 +88,14 @@ defmodule Iagocavalcante.BlogFixtures do
   Generate a reply comment.
   """
   def reply_comment_fixture(parent_comment, attrs \\ %{}) do
-    attrs = 
+    attrs =
       attrs
       |> Enum.into(%{
         post_id: parent_comment.post_id,
         parent_id: parent_comment.id,
         content: "This is a reply to the parent comment with sufficient length for validation."
       })
-    
+
     comment_fixture(attrs)
   end
 end

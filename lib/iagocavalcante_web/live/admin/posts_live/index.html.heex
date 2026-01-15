@@ -8,13 +8,40 @@
               Posts Management
             </h1>
             <div class="mt-2 flex space-x-4">
-              <.link patch={~p"/admin/posts?filter=all"} class={["text-sm", if(@current_filter == :all, do: "font-semibold text-blue-600", else: "text-gray-600 hover:text-gray-900")]}>
+              <.link
+                patch={~p"/admin/posts?filter=all"}
+                class={[
+                  "text-sm",
+                  if(@current_filter == :all,
+                    do: "font-semibold text-blue-600",
+                    else: "text-gray-600 hover:text-gray-900"
+                  )
+                ]}
+              >
                 All Posts ({@posts_count})
               </.link>
-              <.link patch={~p"/admin/posts?filter=published"} class={["text-sm", if(@current_filter == :published, do: "font-semibold text-blue-600", else: "text-gray-600 hover:text-gray-900")]}>
+              <.link
+                patch={~p"/admin/posts?filter=published"}
+                class={[
+                  "text-sm",
+                  if(@current_filter == :published,
+                    do: "font-semibold text-blue-600",
+                    else: "text-gray-600 hover:text-gray-900"
+                  )
+                ]}
+              >
                 Published
               </.link>
-              <.link patch={~p"/admin/posts?filter=draft"} class={["text-sm", if(@current_filter == :draft, do: "font-semibold text-blue-600", else: "text-gray-600 hover:text-gray-900")]}>
+              <.link
+                patch={~p"/admin/posts?filter=draft"}
+                class={[
+                  "text-sm",
+                  if(@current_filter == :draft,
+                    do: "font-semibold text-blue-600",
+                    else: "text-gray-600 hover:text-gray-900"
+                  )
+                ]}
+              >
                 Drafts
               </.link>
             </div>
@@ -30,15 +57,24 @@
         >
           <:col :let={post} label="Title">
             <div class="flex items-center space-x-2">
-              <span><%= post.title %></span>
-              <span class={["px-2 py-1 text-xs rounded-full", if(post.published, do: "bg-green-100 text-green-800", else: "bg-yellow-100 text-yellow-800")]}>
-                <%= if post.published, do: "Published", else: "Draft" %>
+              <span>{post.title}</span>
+              <span class={[
+                "px-2 py-1 text-xs rounded-full",
+                if(post.published,
+                  do: "bg-green-100 text-green-800",
+                  else: "bg-yellow-100 text-yellow-800"
+                )
+              ]}>
+                {if post.published, do: "Published", else: "Draft"}
               </span>
             </div>
           </:col>
-          <:col :let={post} label="Description"><%= String.slice(post.description, 0, 80) %><%= if String.length(post.description) > 80, do: "..." %></:col>
-          <:col :let={post} label="Date"><%= Calendar.strftime(post.date, "%m/%d/%Y") %></:col>
-          <:col :let={post} label="Locale"><%= String.upcase(post.locale) %></:col>
+          <:col :let={post} label="Description">
+            {String.slice(post.description, 0, 80)}{if String.length(post.description) > 80,
+              do: "..."}
+          </:col>
+          <:col :let={post} label="Date">{Calendar.strftime(post.date, "%m/%d/%Y")}</:col>
+          <:col :let={post} label="Locale">{String.upcase(post.locale)}</:col>
           <:action :let={post}>
             <div class="sr-only">
               <.link navigate={~p"/admin/posts/#{post.id}"}>Show</.link>

@@ -20,9 +20,9 @@ defmodule IagocavalcanteWeb.SubscriberVerifyLive do
             <div class="lg:order-first lg:row-span-2">
               <h2 class="text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
                 <%= if is_nil(@token) do %>
-                  <%= gettext("Invalid token.", lang: @locale) %>
+                  {gettext("Invalid token.", lang: @locale)}
                 <% else %>
-                  <%= gettext("Email verified. Thanks <3", lang: @locale) %>
+                  {gettext("Email verified. Thanks <3", lang: @locale)}
                 <% end %>
               </h2>
             </div>

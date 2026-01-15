@@ -13,25 +13,25 @@ defmodule IagocavalcanteWeb.Posts do
         class="article-meta mb-2"
         datetime={article.date}
       >
-        <%= article.date %>
+        {article.date}
       </time>
-
-      <!-- Title -->
+      
+    <!-- Title -->
       <h2 class="article-title">
         <a href={"/articles/#{article.id}"} class="group">
           <span class="absolute -inset-y-4 -inset-x-4 z-10"></span>
-          <%= article.title %>
+          {article.title}
         </a>
       </h2>
-
-      <!-- Description -->
+      
+    <!-- Description -->
       <p class="article-excerpt">
-        <%= article.description %>
+        {article.description}
       </p>
-
-      <!-- Read More Link -->
+      
+    <!-- Read More Link -->
       <div class="mt-4 flex items-center text-sm font-medium text-accent">
-        <%= gettext("Read article", lang: @locale) %>
+        {gettext("Read article", lang: @locale)}
         <svg
           viewBox="0 0 16 16"
           fill="none"

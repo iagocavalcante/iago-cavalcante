@@ -41,17 +41,17 @@ defmodule IagocavalcanteWeb.Footer do
                       Uses
                     </a>
                   </div>
-
-                  <!-- Copyright -->
+                  
+    <!-- Copyright -->
                   <p class="text-sm text-muted">
                     <span>&copy;</span>
-                    <span class="mx-1"><%= DateTime.utc_now().year %></span>
+                    <span class="mx-1">{DateTime.utc_now().year}</span>
                     <span class="font-medium text-ink">Iago Cavalcante</span>
-                    <span>. <%= gettext("All rights reserved.") %></span>
+                    <span>. {gettext("All rights reserved.")}</span>
                   </p>
                 </div>
-
-                <!-- Minimal decorative element -->
+                
+    <!-- Minimal decorative element -->
                 <div class="mt-8 flex justify-center">
                   <div class="h-px w-16" style="background-color: var(--border);"></div>
                 </div>

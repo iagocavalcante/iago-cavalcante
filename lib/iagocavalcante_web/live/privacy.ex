@@ -15,14 +15,17 @@ defmodule IagocavalcanteWeb.PrivacyLive do
                 Your privacy is important to us. This policy explains how we collect, use, and protect your information when you comment on our blog.
               </p>
             </header>
-            
+
             <div class="mt-16 sm:mt-20">
               <div class="prose dark:prose-invert max-w-none">
                 <h2>Information We Collect</h2>
                 <p>When you leave a comment, we collect:</p>
                 <ul>
                   <li><strong>Name:</strong> The name you provide when commenting</li>
-                  <li><strong>Email address:</strong> Used for moderation and to notify you of replies (not displayed publicly)</li>
+                  <li>
+                    <strong>Email address:</strong>
+                    Used for moderation and to notify you of replies (not displayed publicly)
+                  </li>
                   <li><strong>Comment content:</strong> Your actual comment text</li>
                   <li><strong>IP address:</strong> Automatically collected for spam prevention</li>
                   <li><strong>Browser information:</strong> User agent for security purposes</li>
@@ -45,7 +48,9 @@ defmodule IagocavalcanteWeb.PrivacyLive do
                 </ul>
 
                 <h2>Data Retention</h2>
-                <p>We retain comment data indefinitely to maintain the integrity of discussions. You may request deletion of your comments by contacting us.</p>
+                <p>
+                  We retain comment data indefinitely to maintain the integrity of discussions. You may request deletion of your comments by contacting us.
+                </p>
 
                 <h2>Your Rights</h2>
                 <p>You have the right to:</p>
@@ -57,7 +62,9 @@ defmodule IagocavalcanteWeb.PrivacyLive do
                 </ul>
 
                 <h2>Third Party Services</h2>
-                <p>We do not share your personal information with third parties except as necessary for:</p>
+                <p>
+                  We do not share your personal information with third parties except as necessary for:
+                </p>
                 <ul>
                   <li>Legal compliance</li>
                   <li>Spam prevention services</li>
@@ -65,10 +72,12 @@ defmodule IagocavalcanteWeb.PrivacyLive do
                 </ul>
 
                 <h2>Contact Us</h2>
-                <p>If you have any questions about this privacy policy or want to exercise your rights, please contact us through the website contact form.</p>
+                <p>
+                  If you have any questions about this privacy policy or want to exercise your rights, please contact us through the website contact form.
+                </p>
 
                 <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-8">
-                  Last updated: <%= Date.utc_today() %>
+                  Last updated: {Date.utc_today()}
                 </p>
               </div>
             </div>
