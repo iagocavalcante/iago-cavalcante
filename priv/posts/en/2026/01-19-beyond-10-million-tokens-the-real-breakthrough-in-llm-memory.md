@@ -100,6 +100,10 @@ The question that remains: if you could give a model the ability to analyze an e
 
 ---
 
+**Reference:** This article was based on the paper ["Recursive Language Models"](https://arxiv.org/html/2512.24601v1) available on arXiv.
+
+---
+
 **Interested in applied AI and software engineering?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
 Happy building!

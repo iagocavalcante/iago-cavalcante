@@ -100,6 +100,10 @@ A pergunta que fica: se você pudesse dar a um modelo a capacidade de analisar u
 
 ---
 
+**Referência:** Este artigo foi baseado no paper ["Recursive Language Models"](https://arxiv.org/html/2512.24601v1) disponível no arXiv.
+
+---
+
 **Interessado em IA aplicada e engenharia de software?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
 
 Bora construir!
