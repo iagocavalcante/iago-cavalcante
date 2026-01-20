@@ -93,16 +93,27 @@ defmodule IagocavalcanteWeb.Router do
         IagocavalcanteWeb.RestoreLocale
       ] do
       live "/", HomeLive, :home
-      live gettext("/about"), AboutLive, :about
-      live gettext("/articles"), ArticlesLive.Index, :index
-      live gettext("/articles/:id"), ArticlesLive.Show, :show
-      live gettext("/videos"), VideosLive.Index, :index
-      live gettext("/videos/:id"), VideosLive.Show, :show
-      live gettext("/projects"), ProjectsLive, :projects
-      live gettext("/speaking"), SpeakingLive, :speaking
-      live gettext("/uses"), UsesLive, :uses
-      live gettext("/analytics"), AnalyticsLive, :analytics
-      live gettext("/bookmarks"), BookmarksLive, :bookmarks
+
+      # English routes
+      live "/about", AboutLive, :about
+      live "/articles", ArticlesLive.Index, :index
+      live "/articles/:id", ArticlesLive.Show, :show
+      live "/videos", VideosLive.Index, :index
+      live "/videos/:id", VideosLive.Show, :show
+      live "/projects", ProjectsLive, :projects
+      live "/speaking", SpeakingLive, :speaking
+      live "/uses", UsesLive, :uses
+      live "/analytics", AnalyticsLive, :analytics
+      live "/bookmarks", BookmarksLive, :bookmarks
+
+      # Portuguese routes (same LiveViews)
+      live "/sobre", AboutLive, :about
+      live "/artigos", ArticlesLive.Index, :index
+      live "/artigos/:id", ArticlesLive.Show, :show
+      live "/projetos", ProjectsLive, :projects
+      live "/palestras", SpeakingLive, :speaking
+      live "/setup", UsesLive, :uses
+
       live "/privacy", PrivacyLive, :privacy
       live "/subscribers/confirm/:token", SubscriberVerifyLive, :subscriber_verify
     end
