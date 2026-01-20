@@ -37,6 +37,14 @@ window.addEventListener("phx:page-loading-start", info => topbar.delayedShow(200
 window.addEventListener("phx:page-loading-stop", info => topbar.hide())
 
 
+// Handle locale persistence - set cookie when locale changes
+window.addEventListener("phx:set-locale", (event) => {
+  const locale = event.detail.locale
+  const cookieName = "phxi18nexamplelanguage"
+  // Set cookie for 1 year
+  document.cookie = `${cookieName}=${locale}; path=/; max-age=31536000; SameSite=Lax`
+})
+
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 
