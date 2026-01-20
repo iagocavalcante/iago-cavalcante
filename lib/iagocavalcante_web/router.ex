@@ -113,6 +113,7 @@ defmodule IagocavalcanteWeb.Router do
       live "/projetos", ProjectsLive, :projects
       live "/palestras", SpeakingLive, :speaking
       live "/setup", UsesLive, :uses
+      live "/favoritos", BookmarksLive, :bookmarks
 
       live "/privacy", PrivacyLive, :privacy
       live "/subscribers/confirm/:token", SubscriberVerifyLive, :subscriber_verify
