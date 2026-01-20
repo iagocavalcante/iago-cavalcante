@@ -2,8 +2,8 @@ defmodule IagocavalcanteWeb.RestoreLocale do
   @moduledoc """
   LiveView hook to restore and persist locale across page navigations.
 
-  On mount, restores the locale from session.
-  On toggle_locale event, persists to cookie via JS and reloads the page.
+  On mount, restores the locale from session and stores current URI.
+  On toggle_locale event, redirects with locale param to persist change.
   """
   import Phoenix.LiveView
   use Phoenix.Component
@@ -14,7 +14,8 @@ defmodule IagocavalcanteWeb.RestoreLocale do
     {:cont,
      socket
      |> assign(:locale, locale)
-     |> attach_hook(:set_locale, :handle_event, &handle_event/3)}
+     |> attach_hook(:set_locale, :handle_event, &handle_event/3)
+     |> attach_hook(:save_uri, :handle_params, &save_current_uri/3)}
   end
 
   def on_mount(:default, _params, _session, socket) do
@@ -23,7 +24,12 @@ defmodule IagocavalcanteWeb.RestoreLocale do
     {:cont,
      socket
      |> assign(:locale, locale)
-     |> attach_hook(:set_locale, :handle_event, &handle_event/3)}
+     |> attach_hook(:set_locale, :handle_event, &handle_event/3)
+     |> attach_hook(:save_uri, :handle_params, &save_current_uri/3)}
+  end
+
+  defp save_current_uri(_params, uri, socket) do
+    {:cont, assign(socket, :current_uri, uri)}
   end
 
   defp handle_event("toggle_locale", %{"locale" => current_locale}, socket) do
@@ -40,21 +46,21 @@ defmodule IagocavalcanteWeb.RestoreLocale do
   defp persist_and_reload(socket, locale) do
     Gettext.put_locale(IagocavalcanteWeb.Gettext, locale)
 
-    current_path = get_current_path(socket)
+    # Get current path, fallback to home
+    current_path =
+      case socket.assigns[:current_uri] do
+        uri when is_binary(uri) -> URI.parse(uri).path || "/"
+        _ -> "/"
+      end
 
+    # Build redirect URL with locale param
+    redirect_url = "#{current_path}?locale=#{locale}"
+
+    # Push event to set cookie for future navigations, then redirect
+    # Redirect forces full HTTP request so Plug reads the locale param
     {:halt,
      socket
-     |> assign(:locale, locale)
      |> push_event("set-locale", %{locale: locale})
-     |> push_navigate(to: current_path, replace: true)}
-  end
-
-  defp get_current_path(socket) do
-    case socket.assigns do
-      %{__changed__: _, current_path: path} when is_binary(path) -> path
-      _ -> URI.parse(Phoenix.LiveView.get_connect_info(socket, :uri) || "/").path || "/"
-    end
-  rescue
-    _ -> "/"
+     |> redirect(to: redirect_url)}
   end
 end
