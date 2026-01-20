@@ -11,7 +11,7 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/iagocavalcante_web/components/core_components.ex:456
+#: lib/iagocavalcante_web/components/core_components.ex:458
 #, elixir-autogen, elixir-format
 msgid "Actions"
 msgstr "Ações"
@@ -20,7 +20,7 @@ msgstr "Ações"
 #: lib/iagocavalcante_web/components/core_components.ex:169
 #, elixir-autogen, elixir-format
 msgid "close"
-msgstr ""
+msgstr "fechar"
 
 #: lib/iagocavalcante_web/components/social_links.ex:25
 #: lib/iagocavalcante_web/components/social_links.ex:31
@@ -28,12 +28,7 @@ msgstr ""
 msgid "Follow on"
 msgstr "Siga-me em"
 
-#: lib/iagocavalcante_web/live/home.ex:14
-#, elixir-autogen, elixir-format
-msgid "Software alchemist, co-founder, and maker."
-msgstr "Alquimista de Software, co-fundador e maker"
-
-#: lib/iagocavalcante_web/components/work.ex:81
+#: lib/iagocavalcante_web/components/work.ex:100
 #, elixir-autogen, elixir-format
 msgid "%{date_start} until %{date_end}"
 msgstr "%{date_start} até %{date_end}"
@@ -43,17 +38,17 @@ msgstr "%{date_start} até %{date_end}"
 msgid "Although I enjoy sharing content at events, I still get very nervous and appear very little. But I continue to help the community as the manager of the North devs community and by organizing monthly events."
 msgstr "Embora eu goste de compartilhar conteúdo em eventos, ainda fico muito nervoso e apareço muito pouco. Mas continuo ajudando a comunidade como o gerente da comunidade de desenvolvedores do Norte e organizando eventos mensais."
 
-#: lib/iagocavalcante_web/components/work.ex:71
+#: lib/iagocavalcante_web/components/work.ex:88
 #, elixir-autogen, elixir-format
 msgid "Company"
 msgstr "Empresa"
 
-#: lib/iagocavalcante_web/components/work.ex:77
+#: lib/iagocavalcante_web/components/work.ex:96
 #, elixir-autogen, elixir-format
 msgid "Date"
 msgstr "Data"
 
-#: lib/iagocavalcante_web/live/home.ex:101
+#: lib/iagocavalcante_web/live/home.ex:130
 #, elixir-autogen, elixir-format
 msgid "Download CV"
 msgstr "Baixar CV"
@@ -63,7 +58,7 @@ msgstr "Baixar CV"
 msgid "During college, I discovered my passion for programming and building hardware. After graduation, I continued to build things for fun using Arduinos, Raspberry Pis, and ESPs. I also discovered that I enjoyed helping people and even giving talks (even though I was always very shy about speaking to other people)."
 msgstr "Durante a faculdade, descobri minha paixão por programação e construção de hardware. Após a formatura, continuei construindo coisas por diversão usando Arduinos, Raspberry Pis e ESPs. Também descobri que gostava de ajudar as pessoas e até mesmo dar palestras (embora sempre tenha sido muito tímido para falar com outras pessoas)."
 
-#: lib/iagocavalcante_web/components/newsletter.ex:48
+#: lib/iagocavalcante_web/components/newsletter.ex:39
 #, elixir-autogen, elixir-format
 msgid "Email address"
 msgstr "Endereço de email"
@@ -73,7 +68,7 @@ msgstr "Endereço de email"
 msgid "Events"
 msgstr "Eventos"
 
-#: lib/iagocavalcante_web/components/newsletter.ex:41
+#: lib/iagocavalcante_web/components/newsletter.ex:32
 #, elixir-autogen, elixir-format
 msgid "Get notified when I publish something new, and unsubscribe at any time."
 msgstr "Seja notificado quando eu publicar algo novo e se desinscreva a qualquer momento."
@@ -83,7 +78,7 @@ msgstr "Seja notificado quando eu publicar algo novo e se desinscreva a qualquer
 msgid "Go back to articles"
 msgstr "Voltar para artigos"
 
-#: lib/iagocavalcante_web/live/articles_live/index.ex:20
+#: lib/iagocavalcante_web/live/articles_live/index.ex:47
 #, elixir-autogen, elixir-format
 msgid "Here will be centralized all the old and current posts and thoughts, with tips and some solutions that I have implemented throughout my career."
 msgstr "Aqui serão centralizados todos os posts antigos e atuais e pensamentos, com dicas e algumas soluções que implementei ao longo da minha carreira."
@@ -98,7 +93,7 @@ msgstr "Já dei algumas palestras na minha região e para eventos internos."
 msgid "I have been a curious person since childhood, greatly inspired by what my grandfather built and fixed. I always knew that I wanted to be an electrical or computer engineer. During my teenage years, I loved computers and video games, and that's when I made the final decision to study Computer Engineering."
 msgstr "Desde a infância, sempre fui uma pessoa curiosa, muito inspirado pelo que meu avô construía e consertava. Sempre soube que queria ser engenheiro eletricista ou de computação. Durante minha adolescência, eu adorava computadores e jogos de vídeo game, e foi nessa época que tomei a decisão final de estudar Engenharia de Computação."
 
-#: lib/iagocavalcante_web/live/articles_live/index.ex:14
+#: lib/iagocavalcante_web/live/articles_live/index.ex:41
 #, elixir-autogen, elixir-format
 msgid "I write about software in general, and now I want to talk more about hardware and IoT."
 msgstr "Eu escrevo sobre software de maneira geral, e agora quero falar mais sobre hardware e IoT."
@@ -113,11 +108,6 @@ msgstr "Me chamo Iago Cavalcante, um engenheiro de software e empresário que mo
 #, elixir-autogen, elixir-format
 msgid "I'm Iago Cavalcante. I live in Belém, Brazil. I'm a software alchemist and community lover."
 msgstr "Sou Iago Cavalcante. Morando em Belém, Brazil. Sou um alquimista de software e amante de comunidades."
-
-#: lib/iagocavalcante_web/components/footer.ex:38
-#, elixir-autogen, elixir-format
-msgid "Iago Cavalcante. All rights reserved."
-msgstr "Iago Cavalcante. Todos os direitos reservados."
 
 #: lib/iagocavalcante_web/live/about.ex:49
 #, elixir-autogen, elixir-format
@@ -134,7 +124,7 @@ msgstr "Além de tentar criar conteúdo em meu tempo livre e orientar pessoas qu
 msgid "I’ve been using a lot of different software and hardware over the years, but now I've finally stopped to focus on selecting and maintaining cool gadgets and equipment for work and productivity."
 msgstr "Ao longo dos anos, tenho usado muitos softwares e hardwares diferentes, mas agora finalmente parei para me concentrar na seleção e manutenção de gadgets e equipamentos legais para trabalho e produtividade."
 
-#: lib/iagocavalcante_web/components/newsletter.ex:60
+#: lib/iagocavalcante_web/components/newsletter.ex:50
 #, elixir-autogen, elixir-format
 msgid "Join"
 msgstr "Entrar"
@@ -144,13 +134,13 @@ msgstr "Entrar"
 msgid "Link to presentation or video"
 msgstr "Link para apresentação ou vídeo"
 
-#: lib/iagocavalcante_web/components/articles_list.ex:34
-#: lib/iagocavalcante_web/components/posts.ex:35
+#: lib/iagocavalcante_web/components/articles_list.ex:33
+#: lib/iagocavalcante_web/components/posts.ex:34
 #, elixir-autogen, elixir-format
 msgid "Read article"
 msgstr "Ler artigo"
 
-#: lib/iagocavalcante_web/components/work.ex:75
+#: lib/iagocavalcante_web/components/work.ex:92
 #, elixir-autogen, elixir-format
 msgid "Role"
 msgstr "Cargo"
@@ -160,139 +150,97 @@ msgstr "Cargo"
 msgid "Software I use, gadgets I love, and other things I recommend."
 msgstr "Softwares que eu uso, gadgets que eu amo e coisas que recomendo"
 
-#: lib/iagocavalcante_web/components/newsletter.ex:38
+#: lib/iagocavalcante_web/components/newsletter.ex:29
 #, elixir-autogen, elixir-format
 msgid "Stay up to date"
 msgstr "Quer ficar por dentro"
 
-#: lib/iagocavalcante_web/live/home.ex:90
+#: lib/iagocavalcante_web/live/home.ex:118
 #, elixir-autogen, elixir-format
 msgid "Work"
 msgstr "Trabalho"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:13
-#: lib/iagocavalcante_web/router.ex:53
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:50
 #, elixir-autogen, elixir-format
 msgid "/about"
 msgstr "/sobre"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:18
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:55
 #: lib/iagocavalcante_web/live/articles_live/show.ex:20
-#: lib/iagocavalcante_web/router.ex:54
 #, elixir-autogen, elixir-format
 msgid "/articles"
 msgstr "/artigos"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:28
-#: lib/iagocavalcante_web/router.ex:58
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:65
 #, elixir-autogen, elixir-format
 msgid "/projects"
 msgstr "/projetos"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:33
-#: lib/iagocavalcante_web/router.ex:59
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:70
 #, elixir-autogen, elixir-format
 msgid "/speaking"
 msgstr "/palestras"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:38
-#: lib/iagocavalcante_web/router.ex:60
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:75
 #, elixir-autogen, elixir-format
 msgid "/uses"
 msgstr "/setup"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:14
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:51
 #, elixir-autogen, elixir-format, fuzzy
 msgid "About"
 msgstr "Sobre"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:19
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:56
+#: lib/iagocavalcante_web/live/articles_live/index.ex:20
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Articles"
 msgstr "Artigos"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:29
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:66
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Projects"
 msgstr "Projetos"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:34
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:71
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Speaking"
 msgstr "Palestras"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:39
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:76
 #, elixir-autogen, elixir-format
 msgid "Uses"
 msgstr "Setup"
 
-#: lib/iagocavalcante_web/router.ex:55
-#, elixir-autogen, elixir-format, fuzzy
-msgid "/articles/:id"
-msgstr "/artigos"
-
-#: lib/iagocavalcante_web/router.ex:77
+#: lib/iagocavalcante_web/router.ex:133
 #, elixir-autogen, elixir-format
 msgid "/login"
-msgstr ""
+msgstr "/entrar"
 
 #: lib/iagocavalcante_web/live/subscriber_verify.ex:25
 #, elixir-autogen, elixir-format
 msgid "Email verified. Thanks <3"
-msgstr ""
+msgstr "Email verificado. Obrigado <3"
 
 #: lib/iagocavalcante_web/live/subscriber_verify.ex:23
 #, elixir-autogen, elixir-format
 msgid "Invalid token."
-msgstr ""
+msgstr "Token inválido."
 
-#: lib/iagocavalcante_web/live/projects.ex:16
-#, elixir-autogen, elixir-format
-msgid "I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
-msgstr ""
-
-#: lib/iagocavalcante_web/live/projects.ex:13
-#, elixir-autogen, elixir-format
-msgid "Things I’ve made trying to put my dent in the universe."
-msgstr ""
-
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:71
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:81
-#, elixir-autogen, elixir-format, fuzzy
-msgid "Buy me a coffee ☕"
-msgstr "Me pague um cafézinho ☕"
-
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:23
-#: lib/iagocavalcante_web/router.ex:56
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:60
 #, elixir-autogen, elixir-format
 msgid "/videos"
 msgstr "/videos"
-
-#: lib/iagocavalcante_web/router.ex:57
-#, elixir-autogen, elixir-format
-msgid "/videos/:id"
-msgstr "/videos/:id"
 
 #: lib/iagocavalcante_web/live/videos_live/index.html.heex:7
 #, elixir-autogen, elixir-format
 msgid "Recorded videos"
 msgstr "Vídeos gravados"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:24
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:61
 #, elixir-autogen, elixir-format
 msgid "Videos"
 msgstr "Vídeos"
-
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:48
-#: lib/iagocavalcante_web/router.ex:61
-#, elixir-autogen, elixir-format
-msgid "/analytics"
-msgstr ""
-
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:49
-#, elixir-autogen, elixir-format
-msgid "Analytics"
-msgstr "Estatísticas"
 
 #: lib/iagocavalcante_web/live/analytics.ex:29
 #, elixir-autogen, elixir-format
@@ -304,93 +252,170 @@ msgstr "Estatísticas por"
 msgid "You can see the site analytics."
 msgstr "Aqui você pode ver as estatísticas do site"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:43
-#: lib/iagocavalcante_web/router.ex:62
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:80
 #, elixir-autogen, elixir-format
 msgid "/bookmarks"
-msgstr ""
+msgstr "/favoritos"
 
-#: lib/iagocavalcante_web/components/layouts/app.html.heex:44
-#, elixir-autogen, elixir-format
-msgid "Favoritos"
-msgstr ""
-
-#: lib/iagocavalcante_web/live/home.ex:17
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:81
 #, elixir-autogen, elixir-format, fuzzy
-msgid "I’m Iago, a software alchemist (elixir dev) and entrepreneur based in Belém. I’m the co-founder and CTO of Japu and Travessia, where we develop marketplace and SaaS for education and both failed. Now I'm focused in building Agendflow (https://agendflow.com.br)"
-msgstr "Me chamo Iago Cavalcante, um alquimista de software (dev elixir) e empreendedor situado em Belém. Sou co-fundador e CTO da Japu e Travessia, onde desenvolvemos um marketplace e um SaaS para educação e os dois falharam. Agora estou focando em construir o Agendflow (https://agendflow.com.br)"
+msgid "Bookmarks"
+msgstr "favoritos"
 
-#: lib/iagocavalcante_web/live/bookmarks.ex:12
+#: lib/iagocavalcante_web/components/footer.ex:50
 #, elixir-autogen, elixir-format
-msgid "Thats my favorite links from pocket and my base knowledge using tags"
-msgstr "Aqui estão alguns links favoritos do pocket e minha base de conhecimento"
+msgid "All rights reserved."
+msgstr "Todos os direitos reservados."
 
-#: lib/iagocavalcante_web/live/bookmarks.ex:20
-#, elixir-autogen, elixir-format
-msgid "My Knowledge Base"
-msgstr "Minha Base de Conhecimento"
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:105
+#: lib/iagocavalcante_web/components/layouts/app.html.heex:115
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Buy me a coffee"
+msgstr "Me pague um cafézinho ☕"
 
-#: lib/iagocavalcante_web/live/bookmarks.ex:23
-#, elixir-autogen, elixir-format
-msgid "These are my favorite links from Pocket, organized by tags for easy browsing. My personal knowledge base covering programming, architecture, design, and more."
-msgstr "Estes são meus links favoritos do Pocket, organizados por tags para fácil navegação. Minha base de conhecimento pessoal cobrindo programação, arquitetura, design e muito mais."
-
-#: lib/iagocavalcante_web/live/bookmarks.ex:34
-#, elixir-autogen, elixir-format
-msgid "Search bookmarks..."
-msgstr "Buscar favoritos..."
-
-#: lib/iagocavalcante_web/live/bookmarks.ex:51
-#, elixir-autogen, elixir-format
-msgid "Compact View"
-msgstr "Vista Compacta"
-
-#: lib/iagocavalcante_web/live/bookmarks.ex:53
-#, elixir-autogen, elixir-format
-msgid "Detailed View"
-msgstr "Vista Detalhada"
-
-#: lib/iagocavalcante_web/live/bookmarks.ex:68
-#, elixir-autogen, elixir-format
-msgid "Total Bookmarks"
-msgstr "Total de Favoritos"
-
-#: lib/iagocavalcante_web/live/bookmarks.ex:84
+#: lib/iagocavalcante_web/live/bookmarks.ex:232
 #, elixir-autogen, elixir-format
 msgid "Categories"
 msgstr "Categorias"
 
-#: lib/iagocavalcante_web/live/bookmarks.ex:100
+#: lib/iagocavalcante_web/live/bookmarks.ex:95
 #, elixir-autogen, elixir-format
-msgid "Top Category"
-msgstr "Categoria Principal"
+msgid "Collection"
+msgstr "Coleção"
 
-#: lib/iagocavalcante_web/live/bookmarks.ex:112
+#: lib/iagocavalcante_web/live/bookmarks.ex:168
+#, elixir-autogen, elixir-format
+msgid "Compact View"
+msgstr "Vista Compacta"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:170
+#, elixir-autogen, elixir-format
+msgid "Detailed View"
+msgstr "Vista Detalhada"
+
+#: lib/iagocavalcante_web/live/home.ex:30
+#, elixir-autogen, elixir-format
+msgid "Elixir enthusiast."
+msgstr "Entusiasta de Elixir."
+
+#: lib/iagocavalcante_web/live/home.ex:36
+#, elixir-autogen, elixir-format
+msgid "I'm Iago, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI building intelligent solutions. Previously co-founded Japu and Travessia, and now focused on building Agendflow."
+msgstr "Sou Iago, engenheiro de software e empreendedor em Belém, Brasil. Atualmente trabalho na EasyMate AI construindo soluções inteligentes. Anteriormente co-fundei a Japu e a Travessia, e agora estou focado em construir o Agendflow."
+
+#: lib/iagocavalcante_web/live/projects.ex:21
+#, elixir-autogen, elixir-format, fuzzy
+msgid "I've worked on tons of little projects over the years but these are the ones that I'm most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+msgstr "Trabalhei em vários projetos ao longo dos anos, mas estes são os que mais me orgulho. Muitos deles são open-source, então se você ver algo que desperte seu interesse, confira o código e contribua se tiver ideias de como melhorá-lo."
+
+#: lib/iagocavalcante_web/live/home.ex:16
+#, elixir-autogen, elixir-format
+msgid "Introduction"
+msgstr "Introdução"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:99
+#, elixir-autogen, elixir-format
+msgid "My Knowledge Base"
+msgstr "Minha Base de Conhecimento"
+
+#: lib/iagocavalcante_web/components/pagination.ex:60
+#: lib/iagocavalcante_web/components/pagination.ex:90
+#, elixir-autogen, elixir-format
+msgid "Next"
+msgstr "Próximo"
+
+#: lib/iagocavalcante_web/components/pagination.ex:21
+#, elixir-autogen, elixir-format
+msgid "Page"
+msgstr "Página"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:276
 #, elixir-autogen, elixir-format
 msgid "Popular Tags"
 msgstr "Tags Populares"
 
-#: lib/iagocavalcante_web/live/bookmarks.ex:141
+#: lib/iagocavalcante_web/live/projects.ex:14
 #, elixir-autogen, elixir-format
-msgid "Show all"
-msgstr "Mostrar todos"
+msgid "Portfolio"
+msgstr "Portfólio"
 
-#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:23
+#: lib/iagocavalcante_web/components/pagination.ex:48
+#: lib/iagocavalcante_web/components/pagination.ex:90
 #, elixir-autogen, elixir-format
-msgid "bookmark"
-msgstr "favorito"
+msgid "Previous"
+msgstr "Anterior"
 
-#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:23
+#: lib/iagocavalcante_web/live/home.ex:87
 #, elixir-autogen, elixir-format
-msgid "bookmarks"
-msgstr "favoritos"
+msgid "Recent Articles"
+msgstr "Artigos Recentes"
 
-#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:68
+#: lib/iagocavalcante_web/live/bookmarks.ex:132
+#, elixir-autogen, elixir-format
+msgid "Search bookmarks..."
+msgstr "Buscar favoritos..."
+
+#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:110
 #, elixir-autogen, elixir-format
 msgid "Show %{count} more"
 msgstr "Mostrar mais %{count}"
 
-#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:78
+#: lib/iagocavalcante_web/live/bookmarks.ex:311
+#, elixir-autogen, elixir-format
+msgid "Show all"
+msgstr "Mostrar todos"
+
+#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:125
 #, elixir-autogen, elixir-format
 msgid "Show less"
 msgstr "Mostrar menos"
+
+#: lib/iagocavalcante_web/live/home.ex:22
+#, elixir-autogen, elixir-format
+msgid "Software engineer,"
+msgstr "Engenheiro de software,"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:102
+#, elixir-autogen, elixir-format
+msgid "These are my favorite links from Pocket, organized by tags for easy browsing. My personal knowledge base covering programming, architecture, design, and more."
+msgstr "Estes são meus links favoritos do Pocket, organizados por tags para fácil navegação. Minha base de conhecimento pessoal cobrindo programação, arquitetura, design e muito mais."
+
+#: lib/iagocavalcante_web/live/projects.ex:18
+#, elixir-autogen, elixir-format
+msgid "Things I've made trying to put my dent in the universe."
+msgstr "Coisas que fiz tentando deixar minha marca no universo."
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:263
+#, elixir-autogen, elixir-format
+msgid "Top Category"
+msgstr "Categoria Principal"
+
+#: lib/iagocavalcante_web/live/bookmarks.ex:200
+#, elixir-autogen, elixir-format
+msgid "Total Bookmarks"
+msgstr "Total de Favoritos"
+
+#: lib/iagocavalcante_web/components/pagination.ex:25
+#, elixir-autogen, elixir-format
+msgid "articles"
+msgstr "artigos"
+
+#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:28
+#, elixir-autogen, elixir-format
+msgid "bookmark"
+msgstr "favorito"
+
+#: lib/iagocavalcante_web/components/bookmarks_by_tag.ex:29
+#, elixir-autogen, elixir-format
+msgid "bookmarks"
+msgstr "favoritos"
+
+#: lib/iagocavalcante_web/live/home.ex:26
+#, elixir-autogen, elixir-format
+msgid "builder, and"
+msgstr "construtor, e"
+
+#: lib/iagocavalcante_web/components/pagination.ex:22
+#, elixir-autogen, elixir-format
+msgid "of"
+msgstr "de"
