@@ -152,7 +152,7 @@ defmodule Iagocavalcante.Blog do
         description: attrs["description"],
         body: attrs["body"],
         tags: attrs["tags"] || "~w()",
-        published: attrs["published"] || true,
+        published: Map.get(attrs, "published", true),
         date: Date.utc_today(),
         locale: locale,
         author: "Iago Cavalcante",
