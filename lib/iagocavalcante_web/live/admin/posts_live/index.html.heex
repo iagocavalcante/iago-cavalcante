@@ -82,6 +82,17 @@
             <.link patch={~p"/admin/posts/#{post.id}/edit"}>Edit</.link>
           </:action>
           <:action :let={post}>
+            <%= if post.published do %>
+              <.link
+                phx-click={JS.push("notify_subscribers", value: %{id: post.id})}
+                data-confirm={"Notify #{@subscriber_count} subscribers about \"#{post.title}\"?"}
+                class="text-blue-600 hover:text-blue-800"
+              >
+                Notify
+              </.link>
+            <% end %>
+          </:action>
+          <:action :let={post}>
             <.link
               phx-click={JS.push("delete", value: %{id: post.id}) |> hide("##{post.id}")}
               data-confirm="Are you sure?"

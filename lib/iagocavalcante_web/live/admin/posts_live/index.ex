@@ -2,15 +2,18 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
   use IagocavalcanteWeb, :live_view
 
   alias Iagocavalcante.Blog
+  alias Iagocavalcante.Subscribers
 
   @impl true
   def mount(_params, _session, socket) do
     pending_comments_count = Blog.list_pending_comments() |> length()
+    subscriber_count = Subscribers.count_verified_subscribers()
 
     {:ok,
      socket
      |> assign(:current_page, :posts)
-     |> assign(:pending_comments_count, pending_comments_count)}
+     |> assign(:pending_comments_count, pending_comments_count)
+     |> assign(:subscriber_count, subscriber_count)}
   end
 
   @impl true
@@ -61,6 +64,38 @@ defmodule IagocavalcanteWeb.Admin.PostsLive.Index do
     rescue
       _ ->
         {:noreply, socket |> put_flash(:error, "Failed to delete post")}
+    end
+  end
+
+  @impl true
+  def handle_event("notify_subscribers", %{"id" => id}, socket) do
+    case Blog.get_post_by_id(id) do
+      {:ok, post} ->
+        if post.published do
+          # Build post params for notification
+          post_params = %{
+            "title" => post.title,
+            "description" => post.description,
+            "slug" => post.id,
+            "locale" => post.locale
+          }
+
+          # Send notifications asynchronously
+          Task.Supervisor.start_child(Iagocavalcante.TaskSupervisor, fn ->
+            Subscribers.notify_new_post(post_params)
+          end)
+
+          subscriber_count = socket.assigns.subscriber_count
+
+          {:noreply,
+           socket
+           |> put_flash(:info, "Sending notifications to #{subscriber_count} subscribers...")}
+        else
+          {:noreply, socket |> put_flash(:error, "Cannot notify subscribers about a draft post")}
+        end
+
+      {:error, :not_found} ->
+        {:noreply, socket |> put_flash(:error, "Post not found")}
     end
   end
 end
