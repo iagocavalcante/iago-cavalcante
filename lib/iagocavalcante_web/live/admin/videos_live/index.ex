@@ -15,48 +15,78 @@ defmodule IagocavalcanteWeb.Admin.VideosLive.Index do
           :ok,
           socket
           |> assign(:videos, formatted_videos)
-          |> assign(:uploading, false)
-          |> assign(:error, nil)
+          |> assign(:upload_phase, :idle)
+          |> assign(:upload_error, nil)
           |> assign(:video_name, nil)
           |> assign(:current_page, :videos)
           |> assign(:pending_comments_count, pending_comments_count)
           |> allow_upload(:video,
             accept: ~w(.mp4 .avi .mov),
-            max_file_size: 1024 * 1024 * 1024
+            max_file_size: 1024 * 1024 * 1024,
+            progress: &handle_progress/3
           )
         }
 
       {:error, message} ->
         {:ok,
          socket
-         |> assign(:error, message)
+         |> assign(:upload_error, message)
+         |> assign(:upload_phase, :idle)
          |> assign(:current_page, :videos)
          |> assign(:pending_comments_count, pending_comments_count)}
+    end
+  end
+
+  defp handle_progress(:video, entry, socket) do
+    if entry.done? do
+      {:noreply, assign(socket, :upload_phase, :processing)}
+    else
+      {:noreply, socket}
     end
   end
 
   @impl Phoenix.LiveView
   def handle_event("save", %{"video_name" => video_name} = _params, socket) do
     user_email = socket.assigns.current_user.email
+    liveview_pid = self()
 
-    socket = assign(socket, :uploading, true)
-
-    video =
+    # Consume uploaded files and get paths
+    uploaded_files =
       consume_uploaded_entries(socket, :video, fn %{path: path}, entry ->
-        case Stream.upload_video(path, user_email, video_name, entry) do
-          {:ok, video} ->
-            Stream.enable_download(video["uid"])
-            {:ok, video}
+        # Copy file to a temp location since the original will be deleted
+        temp_path =
+          Path.join(
+            System.tmp_dir!(),
+            "video_#{entry.ref}_#{:erlang.unique_integer([:positive])}"
+          )
 
-          {:error, reason} ->
-            {:postpone, reason}
-        end
+        File.cp!(path, temp_path)
+        {:ok, %{path: temp_path, entry: entry}}
       end)
 
-    {:noreply,
-     socket
-     |> update(:videos, &[video | &1])
-     |> assign(:uploading, false)}
+    # Start async upload to Cloudflare
+    Task.Supervisor.start_child(Iagocavalcante.TaskSupervisor, fn ->
+      results =
+        Enum.map(uploaded_files, fn %{path: path, entry: entry} ->
+          result =
+            case Stream.upload_video(path, user_email, video_name, entry) do
+              {:ok, video} ->
+                Stream.enable_download(video["uid"])
+                {:ok, format_video(video)}
+
+              {:error, reason} ->
+                {:error, reason}
+            end
+
+          # Clean up temp file
+          File.rm(path)
+          result
+        end)
+
+      send(liveview_pid, {:upload_complete, results})
+    end)
+
+    {:noreply, assign(socket, :upload_phase, :processing)}
   end
 
   @impl Phoenix.LiveView
@@ -85,6 +115,36 @@ defmodule IagocavalcanteWeb.Admin.VideosLive.Index do
     url = get_download_url(video_uid)
 
     {:noreply, redirect(socket, url)}
+  end
+
+  @impl Phoenix.LiveView
+  def handle_info({:upload_complete, results}, socket) do
+    {successes, failures} =
+      Enum.split_with(results, fn
+        {:ok, _} -> true
+        {:error, _} -> false
+      end)
+
+    videos = Enum.map(successes, fn {:ok, video} -> video end)
+
+    socket =
+      socket
+      |> assign(:upload_phase, :idle)
+      |> update(:videos, fn existing -> videos ++ existing end)
+
+    socket =
+      case failures do
+        [] ->
+          put_flash(socket, :info, "Video uploaded successfully!")
+
+        errors ->
+          error_msg =
+            Enum.map(errors, fn {:error, reason} -> inspect(reason) end) |> Enum.join(", ")
+
+          put_flash(socket, :error, "Some uploads failed: #{error_msg}")
+      end
+
+    {:noreply, socket}
   end
 
   def get_download_url(video_uid) do
