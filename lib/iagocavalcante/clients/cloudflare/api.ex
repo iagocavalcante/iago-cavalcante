@@ -5,11 +5,8 @@ defmodule Iagocavalcante.Clients.Cloudflare.API do
 
   require Logger
 
-  # Default timeouts
-  # 30 seconds
+  # Default timeout (30 seconds)
   @default_timeout 30_000
-  # 10 seconds
-  @connect_timeout 10_000
 
   @doc """
   Creates a new Req request with Cloudflare authentication and default timeouts.
@@ -34,8 +31,7 @@ defmodule Iagocavalcante.Clients.Cloudflare.API do
         "Authorization" => "Bearer #{auth.token}",
         "Content-Type" => "application/json"
       },
-      receive_timeout: @default_timeout,
-      connect_timeout: @connect_timeout
+      receive_timeout: @default_timeout
     )
   end
 

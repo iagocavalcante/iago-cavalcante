@@ -9,10 +9,8 @@ defmodule Iagocavalcante.Clients.Cloudflare.API.Stream do
   require Logger
 
   # Configuration
-  # 30 seconds
+  # 30 seconds for receive timeout
   @default_timeout 30_000
-  # 10 seconds
-  @connect_timeout 10_000
 
   @doc """
   Lists all videos from Cloudflare Stream.
@@ -126,12 +124,9 @@ defmodule Iagocavalcante.Clients.Cloudflare.API.Stream do
     end
   end
 
-  # Build a request with proper timeouts
+  # Build a request with timeout
   defp build_request(account_id) do
     API.do_request(account_id)
-    |> Req.merge(
-      receive_timeout: @default_timeout,
-      connect_timeout: @connect_timeout
-    )
+    |> Req.merge(receive_timeout: @default_timeout)
   end
 end

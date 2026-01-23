@@ -16,8 +16,6 @@ defmodule Iagocavalcante.Clients.Cloudflare.StreamingUpload do
   @default_timeout 30_000
   # 10 minutes for uploads
   @upload_timeout 600_000
-  # 10 seconds
-  @connect_timeout 10_000
   # Exponential backoff
   @retry_delays [1_000, 2_000, 4_000, 8_000, 16_000]
 
@@ -184,8 +182,7 @@ defmodule Iagocavalcante.Clients.Cloudflare.StreamingUpload do
           {"Content-Length", to_string(content_length)}
         ],
         body: full_body,
-        receive_timeout: timeout,
-        connect_timeout: @connect_timeout
+        receive_timeout: timeout
       )
 
     case result do
@@ -247,8 +244,7 @@ defmodule Iagocavalcante.Clients.Cloudflare.StreamingUpload do
           publicDetails: %{title: video_title},
           creator: user_email
         },
-        receive_timeout: @default_timeout,
-        connect_timeout: @connect_timeout
+        receive_timeout: @default_timeout
       )
 
     case result do
@@ -283,8 +279,7 @@ defmodule Iagocavalcante.Clients.Cloudflare.StreamingUpload do
       headers: %{
         "Authorization" => "Bearer #{auth.token}"
       },
-      receive_timeout: @default_timeout,
-      connect_timeout: @connect_timeout
+      receive_timeout: @default_timeout
     )
   end
 
