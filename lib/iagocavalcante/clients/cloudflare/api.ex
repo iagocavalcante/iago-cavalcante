@@ -1,4 +1,23 @@
 defmodule Iagocavalcante.Clients.Cloudflare.API do
+  @moduledoc """
+  Base Cloudflare API client with proper timeouts and error handling.
+  """
+
+  require Logger
+
+  # Default timeouts
+  # 30 seconds
+  @default_timeout 30_000
+  # 10 seconds
+  @connect_timeout 10_000
+
+  @doc """
+  Creates a new Req request with Cloudflare authentication and default timeouts.
+
+  ## Options
+
+    * `account_id` - Override the default account ID from config
+  """
   def do_request(account_id \\ nil) do
     auth = auth()
     account = account_id || auth.account_id
@@ -14,10 +33,20 @@ defmodule Iagocavalcante.Clients.Cloudflare.API do
       headers: %{
         "Authorization" => "Bearer #{auth.token}",
         "Content-Type" => "application/json"
-      }
+      },
+      receive_timeout: @default_timeout,
+      connect_timeout: @connect_timeout
     )
   end
 
+  @doc """
+  Checks the Cloudflare API connection by verifying credentials and listing accounts.
+
+  ## Returns
+
+    * `{:ok, %{token_status: ..., accounts: ...}}` - Connection successful
+    * `{:error, reason}` - Connection failed
+  """
   def check_connection do
     with {:ok, verify_result} <- verify_credentials(),
          {:ok, accounts} <- list_accounts() do
@@ -34,37 +63,56 @@ defmodule Iagocavalcante.Clients.Cloudflare.API do
   end
 
   defp verify_credentials do
-    do_request()
-    |> Req.get!(url: "/client/v4/user/tokens/verify")
-    |> then(fn response ->
-      case response do
-        %{status: 200, body: %{"success" => true, "result" => result}} ->
-          {:ok, result}
+    request = do_request()
 
-        %{body: %{"errors" => [error | _]}} ->
-          {:error, error["message"]}
+    case Req.get(request, url: "/client/v4/user/tokens/verify") do
+      {:ok, %{status: 200, body: %{"success" => true, "result" => result}}} ->
+        {:ok, result}
 
-        _ ->
-          {:error, "Failed to verify credentials"}
-      end
-    end)
+      {:ok, %{body: %{"errors" => [error | _]}}} ->
+        Logger.error("Cloudflare credentials verification failed: #{error["message"]}")
+        {:error, error["message"]}
+
+      {:ok, %{status: status, body: body}} ->
+        Logger.error(
+          "Cloudflare credentials verification failed: HTTP #{status}, body: #{inspect(body)}"
+        )
+
+        {:error, "Failed to verify credentials (HTTP #{status})"}
+
+      {:error, %Req.TransportError{reason: reason}} ->
+        Logger.error("Network error verifying Cloudflare credentials: #{inspect(reason)}")
+        {:error, "Network error: #{inspect(reason)}"}
+
+      {:error, reason} ->
+        Logger.error("Error verifying Cloudflare credentials: #{inspect(reason)}")
+        {:error, "Failed to verify credentials"}
+    end
   end
 
   defp list_accounts do
-    do_request()
-    |> Req.get!(url: "/client/v4/accounts")
-    |> then(fn response ->
-      case response do
-        %{status: 200, body: %{"success" => true, "result" => results}} ->
-          {:ok, results}
+    request = do_request()
 
-        %{body: %{"errors" => [error | _]}} ->
-          {:error, error["message"]}
+    case Req.get(request, url: "/client/v4/accounts") do
+      {:ok, %{status: 200, body: %{"success" => true, "result" => results}}} ->
+        {:ok, results}
 
-        _ ->
-          {:error, "Failed to list accounts"}
-      end
-    end)
+      {:ok, %{body: %{"errors" => [error | _]}}} ->
+        Logger.error("Failed to list Cloudflare accounts: #{error["message"]}")
+        {:error, error["message"]}
+
+      {:ok, %{status: status, body: body}} ->
+        Logger.error("Failed to list Cloudflare accounts: HTTP #{status}, body: #{inspect(body)}")
+        {:error, "Failed to list accounts (HTTP #{status})"}
+
+      {:error, %Req.TransportError{reason: reason}} ->
+        Logger.error("Network error listing Cloudflare accounts: #{inspect(reason)}")
+        {:error, "Network error: #{inspect(reason)}"}
+
+      {:error, reason} ->
+        Logger.error("Error listing Cloudflare accounts: #{inspect(reason)}")
+        {:error, "Failed to list accounts"}
+    end
   end
 
   defp auth do
