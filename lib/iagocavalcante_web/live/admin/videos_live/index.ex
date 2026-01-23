@@ -28,38 +28,30 @@ defmodule IagocavalcanteWeb.Admin.VideosLive.Index do
 
   @impl Phoenix.LiveView
   def handle_params(_params, _uri, socket) do
-    # Data loading happens here - runs once after WebSocket connection
-    socket =
-      socket
-      |> start_async(:load_videos, fn -> Stream.list_videos() end)
-      |> start_async(:load_pending_comments, fn -> Blog.list_pending_comments() |> length() end)
+    # Load data directly (simpler than start_async, matching posts_live pattern)
+    pending_comments_count = Blog.list_pending_comments() |> length()
 
-    {:noreply, socket}
-  end
+    case Stream.list_videos() do
+      {:ok, videos} ->
+        formatted_videos = Enum.map(videos, &format_video/1)
 
-  @impl Phoenix.LiveView
-  def handle_async(:load_videos, {:ok, {:ok, videos}}, socket) do
-    formatted_videos = Enum.map(videos, &format_video/1)
-    {:noreply, assign(socket, videos: formatted_videos, loading: false)}
-  end
+        {:noreply,
+         assign(socket,
+           videos: formatted_videos,
+           loading: false,
+           pending_comments_count: pending_comments_count
+         )}
 
-  def handle_async(:load_videos, {:ok, {:error, message}}, socket) do
-    Logger.error("Failed to load videos: #{inspect(message)}")
-    {:noreply, assign(socket, upload_error: message, loading: false)}
-  end
+      {:error, message} ->
+        Logger.error("Failed to load videos: #{inspect(message)}")
 
-  def handle_async(:load_videos, {:exit, reason}, socket) do
-    Logger.error("Video loading task crashed: #{inspect(reason)}")
-    {:noreply, assign(socket, upload_error: "Failed to load videos", loading: false)}
-  end
-
-  def handle_async(:load_pending_comments, {:ok, count}, socket) do
-    {:noreply, assign(socket, pending_comments_count: count)}
-  end
-
-  def handle_async(:load_pending_comments, {:exit, reason}, socket) do
-    Logger.warning("Failed to load pending comments count: #{inspect(reason)}")
-    {:noreply, socket}
+        {:noreply,
+         assign(socket,
+           upload_error: message,
+           loading: false,
+           pending_comments_count: pending_comments_count
+         )}
+    end
   end
 
   defp handle_progress(:video, entry, socket) do
