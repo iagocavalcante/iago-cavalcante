@@ -5,18 +5,16 @@ defmodule IagocavalcanteWeb.UserLoginLive do
     ~H"""
     <div class="mx-auto max-w-sm">
       <.simple_form
-        :let={f}
+        for={@form}
         id="login_form"
-        for={:user}
         action={~p"/admin/login"}
-        as={:user}
         phx-update="ignore"
       >
-        <.input field={{f, :email}} type="email" label="Email" required />
-        <.input field={{f, :password}} type="password" label="Senha" required />
+        <.input field={@form[:email]} type="email" label="Email" required />
+        <.input field={@form[:password]} type="password" label="Senha" required />
 
-        <:actions :let={f}>
-          <.input field={{f, :remember_me}} type="checkbox" label="Mantenha-me logado" />
+        <:actions>
+          <.input field={@form[:remember_me]} type="checkbox" label="Mantenha-me logado" />
           <.link href={~p"/admin/reset_password"} class="text-sm font-semibold">
             Esqueceu sua senha?
           </.link>
