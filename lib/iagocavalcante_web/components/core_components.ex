@@ -272,6 +272,16 @@ defmodule IagocavalcanteWeb.CoreComponents do
                                    pattern placeholder readonly required rows size step)
   slot :inner_block
 
+  def input(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
+    assigns
+    |> assign(field: nil)
+    |> assign_new(:name, fn -> field.name end)
+    |> assign_new(:id, fn -> field.id end)
+    |> assign_new(:value, fn -> field.value end)
+    |> assign_new(:errors, fn -> translate_errors(field.errors || [], field.field) end)
+    |> input()
+  end
+
   def input(%{field: {f, field}} = assigns) do
     assigns
     |> assign(field: nil)
