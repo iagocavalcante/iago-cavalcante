@@ -98,10 +98,11 @@ msgstr ""
 msgid "I write about software in general, and now I want to talk more about hardware and IoT."
 msgstr ""
 
-#: lib/iagocavalcante_web/components/layouts/root.html.heex:14
-#: lib/iagocavalcante_web/components/layouts/root.html.heex:24
-#, elixir-autogen, elixir-format, fuzzy
-msgid "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém. CTO and founder of Japu and Redação Travessia ."
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:15
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:31
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:39
+#, elixir-autogen, elixir-format
+msgid "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI. Building Agendflow, LeafTok, and open-source tools."
 msgstr ""
 
 #: lib/iagocavalcante_web/live/about.ex:30
