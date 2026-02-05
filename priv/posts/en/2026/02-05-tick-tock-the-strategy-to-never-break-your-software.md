@@ -8,7 +8,7 @@
 }
 ---
 
-Hey folks! Today I want to share a strategy that completely changed how I think about software evolution. I learned this hands-on while working at [Woovi](https://woovi.com), a Brazilian Pix payments fintech, and it's become one of my most valuable mental tools since.
+Hey folks! Today I want to share a strategy that completely changed how I think about software evolution. I learned this hands-on while I was working at [Woovi](https://woovi.com), a Brazilian Pix payments fintech, and it's become one of my most valuable mental tools since.
 
 I'm talking about the **Tick-Tock strategy**.
 
@@ -45,11 +45,11 @@ The Tick-Tock strategy originally came from Intel, who used this model to evolve
 
 The key: **never two tocks in a row**. Whenever you ship something new (tock), the next cycle is stabilization (tick). Always.
 
-## How Woovi Applies This
+## How Woovi Applied This
 
-At Woovi, we deal with money. Literally. Pix payments, integrations with multiple banking providers, real-time webhooks. You can't break anything. A bug here can mean a client not receiving a payment.
+At Woovi, we dealt with money. Literally. Pix payments, integrations with multiple banking providers, real-time webhooks. You couldn't break anything. A bug there could mean a client not receiving a payment.
 
-The Tick-Tock strategy shows up at several levels:
+The Tick-Tock strategy showed up at several levels:
 
 ### Database Changes
 
@@ -83,17 +83,17 @@ See? Each step is safe. If something goes wrong at any stage, you can roll back 
 
 ### Feature Evolution
 
-When we need to change a feature's behavior, it's never "swap and done." It's always:
+When we needed to change a feature's behavior, it was never "swap and done." It was always:
 
 1. **Tock**: Launch the new version side by side with the old one
 2. **Tick**: Monitor, fix bugs, ensure clients have migrated
 3. **Tock**: Remove the old version (only if you're sure nobody uses it)
 
-In practice, this means the system supports **two versions simultaneously** for a period. More work? Yes. But the cost of breaking a client in production is much higher.
+In practice, this meant the system supported **two versions simultaneously** for a period. More work? Yes. But the cost of breaking a client in production was much higher.
 
 ### APIs and Backwards Compatibility
 
-This applies especially to public APIs. At Woovi, we treat backwards compatibility as a priority. If you need to change an endpoint:
+This applied especially to public APIs. At Woovi, we treated backwards compatibility as a priority. If you needed to change an endpoint:
 
 - **Tick**: Add the new field to the response without removing the old one
 - **Tock**: Document the deprecation, give clients a migration deadline
@@ -140,6 +140,6 @@ You don't need to work at a fintech to use Tick-Tock. The strategy works in any 
 | Risk | Low | Controlled |
 | Client | No action needed | May need to adapt |
 
-The Tick-Tock strategy isn't about going slow. It's about going **consistently fast** without leaving a trail of destruction. At Woovi, this is what allows us to evolve a critical financial system without ever breaking our clients' experience.
+The Tick-Tock strategy isn't about going slow. It's about going **consistently fast** without leaving a trail of destruction. At Woovi, this was what allowed us to evolve a critical financial system without ever breaking our clients' experience.
 
 That's it, folks! If you want to chat about how to apply this strategy in your context, find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
