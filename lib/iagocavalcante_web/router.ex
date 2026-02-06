@@ -13,6 +13,7 @@ defmodule IagocavalcanteWeb.Router do
     plug :put_secure_browser_headers
     plug :fetch_current_user
     plug IagocavalcanteWeb.Plugs.Locale
+    plug IagocavalcanteWeb.Plugs.MetaTags
   end
 
   pipeline :admin_layout do

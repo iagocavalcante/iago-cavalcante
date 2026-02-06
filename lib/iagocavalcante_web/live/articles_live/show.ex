@@ -5,7 +5,12 @@ defmodule IagocavalcanteWeb.ArticlesLive.Show do
   alias Iagocavalcante.Blog
 
   def mount(%{"id" => id}, _session, socket) do
-    {:ok, socket |> assign(:article, Blog.get_post_by_id!(id))}
+    article = Blog.get_post_by_id!(id)
+
+    {:ok,
+     socket
+     |> assign(:article, article)
+     |> assign(:page_title, article.title)}
   end
 
   def render(assigns) do

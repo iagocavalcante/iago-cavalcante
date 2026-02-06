@@ -7,40 +7,52 @@
     <.live_title suffix=" · Software Engineer">
       {assigns[:page_title] || "Iago Cavalcante"}
     </.live_title>
-    <meta property="og:title" content="Iago Cavalcante · Software Engineer" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://iagocavalcante.com" />
+    <meta
+      property="og:title"
+      content={assigns[:meta_title] || "Iago Cavalcante · Software Engineer"}
+    />
+    <meta property="og:type" content={assigns[:meta_type] || "website"} />
+    <meta
+      property="og:url"
+      content={assigns[:meta_url] || "https://iagocavalcante.com"}
+    />
     <meta property="og:image" content="https://iagocavalcante.com/images/myself-1.png" />
     <meta
       property="og:description"
       content={
-        gettext(
-          "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI. Building Agendflow, LeafTok, and open-source tools.",
-          lang: @locale
-        )
+        assigns[:meta_description] ||
+          gettext(
+            "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI. Building Agendflow, LeafTok, and open-source tools.",
+            lang: @locale
+          )
       }
     />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Iago Cavalcante · Software Engineer" />
+    <meta
+      name="twitter:title"
+      content={assigns[:meta_title] || "Iago Cavalcante · Software Engineer"}
+    />
     <meta name="twitter:image" content="https://iagocavalcante.com/images/myself-1.png" />
     <meta
       name="twitter:description"
       content={
-        gettext(
-          "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI. Building Agendflow, LeafTok, and open-source tools.",
-          lang: @locale
-        )
+        assigns[:meta_description] ||
+          gettext(
+            "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI. Building Agendflow, LeafTok, and open-source tools.",
+            lang: @locale
+          )
       }
     />
 
     <meta
       name="description"
       content={
-        gettext(
-          "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI. Building Agendflow, LeafTok, and open-source tools.",
-          lang: @locale
-        )
+        assigns[:meta_description] ||
+          gettext(
+            "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI. Building Agendflow, LeafTok, and open-source tools.",
+            lang: @locale
+          )
       }
     />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
