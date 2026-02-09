@@ -10,7 +10,7 @@
 
 Fala, pessoal! Hoje quero compartilhar algo diferente. Não é código, não é arquitetura, mas algo que afeta cada linha de código que a gente escreve: **propósito**.
 
-Assisti uma palestra do Mario Sergio Cortella que mudou completamente como eu penso sobre trabalho. Vou compartilhar 5 lições que parecem óbvias, mas fazem toda diferença quando você entende de verdade.
+Recentemente li o livro *"Por que fazemos o que fazemos"* do Mario Sergio Cortella, e ele mudou completamente como eu penso sobre trabalho. É uma reflexão profunda sobre o sentido por trás do nosso labor diário. Vou compartilhar 5 lições que parecem óbvias, mas fazem toda diferença quando você entende de verdade.
 
 ## 1. O Diagnóstico da Segunda-Feira: Cansaço ou Crise do Espírito?
 

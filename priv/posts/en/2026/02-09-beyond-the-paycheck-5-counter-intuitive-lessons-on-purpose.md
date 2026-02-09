@@ -10,7 +10,7 @@
 
 Hey folks! Today I want to share something different. Not code, not architecture, but something that affects every line of code we write: **purpose**.
 
-I watched a talk by Mario Sergio Cortella (a Brazilian philosopher who's basically the Brené Brown of career advice here) that completely rewired how I think about work. Let me share 5 lessons that seem obvious but hit different when you really understand them.
+I recently read Mario Sergio Cortella's book *"Por que fazemos o que fazemos"* (Why We Do What We Do), and it completely rewired how I think about work. Cortella is a Brazilian philosopher—think of him as the Brené Brown of career advice here—and this book is a deep reflection on the meaning behind our daily labor. Let me share 5 lessons that seem obvious but hit different when you really understand them.
 
 ## 1. The Monday Morning Diagnostic: Tiredness or Crisis of the Spirit?
 
