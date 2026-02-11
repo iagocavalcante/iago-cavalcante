@@ -99,3 +99,5 @@ Purpose is the only answer that satisfies the soul.
 ---
 
 That's it, folks! If this hit something in you, leave a comment. Let's exchange ideas.
+
+📖 Want to read the full book? Grab your copy of *"Por que fazemos o que fazemos"* by Mario Sergio Cortella [here on Amazon](https://amzn.to/4awrTct).

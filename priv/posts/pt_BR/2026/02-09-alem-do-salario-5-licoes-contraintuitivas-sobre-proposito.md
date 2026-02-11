@@ -99,3 +99,5 @@ Propósito é a única resposta que satisfaz a alma.
 ---
 
 É isso, pessoal! Se bateu algo, comenta aí. Bora trocar ideia.
+
+📖 Quer ler o livro completo? Garanta seu exemplar de *"Por que fazemos o que fazemos"* do Mario Sergio Cortella [aqui na Amazon](https://amzn.to/4awrTct).
