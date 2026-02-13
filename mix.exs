@@ -45,6 +45,7 @@ defmodule Iagocavalcante.MixProject do
       {:jason, "~> 1.2"},
       {:mime, "~> 2.0.6", override: true},
       {:nimble_publisher, "~> 1.0"},
+      {:oban, "~> 2.19"},
       {:mdex, "~> 0.11.0"},
       {:phoenix_ecto, "~> 4.5"},
       {:phoenix_html, "~> 4.1"},

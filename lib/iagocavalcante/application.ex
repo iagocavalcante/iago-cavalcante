@@ -22,6 +22,8 @@ defmodule Iagocavalcante.Application do
       {Task.Supervisor, name: Iagocavalcante.TaskSupervisor},
       # Bookmarks cache for CSV data
       Iagocavalcante.Bookmarks.Cache,
+      # Oban job processing (scheduled posts, notifications)
+      {Oban, Application.fetch_env!(:iagocavalcante, Oban)},
       # Start the Endpoint (http/https)
       IagocavalcanteWeb.Endpoint
     ]
