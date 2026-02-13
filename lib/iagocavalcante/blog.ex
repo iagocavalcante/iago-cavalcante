@@ -27,7 +27,14 @@ defmodule Iagocavalcante.Blog do
   def all_tags, do: @tags
   def all_posts, do: @posts
 
-  def published_posts, do: Enum.filter(all_posts(), &(&1.published == true))
+  def published_posts do
+    today = Date.utc_today()
+
+    Enum.filter(all_posts(), fn post ->
+      post.published == true or
+        (post.scheduled_for != nil and Date.compare(post.scheduled_for, today) != :gt)
+    end)
+  end
 
   def published_posts_by_locale(locale) do
     published_posts()
@@ -35,6 +42,22 @@ defmodule Iagocavalcante.Blog do
   end
 
   def draft_posts, do: Enum.filter(all_posts(), &(&1.published == false))
+
+  def scheduled_posts do
+    Enum.filter(all_posts(), fn post ->
+      post.published == false and post.scheduled_for != nil
+    end)
+  end
+
+  def newly_published_posts do
+    today = Date.utc_today()
+
+    Enum.filter(all_posts(), fn post ->
+      post.published == false and
+        post.scheduled_for != nil and
+        Date.compare(post.scheduled_for, today) == :eq
+    end)
+  end
 
   def posts_by_status(status \\ :all) do
     case status do
@@ -230,6 +253,13 @@ defmodule Iagocavalcante.Blog do
   end
 
   defp insert_header_in_body(post) do
+    scheduled_line =
+      if post.scheduled_for do
+        "  scheduled_for: ~D[#{post.scheduled_for}],\n"
+      else
+        ""
+      end
+
     header = """
     %{
       title: "#{post.title}",
@@ -237,7 +267,7 @@ defmodule Iagocavalcante.Blog do
       tags: ~w(#{split_tags(post.tags)}),
       published: #{post.published},
       locale: "#{post.locale}",
-      author: "Iago Cavalcante"
+    #{scheduled_line}  author: "Iago Cavalcante"
     }
     ---
 

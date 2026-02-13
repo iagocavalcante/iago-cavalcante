@@ -22,7 +22,8 @@ defmodule Iagocavalcante.Post do
     :path,
     :published,
     :locale,
-    :year
+    :year,
+    :scheduled_for
   ]
 
   def build(filename, attrs, body) do
