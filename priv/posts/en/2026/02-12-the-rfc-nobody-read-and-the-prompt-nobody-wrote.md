@@ -129,4 +129,4 @@ If you already write good design docs, you're closer to mastering AI agents than
 
 Next week, we'll dissect the anatomy of a good RFC — piece by piece.
 
-Got questions or want to discuss? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Got questions or want to discuss? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

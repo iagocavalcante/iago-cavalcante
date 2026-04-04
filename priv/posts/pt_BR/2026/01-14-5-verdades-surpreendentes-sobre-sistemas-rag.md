@@ -147,6 +147,6 @@ Agora que você conhece as complexidades ocultas, em qual área você vai focar 
 
 ---
 
-**Construindo um sistema RAG ou lutando com um?** Adoraria ouvir sobre sua experiência. Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Construindo um sistema RAG ou lutando com um?** Adoraria ouvir sobre sua experiência. Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 Bora construir!

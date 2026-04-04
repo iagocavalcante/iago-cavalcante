@@ -147,6 +147,6 @@ Now that you know the hidden complexities, which area will you focus on first?
 
 ---
 
-**Building a RAG system or struggling with one?** I'd love to hear about your experience. Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Building a RAG system or struggling with one?** I'd love to hear about your experience. Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 Happy building!

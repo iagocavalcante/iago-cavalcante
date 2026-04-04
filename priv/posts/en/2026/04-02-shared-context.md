@@ -194,4 +194,4 @@ Now we have all the pieces: RFC structure, explicit constraints, interfaces, acc
 
 ---
 
-Enjoyed this? Want to discuss how to externalize context in your projects? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Enjoyed this? Want to discuss how to externalize context in your projects? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

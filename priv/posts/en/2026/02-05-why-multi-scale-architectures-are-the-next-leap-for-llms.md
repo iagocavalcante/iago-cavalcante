@@ -102,6 +102,6 @@ Spoiler: we don't.
 
 ---
 
-**Want to nerd out about efficient AI?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Want to nerd out about efficient AI?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 Happy building!

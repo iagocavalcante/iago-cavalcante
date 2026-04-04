@@ -126,4 +126,4 @@ Thank you for sticking with me through these ten weeks. The conversation doesn't
 
 ---
 
-Enjoyed the series? Want to continue the conversation? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Enjoyed the series? Want to continue the conversation? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

@@ -129,4 +129,4 @@ Se você já escreve bons design docs, você está mais perto de dominar agentes
 
 Na próxima semana, a gente disseca a anatomia de um bom RFC - peça por peça.
 
-Tem dúvidas ou quer trocar ideia sobre o tema? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Tem dúvidas ou quer trocar ideia sobre o tema? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

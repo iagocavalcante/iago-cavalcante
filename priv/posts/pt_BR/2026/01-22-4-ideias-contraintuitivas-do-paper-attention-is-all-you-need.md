@@ -104,6 +104,6 @@ Agora que atenção conquistou texto, o que ela vai nos ensinar a ver a seguir?
 
 ---
 
-**Quer discutir arquiteturas de IA ou compartilhar suas ideias sobre Transformers?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Quer discutir arquiteturas de IA ou compartilhar suas ideias sobre Transformers?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 É isso, pessoal! Bons estudos!

@@ -217,4 +217,4 @@ Na próxima semana, a gente faz exatamente essa tradução. Peça por peça.
 
 ---
 
-Curtiu? Tem alguma seção de RFC que você acha que deveria estar na lista? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Curtiu? Tem alguma seção de RFC que você acha que deveria estar na lista? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

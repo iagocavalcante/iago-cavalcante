@@ -263,4 +263,4 @@ Now that you see the mirror, the next step is mastering one of the most underrat
 
 ---
 
-Liked the mapping? Want to discuss how to apply this on your team? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Liked the mapping? Want to discuss how to apply this on your team? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

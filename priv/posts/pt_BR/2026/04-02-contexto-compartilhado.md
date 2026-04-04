@@ -194,4 +194,4 @@ Agora temos todas as peças: estrutura de RFC, restrições explícitas, interfa
 
 ---
 
-Curtiu? Quer trocar ideia sobre como externalizar contexto nos seus projetos? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Curtiu? Quer trocar ideia sobre como externalizar contexto nos seus projetos? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

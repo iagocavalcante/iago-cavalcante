@@ -142,4 +142,4 @@ Você não precisa trabalhar numa fintech pra usar Tick-Tock. A estratégia func
 
 A estratégia Tick-Tock não é sobre ir devagar. É sobre ir **consistentemente rápido** sem deixar um rastro de destruição. Na Woovi, isso era o que nos permitia evoluir um sistema financeiro crítico sem nunca quebrar a experiência dos clientes.
 
-É isso, pessoal! Se você quer trocar uma ideia sobre como aplicar essa estratégia no seu contexto, me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+É isso, pessoal! Se você quer trocar uma ideia sobre como aplicar essa estratégia no seu contexto, me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

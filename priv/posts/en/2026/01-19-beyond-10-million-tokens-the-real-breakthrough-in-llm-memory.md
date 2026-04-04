@@ -104,6 +104,6 @@ The question that remains: if you could give a model the ability to analyze an e
 
 ---
 
-**Interested in applied AI and software engineering?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Interested in applied AI and software engineering?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 Happy building!

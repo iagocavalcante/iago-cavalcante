@@ -185,6 +185,6 @@ The secret is choosing the right model for your hardware. Start small, test, and
 
 ---
 
-**Questions or want to share your setup?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Questions or want to share your setup?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 Happy building!

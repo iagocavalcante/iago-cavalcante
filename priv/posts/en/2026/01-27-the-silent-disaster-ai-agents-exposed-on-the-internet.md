@@ -269,6 +269,6 @@ The demos are extremely cool. And you should still be careful.
 
 ---
 
-**Questions or want to share your setup?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Questions or want to share your setup?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 ClawdBot is amazing. Just use it responsibly.

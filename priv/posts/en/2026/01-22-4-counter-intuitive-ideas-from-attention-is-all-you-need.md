@@ -104,6 +104,6 @@ Now that attention has conquered text, what will it teach us to see next?
 
 ---
 
-**Want to discuss AI architectures or share your thoughts on Transformers?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Want to discuss AI architectures or share your thoughts on Transformers?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 Happy learning!

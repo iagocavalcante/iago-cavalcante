@@ -102,6 +102,6 @@ Spoiler: não precisamos.
 
 ---
 
-**Quer trocar ideia sobre IA eficiente?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Quer trocar ideia sobre IA eficiente?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 É isso, pessoal! Bons estudos!

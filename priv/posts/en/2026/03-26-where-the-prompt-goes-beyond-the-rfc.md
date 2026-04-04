@@ -203,4 +203,4 @@ If feedback loops are about the conversation between you and the agent, the next
 
 ---
 
-Enjoyed this? Want to discuss how to use feedback loops in your workflows? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Enjoyed this? Want to discuss how to use feedback loops in your workflows? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

@@ -104,6 +104,6 @@ A pergunta que fica: se você pudesse dar a um modelo a capacidade de analisar u
 
 ---
 
-**Interessado em IA aplicada e engenharia de software?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Interessado em IA aplicada e engenharia de software?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 Bora construir!

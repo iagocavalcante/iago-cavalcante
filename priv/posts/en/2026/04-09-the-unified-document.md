@@ -238,4 +238,4 @@ In the tenth and final article, we look ahead. What happens when the unified doc
 
 ---
 
-Enjoyed this? Want to discuss how to unify your technical documents? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Enjoyed this? Want to discuss how to unify your technical documents? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

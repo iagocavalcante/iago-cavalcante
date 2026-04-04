@@ -126,4 +126,4 @@ Obrigado por ter ficado comigo ao longo dessas dez semanas. A conversa não acab
 
 ---
 
-Curtiu a série? Quer continuar a conversa? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Curtiu a série? Quer continuar a conversa? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

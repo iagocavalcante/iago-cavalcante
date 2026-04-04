@@ -264,4 +264,4 @@ Agora que você vê o espelho, o próximo passo é dominar uma das seções mais
 
 ---
 
-Curtiu o mapeamento? Quer discutir como aplicar isso no seu time? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Curtiu o mapeamento? Quer discutir como aplicar isso no seu time? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

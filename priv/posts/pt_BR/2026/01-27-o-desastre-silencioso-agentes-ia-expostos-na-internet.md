@@ -269,6 +269,6 @@ As demos são extremamente legais. E você ainda deveria ter cuidado.
 
 ---
 
-**Dúvidas ou quer compartilhar sua configuração?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Dúvidas ou quer compartilhar sua configuração?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 É isso, pessoal! O ClawdBot é incrível. Só usa com responsabilidade.

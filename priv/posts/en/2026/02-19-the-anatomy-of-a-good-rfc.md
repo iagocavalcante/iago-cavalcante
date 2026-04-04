@@ -218,4 +218,4 @@ Next week, we'll make that exact translation. Piece by piece.
 
 ---
 
-Enjoyed this? Think there's an RFC section I missed? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Enjoyed this? Think there's an RFC section I missed? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

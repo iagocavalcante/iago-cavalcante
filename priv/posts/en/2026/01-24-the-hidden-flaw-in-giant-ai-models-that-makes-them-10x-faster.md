@@ -94,6 +94,6 @@ But here's what fascinates me most: if the core of the mighty Transformer had su
 
 ---
 
-**Interested in AI efficiency and architecture?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Interested in AI efficiency and architecture?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 Happy building!

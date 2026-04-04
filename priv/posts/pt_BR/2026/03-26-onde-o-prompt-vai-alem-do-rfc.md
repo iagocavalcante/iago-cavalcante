@@ -202,4 +202,4 @@ Se feedback loops são sobre a conversa entre você e o agente, o próximo artig
 
 ---
 
-Curtiu? Quer trocar ideia sobre como usar feedback loops nos seus workflows? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Curtiu? Quer trocar ideia sobre como usar feedback loops nos seus workflows? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

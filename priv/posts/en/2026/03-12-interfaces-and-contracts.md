@@ -247,4 +247,4 @@ In the next article, we'll talk about **acceptance criteria** -- how to define, 
 
 ---
 
-Enjoyed this? Want to discuss contracts, interfaces, or service integration? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Enjoyed this? Want to discuss contracts, interfaces, or service integration? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

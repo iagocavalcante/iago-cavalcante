@@ -185,6 +185,6 @@ O segredo tá em escolher o modelo certo pro seu hardware. Começa pequeno, test
 
 ---
 
-**Dúvidas ou quer compartilhar sua configuração?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Dúvidas ou quer compartilhar sua configuração?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 É isso, pessoal! Bons estudos e boas configurações!

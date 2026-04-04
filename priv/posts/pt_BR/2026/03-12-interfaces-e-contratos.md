@@ -247,4 +247,4 @@ No próximo artigo, vamos falar sobre **critérios de aceite** -- como definir, 
 
 ---
 
-Curtiu? Quer trocar ideia sobre contratos, interfaces ou integração de serviços? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Curtiu? Quer trocar ideia sobre contratos, interfaces ou integração de serviços? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

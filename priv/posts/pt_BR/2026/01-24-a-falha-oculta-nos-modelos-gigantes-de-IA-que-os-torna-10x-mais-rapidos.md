@@ -94,6 +94,6 @@ Mas aqui está o que mais me fascina: se o núcleo do poderoso Transformer tinha
 
 ---
 
-**Quer trocar ideia sobre arquiteturas de IA?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Quer trocar ideia sobre arquiteturas de IA?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 É isso, pessoal! Bons estudos!

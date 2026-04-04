@@ -165,4 +165,4 @@ No próximo artigo, vamos falar sobre **loops de feedback** — o ponto onde pro
 
 ---
 
-Curtiu? Quer trocar ideia ou discordar de algo? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Curtiu? Quer trocar ideia ou discordar de algo? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

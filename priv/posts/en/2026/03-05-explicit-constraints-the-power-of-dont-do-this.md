@@ -164,4 +164,4 @@ In the next article, we'll talk about **interfaces and contracts** — how to de
 
 ---
 
-Enjoyed this? Want to discuss or disagree? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Enjoyed this? Want to discuss or disagree? Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

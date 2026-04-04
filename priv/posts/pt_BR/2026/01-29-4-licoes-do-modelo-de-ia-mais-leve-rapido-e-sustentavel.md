@@ -90,6 +90,6 @@ A próxima descoberta pode não vir de quem tem mais GPUs. Pode vir de quem faz 
 
 ---
 
-**Quer trocar ideia sobre IA eficiente?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Quer trocar ideia sobre IA eficiente?** Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 É isso, pessoal! Bons estudos!

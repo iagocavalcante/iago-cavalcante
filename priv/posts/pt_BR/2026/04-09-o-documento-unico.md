@@ -238,4 +238,4 @@ No décimo e último artigo, a gente olha pra frente. O que acontece quando o do
 
 ---
 
-Curtiu? Quer trocar ideia sobre como unificar seus documentos técnicos? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante).
+Curtiu? Quer trocar ideia sobre como unificar seus documentos técnicos? Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).

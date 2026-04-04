@@ -90,6 +90,6 @@ The next breakthrough might not come from whoever has the most GPUs. It might co
 
 ---
 
-**Want to nerd out about efficient AI?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante).
+**Want to nerd out about efficient AI?** Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante).
 
 Happy building!
