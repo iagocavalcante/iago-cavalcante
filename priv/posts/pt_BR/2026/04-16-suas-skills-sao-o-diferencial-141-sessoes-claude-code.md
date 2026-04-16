@@ -8,7 +8,7 @@
 }
 ---
 
-Fala, pessoal! Uns meses atrás eu escrevi sobre [Vibe Coding com Esteroides](/blog/vibe-coding-com-esteroides-claude-code-agentes-superpoderes) — a ideia era que skills personalizadas, agentes paralelos e superpoderes transformam o Claude Code numa máquina de produtividade.
+Fala, pessoal! Uns meses atrás eu escrevi sobre [Vibe Coding com Esteroides](https://iagocavalcante.com/articles/vibe-coding-com-esteroides-claude-code-agentes-superpoderes) — a ideia era que skills personalizadas, agentes paralelos e superpoderes transformam o Claude Code numa máquina de produtividade.
 
 Aquilo era teoria. Hoje eu tenho os recibos.
 

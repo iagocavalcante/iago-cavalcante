@@ -8,7 +8,7 @@
 }
 ---
 
-Hey folks! A few months back I wrote about [Vibe Coding with Steroids](/blog/vibe-coding-with-steroids-claude-code-agents-superpowers) — the claim was that custom skills, parallel agents, and superpowers turn Claude Code into a productivity machine.
+Hey folks! A few months back I wrote about [Vibe Coding with Steroids](https://iagocavalcante.com/articles/vibe-coding-with-steroids-claude-code-agents-superpowers) — the claim was that custom skills, parallel agents, and superpowers turn Claude Code into a productivity machine.
 
 That was theory. Today I've got the receipts.
 
