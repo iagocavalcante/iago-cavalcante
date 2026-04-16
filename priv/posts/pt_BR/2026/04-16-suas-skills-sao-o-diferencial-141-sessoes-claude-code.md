@@ -124,6 +124,6 @@ Vibe coding com esteroides te faz começar. Skills são o que fazem ficar.
 
 **Tem um workflow doloroso que se repete?** Essa é sua próxima skill.
 
-Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iagocavalcante) — curioso pra saber o que vocês tão codificando.
+Me encontra no [Twitter](https://x.com/iagoangelimc) ou [LinkedIn](https://linkedin.com/in/iago-a-cavalcante) — curioso pra saber o que vocês tão codificando.
 
 Bora codar!

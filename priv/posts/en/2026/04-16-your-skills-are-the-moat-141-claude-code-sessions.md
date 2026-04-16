@@ -124,6 +124,6 @@ Vibe coding with steroids gets you started. Skills are what make it stick.
 
 **Got a painful workflow that repeats?** That's your next skill.
 
-Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iagocavalcante) — curious to see what you're codifying.
+Find me on [Twitter](https://x.com/iagoangelimc) or [LinkedIn](https://linkedin.com/in/iago-a-cavalcante) — curious to see what you're codifying.
 
 Happy coding!

@@ -2,6 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Author Social Links (CRITICAL)
+
+When adding author contact links to blog posts or any content, ALWAYS use these exact URLs:
+
+- **Twitter/X**: `https://x.com/iagoangelimc`
+- **LinkedIn**: `https://linkedin.com/in/iago-a-cavalcante`
+
+Never use `linkedin.com/in/iagocavalcante` (wrong handle) or any other variant.
+
 ## Commands
 
 ### Phoenix/Elixir Application (Root)
