@@ -190,10 +190,10 @@ If feedback loops are about the conversation between you and the agent, the next
 
 ### Series: RFCs as Prompts for AI-Agent Development
 
-1. [The fundamental connection](/blog/the-rfc-nobody-read-and-the-prompt-nobody-wrote)
-2. [Anatomy of a good RFC](/blog/the-anatomy-of-a-good-rfc)
-3. [Anatomy of a good system prompt](/blog/the-anatomy-of-a-good-system-prompt)
-4. [Explicit constraints — The power of "don't do this"](/blog/explicit-constraints-the-power-of-dont-do-this)
+1. [The fundamental connection](/articles/the-rfc-nobody-read-and-the-prompt-nobody-wrote)
+2. [Anatomy of a good RFC](/articles/the-anatomy-of-a-good-rfc)
+3. [Anatomy of a good system prompt](/articles/the-anatomy-of-a-good-system-prompt)
+4. [Explicit constraints — The power of "don't do this"](/articles/explicit-constraints-the-power-of-dont-do-this)
 5. Interfaces and contracts *(coming soon)*
 6. Acceptance criteria *(coming soon)*
 7. **Feedback loops** *(this article)*

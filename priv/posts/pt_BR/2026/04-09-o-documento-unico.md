@@ -225,13 +225,13 @@ No décimo e último artigo, a gente olha pra frente. O que acontece quando o do
 
 ### Série: RFCs como Prompts para Desenvolvimento com Agentes de IA
 
-1. [A conexão fundamental](/blog/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu)
-2. [Anatomia de um bom RFC](/blog/anatomia-de-um-bom-rfc)
-3. [Anatomia de um bom prompt de sistema](/blog/anatomia-de-um-bom-prompt-de-sistema)
-4. [Restrições explícitas — O poder do "não faça"](/blog/restricoes-explicitas-o-poder-do-nao-faca)
-5. [Interfaces e contratos](/blog/interfaces-e-contratos)
-6. [Critérios de aceite](/blog/criterios-de-aceite)
-7. [Loops de feedback](/blog/onde-o-prompt-vai-alem-do-rfc)
+1. [A conexão fundamental](/artigos/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu)
+2. [Anatomia de um bom RFC](/artigos/anatomia-de-um-bom-rfc)
+3. [Anatomia de um bom prompt de sistema](/artigos/anatomia-de-um-bom-prompt-de-sistema)
+4. [Restrições explícitas — O poder do "não faça"](/artigos/restricoes-explicitas-o-poder-do-nao-faca)
+5. [Interfaces e contratos](/artigos/interfaces-e-contratos)
+6. [Critérios de aceite](/artigos/criterios-de-aceite)
+7. [Loops de feedback](/artigos/onde-o-prompt-vai-alem-do-rfc)
 8. Contexto compartilhado *(em breve)*
 9. **O documento único** *(este artigo)*
 10. O futuro da especificação *(em breve)*

@@ -151,7 +151,7 @@ No próximo artigo, vamos falar sobre **interfaces e contratos** — como defini
 
 ### Série: RFCs como Prompts para Desenvolvimento com Agentes de IA
 
-1. [A conexão fundamental](/blog/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu)
+1. [A conexão fundamental](/artigos/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu)
 2. Anatomia de um bom RFC *(em breve)*
 3. Anatomia de um bom prompt de sistema *(em breve)*
 4. **Restrições explícitas — O poder do "não faça"** *(este artigo)*

@@ -250,7 +250,7 @@ Now that you see the mirror, the next step is mastering one of the most underrat
 
 ### Series navigation
 
-1. [The RFC Nobody Read and the Prompt Nobody Wrote](/blog/the-rfc-nobody-read-and-the-prompt-nobody-wrote) - The fundamental connection
+1. [The RFC Nobody Read and the Prompt Nobody Wrote](/articles/the-rfc-nobody-read-and-the-prompt-nobody-wrote) - The fundamental connection
 2. **Anatomy of a good RFC** - The structural elements that work
 3. **This article** - The RFC's mirror in prompt world
 4. **Explicit constraints** - The power of "don't do this"

@@ -19,7 +19,7 @@ If that team had written an RFC before opening their code editor, they would hav
 
 ## The six pieces every good RFC has
 
-In the [previous article](/blog/the-rfc-nobody-read-and-the-prompt-nobody-wrote), I showed that the structure of an RFC is essentially the same as a good prompt. Today we're going to crack that structure open piece by piece and understand **why each one exists** and what goes wrong when you skip it.
+In the [previous article](/articles/the-rfc-nobody-read-and-the-prompt-nobody-wrote), I showed that the structure of an RFC is essentially the same as a good prompt. Today we're going to crack that structure open piece by piece and understand **why each one exists** and what goes wrong when you skip it.
 
 Every RFC that actually works -- not just on paper -- has six sections. They're not optional. Each one prevents an entire category of failure.
 
@@ -205,7 +205,7 @@ Next week, we'll make that exact translation. Piece by piece.
 
 **Series: RFCs as Prompts for AI-Agent Development**
 
-1. [The RFC Nobody Read and the Prompt Nobody Wrote](/blog/the-rfc-nobody-read-and-the-prompt-nobody-wrote) - The fundamental connection
+1. [The RFC Nobody Read and the Prompt Nobody Wrote](/articles/the-rfc-nobody-read-and-the-prompt-nobody-wrote) - The fundamental connection
 2. **The Anatomy of a Good RFC** - The structural elements that work *(this article)*
 3. **Anatomy of a good system prompt** - The RFC's mirror
 4. **Explicit constraints** - The power of "don't do this"

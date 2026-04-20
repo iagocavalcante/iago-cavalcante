@@ -181,13 +181,13 @@ Now we have all the pieces: RFC structure, explicit constraints, interfaces, acc
 
 ### Series: RFCs as Prompts for AI-Agent Development
 
-1. [The fundamental connection](/blog/the-rfc-nobody-read-and-the-prompt-nobody-wrote)
-2. [Anatomy of a good RFC](/blog/the-anatomy-of-a-good-rfc)
-3. [Anatomy of a good system prompt](/blog/the-anatomy-of-a-good-system-prompt)
-4. [Explicit constraints — The power of "don't do this"](/blog/explicit-constraints-the-power-of-dont-do-this)
-5. [Interfaces and contracts](/blog/interfaces-and-contracts)
-6. [Acceptance criteria](/blog/acceptance-criteria)
-7. [Feedback loops](/blog/where-the-prompt-goes-beyond-the-rfc)
+1. [The fundamental connection](/articles/the-rfc-nobody-read-and-the-prompt-nobody-wrote)
+2. [Anatomy of a good RFC](/articles/the-anatomy-of-a-good-rfc)
+3. [Anatomy of a good system prompt](/articles/the-anatomy-of-a-good-system-prompt)
+4. [Explicit constraints — The power of "don't do this"](/articles/explicit-constraints-the-power-of-dont-do-this)
+5. [Interfaces and contracts](/articles/interfaces-and-contracts)
+6. [Acceptance criteria](/articles/acceptance-criteria)
+7. [Feedback loops](/articles/where-the-prompt-goes-beyond-the-rfc)
 8. **Shared context** *(this article)*
 9. The unified document *(coming soon)*
 10. The future of specification *(coming soon)*

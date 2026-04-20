@@ -19,7 +19,7 @@ Se esse time tivesse escrito um RFC antes de abrir o editor de código, teriam d
 
 ## As seis peças que todo bom RFC tem
 
-No [artigo anterior](/blog/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu), eu mostrei que a estrutura de um RFC é essencialmente a mesma de um bom prompt. Hoje vamos abrir essa estrutura peça por peça e entender **por que cada uma existe** e o que acontece quando você pula alguma.
+No [artigo anterior](/artigos/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu), eu mostrei que a estrutura de um RFC é essencialmente a mesma de um bom prompt. Hoje vamos abrir essa estrutura peça por peça e entender **por que cada uma existe** e o que acontece quando você pula alguma.
 
 Todo RFC que funciona -- de verdade, não só no papel -- tem seis seções. Não são opcionais. Cada uma previne uma categoria inteira de falhas.
 
@@ -204,7 +204,7 @@ Na próxima semana, a gente faz exatamente essa tradução. Peça por peça.
 
 **Série: RFCs como Prompts para Desenvolvimento com Agentes de IA**
 
-1. [O RFC que Ninguém Leu e o Prompt que Ninguém Escreveu](/blog/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu) - A conexão fundamental
+1. [O RFC que Ninguém Leu e o Prompt que Ninguém Escreveu](/artigos/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu) - A conexão fundamental
 2. **Anatomia de um Bom RFC** - Os elementos estruturais que funcionam *(este artigo)*
 3. **Anatomia de um bom prompt de sistema** - O espelho do RFC
 4. **Restrições explícitas** - O poder do "não faça"

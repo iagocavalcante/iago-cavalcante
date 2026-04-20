@@ -151,7 +151,7 @@ In the next article, we'll talk about **interfaces and contracts** — how to de
 
 ### Series: RFCs as Prompts for AI-Agent Development
 
-1. [The fundamental connection](/blog/the-rfc-nobody-read-and-the-prompt-nobody-wrote)
+1. [The fundamental connection](/articles/the-rfc-nobody-read-and-the-prompt-nobody-wrote)
 2. Anatomy of a good RFC *(coming soon)*
 3. Anatomy of a good system prompt *(coming soon)*
 4. **Explicit constraints — The power of "don't do this"** *(this article)*

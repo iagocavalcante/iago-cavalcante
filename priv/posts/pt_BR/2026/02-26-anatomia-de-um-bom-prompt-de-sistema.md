@@ -251,7 +251,7 @@ Agora que você vê o espelho, o próximo passo é dominar uma das seções mais
 
 ### Navegação da série
 
-1. [O RFC que Ninguém Leu e o Prompt que Ninguém Escreveu](/blog/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu) - A conexão fundamental
+1. [O RFC que Ninguém Leu e o Prompt que Ninguém Escreveu](/artigos/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu) - A conexão fundamental
 2. **Anatomia de um bom RFC** - Os elementos estruturais que funcionam
 3. **Este artigo** - O espelho do RFC no mundo dos prompts
 4. **Restrições explícitas** - O poder do "não faça"
