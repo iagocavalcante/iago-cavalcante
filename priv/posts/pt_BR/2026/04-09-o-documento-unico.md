@@ -232,9 +232,9 @@ No décimo e último artigo, a gente olha pra frente. O que acontece quando o do
 5. [Interfaces e contratos](/artigos/interfaces-e-contratos)
 6. [Critérios de aceite](/artigos/criterios-de-aceite)
 7. [Loops de feedback](/artigos/onde-o-prompt-vai-alem-do-rfc)
-8. Contexto compartilhado *(em breve)*
+8. [Contexto compartilhado](/artigos/contexto-compartilhado)
 9. **O documento único** *(este artigo)*
-10. O futuro da especificação *(em breve)*
+10. [O futuro da especificação](/artigos/o-futuro-da-especificacao)
 
 ---
 

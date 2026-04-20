@@ -120,8 +120,8 @@ Obrigado por ter ficado comigo ao longo dessas dez semanas. A conversa não acab
 5. [Interfaces e contratos](/artigos/interfaces-e-contratos)
 6. [Critérios de aceite](/artigos/criterios-de-aceite)
 7. [Loops de feedback](/artigos/onde-o-prompt-vai-alem-do-rfc)
-8. Contexto compartilhado *(em breve)*
-9. O documento único *(em breve)*
+8. [Contexto compartilhado](/artigos/contexto-compartilhado)
+9. [O documento único](/artigos/o-documento-unico)
 10. **O futuro da especificação** *(este artigo)*
 
 ---

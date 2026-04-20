@@ -152,15 +152,15 @@ In the next article, we'll talk about **interfaces and contracts** — how to de
 ### Series: RFCs as Prompts for AI-Agent Development
 
 1. [The fundamental connection](/articles/the-rfc-nobody-read-and-the-prompt-nobody-wrote)
-2. Anatomy of a good RFC *(coming soon)*
-3. Anatomy of a good system prompt *(coming soon)*
+2. [Anatomy of a good RFC](/articles/the-anatomy-of-a-good-rfc)
+3. [Anatomy of a good system prompt](/articles/the-anatomy-of-a-good-system-prompt)
 4. **Explicit constraints — The power of "don't do this"** *(this article)*
-5. Interfaces and contracts *(coming soon)*
-6. Acceptance criteria *(coming soon)*
-7. Feedback loops *(coming soon)*
-8. Shared context *(coming soon)*
-9. The unified document *(coming soon)*
-10. The future of specification *(coming soon)*
+5. [Interfaces and contracts](/articles/interfaces-and-contracts)
+6. [Acceptance criteria](/articles/acceptance-criteria)
+7. [Feedback loops](/articles/where-the-prompt-goes-beyond-the-rfc)
+8. [Shared context](/articles/shared-context)
+9. [The unified document](/articles/the-unified-document)
+10. [The future of specification](/articles/the-future-of-specification)
 
 ---
 

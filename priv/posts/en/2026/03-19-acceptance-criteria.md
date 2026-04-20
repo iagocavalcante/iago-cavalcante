@@ -156,12 +156,12 @@ In the next article, we'll talk about **feedback loops** -- the point where prom
 2. [Anatomy of a good RFC](/articles/the-anatomy-of-a-good-rfc)
 3. [Anatomy of a good system prompt](/articles/the-anatomy-of-a-good-system-prompt)
 4. [Explicit constraints -- The power of "don't do this"](/articles/explicit-constraints-the-power-of-dont-do-this)
-5. Interfaces and contracts *(coming soon)*
+5. [Interfaces and contracts](/articles/interfaces-and-contracts)
 6. **Acceptance criteria -- When the agent knows it's done** *(this article)*
-7. Feedback loops *(coming soon)*
-8. Shared context *(coming soon)*
-9. The unified document *(coming soon)*
-10. The future of specification *(coming soon)*
+7. [Feedback loops](/articles/where-the-prompt-goes-beyond-the-rfc)
+8. [Shared context](/articles/shared-context)
+9. [The unified document](/articles/the-unified-document)
+10. [The future of specification](/articles/the-future-of-specification)
 
 ---
 

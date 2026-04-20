@@ -189,8 +189,8 @@ Agora temos todas as peças: estrutura de RFC, restrições explícitas, interfa
 6. [Critérios de aceite](/artigos/criterios-de-aceite)
 7. [Loops de feedback](/artigos/onde-o-prompt-vai-alem-do-rfc)
 8. **Contexto compartilhado** *(este artigo)*
-9. O documento único *(em breve)*
-10. O futuro da especificação *(em breve)*
+9. [O documento único](/artigos/o-documento-unico)
+10. [O futuro da especificação](/artigos/o-futuro-da-especificacao)
 
 ---
 

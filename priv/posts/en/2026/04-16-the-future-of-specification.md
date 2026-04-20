@@ -120,8 +120,8 @@ Thank you for sticking with me through these ten weeks. The conversation doesn't
 5. [Interfaces and contracts](/articles/interfaces-and-contracts)
 6. [Acceptance criteria](/articles/acceptance-criteria)
 7. [Feedback loops](/articles/where-the-prompt-goes-beyond-the-rfc)
-8. Shared context *(coming soon)*
-9. The unified document *(coming soon)*
+8. [Shared context](/articles/shared-context)
+9. [The unified document](/articles/the-unified-document)
 10. **The future of specification** *(this article)*
 
 ---

@@ -156,12 +156,12 @@ No próximo artigo, vamos falar sobre **loops de feedback** — o ponto onde pro
 2. [Anatomia de um bom RFC](/artigos/anatomia-de-um-bom-rfc)
 3. [Anatomia de um bom prompt de sistema](/artigos/anatomia-de-um-bom-prompt-de-sistema)
 4. [Restrições explícitas — O poder do "não faça"](/artigos/restricoes-explicitas-o-poder-do-nao-faca)
-5. Interfaces e contratos *(em breve)*
+5. [Interfaces e contratos](/artigos/interfaces-e-contratos)
 6. **Critérios de aceite — Quando o agente sabe que terminou** *(este artigo)*
-7. Loops de feedback *(em breve)*
-8. Contexto compartilhado *(em breve)*
-9. O documento único *(em breve)*
-10. O futuro da especificação *(em breve)*
+7. [Loops de feedback](/artigos/onde-o-prompt-vai-alem-do-rfc)
+8. [Contexto compartilhado](/artigos/contexto-compartilhado)
+9. [O documento único](/artigos/o-documento-unico)
+10. [O futuro da especificação](/artigos/o-futuro-da-especificacao)
 
 ---
 

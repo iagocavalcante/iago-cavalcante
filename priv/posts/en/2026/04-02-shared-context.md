@@ -189,8 +189,8 @@ Now we have all the pieces: RFC structure, explicit constraints, interfaces, acc
 6. [Acceptance criteria](/articles/acceptance-criteria)
 7. [Feedback loops](/articles/where-the-prompt-goes-beyond-the-rfc)
 8. **Shared context** *(this article)*
-9. The unified document *(coming soon)*
-10. The future of specification *(coming soon)*
+9. [The unified document](/articles/the-unified-document)
+10. [The future of specification](/articles/the-future-of-specification)
 
 ---
 

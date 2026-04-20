@@ -232,9 +232,9 @@ In the tenth and final article, we look ahead. What happens when the unified doc
 5. [Interfaces and contracts](/articles/interfaces-and-contracts)
 6. [Acceptance criteria](/articles/acceptance-criteria)
 7. [Feedback loops](/articles/where-the-prompt-goes-beyond-the-rfc)
-8. Shared context *(coming soon)*
+8. [Shared context](/articles/shared-context)
 9. **The unified document** *(this article)*
-10. The future of specification *(coming soon)*
+10. [The future of specification](/articles/the-future-of-specification)
 
 ---
 

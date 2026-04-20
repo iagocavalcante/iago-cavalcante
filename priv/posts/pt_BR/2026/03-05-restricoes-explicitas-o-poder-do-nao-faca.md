@@ -152,15 +152,15 @@ No próximo artigo, vamos falar sobre **interfaces e contratos** — como defini
 ### Série: RFCs como Prompts para Desenvolvimento com Agentes de IA
 
 1. [A conexão fundamental](/artigos/o-rfc-que-ninguem-leu-e-o-prompt-que-ninguem-escreveu)
-2. Anatomia de um bom RFC *(em breve)*
-3. Anatomia de um bom prompt de sistema *(em breve)*
+2. [Anatomia de um bom RFC](/artigos/anatomia-de-um-bom-rfc)
+3. [Anatomia de um bom prompt de sistema](/artigos/anatomia-de-um-bom-prompt-de-sistema)
 4. **Restrições explícitas — O poder do "não faça"** *(este artigo)*
-5. Interfaces e contratos *(em breve)*
-6. Critérios de aceite *(em breve)*
-7. Loops de feedback *(em breve)*
-8. Contexto compartilhado *(em breve)*
-9. O documento único *(em breve)*
-10. O futuro da especificação *(em breve)*
+5. [Interfaces e contratos](/artigos/interfaces-e-contratos)
+6. [Critérios de aceite](/artigos/criterios-de-aceite)
+7. [Loops de feedback](/artigos/onde-o-prompt-vai-alem-do-rfc)
+8. [Contexto compartilhado](/artigos/contexto-compartilhado)
+9. [O documento único](/artigos/o-documento-unico)
+10. [O futuro da especificação](/artigos/o-futuro-da-especificacao)
 
 ---
 
