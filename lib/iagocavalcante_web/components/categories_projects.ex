@@ -9,6 +9,13 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
         description: "Products I've built and maintain",
         projects: [
           %{
+            name: "TrainerGymAI",
+            description:
+              "AI-powered personal trainer SaaS that generates customized workout plans, tracks progress, and adapts routines to your goals.",
+            url: "https://trainergymai.app",
+            image: "/images/projects/trainergymai.png"
+          },
+          %{
             name: "LeafTok",
             description:
               "AI-powered reading app that transforms books into interactive, bite-sized learning cards. Convert PDFs and EPUBs into swipeable cards with spaced repetition.",
