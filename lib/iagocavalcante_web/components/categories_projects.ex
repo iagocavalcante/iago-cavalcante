@@ -44,6 +44,13 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
         description: "Open-source projects I've contributed to",
         projects: [
           %{
+            name: "Claude Turbo Search",
+            description:
+              "Optimized file search and semantic indexing for large codebases in Claude Code. Combines ripgrep, fzf, and QMD semantic search to save 60-80% tokens on exploration.",
+            url: "https://github.com/iagocavalcante/claude-turbo-search",
+            image: "/images/projects/gstack.webp"
+          },
+          %{
             name: "Oasis",
             description:
               "A hydration tracking app built with React Native and Expo. Features daily water intake tracking, streak system, reminders, and beautiful progress visualizations.",
