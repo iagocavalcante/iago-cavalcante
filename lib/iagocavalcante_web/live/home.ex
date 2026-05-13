@@ -62,14 +62,15 @@ defmodule IagocavalcanteWeb.HomeLive do
                   social="linkedin"
                 />
               </div>
-
+              
     <!-- Product Hunt Badge - TrainerGymAI -->
-              <div class="mt-8 animate-slide-up stagger-3">
+              <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 animate-slide-up stagger-3">
                 <a
                   href="https://www.producthunt.com/products/trainer-gym-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-trainer-gym-ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Trainer Gym AI on Product Hunt"
+                  class="flex-shrink-0"
                 >
                   <img
                     alt="Trainer Gym AI - AI coach that adapts to your gym, body, and pace | Product Hunt"
@@ -79,6 +80,12 @@ defmodule IagocavalcanteWeb.HomeLive do
                     loading="lazy"
                   />
                 </a>
+                <p class="text-sm text-ink-light leading-relaxed max-w-xs">
+                  {gettext(
+                    "I shipped Trainer Gym AI on Product Hunt — if it looks useful, give it a kick.",
+                    lang: @locale
+                  )}
+                </p>
               </div>
             </div>
           </div>

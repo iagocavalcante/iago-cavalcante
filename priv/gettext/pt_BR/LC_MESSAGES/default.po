@@ -376,6 +376,11 @@ msgstr "Mostrar menos"
 msgid "Software engineer,"
 msgstr "Engenheiro de software,"
 
+#: lib/iagocavalcante_web/live/home.ex:85
+#, elixir-autogen, elixir-format
+msgid "I shipped Trainer Gym AI on Product Hunt — if it looks useful, give it a kick."
+msgstr "Lancei o Trainer Gym AI no Product Hunt — se curtiu, dá uma força!"
+
 #: lib/iagocavalcante_web/live/bookmarks.ex:102
 #, elixir-autogen, elixir-format
 msgid "These are my favorite links from Pocket, organized by tags for easy browsing. My personal knowledge base covering programming, architecture, design, and more."
