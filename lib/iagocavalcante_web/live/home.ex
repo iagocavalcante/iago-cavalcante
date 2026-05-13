@@ -62,6 +62,24 @@ defmodule IagocavalcanteWeb.HomeLive do
                   social="linkedin"
                 />
               </div>
+
+    <!-- Product Hunt Badge - TrainerGymAI -->
+              <div class="mt-8 animate-slide-up stagger-3">
+                <a
+                  href="https://www.producthunt.com/products/trainer-gym-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-trainer-gym-ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Trainer Gym AI on Product Hunt"
+                >
+                  <img
+                    alt="Trainer Gym AI - AI coach that adapts to your gym, body, and pace | Product Hunt"
+                    width="250"
+                    height="54"
+                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1145609&theme=light&t=1778636048637"
+                    loading="lazy"
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>
