@@ -20,8 +20,11 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 
 FROM ${BUILDER_IMAGE} AS builder
 
+ARG TAILWIND_VERSION=3.2.4
+ARG TAILWIND_SHA256=cd52e757cb0bd15238f0207a215198d924811234028d056b7be39fde70491296
+
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
+RUN apt-get update -y && apt-get install -y build-essential ca-certificates curl git \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
@@ -33,6 +36,17 @@ RUN mix local.hex --force && \
 
 # set build ENV
 ENV MIX_ENV="prod"
+ENV MIX_TAILWIND_PATH="/usr/local/bin/tailwindcss"
+
+# Fetch the pinned Tailwind binary with retries. The Mix wrapper performs a
+# single download attempt, which makes remote builds fail on transient GitHub
+# connection resets.
+RUN curl --fail --show-error --location \
+      --retry 5 --retry-delay 2 --retry-all-errors --connect-timeout 20 \
+      --output "${MIX_TAILWIND_PATH}" \
+      "https://github.com/tailwindlabs/tailwindcss/releases/download/v${TAILWIND_VERSION}/tailwindcss-linux-x64" \
+    && echo "${TAILWIND_SHA256}  ${MIX_TAILWIND_PATH}" | sha256sum --check --strict \
+    && chmod 0755 "${MIX_TAILWIND_PATH}"
 
 # install mix dependencies
 COPY mix.exs mix.lock ./

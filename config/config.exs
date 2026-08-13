@@ -57,6 +57,7 @@ config :esbuild,
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.2.4",
+  path: System.get_env("MIX_TAILWIND_PATH"),
   default: [
     args: ~w(
       --config=tailwind.config.js
