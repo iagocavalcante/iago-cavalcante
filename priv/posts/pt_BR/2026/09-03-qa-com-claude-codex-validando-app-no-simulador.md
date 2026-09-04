@@ -4,7 +4,7 @@
   tags: ~w(ai qa testes mobile claude codex mcp simuladores automacao),
   description: "Como conectar Claude ou Codex ao simulador, transformar requisitos em cenários executáveis e criar um loop de QA mobile com evidências, logs e testes de regressão.",
   locale: "pt_BR",
-  published: false
+  published: true
 }
 ---
 
