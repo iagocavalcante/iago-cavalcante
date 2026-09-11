@@ -1,0 +1,17 @@
+# Host-networked: Docker bridge networking is broken on this host
+# (iptables-nft mismatch) so every service here uses network_mode: host
+# instead of a bridge network. Env comes from
+# /home/tron/migration-envs/site-pessoal.env on the server.
+services:
+  site:
+    build: .
+    image: iagocavalcante-site:latest
+    container_name: iagocavalcante-site
+    network_mode: host
+    env_file: /home/tron/migration-envs/site-pessoal.env
+    environment:
+      PHX_SERVER: "true"
+      PORT: "4020"
+      POOL_SIZE: "5"
+      RELEASE_DISTRIBUTION: "none"
+    restart: unless-stopped

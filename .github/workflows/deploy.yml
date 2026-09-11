@@ -1,0 +1,21 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ssh-tron-iago-cavalcante
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, ssh-tron]
+    timeout-minutes: 30
+    steps:
+      # No actions/checkout on purpose: the deploy dir on the server is the
+      # canonical worktree (holds .env and compose volumes). The script
+      # fetches, ff-pulls, rebuilds the site image, and health-checks.
+      - name: Deploy
+        run: flock -w 600 /tmp/iago-cavalcante-deploy.lock /home/tron/Workspaces/IagoCavalcante/iago-cavalcante/deploy/auto-deploy.sh
