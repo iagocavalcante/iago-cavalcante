@@ -15,7 +15,15 @@ jobs:
     timeout-minutes: 30
     steps:
       # No actions/checkout on purpose: the deploy dir on the server is the
-      # canonical worktree (holds .env and compose volumes). The script
-      # fetches, ff-pulls, rebuilds the site image, and health-checks.
+      # canonical worktree (holds env and volumes). The script is taken from
+      # origin/main rather than the working tree so a deploy can never run a
+      # stale copy, and so the very first deploy works before the checkout
+      # has pulled it. The script itself fetches, ff-pulls, rebuilds only the
+      # app service and health-checks.
       - name: Deploy
-        run: flock -w 600 /tmp/iago-cavalcante-deploy.lock /home/tron/Workspaces/IagoCavalcante/iago-cavalcante/deploy/auto-deploy.sh
+        run: |
+          cd /home/tron/Workspaces/IagoCavalcante/iago-cavalcante
+          git fetch origin main --quiet
+          git show origin/main:deploy/auto-deploy.sh > /tmp/iago-cavalcante-deploy.sh
+          chmod +x /tmp/iago-cavalcante-deploy.sh
+          flock -w 600 /tmp/iago-cavalcante-deploy.lock /tmp/iago-cavalcante-deploy.sh
