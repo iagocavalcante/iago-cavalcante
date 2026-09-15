@@ -1,0 +1,27 @@
+# oak deploy manifest for the iagocavalcante.com Phoenix site.
+# DB migrated to iagocavalcante-db.internal (Postgres 17, SSL). Secrets
+# (DATABASE_URL, SECRET_KEY_BASE, RESEND_API_KEY, CLOUDFLARE_API_TOKEN) are
+# set via 'oak secrets'. Posts are file-based (priv/posts), compiled in.
+app = "iago"
+domains = ["iagocavalcante.com"]
+
+[build]
+dockerfile = "Dockerfile"
+
+[deploy]
+release_command = "/app/bin/migrate"
+
+[env]
+ECTO_IPV6 = "false"
+PHX_HOST = "iagocavalcante.com"
+PORT = "4020"
+POOL_SIZE = "5"
+CLOUDFLARE_BASE_URL = "https://api.cloudflare.com"
+FF_DONATE = "1"
+FF_VIDEO = "1"
+
+[[services]]
+internal_port = 4020
+
+[vm]
+memory_mb = 512
