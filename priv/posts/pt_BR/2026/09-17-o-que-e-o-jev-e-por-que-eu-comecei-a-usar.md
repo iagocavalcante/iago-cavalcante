@@ -21,11 +21,9 @@ Funciona, mas é usar um canhão pra matar mosquito. Na maioria das vezes eu nã
 
 O Jev é um modelo da TypeSafe feito exatamente pra isso. Ele não gera texto. Você manda um contexto e uma pergunta com as respostas possíveis, e ele devolve uma resposta tipada com probabilidade.
 
-## Pensa assim
+Um LLM tradicional é aquele amigo que fala demais. Você pergunta "a receita tá na legenda?" e ele te devolve um parágrafo.
 
-Um LLM tradicional é tipo um amigo que fala demais. Você pergunta "a receita tá na legenda?" e ele te devolve um parágrafo.
-
-O Jev é tipo um amigo objetivo: "Sim, 97% de certeza." Pronto. Aí quem decide o que fazer com isso é o seu código.
+O Jev é aquele amigo objetivo: "Sim, 97% de certeza." Pronto. Aí quem decide o que fazer com isso é o seu código.
 
 ## Os três tipos de pergunta
 
