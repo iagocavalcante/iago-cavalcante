@@ -1,10 +1,13 @@
 # See https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/
 
 name: Fly Deploy
+# Paused: the site is self-hosted on ssh-tron (see deploy.yml) and the Fly app
+# no longer exists. Restore the push trigger to re-enable.
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
 jobs:
   deploy:
     name: Deploy app
