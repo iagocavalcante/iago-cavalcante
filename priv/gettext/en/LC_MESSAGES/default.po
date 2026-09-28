@@ -11,7 +11,7 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/iagocavalcante_web/components/core_components.ex:458
+#: lib/iagocavalcante_web/components/core_components.ex:468
 #, elixir-autogen, elixir-format
 msgid "Actions"
 msgstr ""
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/home.ex:130
+#: lib/iagocavalcante_web/live/home.ex:155
 #, elixir-autogen, elixir-format
 msgid "Download CV"
 msgstr ""
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Get notified when I publish something new, and unsubscribe at any time."
 msgstr ""
 
-#: lib/iagocavalcante_web/live/articles_live/show.ex:22
+#: lib/iagocavalcante_web/live/articles_live/show.ex:27
 #, elixir-autogen, elixir-format
 msgid "Go back to articles"
 msgstr ""
@@ -96,13 +96,6 @@ msgstr ""
 #: lib/iagocavalcante_web/live/articles_live/index.ex:41
 #, elixir-autogen, elixir-format
 msgid "I write about software in general, and now I want to talk more about hardware and IoT."
-msgstr ""
-
-#: lib/iagocavalcante_web/components/layouts/root.html.heex:15
-#: lib/iagocavalcante_web/components/layouts/root.html.heex:31
-#: lib/iagocavalcante_web/components/layouts/root.html.heex:39
-#, elixir-autogen, elixir-format
-msgid "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI. Building Agendflow, LeafTok, and open-source tools."
 msgstr ""
 
 #: lib/iagocavalcante_web/live/about.ex:30
@@ -156,7 +149,7 @@ msgstr ""
 msgid "Stay up to date"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/home.ex:118
+#: lib/iagocavalcante_web/live/home.ex:143
 #, elixir-autogen, elixir-format
 msgid "Work"
 msgstr ""
@@ -167,7 +160,7 @@ msgid "/about"
 msgstr ""
 
 #: lib/iagocavalcante_web/components/layouts/app.html.heex:55
-#: lib/iagocavalcante_web/live/articles_live/show.ex:20
+#: lib/iagocavalcante_web/live/articles_live/show.ex:25
 #, elixir-autogen, elixir-format
 msgid "/articles"
 msgstr ""
@@ -213,7 +206,7 @@ msgstr ""
 msgid "Uses"
 msgstr ""
 
-#: lib/iagocavalcante_web/router.ex:133
+#: lib/iagocavalcante_web/router.ex:135
 #, elixir-autogen, elixir-format
 msgid "/login"
 msgstr ""
@@ -346,7 +339,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/home.ex:87
+#: lib/iagocavalcante_web/live/home.ex:112
 #, elixir-autogen, elixir-format
 msgid "Recent Articles"
 msgstr ""
@@ -376,7 +369,7 @@ msgstr ""
 msgid "Software engineer,"
 msgstr ""
 
-#: lib/iagocavalcante_web/live/home.ex:85
+#: lib/iagocavalcante_web/live/home.ex:84
 #, elixir-autogen, elixir-format
 msgid "I shipped Trainer Gym AI on Product Hunt — if it looks useful, give it a kick."
 msgstr ""
@@ -424,4 +417,176 @@ msgstr ""
 #: lib/iagocavalcante_web/components/pagination.ex:22
 #, elixir-autogen, elixir-format
 msgid "of"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:162
+#, elixir-autogen, elixir-format
+msgid "A browser-based Age of Empires clone built with Three.js and TypeScript. Features 3D rendering and real-time strategy gameplay."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:171
+#, elixir-autogen, elixir-format
+msgid "A desktop app built with Electron and Vue.js using Quasar Framework"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:91
+#, elixir-autogen, elixir-format
+msgid "A hydration tracking app built with React Native and Expo. Features daily water intake tracking, streak system, reminders, and beautiful progress visualizations."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:144
+#, elixir-autogen, elixir-format
+msgid "A minimal, reliable, database-backed job queue for Node.js inspired by Oban. Supports PostgreSQL, SQLite, and MySQL with full TypeScript support."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:242
+#, elixir-autogen, elixir-format
+msgid "A newsletter platform for journalists and writers. Built with Next.js, MongoDB, NestJS, Heroku, Redis, Sendgrid, Stripe, and more."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:211
+#, elixir-autogen, elixir-format
+msgid "A personal board to manage tasks and boards, built with Vue.js and Vuex"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:278
+#, elixir-autogen, elixir-format
+msgid "A webapp to help people find the best trails to hike. Built with Remix, Tailwind and Postgres."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:49
+#, elixir-autogen, elixir-format
+msgid "AI personal trainer that generates personalized workout plans for beginners who don't know what to do at the gym. One-time price, no subscription."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:11
+#, elixir-autogen, elixir-format
+msgid "Apps"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:183
+#, elixir-autogen, elixir-format
+msgid "Bridge between Zendesk and React Native"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:189
+#, elixir-autogen, elixir-format
+msgid "Bridge between Zoom and React Native"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:296
+#, elixir-autogen, elixir-format
+msgid "Built a admin dashboard to manage infos and generate report using Rails and deployed to digital ocean, and App was built using React Native consuming the API built with Rails"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:260
+#, elixir-autogen, elixir-format
+msgid "Built the frontend with Vue.js, we create a entire new webapp to open accounts"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:218
+#, elixir-autogen, elixir-format
+msgid "Client's projects"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:113
+#, elixir-autogen, elixir-format
+msgid "Complete scheduling and service management platform for businesses."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:224
+#, elixir-autogen, elixir-format
+msgid "Digital banking platform. Worked on the web internet banking frontend and mobile applications."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:370
+#, elixir-autogen, elixir-format
+msgid "Download %{app} on %{store}"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:33
+#, elixir-autogen, elixir-format
+msgid "Earn your screen time: distracting apps stay locked until you do bodyweight reps, counted on-device by the camera."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:269
+#, elixir-autogen, elixir-format
+msgid "Fantasay League of Legends game built with VueJs, Django, Postgres, Redis, Docker, and more."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:233
+#, elixir-autogen, elixir-format
+msgid "Full-stack development work building modern web applications and services."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:204
+#, elixir-autogen, elixir-format
+msgid "Game built with Construct 2"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:25
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:42
+#: lib/iagocavalcante_web/components/layouts/root.html.heex:53
+#, elixir-autogen, elixir-format
+msgid "I'm Iago Cavalcante, a software engineer and entrepreneur based in Belém, Brazil. Currently working at EasyMate AI. Building Agendflow, LeafTok, and open-source tools."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:82
+#, elixir-autogen, elixir-format
+msgid "Meal plans built on Brazilian food: AI drafts the plan and a nutritionist reviews and approves it."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:120
+#, elixir-autogen, elixir-format
+msgid "Mobile app to help people find the best events, restaurants, and attractions in Abaetetuba, Brazil."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:107
+#, elixir-autogen, elixir-format
+msgid "My SaaS Products"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:129
+#, elixir-autogen, elixir-format
+msgid "Open-source"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:135
+#, elixir-autogen, elixir-format
+msgid "Optimized file search and semantic indexing for large codebases in Claude Code. Combines ripgrep, fzf, and QMD semantic search to save 60-80% tokens on exploration."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:251
+#, elixir-autogen, elixir-format
+msgid "Project built inside the Intelliway for a specific client, where I built a speech to text analyzer with RabitMQ, Aws Speech, Google Speech, CPQD Speech, NestJS, MongoDB and React"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:177
+#, elixir-autogen, elixir-format
+msgid "Project to bypass paywalls on Medium articles"
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:153
+#, elixir-autogen, elixir-format
+msgid "Share your terminal with anyone via QR code. Built with Bun, WebSockets, and PTY for real-time terminal streaming."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:66
+#, elixir-autogen, elixir-format
+msgid "TikTok-style book reader. Turns any EPUB or PDF into swipeable cards, with on-device narration, reading streaks and book clubs."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:17
+#, elixir-autogen, elixir-format
+msgid "Turns TikTok, Instagram and YouTube recipe videos into a recipe and a grocery list with AI. Free on iPhone and Android."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:287
+#, elixir-autogen, elixir-format
+msgid "Webapp is a platform where users can answer questions and get paid for it. Built with Vue, Postgres, Bootstrap, and AdonisJS."
+msgstr ""
+
+#: lib/iagocavalcante_web/components/categories_projects.ex:196
+#, elixir-autogen, elixir-format
+msgid "Webapp to send anonymous messages to people who owe you money, built with Node and Vue.js using Lambda and Giphy API"
 msgstr ""

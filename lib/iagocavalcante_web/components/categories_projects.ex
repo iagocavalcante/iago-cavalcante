@@ -1,206 +1,312 @@
 defmodule IagocavalcanteWeb.CategoriesProjects do
   use Phoenix.Component
 
-  attr :categories, :list,
-    default: [
+  use Gettext, backend: IagocavalcanteWeb.Gettext
+
+  # Built at render time, not as an attr default, so gettext picks up the
+  # request locale.
+  defp categories do
+    [
       %{
-        name: "My SaaS Products",
-        slug: "saas-products",
-        description: "Products I've built and maintain",
+        name: gettext("Apps"),
+        slug: "apps",
         projects: [
           %{
-            name: "TrainerGymAI",
+            name: "MiseSnag",
             description:
-              "AI-powered personal trainer SaaS that generates customized workout plans, tracks progress, and adapts routines to your goals.",
+              gettext(
+                "Turns TikTok, Instagram and YouTube recipe videos into a recipe and a grocery list with AI. Free on iPhone and Android."
+              ),
+            url: "https://misesnag.app",
+            image: "/images/projects/misesnag.png",
+            stores: [
+              %{name: "App Store", url: "https://apps.apple.com/app/id6795595576"},
+              %{
+                name: "Google Play",
+                url: "https://play.google.com/store/apps/details?id=com.iagocavalcante.misesnag"
+              }
+            ]
+          },
+          %{
+            name: "Fitlock",
+            description:
+              gettext(
+                "Earn your screen time: distracting apps stay locked until you do bodyweight reps, counted on-device by the camera."
+              ),
+            url: "https://fitlock.iagocavalcante.com",
+            image: "/images/projects/fitlock.png",
+            stores: [
+              %{name: "App Store", url: "https://apps.apple.com/app/id6812144123"},
+              %{
+                name: "Google Play",
+                url: "https://play.google.com/store/apps/details?id=com.iagocavalcante.fitlock"
+              }
+            ]
+          },
+          %{
+            name: "Trainer Gym AI",
+            description:
+              gettext(
+                "AI personal trainer that generates personalized workout plans for beginners who don't know what to do at the gym. One-time price, no subscription."
+              ),
             url: "https://trainergymai.app",
-            image: "/images/projects/trainergymai.png"
+            image: "/images/projects/trainergymai.png",
+            stores: [
+              %{name: "App Store", url: "https://apps.apple.com/app/id6670231666"},
+              %{
+                name: "Google Play",
+                url:
+                  "https://play.google.com/store/apps/details?id=com.iagocavalcante.trainergymai"
+              }
+            ]
           },
           %{
             name: "LeafTok",
             description:
-              "AI-powered reading app that transforms books into interactive, bite-sized learning cards. Convert PDFs and EPUBs into swipeable cards with spaced repetition.",
+              gettext(
+                "TikTok-style book reader. Turns any EPUB or PDF into swipeable cards, with on-device narration, reading streaks and book clubs."
+              ),
             url: "https://leaftok.app",
-            image: "/images/projects/leaftok.png"
+            image: "/images/projects/leaftok.png",
+            stores: [
+              %{name: "App Store", url: "https://apps.apple.com/app/id6748622950"},
+              %{
+                name: "Google Play",
+                url: "https://play.google.com/store/apps/details?id=com.iagocavalcante.leaftok"
+              }
+            ]
           },
+          %{
+            name: "EF Nutry",
+            description:
+              gettext(
+                "Meal plans built on Brazilian food: AI drafts the plan and a nutritionist reviews and approves it."
+              ),
+            url: "https://www.efnutry.com",
+            image: "/images/projects/efnutry.png"
+          },
+          %{
+            name: "Oasis",
+            description:
+              gettext(
+                "A hydration tracking app built with React Native and Expo. Features daily water intake tracking, streak system, reminders, and beautiful progress visualizations."
+              ),
+            url: "https://apps.apple.com/app/id6756798684",
+            image: "/images/projects/oasis.png",
+            stores: [
+              %{name: "App Store", url: "https://apps.apple.com/app/id6756798684"},
+              %{
+                name: "Google Play",
+                url: "https://play.google.com/store/apps/details?id=com.iagocavalcante.Oasis"
+              }
+            ]
+          }
+        ]
+      },
+      %{
+        name: gettext("My SaaS Products"),
+        slug: "saas-products",
+        projects: [
           %{
             name: "AgendFlow",
             description:
-              "Sistema de Agendamento e Gestão de Serviços. Complete scheduling and service management platform for businesses.",
+              gettext("Complete scheduling and service management platform for businesses."),
             url: "https://agendflow.com.br",
             image: "/images/projects/agendflow.ico"
           },
           %{
             name: "AbaetéFest App",
             description:
-              "Mobile app to help people find the best events, restaurants, and attractions in Abaetetuba, Brazil.",
+              gettext(
+                "Mobile app to help people find the best events, restaurants, and attractions in Abaetetuba, Brazil."
+              ),
             url: "https://app.abaetefest.com.br",
             image: "/images/projects/abaetefest.png"
           }
         ]
       },
       %{
-        name: "Open-source",
+        name: gettext("Open-source"),
         slug: "open-source",
-        description: "Open-source projects I've contributed to",
         projects: [
           %{
             name: "Claude Turbo Search",
             description:
-              "Optimized file search and semantic indexing for large codebases in Claude Code. Combines ripgrep, fzf, and QMD semantic search to save 60-80% tokens on exploration.",
+              gettext(
+                "Optimized file search and semantic indexing for large codebases in Claude Code. Combines ripgrep, fzf, and QMD semantic search to save 60-80% tokens on exploration."
+              ),
             url: "https://github.com/iagocavalcante/claude-turbo-search",
-            image: "/images/projects/gstack.webp"
-          },
-          %{
-            name: "Oasis",
-            description:
-              "A hydration tracking app built with React Native and Expo. Features daily water intake tracking, streak system, reminders, and beautiful progress visualizations.",
-            url: "https://apps.apple.com/br/app/oasis-drink-water/id6756798684?l=en-GB",
             image: "/images/projects/gstack.webp"
           },
           %{
             name: "Izi Queue",
             description:
-              "A minimal, reliable, database-backed job queue for Node.js inspired by Oban. Supports PostgreSQL, SQLite, and MySQL with full TypeScript support.",
+              gettext(
+                "A minimal, reliable, database-backed job queue for Node.js inspired by Oban. Supports PostgreSQL, SQLite, and MySQL with full TypeScript support."
+              ),
             url: "https://github.com/iagocavalcante/izi-queue",
             image: "/images/projects/gstack.webp"
           },
           %{
             name: "Termshare",
             description:
-              "Share your terminal with anyone via QR code. Built with Bun, WebSockets, and PTY for real-time terminal streaming.",
+              gettext(
+                "Share your terminal with anyone via QR code. Built with Bun, WebSockets, and PTY for real-time terminal streaming."
+              ),
             url: "https://termshare.fly.dev/",
             image: "/images/projects/gstack.webp"
           },
           %{
             name: "Age of Empires Clone",
             description:
-              "A browser-based Age of Empires clone built with Three.js and TypeScript. Features 3D rendering and real-time strategy gameplay.",
+              gettext(
+                "A browser-based Age of Empires clone built with Three.js and TypeScript. Features 3D rendering and real-time strategy gameplay."
+              ),
             url: "https://age-of-empires-clone.fly.dev/",
             image: "/images/projects/gstack.webp"
           },
           %{
             name: "QTube",
-            description: "A desktop app built with Electron and Vue.js using Quasar Framework",
+            description:
+              gettext("A desktop app built with Electron and Vue.js using Quasar Framework"),
             url: "https://qtube.iagocavalcante.com",
             image: "/images/projects/qtube.svg"
           },
           %{
             name: "Égua do artigo",
-            description: "Project to bypass paywalls on Medium articles",
+            description: gettext("Project to bypass paywalls on Medium articles"),
             url: "https://eguadoartigo.iagocavalcante.com",
             image: "/images/projects/eguadoartigo.svg"
           },
           %{
             name: "RN-Zendesk",
-            description: "Bridge between Zendesk and React Native",
+            description: gettext("Bridge between Zendesk and React Native"),
             url: "https://idopterlabs.github.io/rn-zendesk/",
             image: "/images/projects/gstack.webp"
           },
           %{
             name: "React-Native-Zoom-US-Bridge",
-            description: "Bridge between Zoom and React Native",
+            description: gettext("Bridge between Zoom and React Native"),
             url: "https://www.npmjs.com/package/@iagocavalcante/react-native-zoom-us-bridge",
             image: "/images/projects/gstack.webp"
           },
           %{
             name: "Me Pague O que Dev",
             description:
-              "Webapp to send anonymous messages to people who owe you money, built with Node and Vue.js using Lambda and Giphy API",
+              gettext(
+                "Webapp to send anonymous messages to people who owe you money, built with Node and Vue.js using Lambda and Giphy API"
+              ),
             url: "https://mepagueoquedev.iagocavalcante.com/",
             image: "/images/projects/mepagueoquedev.svg"
           },
           %{
             name: "Squash Hardcore",
-            description: "Game built with Construct 2",
+            description: gettext("Game built with Construct 2"),
             url: "https://squash-hardcore.iagocavalcante.com/",
             image: "/images/projects/gstack.webp"
           },
           %{
             name: "Personal Board v1",
             description:
-              "A personal board to manage tasks and boards, built with Vue.js and Vuex",
+              gettext("A personal board to manage tasks and boards, built with Vue.js and Vuex"),
             url: "https://personal-board-v1.iagocavalcante.com/",
             image: "/images/projects/personal-board-v1.png"
           }
         ]
       },
       %{
-        name: "Client's projects",
+        name: gettext("Client's projects"),
         slug: "clients-projects",
-        description: "Freelance projects I've worked on",
         projects: [
           %{
             name: "VRDEBank",
             description:
-              "Digital banking platform. Worked on the web internet banking frontend and mobile applications.",
+              gettext(
+                "Digital banking platform. Worked on the web internet banking frontend and mobile applications."
+              ),
             url: "https://www.vrdebank.com/",
             image: "/images/projects/vrdebank.ico"
           },
           %{
             name: "Funqtion",
             description:
-              "Full-stack development work building modern web applications and services.",
+              gettext(
+                "Full-stack development work building modern web applications and services."
+              ),
             url: "https://funqtion.co/",
             image: "/images/projects/funqtion.ico"
           },
           %{
             name: "Gstack",
             description:
-              "A newsletter platform for journalists and writers. Built with Next.js, MongoDB, NestJS, Heroku, Redis, Sendgrid, Stripe, and more.",
+              gettext(
+                "A newsletter platform for journalists and writers. Built with Next.js, MongoDB, NestJS, Heroku, Redis, Sendgrid, Stripe, and more."
+              ),
             url: "https://gstack.news",
             image: "/images/projects/gstack.png"
           },
           %{
             name: "Speech to text Analyzer",
             description:
-              "Project built inside the Intelliway for a specific client, where I built a speech to text analyzer with RabitMQ, Aws Speech, Google Speech, CPQD Speech, NestJS, MongoDB and React",
+              gettext(
+                "Project built inside the Intelliway for a specific client, where I built a speech to text analyzer with RabitMQ, Aws Speech, Google Speech, CPQD Speech, NestJS, MongoDB and React"
+              ),
             url: "https://www.intelliway.com.br/",
             image: "/images/projects/intelliway.webp"
           },
           %{
             name: "Sua conta BASA",
             description:
-              "Built the frontend with Vue.js, we create a entire new webapp to open accounts",
+              gettext(
+                "Built the frontend with Vue.js, we create a entire new webapp to open accounts"
+              ),
             url: "https://sua-conta-basa.bancoamazonia.com.br/login?type=pf",
             image: "/images/projects/basa.png"
           },
           %{
             name: "HintClub/CartoLoL",
             description:
-              "Fantasay League of Legends game built with VueJs, Django, Postgres, Redis, Docker, and more.",
+              gettext(
+                "Fantasay League of Legends game built with VueJs, Django, Postgres, Redis, Docker, and more."
+              ),
             url: "https://cartolol.com.br/",
             image: "/images/projects/cartolol.png"
           },
           %{
             name: "HoverTrail",
             description:
-              "A webapp to help people find the best trails to hike. Built with Remix, Tailwind and Postgres.",
+              gettext(
+                "A webapp to help people find the best trails to hike. Built with Remix, Tailwind and Postgres."
+              ),
             url: "https://hovertrail.fly.dev/",
             image: "/images/projects/hovertrail.png"
           },
           %{
             name: "Questões PRO",
             description:
-              "Webapp is a platform where users can answer questions and get paid for it. Built with Vue, Postgres, Bootstrap, and AdonisJS.",
+              gettext(
+                "Webapp is a platform where users can answer questions and get paid for it. Built with Vue, Postgres, Bootstrap, and AdonisJS."
+              ),
             url: "https://questoespro.com/",
             image: "/images/projects/gstack.webp"
           },
           %{
             name: "Trail Club de Goiás",
             description:
-              "Built a admin dashboard to manage infos and generate report using Rails and deployed to digital ocean, and App was built using React Native consuming the API built with Rails",
+              gettext(
+                "Built a admin dashboard to manage infos and generate report using Rails and deployed to digital ocean, and App was built using React Native consuming the API built with Rails"
+              ),
             url: "https://apps.apple.com/mu/app/trail-club-go-app/id1552081793?l=fr",
             image: "/images/projects/trailclub.png"
           }
         ]
       }
     ]
-
-  def categories_projects(assigns) do
-    render_categories(assigns)
   end
 
-  defp render_categories(assigns) do
+  def categories_projects(assigns) do
+    assigns = assign(assigns, :categories, categories())
+
     ~H"""
     <div :for={category <- @categories} class="mb-20">
       <!-- Section Title -->
@@ -209,12 +315,11 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
       </div>
       <!-- Projects Grid -->
       <ul role="list" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        <li :for={project <- category.projects} class="group">
-          <a
-            href={project.url}
-            target="_blank"
-            class="block editorial-card h-full hover:border-amber-500 transition-all duration-200"
-          >
+        <li
+          :for={project <- category.projects}
+          class="group editorial-card flex flex-col hover:border-amber-500 transition-all duration-200"
+        >
+          <a href={project.url} target="_blank" rel="noopener" class="block flex-1">
             <!-- Project Icon -->
             <div
               class="flex h-12 w-12 items-center justify-center rounded-lg p-2 mb-4"
@@ -254,6 +359,21 @@ defmodule IagocavalcanteWeb.CategoriesProjects do
               <span class="ml-2 truncate">{URI.parse(project.url).host}</span>
             </div>
           </a>
+          <!-- Download Links -->
+          <div :if={project[:stores]} class="mt-4 flex flex-wrap gap-2">
+            <a
+              :for={store <- project.stores}
+              href={store.url}
+              target="_blank"
+              rel="noopener"
+              aria-label={
+                gettext("Download %{app} on %{store}", app: project.name, store: store.name)
+              }
+              class="rounded-full border px-3 py-1 text-xs font-mono text-ink-light hover:border-amber-500 hover:text-accent transition-colors duration-200"
+            >
+              {store.name}
+            </a>
+          </div>
         </li>
       </ul>
     </div>
